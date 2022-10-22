@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "MagnetCars",
+			"Path": "D:\\Ican\\Cour ican\\Ican Seconde Annee Mastere\\ProjetPremierTrimestre\\MagnetCars\\Source\\MagnetCars.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "MagnetCarsEditor",
+			"Path": "D:\\Ican\\Cour ican\\Ican Seconde Annee Mastere\\ProjetPremierTrimestre\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
