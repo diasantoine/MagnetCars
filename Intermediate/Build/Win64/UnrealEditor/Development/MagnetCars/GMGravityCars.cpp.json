@@ -1,17 +1,17 @@
 {
-    "Version": "1.1",
+    "Version": "1.2",
     "Data": {
-        "Source": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\source\\magnetcars\\private\\gmgravitycars.cpp",
+        "Source": "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\private\\gmgravitycars.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "PCH": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
         "Includes": [
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\source\\magnetcars\\public\\gmgravitycars.h",
-            "d:\\unrealenginee\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
-            "d:\\unrealenginee\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
-            "d:\\unrealenginee\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\serverstatreplicator.generated.h",
-            "d:\\unrealenginee\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\gamemodebase.generated.h",
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\gmgravitycars.generated.h"
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\public\\gmgravitycars.h",
+            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\gamemodebase.h",
+            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\engine\\serverstatreplicator.h",
+            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\serverstatreplicator.generated.h",
+            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\gamemodebase.generated.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\gmgravitycars.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

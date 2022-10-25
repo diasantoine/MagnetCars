@@ -1,8 +1,8 @@
 {
 	"SourceFiles": [
-		"D:\\Ican\\Cour ican\\Ican Seconde Annee Mastere\\ProjetPremierTrimestre\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
-		"D:\\Ican\\Cour ican\\Ican Seconde Annee Mastere\\ProjetPremierTrimestre\\MagnetCars\\Source\\MagnetCars.Target.cs",
-		"D:\\Ican\\Cour ican\\Ican Seconde Annee Mastere\\ProjetPremierTrimestre\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
+		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
+		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars.Target.cs",
+		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
 	],
 	"EngineVersion": "5.0.3"
 }

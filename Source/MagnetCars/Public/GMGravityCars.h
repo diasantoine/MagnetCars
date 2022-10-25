@@ -17,5 +17,7 @@ class MAGNETCARS_API AGMGravityCars : public AGameModeBase
 public :
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	int Bonsoir = 5;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	int BONJOUR = 10;
 	
 };
