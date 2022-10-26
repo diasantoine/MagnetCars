@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\private\\mycameramanager.cpp",
+        "ProvidedModule": "",
+        "PCH": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\public\\mycameramanager.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycameramanager.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
