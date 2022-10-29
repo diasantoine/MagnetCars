@@ -6,6 +6,14 @@
 #include "GameFramework/Character.h"
 #include "MyCar.generated.h"
 
+UENUM(BlueprintType)
+enum EWhichDirection
+{
+	ForwardDirection,
+	BackwardDirection,
+	RightDirection,
+	LeftDirection
+};
 UCLASS()
 class MAGNETCARS_API AMyCar : public ACharacter
 {
@@ -26,4 +34,19 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable)
+	void CarMovement(EWhichDirection Direction);
+	UFUNCTION(BlueprintCallable)
+	void CarGravity();
+	UFUNCTION(BlueprintCallable)
+	void CarRespawn();
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	bool Grounded = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	bool OnGravity = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float RespawnTiming = 2.0f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float ContainerRespawnTiming = 2.0f;
 };

@@ -13,5 +13,4 @@ UCLASS()
 class MAGNETCARS_API AMyCarController : public APlayerController
 {
 	GENERATED_BODY()
-	
 };

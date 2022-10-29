@@ -13,10 +13,22 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define MAGNETCARS_MyCar_generated_h
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_SPARSE_DATA
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_RPC_WRAPPERS
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_RPC_WRAPPERS_NO_PURE_DECLS
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_INCLASS_NO_PURE_DECLS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_SPARSE_DATA
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_RPC_WRAPPERS \
+ \
+	DECLARE_FUNCTION(execCarRespawn); \
+	DECLARE_FUNCTION(execCarGravity); \
+	DECLARE_FUNCTION(execCarMovement);
+
+
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+ \
+	DECLARE_FUNCTION(execCarRespawn); \
+	DECLARE_FUNCTION(execCarGravity); \
+	DECLARE_FUNCTION(execCarMovement);
+
+
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCar(); \
 	friend struct Z_Construct_UClass_AMyCar_Statics; \
@@ -25,7 +37,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_INCLASS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_INCLASS \
 private: \
 	static void StaticRegisterNativesAMyCar(); \
 	friend struct Z_Construct_UClass_AMyCar_Statics; \
@@ -34,7 +46,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_STANDARD_CONSTRUCTORS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMyCar(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMyCar) \
@@ -47,7 +59,7 @@ private: \
 public:
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_ENHANCED_CONSTRUCTORS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMyCar(AMyCar&&); \
@@ -58,25 +70,25 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_9_PROLOG
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_GENERATED_BODY_LEGACY \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_17_PROLOG
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_SPARSE_DATA \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_RPC_WRAPPERS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_INCLASS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_STANDARD_CONSTRUCTORS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_SPARSE_DATA \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_RPC_WRAPPERS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_INCLASS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_GENERATED_BODY \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_SPARSE_DATA \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_INCLASS_NO_PURE_DECLS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_12_ENHANCED_CONSTRUCTORS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_SPARSE_DATA \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_INCLASS_NO_PURE_DECLS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -87,4 +99,9 @@ template<> MAGNETCARS_API UClass* StaticClass<class AMyCar>();
 #define CURRENT_FILE_ID FID_MagnetCars_Source_MagnetCars_Public_MyCar_h
 
 
+#define FOREACH_ENUM_EWHICHDIRECTION(op) \
+	op(ForwardDirection) \
+	op(BackwardDirection) \
+	op(RightDirection) \
+	op(LeftDirection) 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

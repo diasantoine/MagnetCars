@@ -32,3 +32,31 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 }
 
+void AMyCar::CarMovement(EWhichDirection Direction)
+{
+	switch (Direction)
+	{
+	case EWhichDirection::ForwardDirection:
+		default:
+		break;
+	case EWhichDirection::BackwardDirection:
+		break;
+	}
+}
+
+void AMyCar::CarGravity()
+{
+	OnGravity = !OnGravity;
+	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
+}
+
+void AMyCar::CarRespawn()
+{
+	ContainerRespawnTiming += 0.01f; //Delta time hein avec le tick
+	if(ContainerRespawnTiming>= RespawnTiming) ContainerRespawnTiming = 0;
+}
+
+
+
+
+
