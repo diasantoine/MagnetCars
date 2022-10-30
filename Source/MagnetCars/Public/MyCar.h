@@ -49,4 +49,9 @@ public:
 	float RespawnTiming = 2.0f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float ContainerRespawnTiming = 2.0f;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float Acceleration = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float MaxSpeed = 1000.f;
 };

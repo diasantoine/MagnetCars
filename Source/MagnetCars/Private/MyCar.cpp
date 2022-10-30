@@ -3,6 +3,8 @@
 
 #include "MyCar.h"
 
+#include "GameFramework/CharacterMovementComponent.h"
+
 // Sets default values
 AMyCar::AMyCar()
 {
@@ -34,10 +36,12 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyCar::CarMovement(EWhichDirection Direction)
 {
+	UCharacterMovementComponent* ComponentMovement = GetCharacterMovement();
 	switch (Direction)
 	{
 	case EWhichDirection::ForwardDirection:
 		default:
+		ComponentMovement->Velocity *= Acceleration * GetControlRotation().Vector().Normalize();
 		break;
 	case EWhichDirection::BackwardDirection:
 		break;
