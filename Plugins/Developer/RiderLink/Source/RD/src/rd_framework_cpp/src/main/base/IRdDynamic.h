@@ -21,6 +21,8 @@ class SerializationCtx;
 class RD_FRAMEWORK_API IRdDynamic
 {
 public:
+	mutable RName location;
+
 	// region ctor/dtor
 
 	IRdDynamic() = default;
@@ -35,8 +37,6 @@ public:
 	virtual const IProtocol* get_protocol() const = 0;
 
 	virtual SerializationCtx& get_serialization_context() const = 0;
-
-	virtual const RName& get_location() const = 0;
 };
 }	 // namespace rd
 

@@ -123,7 +123,7 @@ using std::to_wstring;
 
 inline std::wstring to_wstring(std::string const& s)
 {
-	// TO-DO: fix this wrong implementation
+	// TODO: fix this wrong implementation
 	return std::wstring(s.begin(), s.end());
 }
 

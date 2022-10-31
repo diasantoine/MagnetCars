@@ -1,19 +1,19 @@
 {
-    "Version": "1.2",
+    "Version": "1.1",
     "Data": {
-        "Source": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycar.gen.cpp",
+        "Source": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycar.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "PCH": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
         "Includes": [
-            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
-            "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\public\\mycar.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\charactermovementreplication.generated.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\rootmotionsource.generated.h",
-            "d:\\epicgamesgamefolder2\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\character.generated.h",
-            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycar.generated.h"
+            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
+            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\source\\magnetcars\\public\\mycar.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\charactermovementreplication.generated.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\rootmotionsource.generated.h",
+            "d:\\unrealenginee\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\character.generated.h",
+            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycar.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

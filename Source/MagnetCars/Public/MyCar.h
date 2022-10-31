@@ -9,11 +9,12 @@
 UENUM(BlueprintType)
 enum EWhichDirection
 {
-	ForwardDirection,
-	BackwardDirection,
-	RightDirection,
-	LeftDirection
+	VerticalDirection,
+	HorizontalDirection
 };
+
+DECLARE_DELEGATE_TwoParams(FDirection,EWhichDirection,float);
+
 UCLASS()
 class MAGNETCARS_API AMyCar : public ACharacter
 {
@@ -22,7 +23,6 @@ class MAGNETCARS_API AMyCar : public ACharacter
 public:
 	// Sets default values for this character's properties
 	AMyCar();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -34,24 +34,34 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	// UFUNCTION(BlueprintCallable)
+	// void CarMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
-	void CarMovement(EWhichDirection Direction);
+	void ForwardMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void BackwardMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void LeftMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void RightMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
 	void CarRespawn();
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	bool Grounded = false;
+	bool isGrounded = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	bool OnGravity = false;
+	bool isOnReverseGravity = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float RespawnTiming = 2.0f;
+	float respawnTiming = 2.0f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float ContainerRespawnTiming = 2.0f;
+	float containerRespawnTiming = 2.0f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float Acceleration = 20.f;
+	float acceleration = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float MaxSpeed = 1000.f;
+	float maxSpeed = 1000.f;
 };

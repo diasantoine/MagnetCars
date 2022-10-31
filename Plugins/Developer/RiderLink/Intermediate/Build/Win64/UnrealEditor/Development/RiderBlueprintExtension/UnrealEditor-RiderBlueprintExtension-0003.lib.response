@@ -1,0 +1,11 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-RiderBlueprintExtension-0003.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"D:\Ican\Cour ican\Ican Seconde Annee Mastere\ProjetPremierTrimestre\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprintExtension\Module.RiderBlueprintExtension.cpp.obj"
+"D:\Ican\Cour ican\Ican Seconde Annee Mastere\ProjetPremierTrimestre\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprintExtension\Default.rc2.res"
+/OUT:"D:\Ican\Cour ican\Ican Seconde Annee Mastere\ProjetPremierTrimestre\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprintExtension\UnrealEditor-RiderBlueprintExtension-0003.lib"
