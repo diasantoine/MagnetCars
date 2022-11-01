@@ -19,7 +19,7 @@ AMyCar::AMyCar()
 void AMyCar::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	componentMovement = this->GetCharacterMovement();
 }
 
 // Called every frame
@@ -32,20 +32,19 @@ void AMyCar::Tick(float DeltaTime)
 void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	PlayerInputComponent->BindAxis("Forward",this,&AMyCar::ForwardMovement);
-	PlayerInputComponent->BindAxis("Backward",this,&AMyCar::BackwardMovement);
-	PlayerInputComponent->BindAxis("Left",this,&AMyCar::LeftMovement);
-	PlayerInputComponent->BindAxis("Right",this,&AMyCar::RightMovement);
+	// PlayerInputComponent->BindAxis("Forward",this,&AMyCar::ForwardMovement);
+	// PlayerInputComponent->BindAxis("Backward",this,&AMyCar::BackwardMovement);
+	// PlayerInputComponent->BindAxis("Left",this,&AMyCar::LeftMovement);
+	// PlayerInputComponent->BindAxis("Right",this,&AMyCar::RightMovement);
 	// même problème que d'habitude, trouve un moyen que les quatres inputs viennent mettre a jour la velocity sans supp les autres inputs
 	// PlayerInputComponent->BindAxis("RightLean",this,&AMyCar::CarDrift);
 	// PlayerInputComponent->BindAxis("LeftLean",this,&AMyCar::CarDrift);
-
 	PlayerInputComponent->BindAction("ChangeGravity",IE_Pressed,this,&AMyCar::CarGravity);
 
 	PlayerInputComponent->BindAction("Respawn",IE_Pressed,this,&AMyCar::CarRespawn);
 }
 
-// void AMyCar::CarMovement(float axisValue)
+
 // {
 // 	UE_LOG(LogTemp, Warning,TEXT("Mais"));
 // 	UCharacterMovementComponent* ComponentMovement = GetCharacterMovement();
@@ -65,36 +64,38 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyCar::ForwardMovement(float axisValue)
 {
-	UCharacterMovementComponent* componentMovement = this->GetCharacterMovement();
 	FVector velocity = componentMovement->Velocity;
-	velocity.X = FMath::Clamp(GetActorForwardVector().X * acceleration  * axisValue,0,maxSpeed);
-	componentMovement->Velocity = velocity * componentMovement->Velocity.GetSafeNormal();
+	velocity.X += axisValue * acceleration;
+	CarMovement(velocity);
 }
 
 void AMyCar::BackwardMovement(float axisValue)
 {
-	UCharacterMovementComponent* componentMovement = this->GetCharacterMovement();
 	FVector velocity = componentMovement->Velocity;
-	velocity.X = FMath::Clamp(GetActorForwardVector().X * acceleration  * axisValue,0,maxSpeed);
+	velocity.X += axisValue * acceleration;
 	componentMovement->Velocity = velocity * componentMovement->Velocity.GetSafeNormal();
+	CarMovement(velocity);
 }
 
 void AMyCar::LeftMovement(float axisValue)
 {
-	UCharacterMovementComponent* componentMovement = this->GetCharacterMovement();
 	FVector velocity = componentMovement->Velocity;
-	velocity.Z = FMath::Clamp(GetActorRightVector().Z * acceleration  * axisValue,0,maxSpeed);
-	componentMovement->Velocity = velocity * componentMovement->Velocity.GetSafeNormal();
+	velocity.Z += axisValue * acceleration;
+	CarMovement(velocity);
 }
 
 void AMyCar::RightMovement(float axisValue)
 {
-	UCharacterMovementComponent* componentMovement = this->GetCharacterMovement();
 	FVector velocity = componentMovement->Velocity;
-	velocity.Z = FMath::Clamp(GetActorRightVector().Z * acceleration  * axisValue,0,maxSpeed);
-	componentMovement->Velocity = velocity * componentMovement->Velocity.GetSafeNormal();
+	velocity.Z += axisValue * acceleration;
+	CarMovement(velocity);
 }
 
+void AMyCar::CarMovement(FVector newInputDirection)
+{
+	const FVector velocity = componentMovement->Velocity;
+	componentMovement->Velocity = velocity.GetSafeNormal() * newInputDirection.GetSafeNormal() + FMath::Clamp(velocity.Length() + newInputDirection.Length(),0,maxSpeed);
+}
 
 
 void AMyCar::CarDrift(float value)
@@ -105,13 +106,14 @@ void AMyCar::CarDrift(float value)
 void AMyCar::CarGravity()
 {
 	isOnReverseGravity = !isOnReverseGravity;
-	this->GetCharacterMovement()->GravityScale = !this->GetCharacterMovement()->GravityScale;
+	this->componentMovement->GravityScale = -this->componentMovement->GravityScale;
+	this->componentMovement->JumpOff(this);
+	APawn::AddControllerRollInput(180);
 	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
 }
 
 void AMyCar::CarRespawn()
 {
-	UE_LOG(LogTemp,Warning,TEXT("HEy"));
 	UGameplayStatics::OpenLevel(this, FName(*GetWorld()->GetName()), false);
 }
 

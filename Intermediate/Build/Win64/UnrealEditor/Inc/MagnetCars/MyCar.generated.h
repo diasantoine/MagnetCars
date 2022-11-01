@@ -22,7 +22,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execRightMovement); \
 	DECLARE_FUNCTION(execLeftMovement); \
 	DECLARE_FUNCTION(execBackwardMovement); \
-	DECLARE_FUNCTION(execForwardMovement);
+	DECLARE_FUNCTION(execForwardMovement); \
+	DECLARE_FUNCTION(execCarMovement);
 
 
 #define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
@@ -33,7 +34,8 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 	DECLARE_FUNCTION(execRightMovement); \
 	DECLARE_FUNCTION(execLeftMovement); \
 	DECLARE_FUNCTION(execBackwardMovement); \
-	DECLARE_FUNCTION(execForwardMovement);
+	DECLARE_FUNCTION(execForwardMovement); \
+	DECLARE_FUNCTION(execCarMovement);
 
 
 #define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_INCLASS_NO_PURE_DECLS \

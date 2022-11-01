@@ -14,6 +14,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 	MAGNETCARS_API UClass* Z_Construct_UClass_AMyCar_NoRegister();
 	MAGNETCARS_API UClass* Z_Construct_UClass_AMyCar();
 	ENGINE_API UClass* Z_Construct_UClass_ACharacter();
+	COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 // End Cross Module References
 	static FEnumRegistrationInfo Z_Registration_Info_UEnum_EWhichDirection;
 	static UEnum* EWhichDirection_StaticEnum()
@@ -122,6 +123,14 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		P_THIS->ForwardMovement(Z_Param_axisValue);
 		P_NATIVE_END;
 	}
+	DEFINE_FUNCTION(AMyCar::execCarMovement)
+	{
+		P_GET_STRUCT(FVector,Z_Param_newInputDirection);
+		P_FINISH;
+		P_NATIVE_BEGIN;
+		P_THIS->CarMovement(Z_Param_newInputDirection);
+		P_NATIVE_END;
+	}
 	void AMyCar::StaticRegisterNativesAMyCar()
 	{
 		UClass* Class = AMyCar::StaticClass();
@@ -129,6 +138,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 			{ "BackwardMovement", &AMyCar::execBackwardMovement },
 			{ "CarDrift", &AMyCar::execCarDrift },
 			{ "CarGravity", &AMyCar::execCarGravity },
+			{ "CarMovement", &AMyCar::execCarMovement },
 			{ "CarRespawn", &AMyCar::execCarRespawn },
 			{ "ForwardMovement", &AMyCar::execForwardMovement },
 			{ "LeftMovement", &AMyCar::execLeftMovement },
@@ -222,6 +232,38 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		}
 		return ReturnFunction;
 	}
+	struct Z_Construct_UFunction_AMyCar_CarMovement_Statics
+	{
+		struct MyCar_eventCarMovement_Parms
+		{
+			FVector newInputDirection;
+		};
+		static const UECodeGen_Private::FStructPropertyParams NewProp_newInputDirection;
+		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[];
+#endif
+		static const UECodeGen_Private::FFunctionParams FuncParams;
+	};
+	const UECodeGen_Private::FStructPropertyParams Z_Construct_UFunction_AMyCar_CarMovement_Statics::NewProp_newInputDirection = { "newInputDirection", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(MyCar_eventCarMovement_Parms, newInputDirection), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(nullptr, 0) };
+	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AMyCar_CarMovement_Statics::PropPointers[] = {
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AMyCar_CarMovement_Statics::NewProp_newInputDirection,
+	};
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCar_CarMovement_Statics::Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/MyCar.h" },
+	};
+#endif
+	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCar_CarMovement_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCar, nullptr, "CarMovement", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMyCar_CarMovement_Statics::MyCar_eventCarMovement_Parms), Z_Construct_UFunction_AMyCar_CarMovement_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCar_CarMovement_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04820401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCar_CarMovement_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCar_CarMovement_Statics::Function_MetaDataParams)) };
+	UFunction* Z_Construct_UFunction_AMyCar_CarMovement()
+	{
+		static UFunction* ReturnFunction = nullptr;
+		if (!ReturnFunction)
+		{
+			UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AMyCar_CarMovement_Statics::FuncParams);
+		}
+		return ReturnFunction;
+	}
 	struct Z_Construct_UFunction_AMyCar_CarRespawn_Statics
 	{
 #if WITH_METADATA
@@ -263,9 +305,7 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::Function_MetaDataParams[] = {
-		{ "Comment", "// UFUNCTION(BlueprintCallable)\n// void CarMovement(float axisValue);\n" },
 		{ "ModuleRelativePath", "Public/MyCar.h" },
-		{ "ToolTip", "UFUNCTION(BlueprintCallable)\nvoid CarMovement(float axisValue);" },
 	};
 #endif
 	const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AMyCar, nullptr, "ForwardMovement", nullptr, nullptr, sizeof(Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::MyCar_eventForwardMovement_Parms), Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::PropPointers), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::Function_MetaDataParams, UE_ARRAY_COUNT(Z_Construct_UFunction_AMyCar_ForwardMovement_Statics::Function_MetaDataParams)) };
@@ -392,8 +432,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		{ &Z_Construct_UFunction_AMyCar_BackwardMovement, "BackwardMovement" }, // 1782606030
 		{ &Z_Construct_UFunction_AMyCar_CarDrift, "CarDrift" }, // 3574860688
 		{ &Z_Construct_UFunction_AMyCar_CarGravity, "CarGravity" }, // 307229539
+		{ &Z_Construct_UFunction_AMyCar_CarMovement, "CarMovement" }, // 1715762802
 		{ &Z_Construct_UFunction_AMyCar_CarRespawn, "CarRespawn" }, // 3289337858
-		{ &Z_Construct_UFunction_AMyCar_ForwardMovement, "ForwardMovement" }, // 1023818591
+		{ &Z_Construct_UFunction_AMyCar_ForwardMovement, "ForwardMovement" }, // 1472687407
 		{ &Z_Construct_UFunction_AMyCar_LeftMovement, "LeftMovement" }, // 2766593994
 		{ &Z_Construct_UFunction_AMyCar_RightMovement, "RightMovement" }, // 1859946717
 	};
@@ -502,9 +543,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		{ EWhichDirection_StaticEnum, TEXT("EWhichDirection"), &Z_Registration_Info_UEnum_EWhichDirection, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2455543830U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCar, AMyCar::StaticClass, TEXT("AMyCar"), &Z_Registration_Info_UClass_AMyCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCar), 349842786U) },
+		{ Z_Construct_UClass_AMyCar, AMyCar::StaticClass, TEXT("AMyCar"), &Z_Registration_Info_UClass_AMyCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCar), 925607010U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_3493623580(TEXT("/Script/MagnetCars"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_3129127277(TEXT("/Script/MagnetCars"),
 		Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::EnumInfo));

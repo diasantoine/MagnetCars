@@ -17,7 +17,7 @@ void EmptyLinkFunctionForGeneratedCodeMagnetCars_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x74AF2BE0,
+				0x06AC584D,
 				0xAABE6D4B,
 				METADATA_PARAMS(nullptr, 0)
 			};
@@ -25,5 +25,5 @@ void EmptyLinkFunctionForGeneratedCodeMagnetCars_init() {}
 		}
 		return Z_Registration_Info_UPackage__Script_MagnetCars.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MagnetCars(Z_Construct_UPackage__Script_MagnetCars, TEXT("/Script/MagnetCars"), Z_Registration_Info_UPackage__Script_MagnetCars, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x74AF2BE0, 0xAABE6D4B));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MagnetCars(Z_Construct_UPackage__Script_MagnetCars, TEXT("/Script/MagnetCars"), Z_Registration_Info_UPackage__Script_MagnetCars, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x06AC584D, 0xAABE6D4B));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

@@ -1,13 +1,13 @@
 {
-    "Version": "1.1",
+    "Version": "1.2",
     "Data": {
-        "Source": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycarcontroller.gen.cpp",
+        "Source": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycarcontroller.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "PCH": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
         "Includes": [
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\source\\magnetcars\\public\\mycarcontroller.h",
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycarcontroller.generated.h"
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\source\\magnetcars\\public\\mycarcontroller.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\mycarcontroller.generated.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

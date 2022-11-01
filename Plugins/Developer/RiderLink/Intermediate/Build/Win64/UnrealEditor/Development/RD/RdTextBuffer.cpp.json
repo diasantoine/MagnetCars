@@ -1,11 +1,11 @@
 {
-    "Version": "1.1",
+    "Version": "1.2",
     "Data": {
-        "Source": "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\plugins\\developer\\riderlink\\source\\rd\\src\\rd_gen_cpp\\src\\rdtextbuffer.cpp",
+        "Source": "f:\\ican\\secondannemastere\\magnetcars\\plugins\\developer\\riderlink\\source\\rd\\src\\rd_gen_cpp\\src\\rdtextbuffer.cpp",
         "ProvidedModule": "",
         "Includes": [
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
-            "d:\\ican\\cour ican\\ican seconde annee mastere\\projetpremiertrimestre\\magnetcars\\plugins\\developer\\riderlink\\source\\rd\\src\\rd_gen_cpp\\src\\rdtextbuffer.h"
+            "f:\\ican\\secondannemastere\\magnetcars\\plugins\\developer\\riderlink\\intermediate\\build\\win64\\unrealeditor\\development\\rd\\definitions.h",
+            "f:\\ican\\secondannemastere\\magnetcars\\plugins\\developer\\riderlink\\source\\rd\\src\\rd_gen_cpp\\src\\rdtextbuffer.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

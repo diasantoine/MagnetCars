@@ -34,8 +34,8 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
-	// UFUNCTION(BlueprintCallable)
-	// void CarMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void CarMovement(FVector newInputDirection);
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
@@ -64,4 +64,7 @@ public:
 	float acceleration = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float maxSpeed = 1000.f;
+
+private:
+	UCharacterMovementComponent* componentMovement;
 };
