@@ -21,7 +21,7 @@ void AMyCar::BeginPlay()
 	componentMovement = this->GetCharacterMovement();
 	componentMovement->MaxAcceleration = acceleration;
 	componentMovement->MaxWalkSpeed = maxSpeed;
-	componentMovement->GroundFriction = 0;
+	//componentMovement->GroundFriction = 0;
 }
 
 // Called every frame
