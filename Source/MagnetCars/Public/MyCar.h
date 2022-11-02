@@ -58,6 +58,12 @@ public:
 	float acceleration = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float maxSpeed = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float accelerationRotation = 5.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float maxRotation = 45.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float groundFiction = 1000.f;
 
 private:
 	UCharacterMovementComponent* componentMovement;

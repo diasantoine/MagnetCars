@@ -296,6 +296,18 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		static const UECodeGen_Private::FMetaDataPairParam NewProp_maxSpeed_MetaData[];
 #endif
 		static const UECodeGen_Private::FFloatPropertyParams NewProp_maxSpeed;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_accelerationRotation_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_accelerationRotation;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_maxRotation_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_maxRotation;
+#if WITH_METADATA
+		static const UECodeGen_Private::FMetaDataPairParam NewProp_groundFiction_MetaData[];
+#endif
+		static const UECodeGen_Private::FFloatPropertyParams NewProp_groundFiction;
 		static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 		static const FCppClassTypeInfoStatic StaticCppClassTypeInfo;
 		static const UECodeGen_Private::FClassParams ClassParams;
@@ -368,6 +380,27 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 	};
 #endif
 	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCar_Statics::NewProp_maxSpeed = { "maxSpeed", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCar, maxSpeed), METADATA_PARAMS(Z_Construct_UClass_AMyCar_Statics::NewProp_maxSpeed_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCar_Statics::NewProp_maxSpeed_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCar_Statics::NewProp_accelerationRotation_MetaData[] = {
+		{ "Category", "MyCar" },
+		{ "ModuleRelativePath", "Public/MyCar.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCar_Statics::NewProp_accelerationRotation = { "accelerationRotation", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCar, accelerationRotation), METADATA_PARAMS(Z_Construct_UClass_AMyCar_Statics::NewProp_accelerationRotation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCar_Statics::NewProp_accelerationRotation_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCar_Statics::NewProp_maxRotation_MetaData[] = {
+		{ "Category", "MyCar" },
+		{ "ModuleRelativePath", "Public/MyCar.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCar_Statics::NewProp_maxRotation = { "maxRotation", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCar, maxRotation), METADATA_PARAMS(Z_Construct_UClass_AMyCar_Statics::NewProp_maxRotation_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCar_Statics::NewProp_maxRotation_MetaData)) };
+#if WITH_METADATA
+	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AMyCar_Statics::NewProp_groundFiction_MetaData[] = {
+		{ "Category", "MyCar" },
+		{ "ModuleRelativePath", "Public/MyCar.h" },
+	};
+#endif
+	const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_AMyCar_Statics::NewProp_groundFiction = { "groundFiction", nullptr, (EPropertyFlags)0x0010000000000005, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, 1, STRUCT_OFFSET(AMyCar, groundFiction), METADATA_PARAMS(Z_Construct_UClass_AMyCar_Statics::NewProp_groundFiction_MetaData, UE_ARRAY_COUNT(Z_Construct_UClass_AMyCar_Statics::NewProp_groundFiction_MetaData)) };
 	const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AMyCar_Statics::PropPointers[] = {
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_isGrounded,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_isOnReverseGravity,
@@ -375,6 +408,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_containerRespawnTiming,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_acceleration,
 		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_maxSpeed,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_accelerationRotation,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_maxRotation,
+		(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AMyCar_Statics::NewProp_groundFiction,
 	};
 	const FCppClassTypeInfoStatic Z_Construct_UClass_AMyCar_Statics::StaticCppClassTypeInfo = {
 		TCppClassTypeTraits<AMyCar>::IsAbstract,
@@ -416,9 +452,9 @@ void EmptyLinkFunctionForGeneratedCodeMyCar() {}
 		{ EWhichDirection_StaticEnum, TEXT("EWhichDirection"), &Z_Registration_Info_UEnum_EWhichDirection, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2455543830U) },
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AMyCar, AMyCar::StaticClass, TEXT("AMyCar"), &Z_Registration_Info_UClass_AMyCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCar), 2244124098U) },
+		{ Z_Construct_UClass_AMyCar, AMyCar::StaticClass, TEXT("AMyCar"), &Z_Registration_Info_UClass_AMyCar, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AMyCar), 2743693484U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_1506448812(TEXT("/Script/MagnetCars"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_4162142320(TEXT("/Script/MagnetCars"),
 		Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::ClassInfo),
 		nullptr, 0,
 		Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_Statics::EnumInfo));
