@@ -12,7 +12,6 @@ AMyCar::AMyCar()
 {
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -20,6 +19,9 @@ void AMyCar::BeginPlay()
 {
 	Super::BeginPlay();
 	componentMovement = this->GetCharacterMovement();
+	componentMovement->MaxAcceleration = acceleration;
+	componentMovement->MaxWalkSpeed = maxSpeed;
+	componentMovement->GroundFriction = 0;
 }
 
 // Called every frame
@@ -32,10 +34,10 @@ void AMyCar::Tick(float DeltaTime)
 void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
-	// PlayerInputComponent->BindAxis("Forward",this,&AMyCar::ForwardMovement);
-	// PlayerInputComponent->BindAxis("Backward",this,&AMyCar::BackwardMovement);
-	// PlayerInputComponent->BindAxis("Left",this,&AMyCar::LeftMovement);
-	// PlayerInputComponent->BindAxis("Right",this,&AMyCar::RightMovement);
+	PlayerInputComponent->BindAxis("Forward",this,&AMyCar::ForwardMovement);
+	PlayerInputComponent->BindAxis("Right",this,&AMyCar::RightMovement);
+	PlayerInputComponent->BindAxis("Turn",this,&AMyCar::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("LookUp",this,&AMyCar::AddControllerPitchInput);
 	// même problème que d'habitude, trouve un moyen que les quatres inputs viennent mettre a jour la velocity sans supp les autres inputs
 	// PlayerInputComponent->BindAxis("RightLean",this,&AMyCar::CarDrift);
 	// PlayerInputComponent->BindAxis("LeftLean",this,&AMyCar::CarDrift);
@@ -64,39 +66,13 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyCar::ForwardMovement(float axisValue)
 {
-	FVector velocity = componentMovement->Velocity;
-	velocity.X += axisValue * acceleration;
-	CarMovement(velocity);
-}
-
-void AMyCar::BackwardMovement(float axisValue)
-{
-	FVector velocity = componentMovement->Velocity;
-	velocity.X += axisValue * acceleration;
-	componentMovement->Velocity = velocity * componentMovement->Velocity.GetSafeNormal();
-	CarMovement(velocity);
-}
-
-void AMyCar::LeftMovement(float axisValue)
-{
-	FVector velocity = componentMovement->Velocity;
-	velocity.Z += axisValue * acceleration;
-	CarMovement(velocity);
+	this->AddMovementInput(GetActorForwardVector() * axisValue);
 }
 
 void AMyCar::RightMovement(float axisValue)
 {
-	FVector velocity = componentMovement->Velocity;
-	velocity.Z += axisValue * acceleration;
-	CarMovement(velocity);
+	this->AddMovementInput(GetActorRightVector()* axisValue);
 }
-
-void AMyCar::CarMovement(FVector newInputDirection)
-{
-	const FVector velocity = componentMovement->Velocity;
-	componentMovement->Velocity = velocity.GetSafeNormal() * newInputDirection.GetSafeNormal() + FMath::Clamp(velocity.Length() + newInputDirection.Length(),0,maxSpeed);
-}
-
 
 void AMyCar::CarDrift(float value)
 {
@@ -107,8 +83,8 @@ void AMyCar::CarGravity()
 {
 	isOnReverseGravity = !isOnReverseGravity;
 	this->componentMovement->GravityScale = -this->componentMovement->GravityScale;
-	this->componentMovement->JumpOff(this);
-	APawn::AddControllerRollInput(180);
+	this->Jump();
+	this->SetActorRotation(FRotator( isOnReverseGravity ? 180 : 0,0,0));
 	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
 }
 

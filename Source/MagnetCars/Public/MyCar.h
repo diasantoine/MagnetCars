@@ -35,13 +35,7 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
 	UFUNCTION(BlueprintCallable)
-	void CarMovement(FVector newInputDirection);
-	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
-	UFUNCTION(BlueprintCallable)
-	void BackwardMovement(float axisValue);
-	UFUNCTION(BlueprintCallable)
-	void LeftMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
