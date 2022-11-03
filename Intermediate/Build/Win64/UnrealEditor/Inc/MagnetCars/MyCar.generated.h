@@ -8,31 +8,43 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AActor;
 #ifdef MAGNETCARS_MyCar_generated_h
 #error "MyCar.generated.h already included, missing '#pragma once' in MyCar.h"
 #endif
 #define MAGNETCARS_MyCar_generated_h
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_SPARSE_DATA
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_RPC_WRAPPERS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_19_GENERATED_BODY \
+	friend struct Z_Construct_UScriptStruct_FCar_Statics; \
+	MAGNETCARS_API static class UScriptStruct* StaticStruct();
+
+
+template<> MAGNETCARS_API UScriptStruct* StaticStruct<struct FCar>();
+
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_SPARSE_DATA
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_RPC_WRAPPERS \
  \
+	DECLARE_FUNCTION(execLastPosition); \
 	DECLARE_FUNCTION(execCarRespawn); \
+	DECLARE_FUNCTION(execResetScene); \
 	DECLARE_FUNCTION(execCarGravity); \
 	DECLARE_FUNCTION(execCarDrift); \
 	DECLARE_FUNCTION(execRightMovement); \
 	DECLARE_FUNCTION(execForwardMovement);
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_RPC_WRAPPERS_NO_PURE_DECLS \
  \
+	DECLARE_FUNCTION(execLastPosition); \
 	DECLARE_FUNCTION(execCarRespawn); \
+	DECLARE_FUNCTION(execResetScene); \
 	DECLARE_FUNCTION(execCarGravity); \
 	DECLARE_FUNCTION(execCarDrift); \
 	DECLARE_FUNCTION(execRightMovement); \
 	DECLARE_FUNCTION(execForwardMovement);
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_INCLASS_NO_PURE_DECLS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAMyCar(); \
 	friend struct Z_Construct_UClass_AMyCar_Statics; \
@@ -41,7 +53,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_INCLASS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_INCLASS \
 private: \
 	static void StaticRegisterNativesAMyCar(); \
 	friend struct Z_Construct_UClass_AMyCar_Statics; \
@@ -50,7 +62,7 @@ public: \
 	DECLARE_SERIALIZER(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_STANDARD_CONSTRUCTORS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_STANDARD_CONSTRUCTORS \
 	/** Standard constructor, called after all reflected properties have been initialized */ \
 	NO_API AMyCar(const FObjectInitializer& ObjectInitializer); \
 	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(AMyCar) \
@@ -63,7 +75,7 @@ private: \
 public:
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_ENHANCED_CONSTRUCTORS \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	NO_API AMyCar(AMyCar&&); \
@@ -74,25 +86,25 @@ public: \
 	DEFINE_DEFAULT_CONSTRUCTOR_CALL(AMyCar)
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_18_PROLOG
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_GENERATED_BODY_LEGACY \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_47_PROLOG
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_GENERATED_BODY_LEGACY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_SPARSE_DATA \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_RPC_WRAPPERS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_INCLASS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_STANDARD_CONSTRUCTORS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_SPARSE_DATA \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_RPC_WRAPPERS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_INCLASS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_STANDARD_CONSTRUCTORS \
 public: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
 
-#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_GENERATED_BODY \
+#define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_SPARSE_DATA \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_INCLASS_NO_PURE_DECLS \
-	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_21_ENHANCED_CONSTRUCTORS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_SPARSE_DATA \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_INCLASS_NO_PURE_DECLS \
+	FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

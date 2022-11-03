@@ -13,6 +13,35 @@ enum EWhichDirection
 	HorizontalDirection
 };
 
+USTRUCT(BlueprintType)
+struct FCar
+{
+	GENERATED_BODY()
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool isGrounded = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool isOnReverseGravity = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
+	float respawnTiming = 2.0f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
+	float containerRespawnTiming = 2.0f;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float acceleration = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float maxSpeed = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float amountRotationCar = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float maxAmountRotationCar = 90.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
+	float amountOfLean = 5.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
+	float maxLean = 45.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float groundFiction = 1000.f;
+};
+
 DECLARE_DELEGATE_TwoParams(FDirection,EWhichDirection,float);
 
 UCLASS()
@@ -33,6 +62,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
@@ -43,27 +73,18 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
+	void ResetScene();
+	UFUNCTION(BlueprintCallable)
 	void CarRespawn();
+	UFUNCTION(BlueprintCallable)
+	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	bool isGrounded = false;
+	FCar carStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	bool isOnReverseGravity = false;
+	FVector lastCarPositionOnRoad = FVector::Zero();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float respawnTiming = 2.0f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float containerRespawnTiming = 2.0f;
-
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float acceleration = 20.f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float maxSpeed = 1000.f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float accelerationRotation = 5.f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float maxRotation = 45.f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float groundFiction = 1000.f;
+	FVector middleOfTheRoad;
 
 private:
 	UCharacterMovementComponent* componentMovement;
