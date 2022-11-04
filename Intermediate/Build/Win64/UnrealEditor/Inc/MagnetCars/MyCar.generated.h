@@ -15,11 +15,11 @@ class AActor;
 #define MAGNETCARS_MyCar_generated_h
 
 #define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_19_GENERATED_BODY \
-	friend struct Z_Construct_UScriptStruct_FCar_Statics; \
+	friend struct Z_Construct_UScriptStruct_FCarOld_Statics; \
 	MAGNETCARS_API static class UScriptStruct* StaticStruct();
 
 
-template<> MAGNETCARS_API UScriptStruct* StaticStruct<struct FCar>();
+template<> MAGNETCARS_API UScriptStruct* StaticStruct<struct FCarOld>();
 
 #define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_SPARSE_DATA
 #define FID_MagnetCars_Source_MagnetCars_Public_MyCar_h_50_RPC_WRAPPERS \

@@ -14,7 +14,7 @@ enum EWhichDirection
 };
 
 USTRUCT(BlueprintType)
-struct FCar
+struct FCarOld
 {
 	GENERATED_BODY()
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
@@ -80,7 +80,7 @@ public:
 	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FCar carStruct;
+	FCarOld carStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FVector lastCarPositionOnRoad = FVector::Zero();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)

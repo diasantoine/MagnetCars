@@ -66,8 +66,11 @@ void AMyCar::RightMovement(float axisValue)
 void AMyCar::CarDrift(float value)
 {
 	this->AddActorLocalRotation(FRotator(0,0,carStruct.amountOfLean * value));
-	// const FRotator containerRotation = this->GetActorRotation();
-	// this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,FMath::Clamp(containerRotation.Roll,0,carStruct.maxLean)));
+	const FRotator containerRotation = this->GetActorRotation();
+	const float rotationRoll = FMath::Clamp(containerRotation.Roll,-carStruct.maxLean,carStruct.maxLean);
+	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,rotationRoll));
+	this->GetCharacterMovement()->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
+	//this->AddMovementInput(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
 }
 
 void AMyCar::CarGravity()
@@ -87,7 +90,7 @@ void AMyCar::ResetScene()
 void AMyCar::CarRespawn()
 {
 	componentMovement->Velocity = FVector::Zero();
-	carStruct = FCar();
+	carStruct = FCarOld();
 	APawn::SetActorLocation(middleOfTheRoad);
 	APawn::SetActorRotation(FRotator::ZeroRotator);
 }
