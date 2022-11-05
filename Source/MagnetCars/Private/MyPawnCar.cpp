@@ -2,8 +2,6 @@
 
 
 #include "MyPawnCar.h"
-
-#include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -11,13 +9,19 @@ AMyPawnCar::AMyPawnCar()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	boxCollision = Cast<UBoxComponent>(this->GetRootComponent());
+	this->carCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("carCollision"));
+	this->carGroundCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("carGroundCollision "));
+	this->springArmGroundCollision = CreateDefaultSubobject<USpringArmComponent>(TEXT("ArmCollisionGround"));
+	this->SetRootComponent(carCollision);
+	//this->springArmGroundCollision->SetupAttachment(this->carCollision);
+	this->carGroundCollision->SetupAttachment(this->springArmGroundCollision);
 }
 
 // Called when the game starts or when spawned
 void AMyPawnCar::BeginPlay()
 {
 	Super::BeginPlay();
+	carCollision->SetLinearDamping(carStruct.groundFiction);
 }
 
 // Called every frame
@@ -32,12 +36,12 @@ void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
 	PlayerInputComponent->BindAxis("Forward",this,&AMyPawnCar::ForwardMovement);
-	PlayerInputComponent->BindAxis("Right",this,&APawn::AddControllerYawInput);
-	//PlayerInputComponent->BindAxis("Turn",this,&AMyCar::AddControllerYawInput);
+	PlayerInputComponent->BindAxis("Right",this,&AMyPawnCar::RightMovement);
+	//PlayerInputComponent->BindAxis("Turn",this,&AMyPawnCar::AddControllerYawInput);
 	//PlayerInputComponent->BindAxis("LookUp",this,&AMyCar::AddControllerPitchInput);
 
-	// PlayerInputComponent->BindAxis("RightLean",this,&AMyPawnCar::CarDrift);
-	// PlayerInputComponent->BindAxis("LeftLean",this,&AMyPawnCar::CarDrift);
+	PlayerInputComponent->BindAxis("RightLean",this,&AMyPawnCar::CarDrift);
+	PlayerInputComponent->BindAxis("LeftLean",this,&AMyPawnCar::CarDrift);
 	
 	PlayerInputComponent->BindAction("ChangeGravity",IE_Pressed,this,&AMyPawnCar::CarGravity);
 
@@ -48,19 +52,27 @@ void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 
 void AMyPawnCar::ForwardMovement(float axisValue)
 {
-	UE_LOG(LogTemp,Warning,TEXT("MERDE, %f"),axisValue);
-	this->boxCollision->AddForce(GetActorForwardVector() * axisValue * carStruct.acceleration);
+	if(carCollision == nullptr)return;
+	this->carCollision->AddForce(GetActorForwardVector() * axisValue * carStruct.acceleration * this->carCollision->GetMass());
 	//this->AddMovementInput(GetActorForwardVector() * axisValue * carStruct.acceleration);
-	this->boxCollision->ComponentVelocity.X = FMath::Clamp(this->boxCollision->ComponentVelocity.X,-carStruct.maxSpeed,carStruct.maxSpeed);
+	this->carCollision->ComponentVelocity.X = FMath::Clamp(this->carCollision->ComponentVelocity.X,-carStruct.maxSpeed,carStruct.maxSpeed);
+	if(carStruct.isGrounded)
+	{
+		FlyingCar(lastZValue);
+	}
 	if(carStruct.isOnReverseGravity) return;
 	InvertGravity();
 }
 
 void AMyPawnCar::RightMovement(float axisValue)
 {
-	this->boxCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration);
-	//this->boxCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration);
-	this->boxCollision->ComponentVelocity.Y = FMath::Clamp(this->boxCollision->ComponentVelocity.Y,-carStruct.maxSpeed,carStruct.maxSpeed);
+	if(carCollision == nullptr)return;
+	this->carCollision->AddLocalRotation(FRotator(0,carStruct.amountRotationCar * axisValue,0));
+	// FRotator rotationCar = this->carCollision->GetRelativeRotation();
+	// this->carCollision->SetRelativeRotation(FRotator(rotationCar.Pitch,FMath::Clamp(rotationCar.Yaw,-carStruct.maxAmountRotationCar,carStruct.maxAmountRotationCar),rotationCar.Roll));
+	//this->carCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration * this->carCollision->GetMass());
+	//this->carCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration);
+	//this->carCollision->ComponentVelocity.Y = FMath::Clamp(this->carCollision->ComponentVelocity.Y,-carStruct.maxSpeed,carStruct.maxSpeed);
 	//this->AddActorWorldRotation(FRotator(0, carStruct.amountRotationCar * axisValue,0));
 	// const FRotator containerRotation = this->GetActorRotation();
 	// this->SetActorRotation(FRotator(containerRotation.Pitch,FMath::Clamp(containerRotation.Yaw,0,carStruct.maxAmountRotationCar),containerRotation.Roll));
@@ -69,28 +81,40 @@ void AMyPawnCar::RightMovement(float axisValue)
 
 void AMyPawnCar::CarDrift(float value)
 {
+	if(carCollision == nullptr)return;
 	this->AddActorLocalRotation(FRotator(0,0,carStruct.amountOfLean * value));
 	const FRotator containerRotation = this->GetActorRotation();
 	const float rotationRoll = FMath::Clamp(containerRotation.Roll,-carStruct.maxLean,carStruct.maxLean);
 	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,rotationRoll));
-	this->boxCollision->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
+	this->carCollision->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean) * carStruct.acceleration);
+	UE_LOG(LogTemp,Warning,TEXT("HEY"));
 	//this->GetCharacterMovement()->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
 	//this->AddMovementInput(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
 }
 
+void AMyPawnCar::FlyingCar(float lowestZ)
+{
+	if(carCollision == nullptr) return;
+	FVector carLocation = this->GetActorLocation();
+	carLocation.Z = lowestZ;
+	this->SetActorLocation(carLocation);
+}
+
+
 void AMyPawnCar::CarGravity()
 {
+	if(carCollision == nullptr)return;
 	carStruct.isOnReverseGravity = !carStruct.isOnReverseGravity;
-	boxCollision->SetEnableGravity(carStruct.isOnReverseGravity);
+	carCollision->SetEnableGravity(!carStruct.isOnReverseGravity);
 	//this->componentMovement->GravityScale = -this->componentMovement->GravityScale;
 	//this->Jump();
-	this->SetActorRotation(FRotator( carStruct.isOnReverseGravity ? 180 : 0,0,0));
+	this->SetActorRotation(FRotator( 0,0,carStruct.isOnReverseGravity ? 180 : 0));
 	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
 }
 
 void AMyPawnCar::InvertGravity()
 {
-	this->boxCollision->ComponentVelocity.Y -= GetWorld()->GetGravityZ();
+	this->carCollision->ComponentVelocity.Y -= GetWorld()->GetGravityZ();
 }
 
 
@@ -107,15 +131,32 @@ void AMyPawnCar::CarRespawn()
 	APawn::SetActorRotation(FRotator::ZeroRotator);
 }
 
+void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
+{
+	this->lastCarPositionOnRoad = lastPositionReturned;
+	this->middleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
+}
+
+void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	Super::NotifyActorBeginOverlap(OtherActor);
+	this->carStruct.isGrounded = true;
+	this->lastZValue = this->GetActorLocation().Z;
+}
+
+
 void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorEndOverlap(OtherActor);
-	LastPosition(this->GetActorLocation(),OtherActor);// componentMovement->GetActorLocation(),OtherActor);
+	this->carStruct.isGrounded = false;
+	this->lastZValue = 0;
 }
 
-
-void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
+void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
-	lastCarPositionOnRoad = lastPositionReturned;
-	middleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
+	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);
+	LastPosition(this->GetActorLocation(),Other);// componentMovement->GetActorLocation(),OtherActor);
 }
+
+
+

@@ -69,7 +69,7 @@ void AMyCar::CarDrift(float value)
 	const FRotator containerRotation = this->GetActorRotation();
 	const float rotationRoll = FMath::Clamp(containerRotation.Roll,-carStruct.maxLean,carStruct.maxLean);
 	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,rotationRoll));
-	this->GetCharacterMovement()->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
+	//this->GetCharacterMovement()->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
 	//this->AddMovementInput(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
 }
 
@@ -78,7 +78,7 @@ void AMyCar::CarGravity()
 	carStruct.isOnReverseGravity = !carStruct.isOnReverseGravity;
 	this->componentMovement->GravityScale = -this->componentMovement->GravityScale;
 	this->Jump();
-	this->SetActorRotation(FRotator( carStruct.isOnReverseGravity ? 180 : 0,0,0));
+	this->SetActorRotation(FRotator( 0,0,carStruct.isOnReverseGravity ? 180 : 0));
 	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
 }
 

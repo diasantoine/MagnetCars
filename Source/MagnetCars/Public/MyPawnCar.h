@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Pawn.h"
 #include "Components/BoxComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "MyPawnCar.generated.h"
 
 USTRUCT(BlueprintType)
@@ -34,6 +35,9 @@ struct FCar
  	float maxLean = 45.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
  	float groundFiction = 1000.f;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float distanceGround = 0.5f;
  };
 
 UCLASS()
@@ -55,7 +59,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
@@ -73,6 +79,8 @@ public:
 	void CarRespawn();
 	UFUNCTION(BlueprintCallable)
 	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
+	UFUNCTION(BlueprintCallable)
+	void FlyingCar(float lowestZ);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar carStruct;
@@ -81,5 +89,11 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FVector middleOfTheRoad;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	class UBoxComponent* boxCollision;
+	float lastZValue = 0;
+	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
+	class UBoxComponent* carCollision;
+	UPROPERTY(BlueprintReadWrite,VisibleAnywhere)
+	class UBoxComponent* carGroundCollision;
+	UPROPERTY(BlueprintReadWrite,VisibleAnywhere)
+	class USpringArmComponent* springArmGroundCollision;
 };
