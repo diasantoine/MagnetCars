@@ -13,31 +13,31 @@ struct FCar
  {
  	GENERATED_BODY()
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
- 	bool isGrounded = false;
+ 	bool IsGrounded = false;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
- 	bool isOnReverseGravity = false;
+ 	bool IsOnReverseGravity = false;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
- 	float respawnTiming = 2.0f;
+ 	float RespawnTiming = 2.0f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
- 	float containerRespawnTiming = 2.0f;
+ 	float ContainerRespawnTiming = 2.0f;
 
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
- 	float acceleration = 20.f;
+ 	float Acceleration = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
- 	float maxSpeed = 1000.f;
+ 	float MaxSpeed = 1000.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
- 	float amountRotationCar = 20.f;
+ 	float AmountRotationCar = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
- 	float maxAmountRotationCar = 90.f;
+ 	float MaxAmountRotationCar = 90.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
- 	float amountOfLean = 5.f;
+ 	float AmountOfLean = 5.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
- 	float maxLean = 45.f;
+ 	float MaxLean = 45.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
- 	float groundFiction = 1000.f;
+ 	float GroundFiction = 1000.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float distanceGround = 0.5f;
+	float DistanceGround = 0.5f;
  };
 
 UCLASS()
@@ -83,17 +83,15 @@ public:
 	void FlyingCar(float lowestZ);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FCar carStruct;
+	FCar CarStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FVector lastCarPositionOnRoad = FVector::Zero();
+	FVector LastCarPositionOnRoad = FVector::Zero();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FVector middleOfTheRoad;
+	FVector MiddleOfTheRoad;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float lastZValue = 0;
-	UPROPERTY(BlueprintReadWrite, VisibleAnywhere)
-	class UBoxComponent* carCollision;
-	UPROPERTY(BlueprintReadWrite,VisibleAnywhere)
-	class UBoxComponent* carGroundCollision;
-	UPROPERTY(BlueprintReadWrite,VisibleAnywhere)
-	class USpringArmComponent* springArmGroundCollision;
+	float LastZValue = 0;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class UBoxComponent* CarCollision;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	class UBoxComponent* CarGroundCollision;
 };
