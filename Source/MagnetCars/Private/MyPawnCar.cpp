@@ -52,9 +52,17 @@ void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 void AMyPawnCar::ForwardMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
-	this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
-	//this->AddMovementInput(GetActorForwardVector() * axisValue * carStruct.acceleration);
-	this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+	if(CarStruct.IsGrounded)
+	{
+		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
+		//this->AddMovementInput(GetActorForwardVector() * axisValue * carStruct.acceleration);
+		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+	}
+	else
+	{
+		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
+		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+	}
 	if(CarStruct.IsGrounded)
 	{
 		FlyingCar(LastZValue);
@@ -66,7 +74,14 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 void AMyPawnCar::RightMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
-	this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+	if(CarStruct.IsGrounded)
+	{
+		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+	}
+	else
+	{
+		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+	}
 	// FRotator rotationCar = this->carCollision->GetRelativeRotation();
 	// this->carCollision->SetRelativeRotation(FRotator(rotationCar.Pitch,FMath::Clamp(rotationCar.Yaw,-carStruct.maxAmountRotationCar,carStruct.maxAmountRotationCar),rotationCar.Roll));
 	//this->carCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration * this->carCollision->GetMass());
@@ -112,8 +127,9 @@ void AMyPawnCar::CarGravity()
 
 void AMyPawnCar::InvertGravity()
 {
-	UE_LOG(LogTemp,Warning,TEXT("%f %s"),GetWorld()->GetGravityZ(), CarCollision->IsGravityEnabled());
-	this->CarCollision->AddForce(GetActorUpVector() * -GetWorld()->GetGravityZ());
+	UE_LOG(LogTemp,Warning,TEXT("hegbzrhb"));
+	//this->CarCollision->AddForce(GetActorUpVector() * -GetWorld()->GetGravityZ());
+	this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplierWhenInversed);
 }
 
 

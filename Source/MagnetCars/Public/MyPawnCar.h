@@ -25,6 +25,8 @@ struct FCar
  	float Acceleration = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float AccelerationNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float AmountRotationCar = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
@@ -82,6 +84,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FlyingCar(float lowestZ);
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float GravityMultiplierWhenInversed = 500.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar CarStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
