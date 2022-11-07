@@ -14,6 +14,7 @@ AMyPawnCar::AMyPawnCar()
 	this->SetRootComponent(CarCollision);
 	this->CarGroundCollision->SetupAttachment(this->RootComponent);
 	this->CarGroundCollision->SetUsingAbsoluteRotation(true);
+	this->CarGroundCollision->SetUsingAbsoluteLocation(true);
 }
 
 // Called when the game starts or when spawned
@@ -60,15 +61,22 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	}
 	else
 	{
-		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
+		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass());
 		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
 	}
+	
 	if(CarStruct.IsGrounded)
 	{
 		FlyingCar(LastZValue);
 	}
-	if(!CarStruct.IsOnReverseGravity) return;
-	InvertGravity();
+	if(CarStruct.IsOnReverseGravity)
+	{
+		InvertGravity();
+	}
+	else
+	{
+		this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplier);
+	}
 }
 
 void AMyPawnCar::RightMovement(float axisValue)
@@ -80,17 +88,8 @@ void AMyPawnCar::RightMovement(float axisValue)
 	}
 	else
 	{
-		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
 	}
-	// FRotator rotationCar = this->carCollision->GetRelativeRotation();
-	// this->carCollision->SetRelativeRotation(FRotator(rotationCar.Pitch,FMath::Clamp(rotationCar.Yaw,-carStruct.maxAmountRotationCar,carStruct.maxAmountRotationCar),rotationCar.Roll));
-	//this->carCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration * this->carCollision->GetMass());
-	//this->carCollision->AddForce(GetActorRightVector() * axisValue * carStruct.acceleration);
-	//this->carCollision->ComponentVelocity.Y = FMath::Clamp(this->carCollision->ComponentVelocity.Y,-carStruct.maxSpeed,carStruct.maxSpeed);
-	//this->AddActorWorldRotation(FRotator(0, carStruct.amountRotationCar * axisValue,0));
-	// const FRotator containerRotation = this->GetActorRotation();
-	// this->SetActorRotation(FRotator(containerRotation.Pitch,FMath::Clamp(containerRotation.Yaw,0,carStruct.maxAmountRotationCar),containerRotation.Roll));
-	//this->AddMovementInput(GetActorRightVector(),axisValue);
 }
 
 void AMyPawnCar::CarDrift(float value)
@@ -98,11 +97,20 @@ void AMyPawnCar::CarDrift(float value)
 	if(CarCollision == nullptr)return;
 	this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
 	const FRotator containerRotation = this->GetActorRotation();
-	//const float rotationRoll = FMath::Clamp(containerRotation.Roll,-CarStruct.MaxLean,CarStruct.MaxLean);
-	// this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,rotationRoll));
-	this->CarCollision->AddForce(GetActorRightVector() * (/*rotationRoll*/ containerRotation.Roll / CarStruct.MaxLean) * CarStruct.Acceleration);
-	//this->GetCharacterMovement()->AddForce(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
-	//this->AddMovementInput(GetActorRightVector() * (rotationRoll / carStruct.maxLean));
+	float RotationRoll;
+	if(CarStruct.IsOnReverseGravity)
+	{
+		RotationRoll = containerRotation.Roll > 0 ?
+			FMath::Clamp(containerRotation.Roll, 180 - CarStruct.MaxLean , 190) : FMath::Clamp(containerRotation.Roll, -190 , CarStruct.MaxLean - 180);
+	}
+	else
+	{
+		RotationRoll =  FMath::Clamp(containerRotation.Roll,-CarStruct.MaxLean,CarStruct.MaxLean);
+	}
+	//const float RotationRoll = CarStruct.IsOnReverseGravity ? FMath::Clamp(containerRotation.Roll, -180 + CarStruct.MaxLean , 180 -CarStruct.MaxLean) : FMath::Clamp(containerRotation.Roll,-CarStruct.MaxLean,CarStruct.MaxLean);
+	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,RotationRoll));
+	//this->CarCollision->ComponentVelocity = this->CarCollision->ComponentVelocity.Length() * (this->CarCollision->ComponentVelocity.GetSafeNormal() * GetActorRightVector());
+	//this->CarCollision->AddForce(GetActorRightVector() * -value * (RotationRoll / CarStruct.MaxLean) * CarStruct.Acceleration * 50);
 }
 
 void AMyPawnCar::FlyingCar(float lowestZ)
@@ -127,7 +135,6 @@ void AMyPawnCar::CarGravity()
 
 void AMyPawnCar::InvertGravity()
 {
-	UE_LOG(LogTemp,Warning,TEXT("hegbzrhb"));
 	//this->CarCollision->AddForce(GetActorUpVector() * -GetWorld()->GetGravityZ());
 	this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplierWhenInversed);
 }
@@ -157,16 +164,17 @@ void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 	Super::NotifyActorBeginOverlap(OtherActor);
 	this->CarStruct.IsGrounded = true;
 	this->LastZValue = this->GetActorLocation().Z;
+	UE_LOG(LogTemp,Warning,TEXT("hey"));
 }
 
 
-void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
+/*void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorEndOverlap(OtherActor);
 	this->CarStruct.IsGrounded = false;
 	this->LastZValue = 0;
 }
-
+*/
 void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);

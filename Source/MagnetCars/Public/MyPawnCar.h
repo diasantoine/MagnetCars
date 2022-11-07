@@ -29,6 +29,8 @@ struct FCar
 	float AccelerationNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float AmountRotationCar = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float AmountRotationCarNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float MaxAmountRotationCar = 90.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
@@ -62,7 +64,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
-	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+	//virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable)
@@ -84,6 +86,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void FlyingCar(float lowestZ);
 
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float GravityMultiplier = 500.f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float GravityMultiplierWhenInversed = 500.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
