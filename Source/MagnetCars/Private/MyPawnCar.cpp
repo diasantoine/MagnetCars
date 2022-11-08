@@ -28,7 +28,12 @@ void AMyPawnCar::BeginPlay()
 void AMyPawnCar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	/*if(ArrayOfGround.Num() > 0)
+	{
+		ContainerTimeBeforeCarFall = 0;
+		return;
+	}
+	CarFall(DeltaTime);*/
 }
 
 // Called to bind functionality to input
@@ -75,7 +80,7 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	}
 	else
 	{
-		this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplier);
+		this->CarCollision->AddForce(this->CarGroundCollision->GetUpVector() * GetWorld()->GetGravityZ() * GravityMultiplier);
 	}
 }
 
@@ -109,8 +114,14 @@ void AMyPawnCar::CarDrift(float value)
 	}
 	//const float RotationRoll = CarStruct.IsOnReverseGravity ? FMath::Clamp(containerRotation.Roll, -180 + CarStruct.MaxLean , 180 -CarStruct.MaxLean) : FMath::Clamp(containerRotation.Roll,-CarStruct.MaxLean,CarStruct.MaxLean);
 	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,RotationRoll));
-	//this->CarCollision->ComponentVelocity = this->CarCollision->ComponentVelocity.Length() * (this->CarCollision->ComponentVelocity.GetSafeNormal() * GetActorRightVector());
-	//this->CarCollision->AddForce(GetActorRightVector() * -value * (RotationRoll / CarStruct.MaxLean) * CarStruct.Acceleration * 50);
+	if(CarStruct.IsOnReverseGravity)
+	{
+		//this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / (RotationRoll > 0 ? 180 - CarStruct.MaxLean : CarStruct.MaxLean - 180)) * CarStruct.AccelerationLean);
+	}
+	else
+	{
+		this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / CarStruct.MaxLean) * CarStruct.AccelerationLean);
+	}
 }
 
 void AMyPawnCar::FlyingCar(float lowestZ)
@@ -159,22 +170,52 @@ void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
 }
 
+void AMyPawnCar::CarFall(float DeltaTime)
+{
+	if(ContainerTimeBeforeCarFall >= TimeBeforeCarFall)
+	{
+		this->CarStruct.IsGrounded = false;
+		this->LastZValue = 0;
+		ContainerTimeBeforeCarFall = 0;
+	}
+	else
+	{
+		ContainerTimeBeforeCarFall += DeltaTime;
+	}
+}
+
+void AMyPawnCar::DetectGround()
+{
+	FCollisionShape Sphere =  FCollisionShape::MakeSphere(10);
+	TArray<FHitResult> Result;
+	this->GetWorld()->SweepMultiByChannel(Result,FVector::Zero(),FVector::Zero(),FQuat(0,0,0,0),ECollisionChannel::ECC_Pawn,Sphere);
+}
+
+
+
 void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	Super::NotifyActorBeginOverlap(OtherActor);
 	this->CarStruct.IsGrounded = true;
 	this->LastZValue = this->GetActorLocation().Z;
-	UE_LOG(LogTemp,Warning,TEXT("hey"));
+	//this->LastZValue = OtherActor->GetActorLocation().Z + CarStruct.DistanceWithTheGround;
+	ArrayOfGround.Add(OtherActor);
+	UE_LOG(LogTemp,Warning,TEXT("start,%s"),*OtherActor->GetActorNameOrLabel());
 }
 
 
-/*void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
-{
-	Super::NotifyActorEndOverlap(OtherActor);
-	this->CarStruct.IsGrounded = false;
-	this->LastZValue = 0;
-}
-*/
+ void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
+ {
+ 	Super::NotifyActorEndOverlap(OtherActor);
+	if(!ArrayOfGround.Contains(OtherActor)) return;
+	ArrayOfGround.Remove(OtherActor);
+	if(ArrayOfGround.Num()>0) return;
+ 	this->CarStruct.IsGrounded = false;
+ 	this->LastZValue = 0;
+	UE_LOG(LogTemp,Warning,TEXT("end,%s"),*OtherActor->GetActorNameOrLabel());
+
+ }
+
 void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	Super::NotifyHit(MyComp, Other, OtherComp, bSelfMoved, HitLocation, HitNormal, NormalImpulse, Hit);

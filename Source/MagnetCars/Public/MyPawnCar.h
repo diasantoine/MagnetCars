@@ -23,6 +23,8 @@ struct FCar
 
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float Acceleration = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float AccelerationLean = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
@@ -41,7 +43,7 @@ struct FCar
  	float GroundFiction = 1000.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float DistanceGround = 0.5f;
+	float DistanceWithTheGround = 10.f;
  };
 
 UCLASS()
@@ -64,7 +66,7 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
-	//virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 
 	UFUNCTION(BlueprintCallable)
@@ -85,7 +87,15 @@ public:
 	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
 	UFUNCTION(BlueprintCallable)
 	void FlyingCar(float lowestZ);
+	UFUNCTION(BlueprintCallable)
+	void DetectGround();
+	UFUNCTION(BlueprintCallable)
+	void CarFall(float DeltaTime);
 
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	TArray<AActor*> ArrayOfGround;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	float TimeBeforeCarFall = 0.5f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	float GravityMultiplier = 500.f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -102,4 +112,7 @@ public:
 	class UBoxComponent* CarCollision;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	class UBoxComponent* CarGroundCollision;
+
+private:
+	float ContainerTimeBeforeCarFall = 0;
 };
