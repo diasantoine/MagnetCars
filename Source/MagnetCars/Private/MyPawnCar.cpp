@@ -21,7 +21,7 @@ AMyPawnCar::AMyPawnCar()
 void AMyPawnCar::BeginPlay()
 {
 	Super::BeginPlay();
-	CarCollision->SetLinearDamping(CarStruct.GroundFiction);
+	CarCollision->SetLinearDamping(CarStruct.GroundFriction);
 }
 
 // Called every frame
@@ -72,7 +72,12 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	
 	if(CarStruct.IsGrounded)
 	{
+		this->CarCollision->SetLinearDamping(CarStruct.GroundFriction);
 		FlyingCar(LastZValue);
+	}
+	else
+	{
+		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
 	}
 	if(CarStruct.IsOnReverseGravity)
 	{
@@ -100,7 +105,14 @@ void AMyPawnCar::RightMovement(float axisValue)
 void AMyPawnCar::CarDrift(float value)
 {
 	if(CarCollision == nullptr)return;
-	this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
+	if(value == 0)
+	{
+		this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
+	}
+	else
+	{
+		this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
+	}
 	const FRotator containerRotation = this->GetActorRotation();
 	float RotationRoll;
 	if(CarStruct.IsOnReverseGravity)
@@ -116,7 +128,7 @@ void AMyPawnCar::CarDrift(float value)
 	this->SetActorRotation(FRotator(containerRotation.Pitch,containerRotation.Yaw,RotationRoll));
 	if(CarStruct.IsOnReverseGravity)
 	{
-		//this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / (RotationRoll > 0 ? 180 - CarStruct.MaxLean : CarStruct.MaxLean - 180)) * CarStruct.AccelerationLean);
+		this->CarCollision->AddForce(GetActorRightVector() * ((RotationRoll > 0 ? RotationRoll - 180 : RotationRoll + 180) / CarStruct.MaxLean) * CarStruct.AccelerationLeanNotGrounded);
 	}
 	else
 	{
@@ -138,15 +150,11 @@ void AMyPawnCar::CarGravity()
 	if(CarCollision == nullptr)return;
 	CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
 	CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity);
-	//this->componentMovement->GravityScale = -this->componentMovement->GravityScale;
-	//this->Jump();
 	this->SetActorRotation(FRotator( 0,0,CarStruct.IsOnReverseGravity ? 180 : 0));
-	//Change Car Gravity to *-1 to make it go the other way, don't forget to rotate the camera x)
 }
 
 void AMyPawnCar::InvertGravity()
 {
-	//this->CarCollision->AddForce(GetActorUpVector() * -GetWorld()->GetGravityZ());
 	this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplierWhenInversed);
 }
 

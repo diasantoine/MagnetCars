@@ -24,11 +24,13 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float Acceleration = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
-	float AccelerationLean = 20.f;
+	float AccelerationNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
-	float AccelerationNotGrounded = 20.f;
+	float AccelerationLean = 20.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float AccelerationLeanNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float AmountRotationCar = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
@@ -40,7 +42,9 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float MaxLean = 45.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
- 	float GroundFiction = 1000.f;
+ 	float GroundFriction = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float AirFriction = 1000.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float DistanceWithTheGround = 10.f;
