@@ -1,0 +1,41 @@
+Log started at 25/10/2022 16:33:56 (2022-10-25T14:33:56Z)
+No config file at C:\Users\diasa\Documents\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Configuration will be read from:
+  C:\Users\diasa\AppData\Roaming\Unreal Engine\UnrealBuildTool\BuildConfiguration.xml
+Log file: F:\ICAN\SecondAnneMastere\MagnetCars\Saved\Logs\UnrealVersionSelector-2022.10.25-16.33.56.log
+
+Note: Android toolchain NDK r21b recommended
+Log file: C:\Users\diasa\AppData\Local\UnrealBuildTool\Log_GPF.txt
+
+---   SDK INFO START   ---
+
+Some Platforms were skipped due to invalid SDK setup: Win64, IOS, Android, Linux, LinuxArm64.
+See the log file for detailed information
+
+---   SDK INFO END   ---
+
+Discovering modules, targets and source code for project...
+ERROR: Error while enumerating Visual Studio toolchains
+COMException: Retrieving the COM class factory for component with CLSID {177F0C4A-1CD3-4DE7-A32C-71DBBB9FA36D} failed due to the following error: 80040154 Classe non enregistrée (0x80040154 (REGDB_E_CLASSNOTREG)).
+   at System.RuntimeTypeHandle.CreateInstance(RuntimeType type, Boolean publicOnly, Boolean wrapExceptions, Boolean& canBeCached, RuntimeMethodHandleInternal& ctor, Boolean& hasNoDefaultCtor)
+   at System.RuntimeType.CreateInstanceDefaultCtorSlow(Boolean publicOnly, Boolean wrapExceptions, Boolean fillCache)
+   at System.RuntimeType.CreateInstanceDefaultCtor(Boolean publicOnly, Boolean skipCheckThis, Boolean fillCache, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type, Boolean nonPublic, Boolean wrapExceptions)
+   at System.Activator.CreateInstance(Type type)
+   at UnrealBuildTool.WindowsPlatform.FindVisualStudioInstallations() in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\UEBuildWindows.cs:line 1189Wrapped by BuildException: Error while enumerating Visual Studio toolchains
+   at UnrealBuildTool.WindowsPlatform.FindVisualStudioInstallations() in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\UEBuildWindows.cs:line 1247
+   at System.Lazy`1.ViaFactory(LazyThreadSafetyMode mode)
+   at System.Lazy`1.ExecutionAndPublication(LazyHelper executionAndPublication, Boolean useDefaultConstructor)
+   at System.Lazy`1.CreateValue()
+   at System.Lazy`1.get_Value()
+   at UnrealBuildTool.WindowsPlatform.get_VisualStudioInstallations() in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\Platform\Windows\UEBuildWindows.cs:line 875
+   at UnrealBuildTool.VCProjectFileGenerator.SetupSupportedPlatformsAndConfigurations(Boolean IncludeAllPlatforms, String& SupportedPlatformNames) in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\ProjectFiles\VisualStudio\VCProjectFileGenerator.cs:line 282
+   at UnrealBuildTool.ProjectFileGenerator.GenerateProjectFiles(PlatformProjectGeneratorCollection PlatformProjectGenerators, String[] Arguments) in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\ProjectFiles\ProjectFileGenerator.cs:line 852
+   at UnrealBuildTool.GenerateProjectFilesMode.Execute(CommandLineArguments Arguments) in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\Modes\GenerateProjectFilesMode.cs:line 234
+   at UnrealBuildTool.UnrealBuildTool.Main(String[] ArgumentsArray) in d:\build\++UE5\Sync\Engine\Source\Programs\UnrealBuildTool\UnrealBuildTool.cs:line 612
+WriteFileIfChanged() wrote 0 changed files of 0 requested writes.
+Timeline:
+
+[ 0.000]
+[ 0.000](+0.158) <unknown>
+[ 0.158]
