@@ -16,6 +16,8 @@ struct FCar
  	bool IsGrounded = false;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
  	bool IsOnReverseGravity = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool InstantReverseGravity = false;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
@@ -31,23 +33,30 @@ struct FCar
 	float AccelerationLean = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLeanNotGrounded = 20.f;
+	
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float AmountRotationCar = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
 	float AmountRotationCarNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float MaxAmountRotationCar = 90.f;
+	
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float AmountOfLean = 5.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float MaxLean = 45.f;
+	
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
  	float GroundFriction = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float AirFriction = 1000.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float DistanceWithTheGround = 10.f;
+	float MinDistanceWithTheGround = 5.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float MaxDistanceWithTheGround = 10.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float RadiusSphere = 10.f;
  };
 
 UCLASS()
@@ -69,9 +78,9 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
-	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	//virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
+	/*virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;*/
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
@@ -114,8 +123,13 @@ public:
 	float LastZValue = 0;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	class UBoxComponent* CarCollision;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	class USceneComponent* TemporaryScene;
+/*	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	class UBoxComponent* CarGroundCollision;*/
+
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	class UBoxComponent* CarGroundCollision;
+	TEnumAsByte<ECollisionChannel> ColllisionChannel;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
