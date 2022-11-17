@@ -8,6 +8,30 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "MyPawnCar.generated.h"
 
+
+
+UENUM(BlueprintType)
+enum EPhysiqueReaction
+{
+	OutsideCircuit,
+	GroundedXYZ,
+	GroundedXY,
+	GroundedXZ,
+	GroundedYZ,
+	GroundedX,
+	GroundedY,
+	GroundedZ,
+	Grounded,
+	FlyingCircuitXYZ,
+	FlyingCircuitXY,
+	FlyingCircuitXZ,
+	FlyingCircuitYZ,
+	FlyingCircuitX,
+	FlyingCircuitY,
+	FlyingCircuitZ,
+	FlyingCircuit
+};
+
 USTRUCT(BlueprintType)
 struct FCar
  {
@@ -57,7 +81,19 @@ struct FCar
 	float MaxDistanceWithTheGround = 10.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float RadiusSphere = 10.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionGround = EPhysiqueReaction::Grounded;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionFly = EPhysiqueReaction::FlyingCircuit;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionCollisionEnvironnement = EPhysiqueReaction::FlyingCircuitXY;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionCollisionCar = EPhysiqueReaction::FlyingCircuitXY;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionOutsideCirtcuit = EPhysiqueReaction::OutsideCircuit;
  };
+
+
 
 UCLASS()
 class MAGNETCARS_API AMyPawnCar : public APawn
@@ -86,6 +122,8 @@ public:
 	void ForwardMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
+	UFUNCTION(BlueprintCallable)
+	void CarPhysiqueReaction(EPhysiqueReaction WhichPhysique);
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)

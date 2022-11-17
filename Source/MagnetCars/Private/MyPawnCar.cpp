@@ -107,6 +107,79 @@ void AMyPawnCar::RightMovement(float axisValue)
 	}
 }
 
+void AMyPawnCar::CarPhysiqueReaction(EPhysiqueReaction WhichPhysique)
+{
+	FBodyInstance* BodyInstance = this->CarCollision->GetBodyInstance();
+	switch (WhichPhysique)
+	{
+	case EPhysiqueReaction::FlyingCircuitXYZ:
+	default:
+		BodyInstance->bLockRotation = false;
+		break;
+	case EPhysiqueReaction::FlyingCircuitXY:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockZRotation = true;
+		break;
+	case EPhysiqueReaction::FlyingCircuitXZ:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockYRotation = true;
+		break;
+	case EPhysiqueReaction::FlyingCircuitYZ:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockXRotation = true;
+		break;
+	case EPhysiqueReaction::FlyingCircuitX:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockXRotation = false;
+		break;
+	case EPhysiqueReaction::FlyingCircuitY:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockYRotation = false;
+		break;
+	case EPhysiqueReaction::FlyingCircuitZ:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockZRotation = false;
+		break;
+	case EPhysiqueReaction::FlyingCircuit:
+		BodyInstance->bLockRotation = true;
+		break;
+	case EPhysiqueReaction::GroundedXYZ:
+		BodyInstance->bLockRotation = false;
+		break;
+	case EPhysiqueReaction::GroundedXY:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockZRotation = true;
+		break;
+	case EPhysiqueReaction::GroundedXZ:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockYRotation = true;
+		break;
+	case EPhysiqueReaction::GroundedYZ:
+		BodyInstance->bLockRotation = false;
+		BodyInstance->bLockXRotation = true;
+		break;
+	case EPhysiqueReaction::GroundedX:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockXRotation = false;
+		break;
+	case EPhysiqueReaction::GroundedY:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockYRotation = false;
+		break;
+	case EPhysiqueReaction::GroundedZ:
+		BodyInstance->bLockRotation = true;
+		BodyInstance->bLockZRotation = false;
+		break;
+	case EPhysiqueReaction::Grounded:
+		BodyInstance->bLockRotation = true;
+		break;
+	case EPhysiqueReaction::OutsideCircuit:
+		BodyInstance->bLockRotation = false;
+		break;
+	}
+}
+
+
 void AMyPawnCar::CarDrift(float value)
 {
 	if(CarCollision == nullptr)return;
