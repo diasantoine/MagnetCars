@@ -64,6 +64,7 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	DetectGround();
 	if(CarStruct.IsGrounded)
 	{
+		this->CarPhysiqueReaction(CarStruct.PhysiqueReactionGround);
 		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
 		//this->AddMovementInput(GetActorForwardVector() * axisValue * carStruct.acceleration);
 		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
@@ -115,66 +116,83 @@ void AMyPawnCar::CarPhysiqueReaction(EPhysiqueReaction WhichPhysique)
 	case EPhysiqueReaction::FlyingCircuitXYZ:
 	default:
 		BodyInstance->bLockRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitXYZ;
 		break;
 	case EPhysiqueReaction::FlyingCircuitXY:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockZRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitXY;
 		break;
 	case EPhysiqueReaction::FlyingCircuitXZ:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockYRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitXZ;
 		break;
 	case EPhysiqueReaction::FlyingCircuitYZ:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockXRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitYZ;
 		break;
 	case EPhysiqueReaction::FlyingCircuitX:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockXRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitX;
 		break;
 	case EPhysiqueReaction::FlyingCircuitY:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockYRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitY;
 		break;
 	case EPhysiqueReaction::FlyingCircuitZ:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockZRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuitZ;
 		break;
 	case EPhysiqueReaction::FlyingCircuit:
 		BodyInstance->bLockRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 		break;
 	case EPhysiqueReaction::GroundedXYZ:
 		BodyInstance->bLockRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedXYZ;
 		break;
 	case EPhysiqueReaction::GroundedXY:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockZRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedXY;
 		break;
 	case EPhysiqueReaction::GroundedXZ:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockYRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedXZ;
 		break;
 	case EPhysiqueReaction::GroundedYZ:
 		BodyInstance->bLockRotation = false;
 		BodyInstance->bLockXRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedYZ;
 		break;
 	case EPhysiqueReaction::GroundedX:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockXRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedX;
 		break;
 	case EPhysiqueReaction::GroundedY:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockYRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedY;
 		break;
 	case EPhysiqueReaction::GroundedZ:
 		BodyInstance->bLockRotation = true;
 		BodyInstance->bLockZRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::GroundedZ;
 		break;
 	case EPhysiqueReaction::Grounded:
 		BodyInstance->bLockRotation = true;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::Grounded;
 		break;
 	case EPhysiqueReaction::OutsideCircuit:
 		BodyInstance->bLockRotation = false;
+		this->CarStruct.PhysiqueReactionStatus = EPhysiqueReaction::OutsideCircuit;
 		break;
 	}
 }
