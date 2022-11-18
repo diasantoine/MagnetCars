@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{85a752a8-5d6c-4be4-ba44-b90aa699d948}">
+		<property name="name">
+			<value>Inclinaison</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{9f488055-f91d-4382-9e48-3d780449f73c}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{9f488055-f91d-4382-9e48-3d780449f73c}">
+		<property name="maximum">
+			<value>45</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
