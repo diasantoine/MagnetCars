@@ -73,14 +73,18 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
  	float GroundFriction = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float AngularGroundFriction = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float AirFriction = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float AngularAirFriction = 1000.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MinDistanceWithTheGround = 5.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MaxDistanceWithTheGround = 10.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float RadiusSphere = 10.f;
+	FVector HalfSizeBoxGroundDetection = FVector(50,50,50);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -169,7 +173,7 @@ public:
 	class UBoxComponent* CarGroundCollision;*/
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TEnumAsByte<ECollisionChannel> ColllisionChannel;
+	TEnumAsByte<ETraceTypeQuery> TraceChannel;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
