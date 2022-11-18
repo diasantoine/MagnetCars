@@ -24,8 +24,16 @@ AMyPawnCar::AMyPawnCar()
 void AMyPawnCar::BeginPlay()
 {
 	Super::BeginPlay();
-	CarCollision->SetLinearDamping(CarStruct.GroundFriction);
-	CarCollision->SetAngularDamping(CarStruct.AngularGroundFriction);
+	if(CarStruct.IsGrounded)
+	{
+		this->CarCollision->SetLinearDamping(CarStruct.GroundFriction);
+		this->CarCollision->SetAngularDamping(CarStruct.AngularGroundFriction);
+	}
+	else
+	{
+		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
+		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
+	}
 }
 
 // Called every frame
@@ -94,7 +102,7 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	else
 	{
 		//this->CarCollision->AddForce(this->CarGroundCollision->GetUpVector() * GetWorld()->GetGravityZ() * GravityMultiplier);
-		this->CarCollision->AddForce(-this->CarCollision->GetUpVector() * GravityMultiplier);
+		//this->CarCollision->AddForce(-this->CarCollision->GetUpVector() * GravityMultiplier * this->CarCollision->GetMass());
 	}
 }
 
@@ -242,7 +250,14 @@ void AMyPawnCar::CarDrift(float value)
 	}
 	else
 	{
-		this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / CarStruct.MaxLean) * CarStruct.AccelerationLean);
+		if(this->CarStruct.DragWholeBodyWhenLean)
+		{
+			this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / CarStruct.MaxLean) * CarStruct.AccelerationLean * this->CarCollision->GetMass());
+		}
+		else
+		{
+			
+		}
 	}
 }
 
@@ -253,13 +268,33 @@ void AMyPawnCar::FlyingCar(float lowestZ)
 	{
 		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, FString::Printf(TEXT("connard,%f"),lowestZ));
 	}*/
-	const float VelocityZ = this->CarCollision->GetPhysicsLinearVelocity().Z;
-	const FVector Direction = this->CarCollision->GetUpVector();
-	const float MassCar = this->CarCollision->GetMass();
-	this->CarCollision->AddForce(Direction * VelocityZ * MassCar * (CarStruct.MaxDistanceWithTheGround / lowestZ));
-	UE_LOG(LogTemp,Warning,TEXT("Pti Con"));
-	//this->CarCollision->ComponentVelocity.Z * this->CarCollision->GetMass();
-	/*this->CarCollision->AddForce(this->CarCollision->GetUpVector() * GetWorld()->GetGravityZ() * GravityMultiplier *(CarStruct.MaxDistanceWithTheGround/lowestZ)
+	if(!first)
+	{
+		Velocity = this->CarCollision->ComponentVelocity;
+		first = true;
+	}
+	if(this->CarCollision->ComponentVelocity.Z < 0)
+	{
+		//const FVector Direction = this->CarCollision->GetUpVector();
+		const FVector Direction = -this->GetActorUpVector();
+		this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForce );//* (CarStruct.IsOnReverseGravity ? 1 : -1));
+	}
+	else
+	{
+		//const FVector Direction = this->CarCollision->GetUpVector();
+		const FVector Direction = -this->GetActorUpVector();
+		const float MassCar = this->CarCollision->GetMass();
+		if(lowestZ  - CarStruct.HalfSizeBoxGroundDetection.Z >= 0)
+		{
+			this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MassCar); //* (CarStruct.IsOnReverseGravity ? 1 : -1));
+		}
+		else
+		{
+			this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MassCar * MagneticForce * (CarStruct.HalfSizeBoxGroundDetection.Z / lowestZ));// * (CarStruct.IsOnReverseGravity ? 1 : -1));
+		}
+	}
+	/*const FVector Direction = this->CarCollision->GetUpVector();
+	this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * GravityMultiplier *(CarStruct.MaxDistanceWithTheGround/lowestZ)
 		* (CarStruct.IsOnReverseGravity ? 1 : -1));*/
 	//(this->GravityMultiplier*100 * lowestZ / this->CarStruct.MaxDistanceWithTheGround));
 	return;
@@ -271,11 +306,12 @@ void AMyPawnCar::FlyingCar(float lowestZ)
 
 void AMyPawnCar::CarGravity()
 {
-	if(CarCollision == nullptr)return;
-	CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
-	CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity);
-	this->SetActorRotation(FRotator( 0,0,CarStruct.IsOnReverseGravity ? 180 : 0));
-	if(!CarStruct.InstantReverseGravity) return;
+	if(this->CarCollision == nullptr)return;
+	this->CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
+	this->CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity);
+	const FRotator CarRotation = this->GetActorRotation();
+	this->SetActorRotation(FRotator(CarRotation.Pitch ,CarRotation.Yaw,this->CarStruct.IsOnReverseGravity ? 180 : 0));
+	if(!this->CarStruct.InstantReverseGravity) return;
 	const float ContainerLinearDamping = this->CarCollision->GetLinearDamping();
 	this->CarCollision->SetLinearDamping(5000000000);
 	this->CarCollision->SetLinearDamping(ContainerLinearDamping);
@@ -285,7 +321,8 @@ void AMyPawnCar::CarGravity()
 void AMyPawnCar::InvertGravity()
 {
 	//this->CarCollision->AddForce(this->GetActorUpVector() * GetWorld()->GetGravityZ() * GravityMultiplierWhenInversed);
-	this->CarCollision->AddForce(this->GetActorUpVector() * GravityMultiplierWhenInversed * GetWorld()->GetGravityZ());
+	//this->CarCollision->AddForce(this->CarCollision->GetUpVector() * GravityMultiplierWhenInversed * GetWorld()->GetGravityZ() * this->CarCollision->GetMass());
+	this->CarCollision->AddForce(this->CarCollision->GetUpVector() * this->CarCollision->GetMass() * GetWorld()->GetGravityZ());
 }
 
 
@@ -331,9 +368,9 @@ void AMyPawnCar::DetectGround()
 	ActorIgnored.Add(this);
 	/*this->GetWorld()->SweepMultiByChannel(Result,this->CarCollision->GetComponentLocation() - FVector(0,0,16),
 		this->CarCollision->GetComponentLocation()  - FVector(0,0,16) - FVector(0,CarStruct.MaxDistanceWithTheGround,0),FQuat(0,0,0,0),ColllisionChannel,Box);*/
-	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(
-		this, this->CarCollision->GetComponentLocation() - FVector(0, 0, 100),
-		this->CarCollision->GetComponentLocation()  - FVector(0,0,100) - FVector(0,CarStruct.MaxDistanceWithTheGround,0),
+	const FVector StartPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection : this->CarStruct.StartBoxGroundDetection);
+	const FVector EndPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
+	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,TraceChannel,false,ActorIgnored,
 		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5); 
 	if(!ResultHit)

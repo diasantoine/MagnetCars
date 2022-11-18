@@ -42,6 +42,8 @@ struct FCar
  	bool IsOnReverseGravity = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool InstantReverseGravity = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool DragWholeBodyWhenLean = true;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
@@ -78,13 +80,17 @@ struct FCar
 	float AirFriction = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float AngularAirFriction = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float CarMass = 100.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float MinDistanceWithTheGround = 5.f;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float MaxDistanceWithTheGround = 10.f;
+	float MinDistanceWithTheGround = 50.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector HalfSizeBoxGroundDetection = FVector(50,50,50);
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	FVector StartBoxGroundDetection = FVector(0,0,100);
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	FVector EndBoxGroundDetection = FVector(0,0,100);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -154,9 +160,7 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float TimeBeforeCarFall = 0.5f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float GravityMultiplier = 500.f;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float GravityMultiplierWhenInversed = 500.f;
+	float MagneticForce = 500.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar CarStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -177,4 +181,6 @@ public:
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
+	bool first = false;
+	FVector Velocity;
 };
