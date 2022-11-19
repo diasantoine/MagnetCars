@@ -139,6 +139,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)
+	void CarIncline();
+	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity();

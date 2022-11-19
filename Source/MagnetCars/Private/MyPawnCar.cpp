@@ -109,19 +109,23 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 void AMyPawnCar::RightMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
+	UE_LOG(LogTemp,Warning,TEXT("test,%f"), axisValue);
 	if(CarStruct.IsGrounded)
 	{
-		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+		//this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
 	}
 	else
 	{
 		//this->CarPhysiqueReaction(CarStruct.PhysiqueReactionGround);
-		this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
+		//this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
+		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
 	}
 }
 
 void AMyPawnCar::CarPhysiqueReaction(EPhysiqueReaction WhichPhysique)
 {
+	return;
 	FBodyInstance* BodyInstance = this->CarCollision->GetBodyInstance();
 	switch (WhichPhysique)
 	{
@@ -261,6 +265,12 @@ void AMyPawnCar::CarDrift(float value)
 	}
 }
 
+void AMyPawnCar::CarIncline()
+{
+	
+}
+
+
 void AMyPawnCar::FlyingCar(float lowestZ)
 {
 	if(CarCollision == nullptr) return;
@@ -312,9 +322,9 @@ void AMyPawnCar::CarGravity()
 	const FRotator CarRotation = this->GetActorRotation();
 	this->SetActorRotation(FRotator(CarRotation.Pitch ,CarRotation.Yaw,this->CarStruct.IsOnReverseGravity ? 180 : 0));
 	if(!this->CarStruct.InstantReverseGravity) return;
-	const float ContainerLinearDamping = this->CarCollision->GetLinearDamping();
+	/*const float ContainerLinearDamping = this->CarCollision->GetLinearDamping();
 	this->CarCollision->SetLinearDamping(5000000000);
-	this->CarCollision->SetLinearDamping(ContainerLinearDamping);
+	this->CarCollision->SetLinearDamping(ContainerLinearDamping);*/
 	//this->TemporaryScene->SetRelativeRotation(FRotator( 0,0,CarStruct.IsOnReverseGravity ? 180 : 0));
 }
 
