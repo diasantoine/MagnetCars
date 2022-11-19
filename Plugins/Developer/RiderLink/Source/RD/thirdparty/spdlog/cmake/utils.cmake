@@ -42,7 +42,6 @@ function(spdlog_enable_warnings target_name)
                     -Wextra
                     -Wconversion
                     -pedantic
-                    -Werror
                     -Wfatal-errors>
                     $<$<CXX_COMPILER_ID:MSVC>:${MSVC_OPTIONS}>)
     endif()

@@ -72,8 +72,7 @@ public:
 // class Polymorphic<int, void>;
 
 template <template <class, class> class C, typename T, typename A>
-class Polymorphic<C<T, A>, typename std::enable_if_t<!util::is_base_of_v<RdReactiveBase, T> &&
-													 !util::is_same_v<Wrapper<T, A>, C<T, A>>>>
+class Polymorphic<C<T, A>, void>
 {
 public:
 	inline static C<T, A> read(SerializationCtx& /*ctx*/, Buffer& buffer)
@@ -211,11 +210,11 @@ public:
 	}
 };
 
-template <typename T, typename A>
-class Polymorphic<Wrapper<T, A>>
+template <typename T>
+class Polymorphic<Wrapper<T>>
 {
 public:
-	inline static void write(SerializationCtx& ctx, Buffer& buffer, Wrapper<T, A> const& value)
+	inline static void write(SerializationCtx& ctx, Buffer& buffer, Wrapper<T> const& value)
 	{
 		value->write(ctx, buffer);
 	}

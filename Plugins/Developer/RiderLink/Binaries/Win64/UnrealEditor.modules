@@ -3,10 +3,9 @@
 	"Modules": 
 	{
 		"RD": "UnrealEditor-RD.dll",
-		"RiderBlueprint": "UnrealEditor-RiderBlueprint.dll",
-		"RiderGameControl": "UnrealEditor-RiderGameControl.dll",
+		"RiderBlueprintExtension": "UnrealEditor-RiderBlueprintExtension.dll",
+		"RiderGameControlExtension": "UnrealEditor-RiderGameControlExtension.dll",
 		"RiderLink": "UnrealEditor-RiderLink.dll",
-		"RiderLogging": "UnrealEditor-RiderLogging.dll",
-		"RiderShaderInfo": "UnrealEditor-RiderShaderInfo.dll"
+		"RiderLoggingExtension": "UnrealEditor-RiderLoggingExtension.dll"
 	}
 }

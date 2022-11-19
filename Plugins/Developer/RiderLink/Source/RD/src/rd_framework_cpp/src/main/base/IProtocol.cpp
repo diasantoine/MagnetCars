@@ -44,10 +44,5 @@ const Identities* IProtocol::get_identity() const
 	return identity.get();
 }
 
-const RName& IProtocol::get_location() const
-{
-	return location;
-}
-
 IProtocol::~IProtocol() = default;
 }	 // namespace rd

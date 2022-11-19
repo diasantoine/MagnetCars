@@ -23,7 +23,7 @@ public:
 
 private:
 	using WT = typename IViewableSet<T, A>::WT;
-	using WA = typename std::allocator_traits<A>::template rebind_alloc<Wrapper<T>>;
+	using WA = typename A::template rebind<Wrapper<T>>::other;
 
 	Signal<Event> change;
 	using data_t = ordered_set<Wrapper<T>, wrapper::TransparentHash<T>, wrapper::TransparentKeyEqual<T>, WA>;

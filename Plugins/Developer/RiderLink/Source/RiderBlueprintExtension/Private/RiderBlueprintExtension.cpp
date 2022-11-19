@@ -1,4 +1,4 @@
-#include "RiderBlueprint.hpp"
+#include "RiderBlueprintExtension.hpp"
 
 #include "BlueprintProvider.hpp"
 #include "IRiderLink.hpp"
@@ -14,31 +14,31 @@
 
 #define LOCTEXT_NAMESPACE "RiderLink"
 
-DEFINE_LOG_CATEGORY(FLogRiderBlueprintModule);
+DEFINE_LOG_CATEGORY(FLogRiderBlueprintExtensionModule);
 
-IMPLEMENT_MODULE(FRiderBlueprintModule, RiderBlueprint);
+IMPLEMENT_MODULE(FRiderBlueprintExtensionModule, RiderBlueprintExtension);
 
 static void AllowSetForeGroundForEditor(JetBrains::EditorPlugin::RdEditorModel const & unrealToBackendModel) {
     static const int32 CurrentProcessId = FPlatformProcess::GetCurrentProcessId();
     try {
         const rd::WiredRdTask<bool> Task = unrealToBackendModel.get_allowSetForegroundWindow().sync(CurrentProcessId);
         if (Task.is_faulted()) {
-            UE_LOG(FLogRiderBlueprintModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(Task.value_or_throw()).c_str());
+            UE_LOG(FLogRiderBlueprintExtensionModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(Task.value_or_throw()).c_str());
         }
         else if (Task.is_succeeded()) {
             if (!(Task.value_or_throw().unwrap())) {
-                UE_LOG(FLogRiderBlueprintModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(Task.value_or_throw()).c_str());
+                UE_LOG(FLogRiderBlueprintExtensionModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(Task.value_or_throw()).c_str());
             }
         }
     }
     catch (std::exception const &e) {
-        UE_LOG(FLogRiderBlueprintModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(e).c_str());
+        UE_LOG(FLogRiderBlueprintExtensionModule, Error, TEXT("AllowSetForeGroundForEditor failed: %hs "), rd::to_string(e).c_str());
     }
 }
 
-void FRiderBlueprintModule::StartupModule()
+void FRiderBlueprintExtensionModule::StartupModule()
 {
-    UE_LOG(FLogRiderBlueprintModule, Verbose, TEXT("STARTUP START"));
+    UE_LOG(FLogRiderBlueprintExtensionModule, Verbose, TEXT("STARTUP START"));
     IRiderLinkModule& RiderLinkModule = IRiderLinkModule::Get();
     ModuleLifetimeDef = RiderLinkModule.CreateNestedLifetimeDefinition();
 
@@ -48,7 +48,7 @@ void FRiderBlueprintModule::StartupModule()
     MessageEndpoint = FMessageEndpoint::Builder(FName("FAssetEditorManager")).Build();
 
     AssetRegistryModule->Get().OnAssetAdded().AddLambda([](const FAssetData& AssetData) {
-        // TO-DO: Fix loading uasset's on 4.23-
+        // TODO: Fix loading uasset's on 4.23-
         // BluePrintProvider::AddAsset(AssetData);
     });
 
@@ -89,12 +89,12 @@ void FRiderBlueprintModule::StartupModule()
             return BluePrintProvider::IsBlueprint(pathName);
         });
     });
-    UE_LOG(FLogRiderBlueprintModule, Verbose, TEXT("STARTUP FINISH"));
+    UE_LOG(FLogRiderBlueprintExtensionModule, Verbose, TEXT("STARTUP FINISH"));
 }
 
-void FRiderBlueprintModule::ShutdownModule()
+void FRiderBlueprintExtensionModule::ShutdownModule()
 {
-    UE_LOG(FLogRiderBlueprintModule, Verbose, TEXT("SHUTDOWN START"));
+    UE_LOG(FLogRiderBlueprintExtensionModule, Verbose, TEXT("SHUTDOWN START"));
     ModuleLifetimeDef.terminate();
-    UE_LOG(FLogRiderBlueprintModule, Verbose, TEXT("SHUTDOWN FINISH"));
+    UE_LOG(FLogRiderBlueprintExtensionModule, Verbose, TEXT("SHUTDOWN FINISH"));
 }

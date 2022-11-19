@@ -18,10 +18,6 @@ namespace rd
 class RD_FRAMEWORK_API RdBindableBase : public virtual IRdBindable /*, IPrintable*/
 {
 protected:
-	mutable RName location;
-	mutable IRdDynamic const* parent = nullptr;
-	mutable RdId rdid = RdId::Null();
-
 	mutable optional<Lifetime> bind_lifetime;
 
 	bool is_bound() const;
@@ -33,25 +29,20 @@ protected:
 public:
 	// region ctor/dtor
 
-	RdBindableBase() : location("<<not bound>>")
+	RdBindableBase()
 	{
-	}
+		location = RName("<<not bound>>");
+	};
 
 	RdBindableBase(RdBindableBase&& other) = default;
 
 	RdBindableBase& operator=(RdBindableBase&& other) = default;
 
-	~RdBindableBase() override = default;
+	virtual ~RdBindableBase() = default;
 	// endregion
 
 	// need to implement in subclasses
 	virtual void init(Lifetime lifetime) const;
-
-	const RName& get_location() const override;
-
-	RdId get_id() const override;
-
-	void set_id(RdId id) const override;
 
 	void bind(Lifetime lf, IRdDynamic const* parent, string_view name) const override;
 
@@ -59,28 +50,31 @@ public:
 
 	SerializationCtx& get_serialization_context() const override;
 
-	mutable ordered_map<std::string, std::shared_ptr<IRdBindable>> bindable_extensions;	   // TO-DO concurrency
-	// mutable std::map<std::string, std::any> non_bindable_extensions;//TO-DO concurrency
+	mutable ordered_map<std::string, std::shared_ptr<IRdBindable>> bindable_extensions;	   // todo concurrency
+	// mutable std::map<std::string, std::any> non_bindable_extensions;//todo concurrency
 
 	template <typename T, typename... Args>
-	auto getOrCreateExtension(std::string name, Args&&... args) const ->
-		typename std::enable_if_t<util::is_base_of_v<IRdBindable, T>, T> const&
+	typename std::enable_if_t<util::is_base_of_v<IRdBindable, T>, T> const& getOrCreateExtension(
+		std::string name, Args&&... args) const
 	{
 		auto it = bindable_extensions.find(name);
 		if (it != bindable_extensions.end())
 		{
 			return *dynamic_cast<T const*>(it->second.get());
 		}
-		std::shared_ptr<T> new_extension = std::make_shared<T>(std::forward<Args>(args)...);
-		T const& res = *new_extension.get();
-		if (bind_lifetime.has_value())
+		else
 		{
-			auto protocol = get_protocol();
-			new_extension->identify(*protocol->get_identity(), rdid.mix(".").mix(name));
-			new_extension->bind(*bind_lifetime, this, name);
+			std::shared_ptr<IRdBindable> new_extension = std::make_shared<T>(std::forward<Args>(args)...);
+			T const& res = *dynamic_cast<T const*>(new_extension.get());
+			if (bind_lifetime.has_value())
+			{
+				auto protocol = get_protocol();
+				new_extension->identify(*protocol->get_identity(), rdid.mix(".").mix(name));
+				new_extension->bind(*bind_lifetime, this, name);
+			}
+			bindable_extensions.emplace(name, std::move(new_extension));
+			return res;
 		}
-		bindable_extensions.emplace(name, std::move(new_extension));
-		return res;
 	}
 
 	/* template<typename T>
@@ -97,10 +91,10 @@ public:
 template <typename T>
 T& withId(T& that, RdId const& id)
 {
-	RD_ASSERT_MSG(that.get_id() == RdId::Null(), "this.id != RdId.NULL_ID, but " + to_string(that.get_id()));
-	RD_ASSERT_MSG(id != RdId::Null(), "id != RdId.NULL_ID");
+	RD_ASSERT_MSG(that.rdid == RdId::Null(), "this.id != RdId.NULL_ID, but " + to_string(that.rdid));
+	RD_ASSERT_MSG((id != RdId::Null()), "id != RdId.NULL_ID");
 
-	that.set_id(id);
+	that.rdid = id;
 	return that;
 }
 
@@ -120,5 +114,6 @@ T& withIdFromName(T& that, std::string const& name)
 #if defined(_MSC_VER)
 #pragma warning(pop)
 #endif
+
 
 #endif	  // RD_CPP_RDBINDABLEBASE_H

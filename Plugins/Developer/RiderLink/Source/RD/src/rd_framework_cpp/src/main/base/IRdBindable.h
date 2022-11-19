@@ -21,6 +21,9 @@ namespace rd
 class RD_FRAMEWORK_API IRdBindable : public IRdDynamic
 {
 public:
+	mutable RdId rdid = RdId::Null();
+
+	mutable IRdDynamic const* parent = nullptr;
 	// region ctor/dtor
 
 	IRdBindable() = default;
@@ -31,9 +34,6 @@ public:
 
 	virtual ~IRdBindable() = default;
 	// endregion
-
-	virtual void set_id(RdId id) const = 0;
-	virtual RdId get_id() const = 0;
 
 	/**
 	 * \brief Inserts the node into the object graph under the given [parent] and assigns the specified [name] to it.

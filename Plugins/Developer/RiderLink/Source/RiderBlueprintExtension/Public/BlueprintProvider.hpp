@@ -6,7 +6,7 @@ struct FAssetData;
 class FMessageEndpoint;
 class UBlueprint;
 
-class RIDERBLUEPRINT_API BluePrintProvider {
+class RIDERBLUEPRINTEXTENSION_API BluePrintProvider {
 public:
 
     static void AddAsset(FAssetData const& AssetData);

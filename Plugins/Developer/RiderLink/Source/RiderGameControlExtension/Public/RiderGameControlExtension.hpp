@@ -7,16 +7,16 @@
 #include "Modules/ModuleInterface.h"
 #include "Templates/UniquePtr.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(FLogRiderGameControlModule, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(FLogRiderGameControlExtensionModule, Log, All);
 
 class FRiderGameControl;
 class FRiderGameControlActionsCache;
 
-class FRiderGameControlModule : public IModuleInterface
+class FRiderGameControlExtensionModule : public IModuleInterface
 {
 public:
-    FRiderGameControlModule() = default;
-    virtual ~FRiderGameControlModule() override = default;
+    FRiderGameControlExtensionModule() = default;
+    virtual ~FRiderGameControlExtensionModule() override = default;
 
     /** IModuleInterface implementation */
     virtual void StartupModule() override;

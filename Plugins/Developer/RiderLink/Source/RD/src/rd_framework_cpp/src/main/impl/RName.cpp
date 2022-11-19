@@ -33,7 +33,7 @@ RName::RName(RName parent, string_view localName, string_view separator)
 {
 }
 
-RName RName::sub(string_view localName, string_view separator) const
+RName RName::sub(string_view localName, string_view separator)
 {
 	return RName(*this, localName, separator);
 }

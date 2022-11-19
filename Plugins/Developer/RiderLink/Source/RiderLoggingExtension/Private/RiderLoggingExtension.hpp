@@ -11,13 +11,13 @@
 #include "Modules/ModuleInterface.h"
 #include "scheduler/SingleThreadScheduler.h"
 
-DECLARE_LOG_CATEGORY_EXTERN(FLogRiderLoggingModule, Log, All);
+DECLARE_LOG_CATEGORY_EXTERN(FLogRiderLoggingExtensionModule, Log, All);
 
-class FRiderLoggingModule : public IModuleInterface
+class FRiderLoggingExtensionModule : public IModuleInterface
 {
 public:
-    FRiderLoggingModule() = default;
-    virtual ~FRiderLoggingModule() override = default;
+    FRiderLoggingExtensionModule() = default;
+    virtual ~FRiderLoggingExtensionModule() override = default;
 
     /** IModuleInterface implementation */
     virtual void StartupModule() override;
