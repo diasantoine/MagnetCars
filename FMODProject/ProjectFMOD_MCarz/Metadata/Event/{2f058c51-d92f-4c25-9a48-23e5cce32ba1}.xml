@@ -5,13 +5,13 @@
 			<value>Red</value>
 		</property>
 		<property name="name">
-			<value>Piste_Décor3</value>
+			<value>Decor_Canyon_X</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
 		</property>
 		<relationship name="folder">
-			<destination>{73e227e2-0452-4390-b863-e6e064e2914f}</destination>
+			<destination>{1ba499c9-8051-4f3e-a28e-9ef0ca010243}</destination>
 		</relationship>
 		<relationship name="mixer">
 			<destination>{aa1307c6-b1be-466c-91dd-8b666ac90d65}</destination>
