@@ -267,7 +267,19 @@ void AMyPawnCar::CarDrift(float value)
 
 void AMyPawnCar::CarIncline()
 {
-	
+	FHitResult Result;
+	TArray<AActor*> ActorIgnored;
+	ActorIgnored.Add(this);
+	/*this->GetWorld()->SweepMultiByChannel(Result,this->CarCollision->GetComponentLocation() - FVector(0,0,16),
+		this->CarCollision->GetComponentLocation()  - FVector(0,0,16) - FVector(0,CarStruct.MaxDistanceWithTheGround,0),FQuat(0,0,0,0),ColllisionChannel,Box);*/
+	const FVector StartPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection : this->CarStruct.StartBoxGroundDetection);
+	const FVector EndPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
+	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
+		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,TraceChannel,false,ActorIgnored,
+		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+	if(ResultHit)
+	{
+	}
 }
 
 
