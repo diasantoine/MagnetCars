@@ -5,6 +5,7 @@
 
 #include <string>
 
+#include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 
 // Sets default values
@@ -57,7 +58,10 @@ void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	//PlayerInputComponent->BindAxis("Turn",this,&AMyPawnCar::AddControllerYawInput);
 	//PlayerInputComponent->BindAxis("LookUp",this,&AMyCar::AddControllerPitchInput);
 
-	PlayerInputComponent->BindAxis("RightLean",this,&AMyPawnCar::CarDrift);
+	if(Keyboard)
+	{
+		PlayerInputComponent->BindAxis("RightLean",this,&AMyPawnCar::CarDrift);
+	}
 	PlayerInputComponent->BindAxis("LeftLean",this,&AMyPawnCar::CarDrift);
 	
 	PlayerInputComponent->BindAction("ChangeGravity",IE_Pressed,this,&AMyPawnCar::CarGravity);
@@ -73,15 +77,22 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	DetectGround();
 	if(CarStruct.IsGrounded)
 	{
-		//this->CarPhysiqueReaction(Grounded);
 		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
-		//this->AddMovementInput(GetActorForwardVector() * axisValue * carStruct.acceleration);
-		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		FVector VelocityCar = this->CarCollision->GetComponentVelocity();
+		VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		//VelocityCar = Velocity.GetSafeNormal() * FMath::Clamp(Velocity.Length(),-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 	}
 	else
 	{
 		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass());
-		this->CarCollision->ComponentVelocity.X = FMath::Clamp(this->CarCollision->ComponentVelocity.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		FVector VelocityCar = this->CarCollision->GetComponentVelocity();
+		VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 	}
 	
 	if(CarStruct.IsGrounded)
@@ -109,17 +120,18 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 void AMyPawnCar::RightMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
-	UE_LOG(LogTemp,Warning,TEXT("test,%f"), axisValue);
 	if(CarStruct.IsGrounded)
 	{
 		//this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
 		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
+		//this->AddControllerYawInput(axisValue * CarStruct.AmountRotationCar);
 	}
 	else
 	{
 		//this->CarPhysiqueReaction(CarStruct.PhysiqueReactionGround);
 		//this->CarCollision->AddLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
 		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
+		//this->AddControllerYawInput(axisValue * CarStruct.AmountOfLeanNotGrounded);
 	}
 }
 
@@ -226,12 +238,14 @@ void AMyPawnCar::CarDrift(float value)
 	if(value == 0)
 	{
 		//this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
-		this->TemporaryScene->AddLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
+		if(this->TemporaryScene->GetRelativeRotation().Roll == 0) return;
+		this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) *
+			(this->TemporaryScene->GetRelativeRotation().Roll > 0 ? -1 : 1)));
 	}
 	else
 	{
 		//this->AddActorLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
-		this->TemporaryScene->AddLocalRotation(FRotator(0,0,CarStruct.AmountOfLean * value));
+		this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) * value));
 	}
 	//const FRotator containerRotation = this->GetActorRotation();
 	const FRotator containerRotation = this->TemporaryScene->GetRelativeRotation();
@@ -254,6 +268,14 @@ void AMyPawnCar::CarDrift(float value)
 	}
 	else
 	{
+		if(this->CarStruct.IsLeanCreateSlow)
+		{
+			if(this->TemporaryScene->GetRelativeRotation().Roll >= this->CarStruct.AmountOfLeanToStartSlow)
+			{
+				this->CarCollision->AddForce(-this->CarCollision->ComponentVelocity.GetSafeNormal() * this->CarCollision->GetMass()
+					* (this-CarStruct.IsGrounded ? this->CarStruct.LeanSlowGrounded : this->CarStruct.LeanSlowAir));
+			}
+		}
 		if(this->CarStruct.DragWholeBodyWhenLean)
 		{
 			this->CarCollision->AddForce(GetActorRightVector() * (RotationRoll / CarStruct.MaxLean) * CarStruct.AccelerationLean * this->CarCollision->GetMass());
@@ -355,10 +377,12 @@ void AMyPawnCar::ResetScene()
 
 void AMyPawnCar::CarRespawn()
 {
-	//componentMovement->Velocity = FVector::Zero();
-	CarStruct = FCar();
-	APawn::SetActorLocation(MiddleOfTheRoad);
+	this->CarCollision->ComponentVelocity = FVector::Zero();
+	this->TemporaryScene->SetRelativeRotation(FRotator::ZeroRotator);
+	APawn::SetActorLocation(ResetPosition);
 	APawn::SetActorRotation(FRotator::ZeroRotator);
+	this->CarStruct.IsOnReverseGravity = false;
+	this->CarStruct.IsGrounded = false;
 }
 
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)

@@ -28,7 +28,7 @@ class RdEndpoint : public virtual RdReactiveBase, public ISerializable
 	using handler_t = std::function<RdTask<TRes, ResSer>(Lifetime, TReq const&)>;
 	mutable handler_t local_handler;
 
-	mutable tsl::ordered_map<RdId, RdTask<TRes, ResSer>, rd::hash<RdId>> awaiting_tasks;	// todo get rid of it
+	mutable tsl::ordered_map<RdId, RdTask<TRes, ResSer>, rd::hash<RdId>> awaiting_tasks;	// TO-DO get rid of it
 public:
 	// region ctor/dtor
 
@@ -39,10 +39,7 @@ public:
 		set(std::move(handler));
 	}
 
-	explicit RdEndpoint(std::function<WTRes(TReq const&)
-
-		>
-			handler)
+	explicit RdEndpoint(std::function<WTRes(TReq const&)> handler)
 	{
 		set(std::move(handler));
 	}
@@ -82,9 +79,8 @@ public:
 	 */
 	void set(std::function<WTRes(TReq const&)> functor) const
 	{
-		local_handler = [handler = std::move(functor)](Lifetime _, TReq const& req) -> RdTask<TRes, ResSer> {
-			return RdTask<TRes, ResSer>::from_result(handler(req));
-		};
+		local_handler = [handler = std::move(functor)](Lifetime _, TReq const& req) -> RdTask<TRes, ResSer>
+		{ return RdTask<TRes, ResSer>::from_result(handler(req)); };
 	}
 
 	void init(Lifetime lifetime) const override
@@ -112,11 +108,15 @@ public:
 		{
 			task.fault(e);
 		}
-		task.advise(*bind_lifetime, [this, task_id, &task](RdTaskResult<TRes, ResSer> const& task_result) {
-			spdlog::get("logSend")->trace("endpoint {}::{} response = {}", to_string(location), to_string(rdid), to_string(*task.result));
-			get_wire()->send(task_id, [&](Buffer& inner_buffer) { task_result.write(get_serialization_context(), inner_buffer); });
-			// todo remove from awaiting_tasks
-		});
+		task.advise(*bind_lifetime,
+			[this, task_id, &task](RdTaskResult<TRes, ResSer> const& task_result)
+			{
+				spdlog::get("logSend")->trace(
+					"endpoint {}::{} response = {}", to_string(location), to_string(rdid), to_string(*task.result));
+				get_wire()->send(
+					task_id, [&](Buffer& inner_buffer) { task_result.write(get_serialization_context(), inner_buffer); });
+				// TO-DO remove from awaiting_tasks
+			});
 	}
 
 	friend bool operator==(const RdEndpoint& lhs, const RdEndpoint& rhs)
