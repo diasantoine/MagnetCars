@@ -24,7 +24,7 @@ constexpr int32_t SocketWire::Base::PING_MESSAGE_LENGTH;
 constexpr int32_t SocketWire::Base::PACKAGE_HEADER_LENGTH;
 
 SocketWire::Base::Base(std::string id, Lifetime parentLifetime, IScheduler* scheduler)
-	: WireBase(scheduler), id(std::move(id)), scheduler(scheduler), local_send_buffer(SEND_BUFFER_SIZE), lifetimeDef(parentLifetime)
+	: WireBase(scheduler), id(std::move(id)), scheduler(scheduler), lifetimeDef(parentLifetime)
 {
 	async_send_buffer.pause("initial");
 	async_send_buffer.start();
@@ -107,9 +107,8 @@ void SocketWire::Base::send(RdId const& rd_id, std::function<void(Buffer& buffer
 {
 	RD_ASSERT_MSG(!rd_id.isNull(), "{}: id mustn't be null");
 
-	std::lock_guard<decltype(wire_send_lock)> lock(wire_send_lock);
+	Buffer local_send_buffer;
 	local_send_buffer.write_integral<int32_t>(0);	 // placeholder for length
-
 	rd_id.write(local_send_buffer);					 // write id
 	local_send_buffer.write_integral<int16_t>(0);	 // placeholder for context
 	writer(local_send_buffer);						 // write rest
@@ -118,9 +117,8 @@ void SocketWire::Base::send(RdId const& rd_id, std::function<void(Buffer& buffer
 
 	local_send_buffer.rewind();
 	local_send_buffer.write_integral<int32_t>(len - 4);
-	local_send_buffer.set_position(static_cast<size_t>(len));
+	local_send_buffer.set_position(len);
 	async_send_buffer.put(std::move(local_send_buffer).getRealArray());
-	local_send_buffer.rewind();
 }
 
 void SocketWire::Base::set_socket_provider(std::shared_ptr<CActiveSocket> new_socket)
@@ -155,7 +153,7 @@ void SocketWire::Base::set_socket_provider(std::shared_ptr<CActiveSocket> new_so
 	});
 	const auto status = heartbeat.wait_for(timeout);
 
-	logger->debug("{}: waited for heartbeat to stop with status: {}", this->id, status);
+	logger->debug("{}: waited for heartbeat to stop with status: {}", this->id, static_cast<uint32_t>(status));
 
 	if (!socket_provider->IsSocketValid())
 	{
@@ -409,7 +407,7 @@ void SocketWire::Base::ping() const
 	}
 	catch (std::exception const& e)
 	{
-		logger->warn("{}: exception raised during PING | {}", this->id, e.what());
+		logger->debug("{}: exception raised during PING | {}", this->id, e.what());
 	}
 }
 
@@ -456,6 +454,8 @@ SocketWire::Client::Client(Lifetime parentLifetime, IScheduler* scheduler, uint1
 
 		try
 		{
+			logger->info("{}: started, port: {}.", this->id, this->port);
+
 			while (!lifetime->is_terminated())
 			{
 				try
@@ -491,7 +491,8 @@ SocketWire::Client::Client(Lifetime parentLifetime, IScheduler* scheduler, uint1
 				}
 				catch (std::exception const& e)
 				{
-					(void) e;
+					logger->debug("{}: connection error for port {} ({}).", this->id, this->port, e.what());
+
 					std::lock_guard<decltype(lock)> guard(lock);
 					bool should_reconnect = false;
 					if (!lifetime->is_terminated())
@@ -511,7 +512,7 @@ SocketWire::Client::Client(Lifetime parentLifetime, IScheduler* scheduler, uint1
 		{
 			logger->info("{}: closed with exception: {}", this->id, e.what());
 		}
-		logger->debug("{}: thread expired", this->id);
+		logger->info("{}: terminated, port: {}.", this->id, this->port);
 	});
 
 	lifetime->add_action([this]() {
@@ -568,48 +569,58 @@ SocketWire::Server::Server(Lifetime parentLifetime, IScheduler* scheduler, uint1
 	thread = std::thread([this, lifetime]() mutable {
 		rd::util::set_thread_name(this->id.empty() ? "SocketWire::Server Thread" : this->id.c_str());
 
-		while (!lifetime->is_terminated())
+		logger->info("{}: started, port: {}.", this->id, this->port);
+
+		try
 		{
-			try
+			while (!lifetime->is_terminated())
 			{
-				logger->info("{}: accepting started", this->id);
-				
-				// [HACK]: Fix RIDER-51111.
-				// winsock blocking accept hangs after creating new process with createprocess with inheritHandles=true
-				// property. Unreal Engine uses the same logic for handling sockets where they wait for timeout on select
-				// before trying to accept connection.
-				while(ss->IsSocketValid() && !ss->Select(0, 300)){}
-				
-				CActiveSocket* accepted = ss->Accept();
-				RD_ASSERT_THROW_MSG(
-					accepted != nullptr, fmt::format("{}: accepting failed, reason: {}", this->id, ss->DescribeError()));
-				socket.reset(accepted);
-				logger->info("{}: accepted passive socket {}/{}", this->id, socket->GetClientAddr(), socket->GetClientPort());
-				RD_ASSERT_THROW_MSG(socket->DisableNagleAlgoritm(),
-					fmt::format("{}: tcpNoDelay failed, reason: {}", this->id, socket->DescribeError()));
-
+				try
 				{
-					std::lock_guard<decltype(lock)> guard(lock);
-					if (lifetime->is_terminated())
-					{
-						logger->debug("{}: closing passive socket", this->id);
-						if (!socket->Close())
-						{
-							logger->error("{}: failed to close socket", this->id);
-						}
-						logger->info("{}: close passive socket", this->id);
-					}
-				}
+					logger->info("{}: accepting started", this->id);
 
-				logger->debug("{}: setting socket provider", this->id);
-				set_socket_provider(socket);
-			}
-			catch (std::exception const& e)
-			{
-				logger->info("{}: closed with exception: {}", this->id, e.what());
+					// [HACK]: Fix RIDER-51111.
+					// winsock blocking accept hangs after creating new process with createprocess with inheritHandles=true
+					// property. Unreal Engine uses the same logic for handling sockets where they wait for timeout on select
+					// before trying to accept connection.
+					while(ss->IsSocketValid() && !ss->Select(0, 300)){}
+
+					CActiveSocket* accepted = ss->Accept();
+					RD_ASSERT_THROW_MSG(
+						accepted != nullptr, fmt::format("{}: accepting failed, reason: {}", this->id, ss->DescribeError()));
+					socket.reset(accepted);
+					logger->info("{}: accepted passive socket {}/{}", this->id, socket->GetClientAddr(), socket->GetClientPort());
+					RD_ASSERT_THROW_MSG(socket->DisableNagleAlgoritm(),
+						fmt::format("{}: tcpNoDelay failed, reason: {}", this->id, socket->DescribeError()));
+
+					{
+						std::lock_guard<decltype(lock)> guard(lock);
+						if (lifetime->is_terminated())
+						{
+							logger->debug("{}: closing passive socket", this->id);
+							if (!socket->Close())
+							{
+								logger->error("{}: failed to close socket", this->id);
+							}
+							logger->info("{}: close passive socket", this->id);
+						}
+					}
+
+					logger->debug("{}: setting socket provider", this->id);
+					set_socket_provider(socket);
+				}
+				catch (std::exception const& e)
+				{
+					logger->info("{}: closed with exception: {}", this->id, e.what());
+				}
 			}
 		}
-		logger->debug("{}: thread expired", this->id);
+		catch (std::exception const& e)
+		{
+			logger->error("{}: terminal socket error ({}).", this->id, e.what());
+		}
+
+		logger->info("{}: terminated, port: {}.", this->id, this->port);
 	});
 
 	lifetime->add_action([this] {
