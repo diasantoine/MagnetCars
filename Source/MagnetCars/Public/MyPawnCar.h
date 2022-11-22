@@ -39,6 +39,8 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
  	bool IsGrounded = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool IsLeanCreateRotation = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsLeanCreateSlow = false;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
  	bool IsOnReverseGravity = false;
@@ -72,6 +74,8 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float AmountOfLean = 5.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
+	float AmountOfRotationWithLean = 5.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
 	float AmountOfLeanNotGrounded = 5.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
 	float AmountOfLeanToStartSlow = 5.f;
@@ -91,7 +95,9 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float AngularAirFriction = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float CarMass = 100.f;
+	float CarMassGround = 100.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float CarMassNotGrounded = 100.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MinDistanceWithTheGround = 50.f;
@@ -199,4 +205,5 @@ private:
 	float ContainerTimeBeforeCarFall = 0;
 	bool first = false;
 	FVector Velocity;
+	float ContainerAcceleration;
 };

@@ -1,6 +1,6 @@
-C:\Users\Charles\Documents\GitHub\MagnetCars\Source\MagnetCars\MagnetCars.cpp
+F:\ICAN\SecondAnneMastere\MagnetCars\Source\MagnetCars\MagnetCars.cpp
 /I .
-/I C:\Users\Charles\Documents\GitHub\MagnetCars\Source\MagnetCars\Private
+/I F:\ICAN\SecondAnneMastere\MagnetCars\Source\MagnetCars\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\Engine
 /I Runtime
 /I ..\Shaders\Shared
@@ -252,9 +252,9 @@ C:\Users\Charles\Documents\GitHub\MagnetCars\Source\MagnetCars\MagnetCars.cpp
 /I Runtime\ClothingSystemRuntimeInterface\Public
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\AnimationDataController
 /I Developer\AnimationDataController\Public
-/I C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars
-/I C:\Users\Charles\Documents\GitHub\MagnetCars\Source
-/I C:\Users\Charles\Documents\GitHub\MagnetCars\Source\MagnetCars\Public
+/I F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars
+/I F:\ICAN\SecondAnneMastere\MagnetCars\Source
+/I F:\ICAN\SecondAnneMastere\MagnetCars\Source\MagnetCars\Public
 /I ThirdParty\mimalloc\include
 /I ThirdParty\LibTiff\Source\Win64
 /I ThirdParty\LibTiff\Source
@@ -269,18 +269,18 @@ C:\Users\Charles\Documents\GitHub\MagnetCars\Source\MagnetCars\MagnetCars.cpp
 /I ThirdParty\PhysX3\PhysX_3.4\Include\common
 /I ThirdParty\PhysX3\PhysX_3.4\Include\extensions
 /I ThirdParty\PhysX3\PhysX_3.4\Include\geometry
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
+/I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt"
-/FI"C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\Definitions.MagnetCars.h"
-/Yu"C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MagnetCars.cpp.obj"
-/sourceDependencies C:\Users\Charles\Documents\GitHub\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MagnetCars.cpp.json
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
+/FI"F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\Definitions.MagnetCars.h"
+/Yu"F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MagnetCars.cpp.obj"
+/sourceDependencies F:\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MagnetCars.cpp.json
 /Zc:inline
 /nologo
 /Oi
