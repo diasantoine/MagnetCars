@@ -98,6 +98,10 @@ struct FCar
 	float CarMassGround = 100.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float CarMassNotGrounded = 100.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float CarMassGroundInversedGravity = 100.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float CarMassNotGroundedInversedGravity = 100.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MinDistanceWithTheGround = 50.f;
@@ -142,9 +146,6 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-	//virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
-	/*virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;*/
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
@@ -171,6 +172,8 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DetectGround();
 	UFUNCTION(BlueprintCallable)
+	void DetectSlope(FVector FloorNormal);
+	UFUNCTION(BlueprintCallable)
 	void CarFall(float DeltaTime);
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -181,6 +184,10 @@ public:
 	float MagneticForce = 500.f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector ResetPosition = FVector::Zero();
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	TArray<USceneComponent*> ArrayRaycastHorizontalCarAngle;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	TArray<USceneComponent*> ArrayRaycastVerticalCarAngle;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -195,9 +202,6 @@ public:
 	class UBoxComponent* CarCollision;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	class USceneComponent* TemporaryScene;
-/*	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	class UBoxComponent* CarGroundCollision;*/
-
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TEnumAsByte<ETraceTypeQuery> TraceChannel;
 
