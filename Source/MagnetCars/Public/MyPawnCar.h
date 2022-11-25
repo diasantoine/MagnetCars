@@ -172,7 +172,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DetectGround();
 	UFUNCTION(BlueprintCallable)
-	void DetectSlope(FVector FloorNormal);
+	float DetectSlope(FVector FloorNormal);
+	UFUNCTION(BlueprintCallable)
+	void RotateCarForSlope(FRotator NewRotation);
 	UFUNCTION(BlueprintCallable)
 	void CarFall(float DeltaTime);
 
