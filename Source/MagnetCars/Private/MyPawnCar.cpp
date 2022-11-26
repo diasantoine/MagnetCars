@@ -390,16 +390,30 @@ void AMyPawnCar::DetectGround()
 	{
 		this->GetWorld()->LineTraceSingleByChannel(A,RaycastVertical->GetComponentLocation(),-RaycastVertical->GetUpVector(),
 			ECollisionChannel::ECC_Visibility);
-		test2 = DetectSlope((A.ImpactPoint - RaycastVertical->GetComponentLocation()).GetSafeNormal());
+		test2 = DetectSlope(A.ImpactNormal) - 90;
 		//test2 = DetectSlope((Result.ImpactPoint - RaycastVertical->GetComponentLocation()).GetSafeNormal());
-		UE_LOG(LogTemp,Warning,TEXT("%f"), test2)
+		//UE_LOG(LogTemp,Warning,TEXT("%f"), test2)
+		break;
 	}
 	float test = 0;
 	test = DetectSlope(Result.ImpactNormal);
-	FRotator NewRotationCar = this->GetActorRotation();
-	NewRotationCar.Pitch = test;
-	FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),5);
-	this->RotateCarForSlope(Test2);
+	UE_LOG(LogTemp,Warning,TEXT("%f"), test)
+	if(FMath::Abs(test) > this->CarStruct.MinSlopeCar)
+	{
+		FRotator NewRotationCar = this->GetActorRotation();
+		NewRotationCar.Pitch = test;
+		FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
+			this->CarStruct.SpeedForSlopeAdjustement);
+		this->RotateCarForSlope(Test2);
+	}
+	else
+	{
+		FRotator NewRotationCar = this->GetActorRotation();
+		NewRotationCar.Pitch = 0;
+		FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
+			this->CarStruct.SpeedForSlopeAdjustement);
+		this->RotateCarForSlope(Test2);
+	}
 	//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[0]->GetComponentLocation()).GetSafeNormal());
 	//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[1]->GetComponentLocation()).GetSafeNormal());
 	//UE_LOG(LogTemp,Warning,TEXT("Vector normal,%f %f %f"), Result.Normal.X, Result.Normal.Y, Result.Normal.Z);

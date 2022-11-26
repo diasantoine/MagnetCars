@@ -70,6 +70,11 @@ struct FCar
 	float AmountRotationCarNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
  	float MaxAmountRotationCar = 90.f;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float MinSlopeCar = 5.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float SpeedForSlopeAdjustement = 5.f;
 	
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float AmountOfLean = 5.f;
