@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{c69f6afc-4f84-4e5a-8ea0-8eec661c12b5}">
+		<property name="assetPath">
+			<value>Env_Desert/Env_VendSable_Loop.wav</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>222.99848072562358</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{9428c196-0e9b-4d07-8932-1721dc0e88da}</destination>
+		</relationship>
+	</object>
+</objects>
