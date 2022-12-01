@@ -1,0 +1,10 @@
+{
+	"SourceFiles": [
+		"D:\\GithubFichier\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
+		"D:\\GithubFichier\\MagnetCars\\Plugins\\AdvancedSessions\\AdvancedSessions\\Source\\AdvancedSessions\\AdvancedSessions.Build.cs",
+		"D:\\GithubFichier\\MagnetCars\\Plugins\\AdvancedSessions\\AdvancedSteamSessions\\Source\\AdvancedSteamSessions\\AdvancedSteamSessions.Build.cs",
+		"D:\\GithubFichier\\MagnetCars\\Source\\MagnetCars.Target.cs",
+		"D:\\GithubFichier\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
+	],
+	"EngineVersion": "5.0.3"
+}
