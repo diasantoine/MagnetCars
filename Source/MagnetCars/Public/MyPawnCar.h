@@ -196,6 +196,8 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TArray<USceneComponent*> ArrayRaycastVerticalCarAngle;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool BlockSlope = true;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar CarStruct;
