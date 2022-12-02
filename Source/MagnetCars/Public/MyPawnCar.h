@@ -173,11 +173,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
 	UFUNCTION(BlueprintCallable)
-	void FlyingCar(float lowestZ);
+	void FlyingCar(FVector ImpactPoint);
 	UFUNCTION(BlueprintCallable)
 	void DetectGround();
 	UFUNCTION(BlueprintCallable)
-	float DetectSlope(FVector FloorNormal);
+	FRotator DetectSlope(FVector FloorNormal);
 	UFUNCTION(BlueprintCallable)
 	void RotateCarForSlope(FRotator NewRotation);
 	UFUNCTION(BlueprintCallable)
@@ -188,7 +188,9 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float TimeBeforeCarFall = 0.5f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float MagneticForce = 500.f;
+	float MagneticForceTowardGround = 500.f;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float MagneticForceTowardUp = 500.f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector ResetPosition = FVector::Zero();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -219,4 +221,6 @@ private:
 	bool first = false;
 	FVector Velocity;
 	float ContainerAcceleration;
+	AActor* LastActorHit;
+	//float TestZ = 0;
 };
