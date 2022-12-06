@@ -2,10 +2,6 @@
 
 
 #include "MyPawnCar.h"
-
-#include <string>
-
-#include "GameFramework/PawnMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -102,6 +98,7 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	}
 	else
 	{
+		if(!this->CarCollision->IsGravityEnabled()) return;
 		this->CarCollision->AddForce(-this->CarCollision->GetUpVector() * (CarStruct.IsGrounded ? CarStruct.CarMassGround : CarStruct.CarMassNotGrounded)
 			* this->CarCollision->GetMass());
 	}
@@ -110,6 +107,8 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 void AMyPawnCar::RightMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
+	this->CarCollision->GetBodyInstance()->bLockZRotation = false;
+	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);
 	if(CarStruct.IsGrounded)
 	{
 		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * axisValue,0));
@@ -118,6 +117,8 @@ void AMyPawnCar::RightMovement(float axisValue)
 	{
 		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * axisValue,0));
 	}
+	this->CarCollision->GetBodyInstance()->bLockZRotation = true;
+	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);
 }
 
 void AMyPawnCar::CarPhysiqueReaction(EPhysiqueReaction WhichPhysique)
@@ -228,8 +229,11 @@ void AMyPawnCar::CarDrift(float value)
 	if(value == 0)
 	{
 		if(this->TemporaryScene->GetRelativeRotation().Roll == 0) return;
-		this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) *
-			(this->TemporaryScene->GetRelativeRotation().Roll > 0 ? -1 : 1)));
+		this->TemporaryScene->SetRelativeRotation(UKismetMathLibrary::RInterpTo_Constant(this->TemporaryScene->GetRelativeRotation(),
+			FRotator(0,0,0),this->GetWorld()->GetDeltaSeconds(),
+			(CarStruct.IsGrounded ? this->CarStruct.SpeedResetLeanGrounded : this->CarStruct.SpeedResetLeanNotGrounded)));
+		/*this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) *
+			(this->TemporaryScene->GetRelativeRotation().Roll > 0 ? -1 : 1)));*/
 	}
 	else
 	{
@@ -277,8 +281,7 @@ void AMyPawnCar::CarIncline()
 	}
 }
 
-
-void AMyPawnCar::FlyingCar(float lowestZ)
+void AMyPawnCar::FlyingCar(FVector ImpactPoint)
 {
 	if(CarCollision == nullptr) return;
 	if(!first)
@@ -289,20 +292,47 @@ void AMyPawnCar::FlyingCar(float lowestZ)
 	if(this->CarCollision->ComponentVelocity.Z < 0)
 	{
 		const FVector Direction = -this->GetActorUpVector();
-		this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForce );
+		this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForceTowardUp);
 	}
 	else
 	{
-		const FVector Direction = -this->GetActorUpVector();
+		const FVector Direction = this->GetActorUpVector();
 		const float MassCar = this->CarCollision->GetMass();
-		if(lowestZ  - CarStruct.HalfSizeBoxGroundDetection.Z >= 0)
+		const float HalfSizeBoxGround = CarStruct.HalfSizeBoxGroundDetection.Z * 1.5f;
+		//UE_LOG(LogTemp,Warning,TEXT("LowestZ %f , HalfSize %f"), lowestZ, HalfSizeBoxGround);
+		//UE_LOG(LogTemp,Warning,TEXT("LowestZ %f , HalfSize %f"), ImpactPoint.Z, HalfSizeBoxGround);
+		this->CarCollision->SetEnableGravity(false);
+		FVector LocationCar = this->GetActorLocation();
+		LocationCar.Z = HalfSizeBoxGround + ImpactPoint.Z;
+		this->SetActorLocation(LocationCar);
+		/*if(FMath::IsNearlyEqual(lowestZ,HalfSizeBoxGround,20.f))
 		{
-			this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MassCar);
+			UE_LOG(LogTemp,Warning,TEXT("LowestZ %f , HalfSize %f"), lowestZ, HalfSizeBoxGround);
+			this->CarCollision->SetEnableGravity(false);
+			FVector LocationCar = this->GetActorLocation();
+			LocationCar.Z = TestZ;
+			this->SetActorLocation(LocationCar);
+		}
+		else if(lowestZ - HalfSizeBoxGround < -50.f)
+		{
+			this->CarCollision->SetEnableGravity(true);
+			this->CarCollision->AddForce(Direction * -GetWorld()->GetGravityZ() * MassCar * MagneticForceTowardUp);
+			TestZ = this->GetActorLocation().Z;
 		}
 		else
 		{
-			this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MassCar * MagneticForce * (CarStruct.HalfSizeBoxGroundDetection.Z / lowestZ));
+			this->CarCollision->SetEnableGravity(true);
+			TestZ = this->GetActorLocation().Z;
+		}*/
+		//this->CarCollision->AddForce(Direction * -GetWorld()->GetGravityZ() * MassCar * MagneticForceTowardUp * (CarStruct.HalfSizeBoxGroundDetection.Z / lowestZ));
+		/*if(lowestZ  - CarStruct.HalfSizeBoxGroundDetection.Z >= 0)
+		{
+			this->CarCollision->AddForce(Direction * -GetWorld()->GetGravityZ() * MassCar / MagneticForceTowardGround);
 		}
+		else
+		{
+			this->CarCollision->AddForce(Direction * -GetWorld()->GetGravityZ() * MassCar * MagneticForceTowardUp * (CarStruct.HalfSizeBoxGroundDetection.Z / lowestZ));
+		}*/
 	}
 }
 
@@ -379,6 +409,9 @@ void AMyPawnCar::DetectGround()
 	if(!ResultHit)
 	{
 		CarStruct.IsGrounded = false;
+		LastActorHit = nullptr;
+		if(!this->CarStruct.IsOnReverseGravity)
+		this->CarCollision->SetEnableGravity(true);
 		return;
 	}
 	CarStruct.IsGrounded = true;
@@ -386,7 +419,7 @@ void AMyPawnCar::DetectGround()
 	//DetectSlope(Result.ImpactNormal);
 	if(!BlockSlope)
 	{
-		float test2 = 0;
+		/*FRotator test2;
 		FHitResult A;
 		for (const auto RaycastVertical : this->ArrayRaycastVerticalCarAngle)
 		{
@@ -394,47 +427,70 @@ void AMyPawnCar::DetectGround()
 				ECollisionChannel::ECC_Visibility);
 			test2 = DetectSlope(A.ImpactNormal);
 			//test2 = DetectSlope((Result.ImpactPoint - RaycastVertical->GetComponentLocation()).GetSafeNormal());
-			//UE_LOG(LogTemp,Warning,TEXT("%f"), test2)
-			UE_LOG(LogTemp,Warning,TEXT("%s %f"), *A.GetActor()->GetFName().ToString(),test2);
 			break;
-		}
-		float test = 0;
+		}*/
+		FRotator test;
 		test = DetectSlope(Result.ImpactNormal);
-		//UE_LOG(LogTemp,Warning,TEXT("%f"), test)
-		if(FMath::Abs(test) > this->CarStruct.MinSlopeCar)
+		FRotator NewRotationCar = this->GetActorRotation();
+		NewRotationCar.Pitch =  test.Pitch;
+		NewRotationCar.Roll =  test.Roll;
+		//NewRotationCar.Pitch =  (FMath::Abs(test.Pitch) > this->CarStruct.MinSlopeCar) ? test.Pitch : 0;
+		//NewRotationCar.Roll =  (FMath::Abs(test.Roll) > this->CarStruct.MinSlopeCar) ? test.Roll : 0;
+		FRotator Test2 = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
+			this->CarStruct.SpeedForSlopeAdjustement);
+		UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
+		this->RotateCarForSlope(Test2);
+		/*
+		if(FMath::Abs(test.Pitch) > this->CarStruct.MinSlopeCar)
 		{
 			FRotator NewRotationCar = this->GetActorRotation();
-			NewRotationCar.Pitch = test;
+			NewRotationCar.Pitch = test.Pitch;
+			NewRotationCar.Roll = test.Roll;
 			FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 				this->CarStruct.SpeedForSlopeAdjustement);
+			UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
 			this->RotateCarForSlope(Test2);
 		}
 		else
 		{
 			FRotator NewRotationCar = this->GetActorRotation();
 			NewRotationCar.Pitch = 0;
+			NewRotationCar.Roll = 0;
 			FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 				this->CarStruct.SpeedForSlopeAdjustement);
 			this->RotateCarForSlope(Test2);
-		}
+		}*/
 		//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[0]->GetComponentLocation()).GetSafeNormal());
 		//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[1]->GetComponentLocation()).GetSafeNormal());
 		//UE_LOG(LogTemp,Warning,TEXT("Vector normal,%f %f %f"), Result.Normal.X, Result.Normal.Y, Result.Normal.Z);
 		/*DetectSlope((Result.Location - this->ArrayRaycastVerticalCarAngle[0]->GetComponentLocation()).GetSafeNormal());
 		DetectSlope((Result.Location - this->ArrayRaycastVerticalCarAngle[1]->GetComponentLocation()).GetSafeNormal());*/	
 	}
-	FlyingCar(FVector::Distance(Result.ImpactPoint,this->GetActorLocation()));
+	if(Result.GetActor() == nullptr) return;
+	FlyingCar(Result.ImpactPoint);
+/*	if(LastActorHit == nullptr)
+	{
+		UE_LOG(LogTemp,Warning,TEXT("%s"),*Result.GetActor()->GetActorNameOrLabel())
+		LastActorHit = Result.GetActor();
+		FlyingCar(Result.ImpactPoint);
+	}else if(LastActorHit != Result.GetActor())
+	{
+		UE_LOG(LogTemp,Warning,TEXT("%s"),*Result.GetActor()->GetActorNameOrLabel())
+		LastActorHit = Result.GetActor();
+		FlyingCar(Result.ImpactPoint);
+	}*/
+	//FlyingCar(FVector::Distance(Result.ImpactPoint,this->GetActorLocation()));
 }
 
-float AMyPawnCar::DetectSlope(FVector FloorNormal)
+FRotator AMyPawnCar::DetectSlope(FVector FloorNormal)
 {
 	//const float AngleX = UKismetMathLibrary::DegAcos(FVector::DotProduct(this->CarCollision->GetForwardVector(),FloorNormal));
 	const FRotator CarRotation = this->GetActorRotation();
 	const float AngleX = UKismetMathLibrary::MakeRotFromYZ(this->CarCollision->GetRightVector(),FloorNormal).Pitch;
 	const float AngleY = CarRotation.Yaw;
-	const float AngleZ = CarRotation.Roll;//UKismetMathLibrary::MakeRotFromXZ(this->CarCollision->GetForwardVector(),FloorNormal).Roll;
+	const float AngleZ = UKismetMathLibrary::MakeRotFromXZ(this->CarCollision->GetForwardVector(),FloorNormal).Roll;//CarRotation.Roll;
 	const FRotator NewCarRotation = {AngleX,AngleY,AngleZ};
-	return AngleX;
+	return NewCarRotation;
 	//UE_LOG(LogTemp,Warning,TEXT("AngleFloor,%f %f %f"), NewCarRotation.Pitch, NewCarRotation.Yaw, NewCarRotation.Roll);
 }
 
@@ -442,6 +498,7 @@ void AMyPawnCar::RotateCarForSlope(FRotator NewRotation)
 {
 	this->CarCollision->GetBodyInstance()->bLockXRotation = false;
 	this->CarCollision->GetBodyInstance()->bLockYRotation = false;
+	this->CarCollision->GetBodyInstance()->bLockZRotation = false;
 	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);
 	//FRotator CarRotation = this->GetActorRotation();
 	//CarRotation.Pitch = AngleX - 90;
@@ -449,6 +506,7 @@ void AMyPawnCar::RotateCarForSlope(FRotator NewRotation)
 	this->SetActorRotation(NewRotation);
 	this->CarCollision->GetBodyInstance()->bLockXRotation = true;
 	this->CarCollision->GetBodyInstance()->bLockYRotation = true;
+	this->CarCollision->GetBodyInstance()->bLockZRotation = true;
 	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);
 }
 
