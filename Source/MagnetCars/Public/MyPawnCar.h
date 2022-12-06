@@ -184,8 +184,20 @@ public:
 	FRotator DetectSlope(FVector FloorNormal);
 	UFUNCTION(BlueprintCallable)
 	void RotateCarForSlope(FRotator NewRotation);
-	UFUNCTION(BlueprintCallable)
-	void CarFall(float DeltaTime);
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarGotGrounded();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarReverseGravity();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarFallOnAnotherCar();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarCollisionWithAnotherCar();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarCollisionWithDecor();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void SlowLeanActivate();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarBoost();
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TArray<AActor*> ArrayOfGround;

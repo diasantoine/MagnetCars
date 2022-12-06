@@ -356,6 +356,7 @@ void AMyPawnCar::CarGravity()
 
 void AMyPawnCar::InvertGravity()
 {
+	this->CarReverseGravity_Implementation();
 	this->CarCollision->AddForce(this->CarCollision->GetUpVector() * this->CarCollision->GetMass() * GetWorld()->GetGravityZ()
 		* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));
 }
@@ -382,7 +383,7 @@ void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
 }
 
-void AMyPawnCar::CarFall(float DeltaTime)
+/*void AMyPawnCar::CarFall(float DeltaTime)
 {
 	if(ContainerTimeBeforeCarFall >= TimeBeforeCarFall)
 	{
@@ -394,7 +395,7 @@ void AMyPawnCar::CarFall(float DeltaTime)
 	{
 		ContainerTimeBeforeCarFall += DeltaTime;
 	}
-}
+}*/
 
 void AMyPawnCar::DetectGround()
 {
@@ -414,7 +415,11 @@ void AMyPawnCar::DetectGround()
 		this->CarCollision->SetEnableGravity(true);
 		return;
 	}
-	CarStruct.IsGrounded = true;
+	if(!this->CarStruct.IsGrounded)
+	{
+		this->CarStruct.IsGrounded = true;
+		this->CarGotGrounded_Implementation();
+	}
 	//DetectSlope((Result.Location - this->CarCollision->GetUpVector()).GetSafeNormal());
 	//DetectSlope(Result.ImpactNormal);
 	if(!BlockSlope)
@@ -510,3 +515,37 @@ void AMyPawnCar::RotateCarForSlope(FRotator NewRotation)
 	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);
 }
 
+void AMyPawnCar::CarGotGrounded_Implementation()
+{
+	
+}
+
+void AMyPawnCar::CarReverseGravity_Implementation()
+{
+	
+}
+
+void AMyPawnCar::SlowLeanActivate_Implementation()
+{
+	
+}
+
+void AMyPawnCar::CarFallOnAnotherCar_Implementation()
+{
+	
+}
+
+void AMyPawnCar::CarCollisionWithDecor_Implementation()
+{
+	
+}
+
+void AMyPawnCar::CarCollisionWithAnotherCar_Implementation()
+{
+	
+}
+
+void AMyPawnCar::CarBoost_Implementation()
+{
+	
+}
