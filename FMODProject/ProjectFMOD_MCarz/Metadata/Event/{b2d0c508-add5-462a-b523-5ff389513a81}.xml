@@ -5,7 +5,7 @@
 			<value>Blue</value>
 		</property>
 		<property name="name">
-			<value>Menu_Selection</value>
+			<value>Menu_Navigation</value>
 		</property>
 		<property name="outputFormat">
 			<value>1</value>

@@ -8,7 +8,7 @@
 			<value>Env_BatimentAbandon</value>
 		</property>
 		<property name="outputFormat">
-			<value>2</value>
+			<value>1</value>
 		</property>
 		<relationship name="folder">
 			<destination>{4f46312d-706d-4bb3-8f74-ebc9c6947dd3}</destination>
@@ -177,7 +177,6 @@
 	<object class="MixerBusEffectChain" id="{5e59c30b-f4d4-429a-9465-4b78eb32b540}">
 		<relationship name="effects">
 			<destination>{bef5f3b9-559c-4568-803c-980a97b15605}</destination>
-			<destination>{595f8ea7-861d-4025-b666-4ed7f8dba848}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{270cf147-214e-49ec-8bcf-f7f775ec3b9f}" />
@@ -195,7 +194,6 @@
 	</object>
 	<object class="MixerBusPanner" id="{6bb05974-5441-41a0-b0b5-10f88f63bdb6}" />
 	<object class="MixerBusFader" id="{bef5f3b9-559c-4568-803c-980a97b15605}" />
-	<object class="SpatialiserEffect" id="{595f8ea7-861d-4025-b666-4ed7f8dba848}" />
 	<object class="MixerBusFader" id="{f92c78f8-3bc2-4d5b-975e-e63312be044d}" />
 	<object class="MixerBusFader" id="{43b17df3-0a5c-4f73-a9f8-21a75a4e66f7}" />
 </objects>
