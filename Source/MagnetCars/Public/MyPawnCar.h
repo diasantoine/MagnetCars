@@ -79,6 +79,10 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
  	float AmountOfLean = 5.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
+	float SpeedResetLeanGrounded = 50.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
+	float SpeedResetLeanNotGrounded = 50.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
 	float AmountOfRotationWithLean = 5.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Lean")
 	float AmountOfLeanNotGrounded = 5.f;

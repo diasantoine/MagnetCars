@@ -229,8 +229,11 @@ void AMyPawnCar::CarDrift(float value)
 	if(value == 0)
 	{
 		if(this->TemporaryScene->GetRelativeRotation().Roll == 0) return;
-		this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) *
-			(this->TemporaryScene->GetRelativeRotation().Roll > 0 ? -1 : 1)));
+		this->TemporaryScene->SetRelativeRotation(UKismetMathLibrary::RInterpTo_Constant(this->TemporaryScene->GetRelativeRotation(),
+			FRotator(0,0,0),this->GetWorld()->GetDeltaSeconds(),
+			(CarStruct.IsGrounded ? this->CarStruct.SpeedResetLeanGrounded : this->CarStruct.SpeedResetLeanNotGrounded)));
+		/*this->TemporaryScene->AddLocalRotation(FRotator(0,0,(CarStruct.IsGrounded ? CarStruct.AmountOfLean : CarStruct.AmountOfLeanNotGrounded) *
+			(this->TemporaryScene->GetRelativeRotation().Roll > 0 ? -1 : 1)));*/
 	}
 	else
 	{
@@ -428,11 +431,21 @@ void AMyPawnCar::DetectGround()
 		}*/
 		FRotator test;
 		test = DetectSlope(Result.ImpactNormal);
+		FRotator NewRotationCar = this->GetActorRotation();
+		NewRotationCar.Pitch =  test.Pitch;
+		NewRotationCar.Roll =  test.Roll;
+		//NewRotationCar.Pitch =  (FMath::Abs(test.Pitch) > this->CarStruct.MinSlopeCar) ? test.Pitch : 0;
+		//NewRotationCar.Roll =  (FMath::Abs(test.Roll) > this->CarStruct.MinSlopeCar) ? test.Roll : 0;
+		FRotator Test2 = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
+			this->CarStruct.SpeedForSlopeAdjustement);
+		UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
+		this->RotateCarForSlope(Test2);
+		/*
 		if(FMath::Abs(test.Pitch) > this->CarStruct.MinSlopeCar)
 		{
 			FRotator NewRotationCar = this->GetActorRotation();
 			NewRotationCar.Pitch = test.Pitch;
-			//NewRotationCar.Roll = test.Roll;
+			NewRotationCar.Roll = test.Roll;
 			FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 				this->CarStruct.SpeedForSlopeAdjustement);
 			UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
@@ -442,11 +455,11 @@ void AMyPawnCar::DetectGround()
 		{
 			FRotator NewRotationCar = this->GetActorRotation();
 			NewRotationCar.Pitch = 0;
-			//NewRotationCar.Roll = 0;
+			NewRotationCar.Roll = 0;
 			FRotator Test2 = UKismetMathLibrary::RInterpTo(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 				this->CarStruct.SpeedForSlopeAdjustement);
 			this->RotateCarForSlope(Test2);
-		}
+		}*/
 		//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[0]->GetComponentLocation()).GetSafeNormal());
 		//DetectSlope((Result.ImpactPoint - this->ArrayRaycastVerticalCarAngle[1]->GetComponentLocation()).GetSafeNormal());
 		//UE_LOG(LogTemp,Warning,TEXT("Vector normal,%f %f %f"), Result.Normal.X, Result.Normal.Y, Result.Normal.Z);
@@ -475,7 +488,7 @@ FRotator AMyPawnCar::DetectSlope(FVector FloorNormal)
 	const FRotator CarRotation = this->GetActorRotation();
 	const float AngleX = UKismetMathLibrary::MakeRotFromYZ(this->CarCollision->GetRightVector(),FloorNormal).Pitch;
 	const float AngleY = CarRotation.Yaw;
-	const float AngleZ = CarRotation.Roll;//UKismetMathLibrary::MakeRotFromXZ(this->CarCollision->GetForwardVector(),FloorNormal).Roll;
+	const float AngleZ = UKismetMathLibrary::MakeRotFromXZ(this->CarCollision->GetForwardVector(),FloorNormal).Roll;//CarRotation.Roll;
 	const FRotator NewCarRotation = {AngleX,AngleY,AngleZ};
 	return NewCarRotation;
 	//UE_LOG(LogTemp,Warning,TEXT("AngleFloor,%f %f %f"), NewCarRotation.Pitch, NewCarRotation.Yaw, NewCarRotation.Roll);
