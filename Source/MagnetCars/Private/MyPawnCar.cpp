@@ -252,6 +252,7 @@ void AMyPawnCar::CarDrift(float value)
 	{
 		if(FMath::Abs(this->TemporaryScene->GetRelativeRotation().Roll) >= this->CarStruct.AmountOfLeanToStartSlow)
 		{
+			this->SlowLeanActivate();
 			this->CarCollision->AddForce(-this->CarCollision->GetForwardVector() * this->CarCollision->GetMass()
 				* (this-CarStruct.IsGrounded ? this->CarStruct.LeanSlowGrounded : this->CarStruct.LeanSlowAir));
 		}
@@ -356,10 +357,23 @@ void AMyPawnCar::CarGravity()
 
 void AMyPawnCar::InvertGravity()
 {
-	this->CarReverseGravity_Implementation();
+	if(this->CarCollision == nullptr)return;
+	this->CarReverseGravity();
 	this->CarCollision->AddForce(this->CarCollision->GetUpVector() * this->CarCollision->GetMass() * GetWorld()->GetGravityZ()
 		* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));
 }
+
+void AMyPawnCar::BoostPlate(float Boost)
+{
+	if(this->CarCollision == nullptr)return;
+	this->CarCollision->AddForce(GetActorForwardVector() * Boost * this->CarCollision->GetMass());
+	FVector VelocityCar = this->CarCollision->GetComponentVelocity();
+	VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost);
+	VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost);
+	VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost);
+	this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
+}
+
 
 
 void AMyPawnCar::ResetScene()
@@ -418,7 +432,7 @@ void AMyPawnCar::DetectGround()
 	if(!this->CarStruct.IsGrounded)
 	{
 		this->CarStruct.IsGrounded = true;
-		this->CarGotGrounded_Implementation();
+		this->CarGotGrounded();
 	}
 	//DetectSlope((Result.Location - this->CarCollision->GetUpVector()).GetSafeNormal());
 	//DetectSlope(Result.ImpactNormal);
@@ -549,3 +563,17 @@ void AMyPawnCar::CarBoost_Implementation()
 {
 	
 }
+
+void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
+{
+	if(Other == nullptr)return;
+	if(Other->ActorHasTag("Obstacle"))
+	{
+		this->CarCollisionWithDecor();
+	}else if(Other->ActorHasTag("Car"))
+	{
+		this->CarCollisionWithAnotherCar();
+	}
+	
+}
+

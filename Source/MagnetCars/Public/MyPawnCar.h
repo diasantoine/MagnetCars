@@ -60,6 +60,10 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float MaxSpeedWithBoost = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float SpeedResetMaxSpeed = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLean = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLeanNotGrounded = 20.f;
@@ -155,6 +159,7 @@ public:
 
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
@@ -170,6 +175,8 @@ public:
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity();
+	UFUNCTION(BlueprintCallable)
+	void BoostPlate(float Boost);
 	UFUNCTION(BlueprintCallable)
 	void ResetScene();
 	UFUNCTION(BlueprintCallable)
