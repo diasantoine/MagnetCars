@@ -1,0 +1,13 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\githubfichier\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\magnetcars.init.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\githubfichier\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\githubfichier\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

@@ -279,8 +279,8 @@ D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars
 /FI"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\Definitions.MagnetCars.h"
 /Yu"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h"
 /Fp"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MyGameStateBase.gen.cpp.obj"
-/sourceDependencies D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MyGameStateBase.gen.cpp.json
+/Fo"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MyGameStateBase.gen.cpp.lc.obj"
+/sourceDependencies"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\MyGameStateBase.gen.cpp.lc.json"
 /Zc:inline
 /nologo
 /Oi
