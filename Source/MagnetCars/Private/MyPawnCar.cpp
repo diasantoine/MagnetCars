@@ -2,6 +2,8 @@
 
 
 #include "MyPawnCar.h"
+
+#include "MyGroundBoostPlate.h"
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 
@@ -18,8 +20,9 @@ AMyPawnCar::AMyPawnCar()
 void AMyPawnCar::BeginPlay()
 {
 	Super::BeginPlay();
-	ContainerAcceleration = CarStruct.Acceleration;
-	if(CarStruct.IsGrounded)
+	this->ContainerAcceleration = CarStruct.Acceleration;
+	this->Tags.Add(this->CarTag);
+	if(this->CarStruct.IsGrounded)
 	{
 		this->CarCollision->SetLinearDamping(CarStruct.GroundFriction);
 		this->CarCollision->SetAngularDamping(CarStruct.AngularGroundFriction);
@@ -29,6 +32,7 @@ void AMyPawnCar::BeginPlay()
 		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
+	UE_LOG(LogTemp,Warning,TEXT("%s"),*this->Tags[0].ToString());
 }
 
 // Called every frame
@@ -567,13 +571,18 @@ void AMyPawnCar::CarBoost_Implementation()
 void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 {
 	if(Other == nullptr)return;
-	if(Other->ActorHasTag("Obstacle"))
+	if(Other == this)return;
+	if(Other->ActorHasTag(this->DecorTag))
 	{
 		this->CarCollisionWithDecor();
-	}else if(Other->ActorHasTag("Car"))
+	}else if(Other->ActorHasTag(this->CarTag))
 	{
 		this->CarCollisionWithAnotherCar();
+	}else if(Other->ActorHasTag(this->BoostTag))
+	{
+		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Other->GetClass());
+		if(GroundBoostPlate == nullptr) return;
+		this->BoostPlate(GroundBoostPlate->PowerBoost);
 	}
-	
 }
 

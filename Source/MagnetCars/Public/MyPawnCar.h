@@ -207,7 +207,11 @@ public:
 	void CarBoost();
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TArray<AActor*> ArrayOfGround;
+	FName CarTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	FName DecorTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	FName BoostTag;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float TimeBeforeCarFall = 0.5f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
