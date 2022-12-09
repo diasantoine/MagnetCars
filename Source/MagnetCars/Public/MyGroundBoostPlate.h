@@ -23,7 +23,7 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UPROPERTY(BlueprintReadWrite,Category = "Parameter Boost")
+	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category = "Parameter Boost")
 	float PowerBoost = 50;
 
 };

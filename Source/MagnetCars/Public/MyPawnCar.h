@@ -48,6 +48,8 @@ struct FCar
 	bool InstantReverseGravity = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool DragWholeBodyWhenLean = true;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool IsBoosted = true;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
@@ -60,7 +62,7 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
-	float MaxSpeedWithBoost = 1000.f;
+	float MaxSpeedWithBoost = 10000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float SpeedResetMaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
