@@ -32,7 +32,7 @@ void AMyPawnCar::BeginPlay()
 		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
-	UE_LOG(LogTemp,Warning,TEXT("%s"),*this->Tags[0].ToString());
+	//UE_LOG(LogTemp,Warning,TEXT("%s"),*this->Tags[0].ToString());
 }
 
 // Called every frame
@@ -67,10 +67,22 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 {
 	if(CarCollision == nullptr)return;
 	DetectGround();
-	if(this->CarCollision->GetComponentVelocity().X > 0 && this->CarCollision->GetComponentVelocity().X < this->CarStruct.MaxSpeedWithBoost && this->CarStruct.IsBoosted ||
-		this->CarCollision->GetComponentVelocity().X < 0 && this->CarCollision->GetComponentVelocity().X > -this->CarStruct.MaxSpeedWithBoost && this->CarStruct.IsBoosted)
+	if(this->CarStruct.IsBoosted)
 	{
-		this->CarStruct.IsBoosted = false;
+		if(this->CarCollision->GetComponentVelocity().X >= 0)
+		{
+			if(this->CarCollision->GetComponentVelocity().X < this->CarStruct.MaxSpeed)
+			{
+				this->CarStruct.IsBoosted = false;
+			}
+		}
+		else
+		{
+			if(this->CarCollision->GetComponentVelocity().X > -this->CarStruct.MaxSpeed)
+			{
+				this->CarStruct.IsBoosted = false;
+			}
+		}
 	}
 	if(this->CarStruct.IsGrounded)
 	{
@@ -78,6 +90,7 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 		FVector VelocityCar = this->CarCollision->GetComponentVelocity();
 		if(this->CarStruct.IsBoosted)
 		{
+			UE_LOG(LogTemp,Warning,TEXT("prkertf"));
 			VelocityCar.X = UKismetMathLibrary::FInterpTo_Constant(FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost),
 				FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed),this->GetWorld()->GetDeltaSeconds(),this->CarStruct.SpeedResetMaxSpeed);
 			VelocityCar.Y = UKismetMathLibrary::FInterpTo_Constant(FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost),
@@ -399,6 +412,8 @@ void AMyPawnCar::InvertGravity()
 void AMyPawnCar::BoostPlate(float Boost)
 {
 	if(this->CarCollision == nullptr)return;
+	this->CarStruct.IsBoosted = true;
+	this->CarBoost();
 	this->CarCollision->AddForce(GetActorForwardVector() * Boost * this->CarCollision->GetMass());
 	FVector VelocityCar = this->CarCollision->GetComponentVelocity();
 	VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost);
@@ -490,7 +505,7 @@ void AMyPawnCar::DetectGround()
 		//NewRotationCar.Roll =  (FMath::Abs(test.Roll) > this->CarStruct.MinSlopeCar) ? test.Roll : 0;
 		FRotator Test2 = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 			this->CarStruct.SpeedForSlopeAdjustement);
-		UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
+		//UE_LOG(LogTemp,Warning,TEXT("Yaw %f, Yaw %f"),Test2.Yaw,this->GetActorRotation().Yaw);
 		this->RotateCarForSlope(Test2);
 		/*
 		if(FMath::Abs(test.Pitch) > this->CarStruct.MinSlopeCar)
@@ -520,6 +535,12 @@ void AMyPawnCar::DetectGround()
 	}
 	if(Result.GetActor() == nullptr) return;
 	FlyingCar(Result.ImpactPoint);
+	if(Result.GetActor()->ActorHasTag(this->BoostTag))
+	{
+		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Result.GetActor());
+		if(GroundBoostPlate == nullptr) return;
+		this->BoostPlate(GroundBoostPlate->PowerBoost);
+	}
 /*	if(LastActorHit == nullptr)
 	{
 		UE_LOG(LogTemp,Warning,TEXT("%s"),*Result.GetActor()->GetActorNameOrLabel())
@@ -607,11 +628,11 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 	}else if(Other->ActorHasTag(this->CarTag))
 	{
 		this->CarCollisionWithAnotherCar();
-	}else if(Other->ActorHasTag(this->BoostTag))
+	}/*else if(Other->ActorHasTag(this->BoostTag))
 	{
-		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Other->GetClass());
+		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Other);
 		if(GroundBoostPlate == nullptr) return;
 		this->BoostPlate(GroundBoostPlate->PowerBoost);
-	}
+	}*/
 }
 
