@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{ddad14b3-a790-44be-8b78-b5fa72032814}">
+		<property name="name">
+			<value>EnLair-SlowMo</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{7f71b844-ee46-4ff7-a293-5cc528ea7e40}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{7f71b844-ee46-4ff7-a293-5cc528ea7e40}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+	</object>
+</objects>
