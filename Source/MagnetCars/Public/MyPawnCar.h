@@ -64,6 +64,8 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float MaxSpeedWithBoost = 10000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float ActualMaxSpeedUnderBoost = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float SpeedResetMaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLean = 20.f;
