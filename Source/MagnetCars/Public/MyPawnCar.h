@@ -160,13 +160,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
+	void PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime);
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
@@ -246,12 +246,18 @@ public:
 	class USceneComponent* TemporaryScene;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TEnumAsByte<ETraceTypeQuery> TraceChannel;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* SpeedCurve;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* RotationCurve;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
 	bool first = false;
 	FVector Velocity;
 	float ContainerAcceleration;
+	float ContainerForwardAxis;
 	AActor* LastActorHit;
+	FCalculateCustomPhysics OnCalculateCustomPhysics;
 	//float TestZ = 0;
 };

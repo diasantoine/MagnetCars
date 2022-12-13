@@ -32,6 +32,7 @@ void AMyPawnCar::BeginPlay()
 		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
+	this->GetWorld()->GetPhysicsScene()->OnPhysSceneStep.AddUObject(this,&AMyPawnCar::PhysicalCarMovement);
 	//UE_LOG(LogTemp,Warning,TEXT("%s"),*this->Tags[0].ToString());
 }
 
@@ -91,9 +92,10 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	}
 	if(this->CarStruct.IsGrounded)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("Act %f, MaxBoost %f"), this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.MaxSpeedWithBoost);
-		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
-		FVector VelocityCar = this->CarCollision->GetComponentVelocity();
+		//UE_LOG(LogTemp,Warning,TEXT("Act %f, MaxBoost %f"), this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.MaxSpeedWithBoost);
+		ContainerForwardAxis = axisValue * CarStruct.Acceleration * this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();
+		//this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.Acceleration * this->CarCollision->GetMass());
+		//FVector VelocityCar = this->CarCollision->GetComponentVelocity();
 		if(this->CarStruct.IsBoosted)
 		{
 			this->CarStruct.ActualMaxSpeedUnderBoost = UKismetMathLibrary::FInterpTo_Constant(this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.MaxSpeed,this->GetWorld()->GetDeltaSeconds(),
@@ -122,8 +124,9 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 	else
 	{
 
-		this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass());
-		FVector VelocityCar = this->CarCollision->GetComponentVelocity();
+		ContainerForwardAxis = axisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();
+		//this->CarCollision->AddForce(GetActorForwardVector() * axisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass());
+		//FVector VelocityCar = this->CarCollision->GetComponentVelocity();
 		if(this->CarStruct.IsBoosted)
 		{
 			this->CarStruct.ActualMaxSpeedUnderBoost = UKismetMathLibrary::FInterpTo_Constant(this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.MaxSpeed,this->GetWorld()->GetDeltaSeconds(),
@@ -134,17 +137,17 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 				FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeed,CarStruct.MaxSpeed),this->GetWorld()->GetDeltaSeconds(),this->CarStruct.SpeedResetMaxSpeed);
 			VelocityCar.Z = UKismetMathLibrary::FInterpTo_Constant(FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeedWithBoost,CarStruct.MaxSpeedWithBoost),
 				FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeed,CarStruct.MaxSpeed),this->GetWorld()->GetDeltaSeconds(),this->CarStruct.SpeedResetMaxSpeed);*/
-			VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
-			VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
-			VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
+			//VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
+			//VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
+			//VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
 		}
 		else
 		{
-			VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
-			VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
-			VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+			//VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+			//VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
+			//VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.MaxSpeed,CarStruct.MaxSpeed);
 		}
-		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
+		//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 	}
 	
 	if(CarStruct.IsGrounded)
@@ -168,6 +171,19 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 			* this->CarCollision->GetMass());
 	}
 }
+
+void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime)
+{
+	if(this->CarCollision == nullptr)return;
+	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+	ContainerForwardAxis *= this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed));
+	UE_LOG(LogTemp,Warning,TEXT("%f"),
+		this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed)));
+	this->CarCollision->AddForce(GetActorForwardVector() * ContainerForwardAxis);
+	//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar.GetSafeNormal() * FMath::Clamp(VelocityCar.Length(),0,CarStruct.MaxSpeed));
+}
+
+
 
 void AMyPawnCar::RightMovement(float axisValue)
 {
