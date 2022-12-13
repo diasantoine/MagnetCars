@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\githubfichier\\magnetcars\\source\\magnetcars\\magnetcars.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\githubfichier\\magnetcars\\intermediate\\build\\win64\\magnetcars\\shipping\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\githubfichier\\magnetcars\\intermediate\\build\\win64\\unrealgame\\shipping\\magnetcars\\definitions.magnetcars.h",
+            "d:\\githubfichier\\magnetcars\\source\\magnetcars\\magnetcars.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

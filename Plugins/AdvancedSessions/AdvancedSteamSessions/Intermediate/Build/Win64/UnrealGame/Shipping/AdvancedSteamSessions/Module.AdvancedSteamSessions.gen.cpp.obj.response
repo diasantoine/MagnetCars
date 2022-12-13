@@ -1,6 +1,6 @@
-"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp"
+D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp
 /I .
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Source\AdvancedSteamSessions\Private"
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Source\AdvancedSteamSessions\Private
 /I ..\Plugins\Online\OnlineSubsystem\Intermediate\Build\Win64\UnrealGame\Inc\OnlineSubsystem
 /I ..\Plugins\Online\OnlineSubsystem
 /I ..\Plugins\Online\OnlineSubsystem\Source
@@ -109,13 +109,13 @@
 /I Runtime\TypedElementFramework\Public
 /I ..\Intermediate\Build\Win64\UnrealGame\Inc\TypedElementRuntime
 /I Runtime\TypedElementRuntime\Public
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Inc\AdvancedSteamSessions"
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Source"
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Inc\AdvancedSteamSessions
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Source
 /I ..\Plugins\Online\OnlineSubsystemSteam\Source\Private
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Source\AdvancedSteamSessions\Classes"
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealGame\Inc\AdvancedSessions"
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSessions\Source"
-/I "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes"
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Source\AdvancedSteamSessions\Classes
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealGame\Inc\AdvancedSessions
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Source
+/I D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Source\AdvancedSessions\Classes
 /I ThirdParty\Steamworks\Steamv151\sdk\public
 /I ..\Plugins\Online\OnlineSubsystemSteam\Intermediate\Build\Win64\UnrealGame\Inc\OnlineSubsystemSteam
 /I ..\Plugins\Online\OnlineSubsystemSteam
@@ -124,18 +124,18 @@
 /I ThirdParty\mimalloc\include
 /I ThirdParty\LibTiff\Source\Win64
 /I ThirdParty\LibTiff\Source
-/I "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\INCLUDE"
-/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.6.2\include\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\ucrt"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\shared"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\um"
-/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.18362.0\winrt"
-/FI"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Intermediate\Build\Win64\VRExpPluginExample\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h"
-/FI"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Definitions.AdvancedSteamSessions.h"
-/Yu"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Intermediate\Build\Win64\VRExpPluginExample\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h"
-/Fp"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Intermediate\Build\Win64\VRExpPluginExample\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
-/Fo"C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
-/sourceDependencies "C:\Users\morde\Documents\Unreal Projects\PluginExpProject\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.json"
+/I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\INCLUDE"
+/I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.19041.0\winrt"
+/FI"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCars\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h"
+/FI"D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Definitions.AdvancedSteamSessions.h"
+/Yu"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCars\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h"
+/Fp"D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCars\Shipping\Engine\SharedPCH.Engine.ShadowErrors.h.pch"
+/Fo"D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
+/sourceDependencies D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealGame\Shipping\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.json
 /Zc:inline
 /nologo
 /Oi

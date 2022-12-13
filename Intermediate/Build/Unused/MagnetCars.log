@@ -1,21 +1,33 @@
-﻿  Using bundled DotNet SDK
+﻿  Cleaning MagnetCars and UnrealHeaderTool binaries...
+  Using bundled DotNet SDK
   Log file: C:\Users\peron\AppData\Local\UnrealBuildTool\Log.txt
   Using 'git status' to determine working set for adaptive non-unity build (D:\GithubFichier\MagnetCars).
-  Creating makefile for MagnetCarsEditor (no existing makefile)
-  Building MagnetCarsEditor...
+  Creating makefile for MagnetCars (no existing makefile)
+  Parsing headers for MagnetCars
+    Running UnrealHeaderTool "D:\GithubFichier\MagnetCars\MagnetCars.uproject" "D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCars\Shipping\MagnetCars.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\peron\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  Reflection code generated for MagnetCars in 33,9516393 seconds
+  Building MagnetCars...
   Using Visual Studio 2022 14.34.31933 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
   Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
     Executing up to 4 processes, one per physical core
-    Requested 1,5 GB free memory per action, 1,73 GB available: limiting max parallel actions to 1
-  Building 7 actions with 1 process...
-  [1/7] Compile MyGameStateBase.cpp
-  [2/7] Compile MagnetCars.cpp
-  [3/7] Compile MagnetCars.init.gen.cpp
-  [4/7] Compile MyGameStateBase.gen.cpp
-  [5/7] Link UnrealEditor-MagnetCars.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.exp
-  [6/7] Link UnrealEditor-MagnetCars.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.exp
-  [7/7] WriteMetadata MagnetCarsEditor.target
-  Total time in Parallel executor: 525,71 seconds
-  Total execution time: 551,72 seconds
+    Requested 1,5 GB free memory per action, 1,81 GB available: limiting max parallel actions to 1
+  Building 16 actions with 1 process...
+  [1/16] Compile SharedPCH.Engine.ShadowErrors.cpp
+  [2/16] Compile MyBlueprintFunctionLibrary.cpp
+  [3/16] Compile Module.AdvancedSessions.gen.3_of_3.cpp
+  [4/16] Compile MagnetCars.cpp
+  [5/16] Compile MagnetCars.init.gen.cpp
+  [6/16] Compile MyGameStateBase.gen.cpp
+  [7/16] Compile Module.AdvancedSteamSessions.gen.cpp
+  [8/16] Compile Module.AdvancedSteamSessions.cpp
+  [9/16] Compile MyGameStateBase.cpp
+  [10/16] Compile Module.AdvancedSessions.cpp
+  [11/16] Compile MyBlueprintFunctionLibrary.gen.cpp
+  [12/16] Compile Module.AdvancedSessions.gen.1_of_3.cpp
+  [13/16] Resource Default.rc2
+  [14/16] Compile Module.AdvancedSessions.gen.2_of_3.cpp
+  [15/16] Link MagnetCars-Win64-Shipping.exe
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Binaries\Win64\MagnetCars-Win64-Shipping.lib et de l'objet D:\GithubFichier\MagnetCars\Binaries\Win64\MagnetCars-Win64-Shipping.exp
+  [16/16] WriteMetadata MagnetCars-Win64-Shipping.target
+  Total time in Parallel executor: 254,64 seconds
+  Total execution time: 305,57 seconds
