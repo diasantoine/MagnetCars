@@ -40,6 +40,19 @@ void AMyPawnCar::BeginPlay()
 void AMyPawnCar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if(this->CarCollision)
+	{
+		FVector MyVelocity = this->CarCollision->GetPhysicsLinearVelocity();
+		if(this->CarStruct.IsBoosted)
+		{
+			MyVelocity.X = FMath::Clamp(MyVelocity.X,-this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.ActualMaxSpeedUnderBoost);
+		}
+		else
+		{
+			MyVelocity.X = FMath::Clamp(MyVelocity.X,-this->CarStruct.MaxSpeed,this->CarStruct.MaxSpeed);
+		}
+		this->CarCollision->SetPhysicsLinearVelocity(MyVelocity);
+	}
 }
 
 // Called to bind functionality to input
@@ -175,12 +188,18 @@ void AMyPawnCar::ForwardMovement(float axisValue)
 void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime)
 {
 	if(this->CarCollision == nullptr)return;
+	
 	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+	//this->CarCollision->GetBodyInstance()->ClearForces();
 	ContainerForwardAxis *= this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed));
-	UE_LOG(LogTemp,Warning,TEXT("%f"),
-		this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed)));
+	/*UE_LOG(LogTemp,Warning,TEXT("%f"),
+		this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed)));*/
 	this->CarCollision->AddForce(GetActorForwardVector() * ContainerForwardAxis);
-	//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar.GetSafeNormal() * FMath::Clamp(VelocityCar.Length(),0,CarStruct.MaxSpeed));
+	//this->CarCollision->GetBodyInstance()->SetLinearVelocity(VelocityCar.GetSafeNormal() * FMath::Clamp(VelocityCar.Length(),0,CarStruct.MaxSpeed),true,true);
+	/*FRigidBodyState* Test = nullptr;
+	this->CarCollision->GetRigidBodyState(*Test);
+	if(Test == nullptr)return;
+	Test->LinVel = VelocityCar.GetSafeNormal() * FMath::Clamp(VelocityCar.Length(),0,CarStruct.MaxSpeed);*/
 }
 
 
