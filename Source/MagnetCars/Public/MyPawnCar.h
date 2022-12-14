@@ -123,11 +123,11 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MinDistanceWithTheGround = 50.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector HalfSizeBoxGroundDetection = FVector(50,50,50);
+	FVector HalfSizeBoxGroundDetection = FVector(200,200,200);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector StartBoxGroundDetection = FVector(0,0,100);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector EndBoxGroundDetection = FVector(0,0,100);
+	FVector EndBoxGroundDetection = FVector(0,0,200);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
