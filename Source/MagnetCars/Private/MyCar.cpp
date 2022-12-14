@@ -51,7 +51,6 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyCar::ForwardMovement(float axisValue)
 {
-	UE_LOG(LogTemp,Warning,TEXT("Text, %f"),axisValue);
 	this->AddMovementInput(GetActorForwardVector() * axisValue);
 }
 

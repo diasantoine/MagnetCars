@@ -170,8 +170,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
-	void CarPhysiqueReaction(EPhysiqueReaction WhichPhysique);
-	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();

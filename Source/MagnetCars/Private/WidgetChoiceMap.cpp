@@ -30,7 +30,6 @@ void UWidgetChoiceMap::MapButtonEffect_Implementation(UButton* WhichButton)
 {
 	if(WhichButton == this->MapChoice1)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("Gne?"));
 		MapChoice1->SetBackgroundColor(FLinearColor::Black);
 	}else if (WhichButton== this->MapChoice2)
 	{
