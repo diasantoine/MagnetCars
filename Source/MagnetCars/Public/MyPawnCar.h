@@ -48,6 +48,8 @@ struct FCar
 	bool InstantReverseGravity = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool DragWholeBodyWhenLean = true;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool IsBoosted = true;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
@@ -59,6 +61,12 @@ struct FCar
 	float AccelerationNotGrounded = 20.f;
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float MaxSpeedWithBoost = 10000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float ActualMaxSpeedUnderBoost = 1000.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float SpeedResetMaxSpeed = 1000.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLean = 20.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
@@ -152,12 +160,13 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
+	void PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime);
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
@@ -165,11 +174,11 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)
-	void CarIncline();
-	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity();
+	UFUNCTION(BlueprintCallable)
+	void BoostPlate(float Boost);
 	UFUNCTION(BlueprintCallable)
 	void ResetScene();
 	UFUNCTION(BlueprintCallable)
@@ -184,11 +193,27 @@ public:
 	FRotator DetectSlope(FVector FloorNormal);
 	UFUNCTION(BlueprintCallable)
 	void RotateCarForSlope(FRotator NewRotation);
-	UFUNCTION(BlueprintCallable)
-	void CarFall(float DeltaTime);
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarGotGrounded();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarReverseGravity();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarFallOnAnotherCar();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarCollisionWithAnotherCar();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarCollisionWithDecor();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void SlowLeanActivate();
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarBoost();
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TArray<AActor*> ArrayOfGround;
+	FName CarTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	FName DecorTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	FName BoostTag;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	float TimeBeforeCarFall = 0.5f;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
@@ -203,6 +228,8 @@ public:
 	TArray<USceneComponent*> ArrayRaycastVerticalCarAngle;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool BlockSlope = true;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool ResetGravityInstant = false;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -219,12 +246,18 @@ public:
 	class USceneComponent* TemporaryScene;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TEnumAsByte<ETraceTypeQuery> TraceChannel;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* SpeedCurve;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* RotationCurve;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
 	bool first = false;
 	FVector Velocity;
 	float ContainerAcceleration;
+	float ContainerForwardAxis;
 	AActor* LastActorHit;
+	FCalculateCustomPhysics OnCalculateCustomPhysics;
 	//float TestZ = 0;
 };
