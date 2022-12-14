@@ -174,8 +174,6 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
 	UFUNCTION(BlueprintCallable)
-	void CarIncline();
-	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity();
@@ -230,6 +228,8 @@ public:
 	TArray<USceneComponent*> ArrayRaycastVerticalCarAngle;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool BlockSlope = true;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool ResetGravityInstant = false;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
