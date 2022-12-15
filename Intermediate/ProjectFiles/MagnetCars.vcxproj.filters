@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="17.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <None Include="..\..\MagnetCars.uproject" />
     <Filter Include="Source">
@@ -1807,6 +1807,12 @@
     <ClCompile Include="..\..\Source\MagnetCars\Private\GMGravityCars.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\LoadCircuit.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\MapChoicePlayer.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MagnetCars\Private\MyCameraManager.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
@@ -1816,13 +1822,28 @@
     <ClCompile Include="..\..\Source\MagnetCars\Private\MyCarController.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\MyGroundBoostPlate.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\MyPartCircuit.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MagnetCars\Private\MyPawnCar.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\WidgetChoiceMap.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
     <Filter Include="Source\MagnetCars\Public">
       <UniqueIdentifier>{3A3B9C08-F64A-33EC-BC6B-82AB02848D86}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\MagnetCars\Public\GMGravityCars.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\LoadCircuit.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\MapChoicePlayer.h">
       <Filter>Source\MagnetCars\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MagnetCars\Public\MyCameraManager.h">
@@ -1834,7 +1855,16 @@
     <ClInclude Include="..\..\Source\MagnetCars\Public\MyCarController.h">
       <Filter>Source\MagnetCars\Public</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\MyGroundBoostPlate.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\MyPartCircuit.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\MagnetCars\Public\MyPawnCar.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\WidgetChoiceMap.h">
       <Filter>Source\MagnetCars\Public</Filter>
     </ClInclude>
   </ItemGroup>

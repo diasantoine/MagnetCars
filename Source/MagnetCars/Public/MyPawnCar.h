@@ -123,11 +123,11 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float MinDistanceWithTheGround = 50.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector HalfSizeBoxGroundDetection = FVector(50,50,50);
+	FVector HalfSizeBoxGroundDetection = FVector(200,200,200);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector StartBoxGroundDetection = FVector(0,0,100);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector EndBoxGroundDetection = FVector(0,0,100);
+	FVector EndBoxGroundDetection = FVector(0,0,200);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -160,21 +160,19 @@ protected:
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float axisValue);
+	void PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime);
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float axisValue);
 	UFUNCTION(BlueprintCallable)
 	void CarPhysiqueReaction(EPhysiqueReaction WhichPhysique);
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float value);
-	UFUNCTION(BlueprintCallable)
-	void CarIncline();
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();
 	UFUNCTION(BlueprintCallable)
@@ -231,6 +229,8 @@ public:
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool BlockSlope = true;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	bool ResetGravityInstant = false;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar CarStruct;
@@ -246,12 +246,18 @@ public:
 	class USceneComponent* TemporaryScene;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	TEnumAsByte<ETraceTypeQuery> TraceChannel;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* SpeedCurve;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UCurveFloat* RotationCurve;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
 	bool first = false;
 	FVector Velocity;
 	float ContainerAcceleration;
+	float ContainerForwardAxis;
 	AActor* LastActorHit;
+	FCalculateCustomPhysics OnCalculateCustomPhysics;
 	//float TestZ = 0;
 };
