@@ -23,4 +23,12 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Parameter PartCircuit")
+	FVector StartPartCircuit = {0,0,0};
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Parameter PartCircuit")
+	FVector EndPartCircuit = {0,0,0};
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateStartAndEndCircuit(FVector Start, FVector End);
 };

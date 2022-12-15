@@ -29,11 +29,12 @@ void ALoadCircuit::LoadCircuit_Implementation()
 {
 	for (auto Circuit : MapCircuit)
 	{
-		for (TSubclassOf<AMyPartCircuit> CircuitPart : Circuit.Value.CircuitPart)
+		for (AMyPartCircuit* CircuitPart : Circuit.Value.CircuitPart)
 		{
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-			this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->GetActorLocation(),this->GetActorRotation(),ActorSpawnParams);
+			FVector EndCircuit = CircuitPart->EndPartCircuit;
+			this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart->GetClass(),this->GetActorLocation(),this->GetActorRotation(),ActorSpawnParams);
 		}
 	}
 }

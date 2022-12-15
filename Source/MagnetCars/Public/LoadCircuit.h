@@ -12,7 +12,7 @@ struct FCircuit
 {
 	GENERATED_BODY();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Circuit Construction")
-	TArray<TSubclassOf<AMyPartCircuit>> CircuitPart;
+	TArray<AMyPartCircuit*> CircuitPart;
 };
 
 UCLASS()

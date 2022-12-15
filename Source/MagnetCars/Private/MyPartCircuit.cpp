@@ -22,6 +22,12 @@ void AMyPartCircuit::BeginPlay()
 void AMyPartCircuit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
+
+void AMyPartCircuit::UpdateStartAndEndCircuit(FVector Start, FVector End)
+{
+	this->StartPartCircuit = Start;
+	this->EndPartCircuit = End;
+}
+
 
