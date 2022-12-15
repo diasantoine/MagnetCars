@@ -15,7 +15,6 @@ ALoadCircuit::ALoadCircuit()
 void ALoadCircuit::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -27,14 +26,62 @@ void ALoadCircuit::Tick(float DeltaTime)
 
 void ALoadCircuit::LoadCircuit_Implementation()
 {
+	UE_LOG(LogTemp,Warning,TEXT("Prout"));
+	bool First = false;
 	for (auto Circuit : MapCircuit)
 	{
-		for (AMyPartCircuit* CircuitPart : Circuit.Value.CircuitPart)
+		for (const TSubclassOf<AMyPartCircuit> CircuitPart : Circuit.Value.CircuitPart)
 		{
+			if(CircuitPart == nullptr) continue;
 			FActorSpawnParameters ActorSpawnParams;
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
-			FVector EndCircuit = CircuitPart->EndPartCircuit;
-			this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart->GetClass(),this->GetActorLocation(),this->GetActorRotation(),ActorSpawnParams);
+			if(!First)
+			{
+				this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
+				First = true;
+				this->LastEndPosition = CircuitPart.GetDefaultObject()->EndPartCircuit;
+			}
+			else
+			{
+				FVector SpawnPosition;
+				FVector StartPartCircuit = CircuitPart.GetDefaultObject()->StartPartCircuit;
+				switch (WhichAxisAccounted)
+				{
+				case XYZ:
+					default:
+					SpawnPosition = LastEndPosition - StartPartCircuit;
+					break;
+				case XY:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.X -= StartPartCircuit.X;
+					SpawnPosition.Y -= StartPartCircuit.Y;
+					break;
+				case XZ:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.X -= StartPartCircuit.X;
+					SpawnPosition.Z -= StartPartCircuit.Z;
+					break;
+				case YZ:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.Y -= StartPartCircuit.Y;
+					SpawnPosition.Z -= StartPartCircuit.Z;
+					break;
+				case X:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.X -= StartPartCircuit.X;
+					break;
+				case Y:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.Y -= StartPartCircuit.Y;
+					break;
+				case Z:
+					SpawnPosition = LastEndPosition;
+					SpawnPosition.Z -= StartPartCircuit.Z;
+					break;
+				}
+				this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,SpawnPosition,FRotator::ZeroRotator,ActorSpawnParams);
+			}
+			this->LastEndPosition = CircuitPart.GetDefaultObject()->EndPartCircuit;
 		}
 	}
 }

@@ -12,7 +12,19 @@ struct FCircuit
 {
 	GENERATED_BODY();
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Circuit Construction")
-	TArray<AMyPartCircuit*> CircuitPart;
+	TArray<TSubclassOf<AMyPartCircuit>> CircuitPart;
+};
+
+UENUM(BlueprintType)
+enum EAXisAccountedForPlacement
+{
+	XYZ,
+	XY,
+	XZ,
+	YZ,
+	X,
+	Y,
+	Z
 };
 
 UCLASS()
@@ -32,9 +44,21 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
-	UFUNCTION(BlueprintNativeEvent,BlueprintCallable)
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
 	void LoadCircuit();
 
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TArray<AMyPartCircuit*> ArrayPartCircuit;
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TEnumAsByte<EAXisAccountedForPlacement> WhichAxisAccounted = XY;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	FVector FirstPartCircuitPosition = FVector::Zero();
+	
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
 	TMap<int,FCircuit> MapCircuit;
+
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Var")
+	FVector LastEndPosition = FVector::Zero();
 };
