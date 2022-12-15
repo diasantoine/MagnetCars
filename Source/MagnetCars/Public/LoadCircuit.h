@@ -47,7 +47,10 @@ public:
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
 	void LoadCircuit();
 
-	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
+	void UnLoadCircuit();
+
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Parameter")
 	TArray<AMyPartCircuit*> ArrayPartCircuit;
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")

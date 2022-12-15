@@ -27,6 +27,7 @@ void ALoadCircuit::Tick(float DeltaTime)
 void ALoadCircuit::LoadCircuit_Implementation()
 {
 	UE_LOG(LogTemp,Warning,TEXT("Prout"));
+	this->UnLoadCircuit();
 	bool First = false;
 	for (auto Circuit : MapCircuit)
 	{
@@ -37,14 +38,16 @@ void ALoadCircuit::LoadCircuit_Implementation()
 			ActorSpawnParams.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AdjustIfPossibleButAlwaysSpawn;
 			if(!First)
 			{
-				this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
+				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
+				this->ArrayPartCircuit.Add(Container);
 				First = true;
-				this->LastEndPosition = CircuitPart.GetDefaultObject()->EndPartCircuit;
+				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
 			}
 			else
 			{
 				FVector SpawnPosition;
-				FVector StartPartCircuit = CircuitPart.GetDefaultObject()->StartPartCircuit;
+				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,FVector::Zero(),FRotator::ZeroRotator,ActorSpawnParams);
+				FVector StartPartCircuit = Container->StartPartCircuit->GetComponentLocation();
 				switch (WhichAxisAccounted)
 				{
 				case XYZ:
@@ -79,11 +82,24 @@ void ALoadCircuit::LoadCircuit_Implementation()
 					SpawnPosition.Z -= StartPartCircuit.Z;
 					break;
 				}
-				this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,SpawnPosition,FRotator::ZeroRotator,ActorSpawnParams);
+				Container->SetActorLocation(SpawnPosition);
+				this->ArrayPartCircuit.Add(Container);
+				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
 			}
-			this->LastEndPosition = CircuitPart.GetDefaultObject()->EndPartCircuit;
 		}
 	}
+}
+
+
+void ALoadCircuit::UnLoadCircuit_Implementation()
+{
+	UE_LOG(LogTemp,Warning,TEXT("Prout2"));
+	if(this->ArrayPartCircuit.Num() == 0) return;
+	for (AMyPartCircuit* PartCircuit : this->ArrayPartCircuit)
+	{
+		PartCircuit->Destroy();
+	}
+	this->ArrayPartCircuit.Empty();
 }
 
 
