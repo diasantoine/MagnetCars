@@ -53,14 +53,6 @@
 			"ChunkId": "a8a408dbac6bb61700000001"
 		},
 		{
-			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.uasset",
-			"ChunkId": "b60fa590a5fe4d6f00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenNormalMap.uasset",
-			"ChunkId": "c18dd883a0c55c8b00000001"
-		},
-		{
 			"Path": "Engine/Content/EditorResources/S_Terrain.uasset",
 			"ChunkId": "5cea311860b94ecb00000001"
 		},
@@ -133,46 +125,6 @@
 			"ChunkId": "c599b991259f3dc100000001"
 		},
 		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenGrayscaleMap_VT.uasset",
-			"ChunkId": "0219c3161c6d6eb200000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenEmissiveMap_VT.uasset",
-			"ChunkId": "d77ca907bf9be46e00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenDiffuseMap_VT.uasset",
-			"ChunkId": "adba4404ca6448ad00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenLinearColor.uasset",
-			"ChunkId": "768633666781f70600000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenGrayscaleMap.uasset",
-			"ChunkId": "2563b8e7aff6d26e00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenEmissiveMap.uasset",
-			"ChunkId": "7ba7b2b1aeafb4cc00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/BaseFlattenDiffuseMap.uasset",
-			"ChunkId": "641c8321450e97f400000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/InvalidLightmapSettings.uasset",
-			"ChunkId": "cdb6f2e8065df7c100000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/InvalidLightmapSettings.ubulk",
-			"ChunkId": "cdb6f2e8065df7c100000002"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/DefaultWhiteGrid_Low.uasset",
-			"ChunkId": "8500a33b2fedbab800000001"
-		},
-		{
 			"Path": "Engine/Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/UnpackInteger3.uasset",
 			"ChunkId": "7b967f8ff09764ce00000001"
 		},
@@ -225,16 +177,56 @@
 			"ChunkId": "7bae9d93c88ae44900000001"
 		},
 		{
-			"Path": "Engine/Content/EngineDebugMaterials/VolumeToRender.uasset",
-			"ChunkId": "7f8259be57e87dce00000001"
-		},
-		{
 			"Path": "Engine/Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/EmptyNormal.uasset",
 			"ChunkId": "6f3a7c0fe1cf64ce00000001"
 		},
 		{
 			"Path": "Engine/Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/Empty.uasset",
 			"ChunkId": "efd3b99beb745ea100000001"
+		},
+		{
+			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture.uasset",
+			"ChunkId": "b60fa590a5fe4d6f00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenNormalMap.uasset",
+			"ChunkId": "c18dd883a0c55c8b00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenGrayscaleMap_VT.uasset",
+			"ChunkId": "0219c3161c6d6eb200000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenEmissiveMap_VT.uasset",
+			"ChunkId": "d77ca907bf9be46e00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenDiffuseMap_VT.uasset",
+			"ChunkId": "adba4404ca6448ad00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenLinearColor.uasset",
+			"ChunkId": "768633666781f70600000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenGrayscaleMap.uasset",
+			"ChunkId": "2563b8e7aff6d26e00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenEmissiveMap.uasset",
+			"ChunkId": "7ba7b2b1aeafb4cc00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/BaseFlattenDiffuseMap.uasset",
+			"ChunkId": "641c8321450e97f400000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/DefaultWhiteGrid_Low.uasset",
+			"ChunkId": "8500a33b2fedbab800000001"
+		},
+		{
+			"Path": "Engine/Content/EngineDebugMaterials/VolumeToRender.uasset",
+			"ChunkId": "7f8259be57e87dce00000001"
 		},
 		{
 			"Path": "Engine/Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/game_wind_noise.uasset",
@@ -305,28 +297,12 @@
 			"ChunkId": "36f9c4a1a41147a000000001"
 		},
 		{
-			"Path": "Engine/Content/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial.uasset",
-			"ChunkId": "f267c7830989284200000001"
+			"Path": "Engine/Content/EngineMaterials/InvalidLightmapSettings.uasset",
+			"ChunkId": "cdb6f2e8065df7c100000001"
 		},
 		{
-			"Path": "Engine/Content/EngineDamageTypes/DmgTypeBP_Environmental.uasset",
-			"ChunkId": "79688f0e793acea100000001"
-		},
-		{
-			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat4.uasset",
-			"ChunkId": "0ccdb42a00235ca400000001"
-		},
-		{
-			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3.uasset",
-			"ChunkId": "3f9ae4ae5e9a10b000000001"
-		},
-		{
-			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components.uasset",
-			"ChunkId": "7276d40fd50dba5900000001"
-		},
-		{
-			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2.uasset",
-			"ChunkId": "a29fb34f83f7d31a00000001"
+			"Path": "Engine/Content/EngineMaterials/InvalidLightmapSettings.ubulk",
+			"ChunkId": "cdb6f2e8065df7c100000002"
 		},
 		{
 			"Path": "Engine/Plugins/Runtime/HairStrands/Content/Materials/HairGroupColors.uasset",
@@ -357,6 +333,30 @@
 			"ChunkId": "ba6543c81e92e56d00000002"
 		},
 		{
+			"Path": "Engine/Content/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial.uasset",
+			"ChunkId": "f267c7830989284200000001"
+		},
+		{
+			"Path": "Engine/Content/EngineDamageTypes/DmgTypeBP_Environmental.uasset",
+			"ChunkId": "79688f0e793acea100000001"
+		},
+		{
+			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat4.uasset",
+			"ChunkId": "0ccdb42a00235ca400000001"
+		},
+		{
+			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3.uasset",
+			"ChunkId": "3f9ae4ae5e9a10b000000001"
+		},
+		{
+			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components.uasset",
+			"ChunkId": "7276d40fd50dba5900000001"
+		},
+		{
+			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2.uasset",
+			"ChunkId": "a29fb34f83f7d31a00000001"
+		},
+		{
 			"Path": "Engine/Content/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components.uasset",
 			"ChunkId": "94d5e4cbc0f4380c00000001"
 		},
@@ -377,30 +377,6 @@
 			"ChunkId": "474711309ee6ba8900000001"
 		},
 		{
-			"Path": "Engine/Content/EngineMeshes/Sphere.uasset",
-			"ChunkId": "f421d8f857b9ed0300000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMeshes/Sphere.ubulk",
-			"ChunkId": "f421d8f857b9ed0300000002"
-		},
-		{
-			"Path": "Engine/Content/EngineResources/GradientTexture0.uasset",
-			"ChunkId": "f87a01e7b138538a00000001"
-		},
-		{
-			"Path": "Engine/Content/EditorResources/S_TriggerSphere.uasset",
-			"ChunkId": "67d4e8f2a83a1c4800000001"
-		},
-		{
-			"Path": "Engine/Content/EditorResources/S_TriggerCapsule.uasset",
-			"ChunkId": "a8fda97722bfb0e600000001"
-		},
-		{
-			"Path": "Engine/Content/EditorResources/S_TriggerBox.uasset",
-			"ChunkId": "8953c1244c740aad00000001"
-		},
-		{
 			"Path": "Engine/Content/VREditor/LaserPointer/VR_LaserPower_01.uasset",
 			"ChunkId": "200cd3dc0f3f673a00000001"
 		},
@@ -409,12 +385,60 @@
 			"ChunkId": "200cd3dc0f3f673a00000002"
 		},
 		{
+			"Path": "Engine/Content/EngineMeshes/Sphere.uasset",
+			"ChunkId": "f421d8f857b9ed0300000001"
+		},
+		{
+			"Path": "Engine/Content/EngineMeshes/Sphere.ubulk",
+			"ChunkId": "f421d8f857b9ed0300000002"
+		},
+		{
+			"Path": "Engine/Content/EditorResources/S_TriggerCapsule.uasset",
+			"ChunkId": "a8fda97722bfb0e600000001"
+		},
+		{
 			"Path": "Engine/Content/EngineSky/VolumetricClouds/T_NoiseShape64.uasset",
 			"ChunkId": "a996adcfa357ed2d00000001"
 		},
 		{
 			"Path": "Engine/Content/EngineSky/VolumetricClouds/T_NoiseShape64.ubulk",
 			"ChunkId": "a996adcfa357ed2d00000002"
+		},
+		{
+			"Path": "Engine/Content/EditorResources/S_TriggerSphere.uasset",
+			"ChunkId": "67d4e8f2a83a1c4800000001"
+		},
+		{
+			"Path": "Engine/Content/EngineResources/GradientTexture0.uasset",
+			"ChunkId": "f87a01e7b138538a00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineResources/WhiteSquareTexture.uasset",
+			"ChunkId": "b85ee5fd59f4dd2000000001"
+		},
+		{
+			"Path": "Engine/Content/EditorResources/S_BoxReflectionCapture.uasset",
+			"ChunkId": "ff5a26a059754af200000001"
+		},
+		{
+			"Path": "Engine/Content/EngineResources/DefaultTexture.uasset",
+			"ChunkId": "6baf53cf79c0948b00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineResources/DefaultTexture.ubulk",
+			"ChunkId": "6baf53cf79c0948b00000002"
+		},
+		{
+			"Path": "Engine/Content/EditorMaterials/MAT_Groups_Visibility.uasset",
+			"ChunkId": "2127f99d332bc85400000001"
+		},
+		{
+			"Path": "Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Vector.uasset",
+			"ChunkId": "42a5bdf71bdb9f1200000001"
+		},
+		{
+			"Path": "Engine/Content/EditorResources/S_TriggerBox.uasset",
+			"ChunkId": "8953c1244c740aad00000001"
 		},
 		{
 			"Path": "Engine/Content/EngineSky/VolumetricClouds/T_VolumeNoiseShape64.uasset",
@@ -439,22 +463,6 @@
 		{
 			"Path": "Engine/Content/EngineSky/VolumetricClouds/CloudGradientTexture.uasset",
 			"ChunkId": "d28cf23bc747e18000000001"
-		},
-		{
-			"Path": "Engine/Content/EngineFonts/RobotoDistanceField.uasset",
-			"ChunkId": "52a5c49a743a12b500000001"
-		},
-		{
-			"Path": "Engine/Content/EditorMaterials/MatineeGroups/MAT_ColorTrack.uasset",
-			"ChunkId": "12bace0bc8b42ac000000001"
-		},
-		{
-			"Path": "Engine/Content/EditorMaterials/MAT_Groups_Visibility.uasset",
-			"ChunkId": "2127f99d332bc85400000001"
-		},
-		{
-			"Path": "Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_Vector.uasset",
-			"ChunkId": "42a5bdf71bdb9f1200000001"
 		},
 		{
 			"Path": "Engine/Content/EditorResources/S_Trigger.uasset",
@@ -489,6 +497,10 @@
 			"ChunkId": "b743bdd5e5df72a400000002"
 		},
 		{
+			"Path": "Engine/Content/EngineFonts/RobotoDistanceField.uasset",
+			"ChunkId": "52a5c49a743a12b500000001"
+		},
+		{
 			"Path": "Engine/Content/EngineResources/DefaultVolumeTexture2D.uasset",
 			"ChunkId": "6c54e7f6d4ea912200000001"
 		},
@@ -499,14 +511,6 @@
 		{
 			"Path": "Engine/Content/EngineResources/DefaultTextureCube.uasset",
 			"ChunkId": "3e6f2bc6739d380300000001"
-		},
-		{
-			"Path": "Engine/Content/EngineResources/DefaultTexture.uasset",
-			"ChunkId": "6baf53cf79c0948b00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineResources/DefaultTexture.ubulk",
-			"ChunkId": "6baf53cf79c0948b00000002"
 		},
 		{
 			"Path": "Engine/Content/EditorMaterials/MAT_Groups_Toggle.uasset",
@@ -537,6 +541,10 @@
 			"ChunkId": "2917d76711e58ca300000001"
 		},
 		{
+			"Path": "Engine/Content/EditorMaterials/MatineeGroups/MAT_ColorTrack.uasset",
+			"ChunkId": "12bace0bc8b42ac000000001"
+		},
+		{
 			"Path": "Engine/Content/EditorMaterials/MatineeGroups/MAT_Groups_AudioMaster.uasset",
 			"ChunkId": "c6249d4d30bbac8400000001"
 		},
@@ -551,14 +559,6 @@
 		{
 			"Path": "Engine/Content/EngineResources/Black.uasset",
 			"ChunkId": "cda0cf6115260c9400000001"
-		},
-		{
-			"Path": "Engine/Content/EngineResources/WhiteSquareTexture.uasset",
-			"ChunkId": "b85ee5fd59f4dd2000000001"
-		},
-		{
-			"Path": "Engine/Content/EditorResources/S_BoxReflectionCapture.uasset",
-			"ChunkId": "ff5a26a059754af200000001"
 		},
 		{
 			"Path": "Engine/Content/EditorResources/S_Actor.uasset",
@@ -623,22 +623,6 @@
 		{
 			"Path": "MagnetCars/Content/Vehicles/PhysicsMaterials/NonSlippery.uasset",
 			"ChunkId": "1f824da42b6b70d500000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N.uasset",
-			"ChunkId": "9777aac2799ddb0900000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N.ubulk",
-			"ChunkId": "9777aac2799ddb0900000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M.uasset",
-			"ChunkId": "c58c204543b6dd9300000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M.ubulk",
-			"ChunkId": "c58c204543b6dd9300000002"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/SKM_Offroad_Skeleton.uasset",
@@ -717,6 +701,22 @@
 			"ChunkId": "750974623cd4255a00000001"
 		},
 		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N.uasset",
+			"ChunkId": "9777aac2799ddb0900000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N.ubulk",
+			"ChunkId": "9777aac2799ddb0900000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M.uasset",
+			"ChunkId": "c58c204543b6dd9300000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M.ubulk",
+			"ChunkId": "c58c204543b6dd9300000002"
+		},
+		{
 			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_BC.uasset",
 			"ChunkId": "9d4a69760e804f1900000001"
 		},
@@ -747,46 +747,6 @@
 		{
 			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Lights_M.ubulk",
 			"ChunkId": "e906adbbfe8c4f3c00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M.uasset",
-			"ChunkId": "3602241152e7218600000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M.ubulk",
-			"ChunkId": "3602241152e7218600000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M.uasset",
-			"ChunkId": "b9e7ed3e3ad23c9200000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M.ubulk",
-			"ChunkId": "b9e7ed3e3ad23c9200000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN.uasset",
-			"ChunkId": "f812939709ca8b0d00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN.ubulk",
-			"ChunkId": "f812939709ca8b0d00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC.uasset",
-			"ChunkId": "0a48776e30d59edd00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC.ubulk",
-			"ChunkId": "0a48776e30d59edd00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M.uasset",
-			"ChunkId": "bc8bfd0cc00dfdcb00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M.ubulk",
-			"ChunkId": "bc8bfd0cc00dfdcb00000002"
 		},
 		{
 			"Path": "MagnetCars/Content/MyContent/MapsManager/MapsFrancoisGuillaume/VehicleOffroadExampleMap_HLOD0_Instancing.uasset",
@@ -829,28 +789,28 @@
 			"ChunkId": "5516ce2c36f3d9ae00000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan.uasset",
-			"ChunkId": "794b207f7810a73900000001"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M.uasset",
+			"ChunkId": "3602241152e7218600000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan.ubulk",
-			"ChunkId": "794b207f7810a73900000002"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M.ubulk",
+			"ChunkId": "3602241152e7218600000002"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N.uasset",
-			"ChunkId": "f6fa9ea8e5d6973a00000001"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M.uasset",
+			"ChunkId": "b9e7ed3e3ad23c9200000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N.ubulk",
-			"ChunkId": "f6fa9ea8e5d6973a00000002"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M.ubulk",
+			"ChunkId": "b9e7ed3e3ad23c9200000002"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M.uasset",
-			"ChunkId": "5ff2e54a669670ee00000001"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN.uasset",
+			"ChunkId": "f812939709ca8b0d00000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M.ubulk",
-			"ChunkId": "5ff2e54a669670ee00000002"
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN.ubulk",
+			"ChunkId": "f812939709ca8b0d00000002"
 		},
 		{
 			"Path": "Engine/Content/MobileResources/HUD/VirtualJoystick_Background.uasset",
@@ -921,6 +881,46 @@
 			"ChunkId": "3f015559130c72bc00000002"
 		},
 		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC.uasset",
+			"ChunkId": "0a48776e30d59edd00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC.ubulk",
+			"ChunkId": "0a48776e30d59edd00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M.uasset",
+			"ChunkId": "bc8bfd0cc00dfdcb00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M.ubulk",
+			"ChunkId": "bc8bfd0cc00dfdcb00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan.uasset",
+			"ChunkId": "794b207f7810a73900000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan.ubulk",
+			"ChunkId": "794b207f7810a73900000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N.uasset",
+			"ChunkId": "f6fa9ea8e5d6973a00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N.ubulk",
+			"ChunkId": "f6fa9ea8e5d6973a00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M.uasset",
+			"ChunkId": "5ff2e54a669670ee00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M.ubulk",
+			"ChunkId": "5ff2e54a669670ee00000002"
+		},
+		{
 			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_CCRCCPlastic_M.uasset",
 			"ChunkId": "794adb5cbdd5e95a00000001"
 		},
@@ -967,6 +967,38 @@
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_N.ubulk",
 			"ChunkId": "dc242e508b0ae3ba00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D.uasset",
+			"ChunkId": "3a7eeb0e2fa08fe500000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D.ubulk",
+			"ChunkId": "3a7eeb0e2fa08fe500000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan.uasset",
+			"ChunkId": "58a5164de497f2bd00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan.ubulk",
+			"ChunkId": "58a5164de497f2bd00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N.uasset",
+			"ChunkId": "edb993af92c54d4d00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N.ubulk",
+			"ChunkId": "edb993af92c54d4d00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR.uasset",
+			"ChunkId": "823f93579936b0d000000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR.ubulk",
+			"ChunkId": "823f93579936b0d000000002"
 		},
 		{
 			"Path": "Engine/Plugins/2D/Paper2D/Content/DefaultSpriteMaterial.uasset",
@@ -1037,44 +1069,20 @@
 			"ChunkId": "06a12bde275caf6b00000001"
 		},
 		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM.uasset",
+			"ChunkId": "4a355fc7f9aa803700000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM.ubulk",
+			"ChunkId": "4a355fc7f9aa803700000002"
+		},
+		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Seats_Tan.uasset",
 			"ChunkId": "e623b7b8e26a871b00000001"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Seats_Tan.ubulk",
 			"ChunkId": "e623b7b8e26a871b00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D.uasset",
-			"ChunkId": "3a7eeb0e2fa08fe500000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D.ubulk",
-			"ChunkId": "3a7eeb0e2fa08fe500000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan.uasset",
-			"ChunkId": "58a5164de497f2bd00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan.ubulk",
-			"ChunkId": "58a5164de497f2bd00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N.uasset",
-			"ChunkId": "edb993af92c54d4d00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N.ubulk",
-			"ChunkId": "edb993af92c54d4d00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR.uasset",
-			"ChunkId": "823f93579936b0d000000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR.ubulk",
-			"ChunkId": "823f93579936b0d000000002"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_D.uasset",
@@ -1091,6 +1099,14 @@
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_CCRCCP.ubulk",
 			"ChunkId": "e38efe9419a93d2b00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN.uasset",
+			"ChunkId": "84c73c90f61240ab00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN.ubulk",
+			"ChunkId": "84c73c90f61240ab00000002"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Seats_N.uasset",
@@ -1141,28 +1157,28 @@
 			"ChunkId": "535ab50c7859997500000002"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN.uasset",
-			"ChunkId": "84c73c90f61240ab00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN.ubulk",
-			"ChunkId": "84c73c90f61240ab00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM.uasset",
-			"ChunkId": "4a355fc7f9aa803700000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM.ubulk",
-			"ChunkId": "4a355fc7f9aa803700000002"
-		},
-		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_Tan.uasset",
 			"ChunkId": "15f6bddd1c28780d00000001"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_Tan.ubulk",
 			"ChunkId": "15f6bddd1c28780d00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N.uasset",
+			"ChunkId": "61564b2b031e7e4000000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N.ubulk",
+			"ChunkId": "61564b2b031e7e4000000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR.uasset",
+			"ChunkId": "d427e4c7d03f403f00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR.ubulk",
+			"ChunkId": "d427e4c7d03f403f00000002"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/SportsCar/Materials/M_SportsCar_Wheel.uasset",
@@ -1229,12 +1245,84 @@
 			"ChunkId": "6098725f85292e1b00000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N.uasset",
-			"ChunkId": "61564b2b031e7e4000000001"
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN.uasset",
+			"ChunkId": "9be20627728754e800000001"
 		},
 		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N.ubulk",
-			"ChunkId": "61564b2b031e7e4000000002"
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN.ubulk",
+			"ChunkId": "9be20627728754e800000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM.uasset",
+			"ChunkId": "6d10eb10e2cd5c8a00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM.ubulk",
+			"ChunkId": "6d10eb10e2cd5c8a00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D.uasset",
+			"ChunkId": "62490907e97a7f6f00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D.ubulk",
+			"ChunkId": "62490907e97a7f6f00000002"
+		},
+		{
+			"Path": "MagnetCars/Content/LevelPrototyping/Textures/T_GridChecker_A.uasset",
+			"ChunkId": "4fec0163af43e6cc00000001"
+		},
+		{
+			"Path": "MagnetCars/Content/LevelPrototyping/Textures/T_GridChecker_A.ubulk",
+			"ChunkId": "4fec0163af43e6cc00000002"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/DefaultCalibrationGrayscale.uasset",
+			"ChunkId": "b916d415e9289b5500000001"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Blue.uasset",
+			"ChunkId": "86737b633647e77300000001"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Blue.ubulk",
+			"ChunkId": "86737b633647e77300000002"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Clouds_M.uasset",
+			"ChunkId": "927b2fe4876a1f7400000001"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Clouds_M.ubulk",
+			"ChunkId": "927b2fe4876a1f7400000002"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Stars.uasset",
+			"ChunkId": "56d51199b9b2142a00000001"
+		},
+		{
+			"Path": "Engine/Content/EngineSky/T_Sky_Stars.ubulk",
+			"ChunkId": "56d51199b9b2142a00000002"
+		},
+		{
+			"Path": "Engine/Content/EngineMaterials/DefaultCalibrationColor.uasset",
+			"ChunkId": "c8548e53bc64ae9400000001"
+		},
+		{
+			"Path": "Engine/Content/EditorMaterials/PreviewShadowIndicator.uasset",
+			"ChunkId": "2d5d52b0905803e600000001"
+		},
+		{
+			"Path": "Engine/Content/EditorMaterials/PreviewShadowIndicator.ubulk",
+			"ChunkId": "2d5d52b0905803e600000002"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP.uasset",
+			"ChunkId": "3f730cba4d8ccd2200000001"
+		},
+		{
+			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP.ubulk",
+			"ChunkId": "3f730cba4d8ccd2200000002"
 		},
 		{
 			"Path": "MagnetCars/Content/Vehicles/SportsCar/SportsCar_AnimBP.uasset",
@@ -1335,30 +1423,6 @@
 		{
 			"Path": "Engine/Plugins/Editor/SpeedTreeImporter/Content/SpeedTree9/SpeedTreeMaster.uasset",
 			"ChunkId": "7bb897d6d85abe5e00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR.uasset",
-			"ChunkId": "d427e4c7d03f403f00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR.ubulk",
-			"ChunkId": "d427e4c7d03f403f00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D.uasset",
-			"ChunkId": "62490907e97a7f6f00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D.ubulk",
-			"ChunkId": "62490907e97a7f6f00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP.uasset",
-			"ChunkId": "3f730cba4d8ccd2200000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP.ubulk",
-			"ChunkId": "3f730cba4d8ccd2200000002"
 		},
 		{
 			"Path": "Engine/Content/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud_Inst.uasset",
@@ -1479,70 +1543,6 @@
 		{
 			"Path": "Engine/Plugins/Animation/ControlRig/Content/Controls/ControlRig_Square_solid.ubulk",
 			"ChunkId": "282dd182b8a2782f00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN.uasset",
-			"ChunkId": "9be20627728754e800000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN.ubulk",
-			"ChunkId": "9be20627728754e800000002"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM.uasset",
-			"ChunkId": "6d10eb10e2cd5c8a00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM.ubulk",
-			"ChunkId": "6d10eb10e2cd5c8a00000002"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Blue.uasset",
-			"ChunkId": "86737b633647e77300000001"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Blue.ubulk",
-			"ChunkId": "86737b633647e77300000002"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Clouds_M.uasset",
-			"ChunkId": "927b2fe4876a1f7400000001"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Clouds_M.ubulk",
-			"ChunkId": "927b2fe4876a1f7400000002"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Stars.uasset",
-			"ChunkId": "56d51199b9b2142a00000001"
-		},
-		{
-			"Path": "Engine/Content/EngineSky/T_Sky_Stars.ubulk",
-			"ChunkId": "56d51199b9b2142a00000002"
-		},
-		{
-			"Path": "MagnetCars/Content/LevelPrototyping/Textures/T_GridChecker_A.uasset",
-			"ChunkId": "4fec0163af43e6cc00000001"
-		},
-		{
-			"Path": "MagnetCars/Content/LevelPrototyping/Textures/T_GridChecker_A.ubulk",
-			"ChunkId": "4fec0163af43e6cc00000002"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/DefaultCalibrationGrayscale.uasset",
-			"ChunkId": "b916d415e9289b5500000001"
-		},
-		{
-			"Path": "Engine/Content/EngineMaterials/DefaultCalibrationColor.uasset",
-			"ChunkId": "c8548e53bc64ae9400000001"
-		},
-		{
-			"Path": "Engine/Content/EditorMaterials/PreviewShadowIndicator.uasset",
-			"ChunkId": "2d5d52b0905803e600000001"
-		},
-		{
-			"Path": "Engine/Content/EditorMaterials/PreviewShadowIndicator.ubulk",
-			"ChunkId": "2d5d52b0905803e600000002"
 		},
 		{
 			"Path": "Engine/Plugins/Animation/ControlRig/Content/Controls/ControlRig_Square_3mm.uasset",
@@ -2273,16 +2273,16 @@
 			"ChunkId": "51c6c530c6e9e7c500000001"
 		},
 		{
+			"Path": "Engine/Content/EditorResources/EmptyActor.uasset",
+			"ChunkId": "cb90c94586b3228900000001"
+		},
+		{
 			"Path": "Engine/Content/OpenWorldTemplate/LandscapeMaterial/T_GridChecker_A.uasset",
 			"ChunkId": "eb26c788a1a10ea100000001"
 		},
 		{
 			"Path": "Engine/Content/OpenWorldTemplate/LandscapeMaterial/T_GridChecker_A.ubulk",
 			"ChunkId": "eb26c788a1a10ea100000002"
-		},
-		{
-			"Path": "Engine/Content/EditorResources/EmptyActor.uasset",
-			"ChunkId": "cb90c94586b3228900000001"
 		},
 		{
 			"Path": "Engine/Content/EngineMaterials/BlendFunc_DefBase.uasset",
@@ -2367,14 +2367,6 @@
 			"PackageChunkId": "a8a408dbac6bb61700000001"
 		},
 		{
-			"Name": "/Engine/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture",
-			"PackageChunkId": "b60fa590a5fe4d6f00000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenNormalMap",
-			"PackageChunkId": "c18dd883a0c55c8b00000001"
-		},
-		{
 			"Name": "/Engine/EditorResources/S_Terrain",
 			"PackageChunkId": "5cea311860b94ecb00000001",
 			"BulkDataChunkIds": [
@@ -2445,45 +2437,6 @@
 			"PackageChunkId": "c599b991259f3dc100000001"
 		},
 		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenGrayscaleMap_VT",
-			"PackageChunkId": "0219c3161c6d6eb200000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenEmissiveMap_VT",
-			"PackageChunkId": "d77ca907bf9be46e00000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenDiffuseMap_VT",
-			"PackageChunkId": "adba4404ca6448ad00000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenLinearColor",
-			"PackageChunkId": "768633666781f70600000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenGrayscaleMap",
-			"PackageChunkId": "2563b8e7aff6d26e00000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenEmissiveMap",
-			"PackageChunkId": "7ba7b2b1aeafb4cc00000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/BaseFlattenDiffuseMap",
-			"PackageChunkId": "641c8321450e97f400000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/InvalidLightmapSettings",
-			"PackageChunkId": "cdb6f2e8065df7c100000001",
-			"BulkDataChunkIds": [
-				"cdb6f2e8065df7c100000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineMaterials/DefaultWhiteGrid_Low",
-			"PackageChunkId": "8500a33b2fedbab800000001"
-		},
-		{
 			"Name": "/SpeedTreeImporter/SpeedTree9/UnpackInteger3",
 			"PackageChunkId": "7b967f8ff09764ce00000001"
 		},
@@ -2536,16 +2489,56 @@
 			"PackageChunkId": "7bae9d93c88ae44900000001"
 		},
 		{
-			"Name": "/Engine/EngineDebugMaterials/VolumeToRender",
-			"PackageChunkId": "7f8259be57e87dce00000001"
-		},
-		{
 			"Name": "/SpeedTreeImporter/SpeedTree9/EmptyNormal",
 			"PackageChunkId": "6f3a7c0fe1cf64ce00000001"
 		},
 		{
 			"Name": "/SpeedTreeImporter/SpeedTree9/Empty",
 			"PackageChunkId": "efd3b99beb745ea100000001"
+		},
+		{
+			"Name": "/Engine/Functions/Engine_MaterialFunctions02/PivotPainter2/Black_1x1_EXR_Texture",
+			"PackageChunkId": "b60fa590a5fe4d6f00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenNormalMap",
+			"PackageChunkId": "c18dd883a0c55c8b00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenGrayscaleMap_VT",
+			"PackageChunkId": "0219c3161c6d6eb200000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenEmissiveMap_VT",
+			"PackageChunkId": "d77ca907bf9be46e00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenDiffuseMap_VT",
+			"PackageChunkId": "adba4404ca6448ad00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenLinearColor",
+			"PackageChunkId": "768633666781f70600000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenGrayscaleMap",
+			"PackageChunkId": "2563b8e7aff6d26e00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenEmissiveMap",
+			"PackageChunkId": "7ba7b2b1aeafb4cc00000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/BaseFlattenDiffuseMap",
+			"PackageChunkId": "641c8321450e97f400000001"
+		},
+		{
+			"Name": "/Engine/EngineMaterials/DefaultWhiteGrid_Low",
+			"PackageChunkId": "8500a33b2fedbab800000001"
+		},
+		{
+			"Name": "/Engine/EngineDebugMaterials/VolumeToRender",
+			"PackageChunkId": "7f8259be57e87dce00000001"
 		},
 		{
 			"Name": "/SpeedTreeImporter/SpeedTree9/game_wind_noise",
@@ -2613,28 +2606,11 @@
 			"PackageChunkId": "36f9c4a1a41147a000000001"
 		},
 		{
-			"Name": "/Engine/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial",
-			"PackageChunkId": "f267c7830989284200000001"
-		},
-		{
-			"Name": "/Engine/EngineDamageTypes/DmgTypeBP_Environmental",
-			"PackageChunkId": "79688f0e793acea100000001"
-		},
-		{
-			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat4",
-			"PackageChunkId": "0ccdb42a00235ca400000001"
-		},
-		{
-			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3",
-			"PackageChunkId": "3f9ae4ae5e9a10b000000001"
-		},
-		{
-			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components",
-			"PackageChunkId": "7276d40fd50dba5900000001"
-		},
-		{
-			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2",
-			"PackageChunkId": "a29fb34f83f7d31a00000001"
+			"Name": "/Engine/EngineMaterials/InvalidLightmapSettings",
+			"PackageChunkId": "cdb6f2e8065df7c100000001",
+			"BulkDataChunkIds": [
+				"cdb6f2e8065df7c100000002"
+			]
 		},
 		{
 			"Name": "/HairStrands/Materials/HairGroupColors",
@@ -2663,6 +2639,30 @@
 			]
 		},
 		{
+			"Name": "/Engine/VREditor/TransformGizmo/TranslucentTransformGizmoMaterial",
+			"PackageChunkId": "f267c7830989284200000001"
+		},
+		{
+			"Name": "/Engine/EngineDamageTypes/DmgTypeBP_Environmental",
+			"PackageChunkId": "79688f0e793acea100000001"
+		},
+		{
+			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat4",
+			"PackageChunkId": "0ccdb42a00235ca400000001"
+		},
+		{
+			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat3",
+			"PackageChunkId": "3f9ae4ae5e9a10b000000001"
+		},
+		{
+			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat3Components",
+			"PackageChunkId": "7276d40fd50dba5900000001"
+		},
+		{
+			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/MakeFloat2",
+			"PackageChunkId": "a29fb34f83f7d31a00000001"
+		},
+		{
 			"Name": "/Engine/Functions/Engine_MaterialFunctions02/Utility/BreakOutFloat2Components",
 			"PackageChunkId": "94d5e4cbc0f4380c00000001"
 		},
@@ -2683,29 +2683,6 @@
 			"PackageChunkId": "474711309ee6ba8900000001"
 		},
 		{
-			"Name": "/Engine/EngineMeshes/Sphere",
-			"PackageChunkId": "f421d8f857b9ed0300000001",
-			"BulkDataChunkIds": [
-				"f421d8f857b9ed0300000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineResources/GradientTexture0",
-			"PackageChunkId": "f87a01e7b138538a00000001"
-		},
-		{
-			"Name": "/Engine/EditorResources/S_TriggerSphere",
-			"PackageChunkId": "67d4e8f2a83a1c4800000001"
-		},
-		{
-			"Name": "/Engine/EditorResources/S_TriggerCapsule",
-			"PackageChunkId": "a8fda97722bfb0e600000001"
-		},
-		{
-			"Name": "/Engine/EditorResources/S_TriggerBox",
-			"PackageChunkId": "8953c1244c740aad00000001"
-		},
-		{
 			"Name": "/Engine/VREditor/LaserPointer/VR_LaserPower_01",
 			"PackageChunkId": "200cd3dc0f3f673a00000001",
 			"BulkDataChunkIds": [
@@ -2713,11 +2690,57 @@
 			]
 		},
 		{
+			"Name": "/Engine/EngineMeshes/Sphere",
+			"PackageChunkId": "f421d8f857b9ed0300000001",
+			"BulkDataChunkIds": [
+				"f421d8f857b9ed0300000002"
+			]
+		},
+		{
+			"Name": "/Engine/EditorResources/S_TriggerCapsule",
+			"PackageChunkId": "a8fda97722bfb0e600000001"
+		},
+		{
 			"Name": "/Engine/EngineSky/VolumetricClouds/T_NoiseShape64",
 			"PackageChunkId": "a996adcfa357ed2d00000001",
 			"BulkDataChunkIds": [
 				"a996adcfa357ed2d00000002"
 			]
+		},
+		{
+			"Name": "/Engine/EditorResources/S_TriggerSphere",
+			"PackageChunkId": "67d4e8f2a83a1c4800000001"
+		},
+		{
+			"Name": "/Engine/EngineResources/GradientTexture0",
+			"PackageChunkId": "f87a01e7b138538a00000001"
+		},
+		{
+			"Name": "/Engine/EngineResources/WhiteSquareTexture",
+			"PackageChunkId": "b85ee5fd59f4dd2000000001"
+		},
+		{
+			"Name": "/Engine/EditorResources/S_BoxReflectionCapture",
+			"PackageChunkId": "ff5a26a059754af200000001"
+		},
+		{
+			"Name": "/Engine/EngineResources/DefaultTexture",
+			"PackageChunkId": "6baf53cf79c0948b00000001",
+			"BulkDataChunkIds": [
+				"6baf53cf79c0948b00000002"
+			]
+		},
+		{
+			"Name": "/Engine/EditorMaterials/MAT_Groups_Visibility",
+			"PackageChunkId": "2127f99d332bc85400000001"
+		},
+		{
+			"Name": "/Engine/EditorMaterials/MatineeGroups/MAT_Groups_Vector",
+			"PackageChunkId": "42a5bdf71bdb9f1200000001"
+		},
+		{
+			"Name": "/Engine/EditorResources/S_TriggerBox",
+			"PackageChunkId": "8953c1244c740aad00000001"
 		},
 		{
 			"Name": "/Engine/EngineSky/VolumetricClouds/T_VolumeNoiseShape64",
@@ -2741,22 +2764,6 @@
 		{
 			"Name": "/Engine/EngineSky/VolumetricClouds/CloudGradientTexture",
 			"PackageChunkId": "d28cf23bc747e18000000001"
-		},
-		{
-			"Name": "/Engine/EngineFonts/RobotoDistanceField",
-			"PackageChunkId": "52a5c49a743a12b500000001"
-		},
-		{
-			"Name": "/Engine/EditorMaterials/MatineeGroups/MAT_ColorTrack",
-			"PackageChunkId": "12bace0bc8b42ac000000001"
-		},
-		{
-			"Name": "/Engine/EditorMaterials/MAT_Groups_Visibility",
-			"PackageChunkId": "2127f99d332bc85400000001"
-		},
-		{
-			"Name": "/Engine/EditorMaterials/MatineeGroups/MAT_Groups_Vector",
-			"PackageChunkId": "42a5bdf71bdb9f1200000001"
 		},
 		{
 			"Name": "/Engine/EditorResources/S_Trigger",
@@ -2787,6 +2794,10 @@
 			]
 		},
 		{
+			"Name": "/Engine/EngineFonts/RobotoDistanceField",
+			"PackageChunkId": "52a5c49a743a12b500000001"
+		},
+		{
 			"Name": "/Engine/EngineResources/DefaultVolumeTexture2D",
 			"PackageChunkId": "6c54e7f6d4ea912200000001"
 		},
@@ -2797,13 +2808,6 @@
 		{
 			"Name": "/Engine/EngineResources/DefaultTextureCube",
 			"PackageChunkId": "3e6f2bc6739d380300000001"
-		},
-		{
-			"Name": "/Engine/EngineResources/DefaultTexture",
-			"PackageChunkId": "6baf53cf79c0948b00000001",
-			"BulkDataChunkIds": [
-				"6baf53cf79c0948b00000002"
-			]
 		},
 		{
 			"Name": "/Engine/EditorMaterials/MAT_Groups_Toggle",
@@ -2834,6 +2838,10 @@
 			"PackageChunkId": "2917d76711e58ca300000001"
 		},
 		{
+			"Name": "/Engine/EditorMaterials/MatineeGroups/MAT_ColorTrack",
+			"PackageChunkId": "12bace0bc8b42ac000000001"
+		},
+		{
 			"Name": "/Engine/EditorMaterials/MatineeGroups/MAT_Groups_AudioMaster",
 			"PackageChunkId": "c6249d4d30bbac8400000001"
 		},
@@ -2848,14 +2856,6 @@
 		{
 			"Name": "/Engine/EngineResources/Black",
 			"PackageChunkId": "cda0cf6115260c9400000001"
-		},
-		{
-			"Name": "/Engine/EngineResources/WhiteSquareTexture",
-			"PackageChunkId": "b85ee5fd59f4dd2000000001"
-		},
-		{
-			"Name": "/Engine/EditorResources/S_BoxReflectionCapture",
-			"PackageChunkId": "ff5a26a059754af200000001"
 		},
 		{
 			"Name": "/Game/__ExternalObjects__/VehicleTemplate/Maps/VehicleOffroadExampleMap/E/QY/BWIOH8DIKNFMOEFU99E2KD",
@@ -3385,20 +3385,6 @@
 			"PackageChunkId": "1f824da42b6b70d500000001"
 		},
 		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N",
-			"PackageChunkId": "9777aac2799ddb0900000001",
-			"BulkDataChunkIds": [
-				"9777aac2799ddb0900000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M",
-			"PackageChunkId": "c58c204543b6dd9300000001",
-			"BulkDataChunkIds": [
-				"c58c204543b6dd9300000002"
-			]
-		},
-		{
 			"Name": "/Game/Vehicles/OffroadCar/SKM_Offroad_Skeleton",
 			"PackageChunkId": "94e128966cbb80c300000001"
 		},
@@ -3475,6 +3461,20 @@
 			"PackageChunkId": "750974623cd4255a00000001"
 		},
 		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_N",
+			"PackageChunkId": "9777aac2799ddb0900000001",
+			"BulkDataChunkIds": [
+				"9777aac2799ddb0900000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_M",
+			"PackageChunkId": "c58c204543b6dd9300000001",
+			"BulkDataChunkIds": [
+				"c58c204543b6dd9300000002"
+			]
+		},
+		{
 			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Wheel_BC",
 			"PackageChunkId": "9d4a69760e804f1900000001",
 			"BulkDataChunkIds": [
@@ -3500,41 +3500,6 @@
 			"PackageChunkId": "e906adbbfe8c4f3c00000001",
 			"BulkDataChunkIds": [
 				"e906adbbfe8c4f3c00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M",
-			"PackageChunkId": "3602241152e7218600000001",
-			"BulkDataChunkIds": [
-				"3602241152e7218600000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M",
-			"PackageChunkId": "b9e7ed3e3ad23c9200000001",
-			"BulkDataChunkIds": [
-				"b9e7ed3e3ad23c9200000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN",
-			"PackageChunkId": "f812939709ca8b0d00000001",
-			"BulkDataChunkIds": [
-				"f812939709ca8b0d00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC",
-			"PackageChunkId": "0a48776e30d59edd00000001",
-			"BulkDataChunkIds": [
-				"0a48776e30d59edd00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M",
-			"PackageChunkId": "bc8bfd0cc00dfdcb00000001",
-			"BulkDataChunkIds": [
-				"bc8bfd0cc00dfdcb00000002"
 			]
 		},
 		{
@@ -3578,24 +3543,24 @@
 			"PackageChunkId": "5516ce2c36f3d9ae00000001"
 		},
 		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan",
-			"PackageChunkId": "794b207f7810a73900000001",
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_MSR_M",
+			"PackageChunkId": "3602241152e7218600000001",
 			"BulkDataChunkIds": [
-				"794b207f7810a73900000002"
+				"3602241152e7218600000002"
 			]
 		},
 		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N",
-			"PackageChunkId": "f6fa9ea8e5d6973a00000001",
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_CCRCCPlastic_M",
+			"PackageChunkId": "b9e7ed3e3ad23c9200000001",
 			"BulkDataChunkIds": [
-				"f6fa9ea8e5d6973a00000002"
+				"b9e7ed3e3ad23c9200000002"
 			]
 		},
 		{
-			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M",
-			"PackageChunkId": "5ff2e54a669670ee00000001",
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BotN",
+			"PackageChunkId": "f812939709ca8b0d00000001",
 			"BulkDataChunkIds": [
-				"5ff2e54a669670ee00000002"
+				"f812939709ca8b0d00000002"
 			]
 		},
 		{
@@ -3666,6 +3631,41 @@
 			]
 		},
 		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_BC",
+			"PackageChunkId": "0a48776e30d59edd00000001",
+			"BulkDataChunkIds": [
+				"0a48776e30d59edd00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Chassis_ASAOP_M",
+			"PackageChunkId": "bc8bfd0cc00dfdcb00000001",
+			"BulkDataChunkIds": [
+				"bc8bfd0cc00dfdcb00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_Tan",
+			"PackageChunkId": "794b207f7810a73900000001",
+			"BulkDataChunkIds": [
+				"794b207f7810a73900000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_N",
+			"PackageChunkId": "f6fa9ea8e5d6973a00000001",
+			"BulkDataChunkIds": [
+				"f6fa9ea8e5d6973a00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_MSR_M",
+			"PackageChunkId": "5ff2e54a669670ee00000001",
+			"BulkDataChunkIds": [
+				"5ff2e54a669670ee00000002"
+			]
+		},
+		{
 			"Name": "/Game/Vehicles/SportsCar/Materials/Textures/T_SportsCar_Body_CCRCCPlastic_M",
 			"PackageChunkId": "794adb5cbdd5e95a00000001",
 			"BulkDataChunkIds": [
@@ -3705,6 +3705,34 @@
 			"PackageChunkId": "dc242e508b0ae3ba00000001",
 			"BulkDataChunkIds": [
 				"dc242e508b0ae3ba00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D",
+			"PackageChunkId": "3a7eeb0e2fa08fe500000001",
+			"BulkDataChunkIds": [
+				"3a7eeb0e2fa08fe500000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan",
+			"PackageChunkId": "58a5164de497f2bd00000001",
+			"BulkDataChunkIds": [
+				"58a5164de497f2bd00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N",
+			"PackageChunkId": "edb993af92c54d4d00000001",
+			"BulkDataChunkIds": [
+				"edb993af92c54d4d00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR",
+			"PackageChunkId": "823f93579936b0d000000001",
+			"BulkDataChunkIds": [
+				"823f93579936b0d000000002"
 			]
 		},
 		{
@@ -3775,38 +3803,17 @@
 			"PackageChunkId": "06a12bde275caf6b00000001"
 		},
 		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM",
+			"PackageChunkId": "4a355fc7f9aa803700000001",
+			"BulkDataChunkIds": [
+				"4a355fc7f9aa803700000002"
+			]
+		},
+		{
 			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Seats_Tan",
 			"PackageChunkId": "e623b7b8e26a871b00000001",
 			"BulkDataChunkIds": [
 				"e623b7b8e26a871b00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Wheels_D",
-			"PackageChunkId": "3a7eeb0e2fa08fe500000001",
-			"BulkDataChunkIds": [
-				"3a7eeb0e2fa08fe500000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_Tan",
-			"PackageChunkId": "58a5164de497f2bd00000001",
-			"BulkDataChunkIds": [
-				"58a5164de497f2bd00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_N",
-			"PackageChunkId": "edb993af92c54d4d00000001",
-			"BulkDataChunkIds": [
-				"edb993af92c54d4d00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_MSR",
-			"PackageChunkId": "823f93579936b0d000000001",
-			"BulkDataChunkIds": [
-				"823f93579936b0d000000002"
 			]
 		},
 		{
@@ -3821,6 +3828,13 @@
 			"PackageChunkId": "e38efe9419a93d2b00000001",
 			"BulkDataChunkIds": [
 				"e38efe9419a93d2b00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN",
+			"PackageChunkId": "84c73c90f61240ab00000001",
+			"BulkDataChunkIds": [
+				"84c73c90f61240ab00000002"
 			]
 		},
 		{
@@ -3866,24 +3880,24 @@
 			]
 		},
 		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_BN",
-			"PackageChunkId": "84c73c90f61240ab00000001",
-			"BulkDataChunkIds": [
-				"84c73c90f61240ab00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Sus_ASAOPM",
-			"PackageChunkId": "4a355fc7f9aa803700000001",
-			"BulkDataChunkIds": [
-				"4a355fc7f9aa803700000002"
-			]
-		},
-		{
 			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_Tan",
 			"PackageChunkId": "15f6bddd1c28780d00000001",
 			"BulkDataChunkIds": [
 				"15f6bddd1c28780d00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N",
+			"PackageChunkId": "61564b2b031e7e4000000001",
+			"BulkDataChunkIds": [
+				"61564b2b031e7e4000000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR",
+			"PackageChunkId": "d427e4c7d03f403f00000001",
+			"BulkDataChunkIds": [
+				"d427e4c7d03f403f00000002"
 			]
 		},
 		{
@@ -3951,10 +3965,74 @@
 			"PackageChunkId": "6098725f85292e1b00000001"
 		},
 		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_N",
-			"PackageChunkId": "61564b2b031e7e4000000001",
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN",
+			"PackageChunkId": "9be20627728754e800000001",
 			"BulkDataChunkIds": [
-				"61564b2b031e7e4000000002"
+				"9be20627728754e800000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM",
+			"PackageChunkId": "6d10eb10e2cd5c8a00000001",
+			"BulkDataChunkIds": [
+				"6d10eb10e2cd5c8a00000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D",
+			"PackageChunkId": "62490907e97a7f6f00000001",
+			"BulkDataChunkIds": [
+				"62490907e97a7f6f00000002"
+			]
+		},
+		{
+			"Name": "/Game/LevelPrototyping/Textures/T_GridChecker_A",
+			"PackageChunkId": "4fec0163af43e6cc00000001",
+			"BulkDataChunkIds": [
+				"4fec0163af43e6cc00000002"
+			]
+		},
+		{
+			"Name": "/Engine/EngineMaterials/DefaultCalibrationGrayscale",
+			"PackageChunkId": "b916d415e9289b5500000001"
+		},
+		{
+			"Name": "/Engine/EngineSky/T_Sky_Blue",
+			"PackageChunkId": "86737b633647e77300000001",
+			"BulkDataChunkIds": [
+				"86737b633647e77300000002"
+			]
+		},
+		{
+			"Name": "/Engine/EngineSky/T_Sky_Clouds_M",
+			"PackageChunkId": "927b2fe4876a1f7400000001",
+			"BulkDataChunkIds": [
+				"927b2fe4876a1f7400000002"
+			]
+		},
+		{
+			"Name": "/Engine/EngineSky/T_Sky_Stars",
+			"PackageChunkId": "56d51199b9b2142a00000001",
+			"BulkDataChunkIds": [
+				"56d51199b9b2142a00000002"
+			]
+		},
+		{
+			"Name": "/Engine/EngineMaterials/DefaultCalibrationColor",
+			"PackageChunkId": "c8548e53bc64ae9400000001"
+		},
+		{
+			"Name": "/Engine/EditorMaterials/PreviewShadowIndicator",
+			"PackageChunkId": "2d5d52b0905803e600000001",
+			"BulkDataChunkIds": [
+				"2d5d52b0905803e600000002"
+			]
+		},
+		{
+			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP",
+			"PackageChunkId": "3f730cba4d8ccd2200000001",
+			"BulkDataChunkIds": [
+				"3f730cba4d8ccd2200000002"
 			]
 		},
 		{
@@ -4047,27 +4125,6 @@
 		{
 			"Name": "/SpeedTreeImporter/SpeedTree9/SpeedTreeMaster",
 			"PackageChunkId": "7bb897d6d85abe5e00000001"
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_MSR",
-			"PackageChunkId": "d427e4c7d03f403f00000001",
-			"BulkDataChunkIds": [
-				"d427e4c7d03f403f00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_D",
-			"PackageChunkId": "62490907e97a7f6f00000001",
-			"BulkDataChunkIds": [
-				"62490907e97a7f6f00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_CCRCCP",
-			"PackageChunkId": "3f730cba4d8ccd2200000001",
-			"BulkDataChunkIds": [
-				"3f730cba4d8ccd2200000002"
-			]
 		},
 		{
 			"Name": "/Engine/EngineSky/VolumetricClouds/m_SimpleVolumetricCloud_Inst",
@@ -4173,63 +4230,6 @@
 			"PackageChunkId": "282dd182b8a2782f00000001",
 			"BulkDataChunkIds": [
 				"282dd182b8a2782f00000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_BN",
-			"PackageChunkId": "9be20627728754e800000001",
-			"BulkDataChunkIds": [
-				"9be20627728754e800000002"
-			]
-		},
-		{
-			"Name": "/Game/Vehicles/OffroadCar/Materials/Textures/T_OffroadCar_Body_ASAOPM",
-			"PackageChunkId": "6d10eb10e2cd5c8a00000001",
-			"BulkDataChunkIds": [
-				"6d10eb10e2cd5c8a00000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineSky/T_Sky_Blue",
-			"PackageChunkId": "86737b633647e77300000001",
-			"BulkDataChunkIds": [
-				"86737b633647e77300000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineSky/T_Sky_Clouds_M",
-			"PackageChunkId": "927b2fe4876a1f7400000001",
-			"BulkDataChunkIds": [
-				"927b2fe4876a1f7400000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineSky/T_Sky_Stars",
-			"PackageChunkId": "56d51199b9b2142a00000001",
-			"BulkDataChunkIds": [
-				"56d51199b9b2142a00000002"
-			]
-		},
-		{
-			"Name": "/Game/LevelPrototyping/Textures/T_GridChecker_A",
-			"PackageChunkId": "4fec0163af43e6cc00000001",
-			"BulkDataChunkIds": [
-				"4fec0163af43e6cc00000002"
-			]
-		},
-		{
-			"Name": "/Engine/EngineMaterials/DefaultCalibrationGrayscale",
-			"PackageChunkId": "b916d415e9289b5500000001"
-		},
-		{
-			"Name": "/Engine/EngineMaterials/DefaultCalibrationColor",
-			"PackageChunkId": "c8548e53bc64ae9400000001"
-		},
-		{
-			"Name": "/Engine/EditorMaterials/PreviewShadowIndicator",
-			"PackageChunkId": "2d5d52b0905803e600000001",
-			"BulkDataChunkIds": [
-				"2d5d52b0905803e600000002"
 			]
 		},
 		{
@@ -4914,15 +4914,15 @@
 			"PackageChunkId": "51c6c530c6e9e7c500000001"
 		},
 		{
+			"Name": "/Engine/EditorResources/EmptyActor",
+			"PackageChunkId": "cb90c94586b3228900000001"
+		},
+		{
 			"Name": "/Engine/OpenWorldTemplate/LandscapeMaterial/T_GridChecker_A",
 			"PackageChunkId": "eb26c788a1a10ea100000001",
 			"BulkDataChunkIds": [
 				"eb26c788a1a10ea100000002"
 			]
-		},
-		{
-			"Name": "/Engine/EditorResources/EmptyActor",
-			"PackageChunkId": "cb90c94586b3228900000001"
 		},
 		{
 			"Name": "/Engine/EngineMaterials/BlendFunc_DefBase",
