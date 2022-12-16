@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="SandboxScene" id="{7642aefa-f6fa-44b9-9430-fb55274ba0d4}">
+		<property name="name">
+			<value>1- Charles (Conduite collision gravite)</value>
+		</property>
+		<relationship name="folder">
+			<destination>{85949f9e-e494-4ae5-835f-bccbd5509e21}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{1c220c0e-f148-4f48-a4ae-121cd1b0d0ef}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{155dd27e-6c1f-4779-a914-ba29c3e8d73b}</destination>
+		</relationship>
+	</object>
+	<object class="MarkerTrack" id="{1c220c0e-f148-4f48-a4ae-121cd1b0d0ef}" />
+	<object class="Timeline" id="{155dd27e-6c1f-4779-a914-ba29c3e8d73b}" />
+</objects>

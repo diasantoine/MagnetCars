@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="SandboxScene" id="{bbbdd6c2-ac0a-474c-954d-d2ff269cab9b}">
+		<property name="name">
+			<value>2- Raphael (Fin scoring)</value>
+		</property>
+		<relationship name="folder">
+			<destination>{85949f9e-e494-4ae5-835f-bccbd5509e21}</destination>
+		</relationship>
+		<relationship name="markerTracks">
+			<destination>{d481e520-d89f-4ad6-b622-c9f377e9aadc}</destination>
+		</relationship>
+		<relationship name="timeline">
+			<destination>{46f6d822-04ae-4f84-828a-3d40aee9eca3}</destination>
+		</relationship>
+		<relationship name="emitters">
+			<destination>{0a5d7605-887b-486e-ae89-33173705c4d5}</destination>
+		</relationship>
+	</object>
+	<object class="MarkerTrack" id="{d481e520-d89f-4ad6-b622-c9f377e9aadc}" />
+	<object class="Timeline" id="{46f6d822-04ae-4f84-828a-3d40aee9eca3}" />
+	<object class="SandboxEmitter" id="{0a5d7605-887b-486e-ae89-33173705c4d5}">
+		<property name="positionX">
+			<value>0.699999988</value>
+		</property>
+		<property name="positionZ">
+			<value>-0.100000001</value>
+		</property>
+		<relationship name="sandboxParameters">
+			<destination>{67128f6e-6d39-4081-8067-c233ffdb7758}</destination>
+		</relationship>
+		<relationship name="event">
+			<destination>{95906d91-2884-418e-8e6b-c2b207e1781a}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxParameter" id="{67128f6e-6d39-4081-8067-c233ffdb7758}">
+		<property name="parameterValue">
+			<value>0</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{62b87c49-044e-4fc7-b93d-5add95a659c4}</destination>
+		</relationship>
+	</object>
+</objects>
