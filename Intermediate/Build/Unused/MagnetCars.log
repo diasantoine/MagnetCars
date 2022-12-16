@@ -1,0 +1,43 @@
+﻿  Cleaning MagnetCarsEditor and UnrealHeaderTool binaries...
+  Using bundled DotNet SDK
+  Log file: C:\Users\peron\AppData\Local\UnrealBuildTool\Log.txt
+  Using 'git status' to determine working set for adaptive non-unity build (D:\GithubFichier\MagnetCars).
+  Creating makefile for MagnetCarsEditor (no existing makefile)
+  Parsing headers for MagnetCarsEditor
+    Running UnrealHeaderTool "D:\GithubFichier\MagnetCars\MagnetCars.uproject" "D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\MagnetCarsEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\peron\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
+  Reflection code generated for MagnetCarsEditor in 83,1876712 seconds
+  Building MagnetCarsEditor...
+  Using Visual Studio 2022 14.34.31933 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
+  Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
+    Executing up to 4 processes, one per physical core
+    Requested 1,5 GB free memory per action, 2,05 GB available: limiting max parallel actions to 1
+  Building 21 actions with 1 process...
+  [1/21] Compile SharedPCH.Engine.ShadowErrors.cpp
+  [2/21] Compile Module.AdvancedSessions.gen.1_of_3.cpp
+  [3/21] Compile Module.AdvancedSessions.gen.3_of_3.cpp
+  [4/21] Compile Module.AdvancedSessions.gen.2_of_3.cpp
+  [5/21] Resource Default.rc2
+  [6/21] Compile Module.AdvancedSteamSessions.cpp
+  [7/21] Compile MagnetCars.init.gen.cpp
+  [8/21] Compile MagnetCars.cpp
+  [9/21] Compile Module.AdvancedSteamSessions.gen.cpp
+  [10/21] Compile MyGameStateBase.gen.cpp
+  [11/21] Compile MyGameStateBase.cpp
+  [12/21] Resource Default.rc2
+  [13/21] Resource Default.rc2
+  [14/21] Link UnrealEditor-MagnetCars.lib
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.exp
+  [15/21] Link UnrealEditor-AdvancedSteamSessions.lib
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.exp
+  [16/21] Compile Module.AdvancedSessions.cpp
+  [17/21] Link UnrealEditor-AdvancedSessions.dll
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.exp
+  [18/21] Link UnrealEditor-AdvancedSessions.lib
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.exp
+  [19/21] Link UnrealEditor-AdvancedSteamSessions.dll
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.exp
+  [20/21] Link UnrealEditor-MagnetCars.dll
+     Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.exp
+  [21/21] WriteMetadata MagnetCarsEditor.target
+  Total time in Parallel executor: 223,27 seconds
+  Total execution time: 359,66 seconds
