@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LoadCircuit.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "WidgetChoiceMap.generated.h"
@@ -23,6 +24,21 @@ public:
 	UButton* MapChoice3;
 	UPROPERTY(EditAnywhere,BlueprintReadOnly, meta = (BindWidget))
 	UButton* MapChoice4;
+
+	UPROPERTY(EditAnywhere,BlueprintReadOnly, meta = (BindWidget))
+	UButton* MapGeneration;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	ALoadCircuit* LoadCircuit = nullptr;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FLinearColor SnowPartCirtcuit = FLinearColor::White;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FLinearColor SandPartCirtcuit = FLinearColor::Yellow;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FLinearColor CityPartCirtcuit = FLinearColor::Black;
+	UPROPERTY(EditAnywhere,BlueprintReadWrite)
+	FLinearColor InnerCityPartCirtcuit = FLinearColor::Gray;
 	
 	UFUNCTION(BlueprintNativeEvent,Category = "Map")
 	void MapButtonEffect(UButton* WhichButton);
@@ -38,10 +54,15 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent,Category = "Map")
 	void MapButton4Clicked();
+
+	UFUNCTION(BlueprintNativeEvent,Category = "Map")
+	void LaunchGenerationMap();
 	
 private:
+	virtual void NativeConstruct() override;	
 
-	virtual void NativeConstruct() override;
-
-
+	int WhichPart1 = 0;
+	int WhichPart2 = 0;
+	int WhichPart3 = 0;
+	int WhichPart4 = 0;
 };
