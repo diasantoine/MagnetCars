@@ -298,17 +298,5 @@
     <ClInclude Include="..\..\Source\MagnetCars\MyGameStateBase.h">
       <Filter>Source\MagnetCars</Filter>
     </ClInclude>
-    <Filter Include="Source\MagnetCars\Private">
-      <UniqueIdentifier>{7440FAF7-CDC3-38BD-B179-A60453D7F9FA}</UniqueIdentifier>
-    </Filter>
-    <ClCompile Include="..\..\Source\MagnetCars\Private\MyBlueprintFunctionLibrary.cpp">
-      <Filter>Source\MagnetCars\Private</Filter>
-    </ClCompile>
-    <Filter Include="Source\MagnetCars\Public">
-      <UniqueIdentifier>{3A3B9C08-F64A-33EC-BC6B-82AB02848D86}</UniqueIdentifier>
-    </Filter>
-    <ClInclude Include="..\..\Source\MagnetCars\Public\MyBlueprintFunctionLibrary.h">
-      <Filter>Source\MagnetCars\Public</Filter>
-    </ClInclude>
   </ItemGroup>
 </Project>
