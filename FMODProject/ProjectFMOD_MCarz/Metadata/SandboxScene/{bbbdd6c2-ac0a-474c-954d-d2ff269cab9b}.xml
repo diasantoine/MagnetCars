@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="SandboxScene" id="{bbbdd6c2-ac0a-474c-954d-d2ff269cab9b}">
+		<property name="note">
+			<value>tu termines la partie, listener se colle a la ligne d'arrivé, affichage des scrores (les temps) des joueurs et on entends les autres véhicules passé</value>
+		</property>
 		<property name="name">
 			<value>2- Raphael (Fin scoring)</value>
 		</property>

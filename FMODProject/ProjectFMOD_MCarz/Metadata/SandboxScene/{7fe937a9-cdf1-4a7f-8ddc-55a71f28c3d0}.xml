@@ -77,6 +77,7 @@
 		<relationship name="sandboxParameters">
 			<destination>{e67fcce2-e4b4-4f54-a5af-1a9c29492afb}</destination>
 			<destination>{1c5dfae5-36d5-4d9a-b43a-3ece6bb6c91a}</destination>
+			<destination>{42cf9c21-0869-485f-9913-27536deee531}</destination>
 		</relationship>
 		<relationship name="event">
 			<destination>{0bcfe947-2af3-45a5-bd1b-679900b75456}</destination>
@@ -96,6 +97,14 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{74335b72-7572-4d44-b9e0-4edd78492008}</destination>
+		</relationship>
+	</object>
+	<object class="SandboxParameter" id="{42cf9c21-0869-485f-9913-27536deee531}">
+		<property name="parameterValue">
+			<value>0</value>
+		</property>
+		<relationship name="parameter">
+			<destination>{475cbb23-e01a-49df-bf60-227e93b36e58}</destination>
 		</relationship>
 	</object>
 </objects>
