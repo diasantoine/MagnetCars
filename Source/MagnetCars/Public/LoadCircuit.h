@@ -45,13 +45,28 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
+	void LoadMapType();
+
+	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
 	void LoadCircuit();
 
 	UFUNCTION(BlueprintNativeEvent,BlueprintCallable,CallInEditor)
 	void UnLoadCircuit();
 
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TSubclassOf<AMyPartCircuit> PartCircuitTypeSand;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TSubclassOf<AMyPartCircuit> PartCircuitTypeCity;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TSubclassOf<AMyPartCircuit> PartCircuitTypeInnerCity;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TSubclassOf<AMyPartCircuit> PartCircuitTypeCanyon;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
+	TArray<TSubclassOf<AMyPartCircuit>> OrderPartCircuit;
+
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Parameter")
-	TArray<AMyPartCircuit*> ArrayPartCircuit;
+	TArray<AMyPartCircuit*> PartCircuitGenerated;
 	
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
 	TEnumAsByte<EAXisAccountedForPlacement> WhichAxisAccounted = XY;

@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "LoadCircuit.h"
 #include "GameFramework/Pawn.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -121,13 +122,19 @@ struct FCar
 	float CarMassNotGroundedInversedGravity = 100.f;
 
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	float MinDistanceWithTheGround = 50.f;
+	float DistanceWithTheGround = 200.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector HalfSizeBoxGroundDetection = FVector(200,200,200);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector StartBoxGroundDetection = FVector(0,0,100);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector EndBoxGroundDetection = FVector(0,0,200);
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	bool BoxFollowRotationPitch = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	bool BoxFollowRotationYaw = false;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	bool BoxFollowRotationRoll = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	TEnumAsByte<EPhysiqueReaction> PhysiqueReactionStatus = EPhysiqueReaction::FlyingCircuit;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -248,6 +255,8 @@ public:
 	UCurveFloat* SpeedCurve;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	UCurveFloat* RotationCurve;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere)
+	AActor* LastGroundDetected = nullptr;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
@@ -255,7 +264,6 @@ private:
 	FVector Velocity;
 	float ContainerAcceleration;
 	float ContainerForwardAxis;
-	AActor* LastActorHit;
 	FCalculateCustomPhysics OnCalculateCustomPhysics;
 	//float TestZ = 0;
 };
