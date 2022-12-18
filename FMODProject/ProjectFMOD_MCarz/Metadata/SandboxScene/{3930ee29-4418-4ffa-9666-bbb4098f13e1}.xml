@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="SandboxScene" id="{3930ee29-4418-4ffa-9666-bbb4098f13e1}">
+		<property name="note">
+			<value>1- Represente la depart de partie, les "joueurs" sont cote à cote et joue avec leur pédale d'acceleration a l'arret pour chauffer leur moteur.
+2- Allumer tout les event "Moteur_Vitesse", jouer avec le parameter "PriseBoost" pour simuler la pédale d'acceleration a l'arret
+3- Jouer l'event "Piste_ReadySetGo" pour le timing de départ
+4- A la fin de l'event déplacer les "Joueurs", modifier les parameter RPM pour changer le son du moteur pour simuler une prise de vitesse.
+PS: Pensez a déplacer le Listener derriere le véhicule pour avoir une bonne simulation</value>
+		</property>
 		<property name="name">
 			<value>3- Hugo (Départ) ok</value>
 		</property>
@@ -21,10 +28,6 @@
 			<destination>{80b82c5f-aee8-4214-82c2-d0b02fd64d60}</destination>
 			<destination>{65bef0bc-5a87-4c5e-b640-2c1c7511971c}</destination>
 			<destination>{a605b9b1-c7da-45fd-b37c-c942e4637593}</destination>
-			<destination>{efd95fa7-fe94-44f4-837e-ef0443a550b4}</destination>
-			<destination>{783316f9-6a06-486f-998e-387f0775fb47}</destination>
-			<destination>{a2986876-e74f-4d1c-8c6e-7699db0c0411}</destination>
-			<destination>{7c38d484-9020-458b-a0e5-e26611d915af}</destination>
 			<destination>{020515fb-d606-41ff-a19f-9ffe7ff5c13e}</destination>
 		</relationship>
 	</object>
@@ -105,71 +108,6 @@
 			<destination>{0bcfe947-2af3-45a5-bd1b-679900b75456}</destination>
 		</relationship>
 	</object>
-	<object class="SandboxEmitter" id="{efd95fa7-fe94-44f4-837e-ef0443a550b4}">
-		<property name="positionX">
-			<value>-7.9749999</value>
-		</property>
-		<property name="positionZ">
-			<value>0.150000006</value>
-		</property>
-		<relationship name="sandboxParameters">
-			<destination>{3bdda121-3581-4b55-8d3b-eaa99c42da04}</destination>
-		</relationship>
-		<relationship name="event">
-			<destination>{4691c9bf-029a-44dc-93d1-c3cc972efe73}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxEmitter" id="{783316f9-6a06-486f-998e-387f0775fb47}">
-		<property name="positionX">
-			<value>-2.69999981</value>
-		</property>
-		<property name="positionZ">
-			<value>0.0249999929</value>
-		</property>
-		<property name="rotationY">
-			<value>5.48713589</value>
-		</property>
-		<relationship name="sandboxParameters">
-			<destination>{447dac90-22ca-40cb-b0ec-9d88bf12bf13}</destination>
-		</relationship>
-		<relationship name="event">
-			<destination>{4691c9bf-029a-44dc-93d1-c3cc972efe73}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxEmitter" id="{a2986876-e74f-4d1c-8c6e-7699db0c0411}">
-		<property name="positionX">
-			<value>-7.8499999</value>
-		</property>
-		<property name="positionZ">
-			<value>-4.97499943</value>
-		</property>
-		<property name="rotationY">
-			<value>-3.40520906</value>
-		</property>
-		<relationship name="sandboxParameters">
-			<destination>{63a80c01-13e1-4e8f-8a70-76e0d07be135}</destination>
-		</relationship>
-		<relationship name="event">
-			<destination>{4691c9bf-029a-44dc-93d1-c3cc972efe73}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxEmitter" id="{7c38d484-9020-458b-a0e5-e26611d915af}">
-		<property name="positionX">
-			<value>-2.5999999</value>
-		</property>
-		<property name="positionZ">
-			<value>-4.95000076</value>
-		</property>
-		<property name="rotationY">
-			<value>3.75105381</value>
-		</property>
-		<relationship name="sandboxParameters">
-			<destination>{7d7c4e3d-3f64-4471-adf3-1e13f689cf29}</destination>
-		</relationship>
-		<relationship name="event">
-			<destination>{4691c9bf-029a-44dc-93d1-c3cc972efe73}</destination>
-		</relationship>
-	</object>
 	<object class="SandboxEmitter" id="{020515fb-d606-41ff-a19f-9ffe7ff5c13e}">
 		<property name="positionX">
 			<value>-4.80832577</value>
@@ -214,38 +152,6 @@
 		</property>
 		<relationship name="parameter">
 			<destination>{74335b72-7572-4d44-b9e0-4edd78492008}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxParameter" id="{3bdda121-3581-4b55-8d3b-eaa99c42da04}">
-		<property name="parameterValue">
-			<value>0</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{1e0bca11-ac94-44bc-a8d8-546673425780}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxParameter" id="{447dac90-22ca-40cb-b0ec-9d88bf12bf13}">
-		<property name="parameterValue">
-			<value>2.20000005</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{1e0bca11-ac94-44bc-a8d8-546673425780}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxParameter" id="{63a80c01-13e1-4e8f-8a70-76e0d07be135}">
-		<property name="parameterValue">
-			<value>0</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{1e0bca11-ac94-44bc-a8d8-546673425780}</destination>
-		</relationship>
-	</object>
-	<object class="SandboxParameter" id="{7d7c4e3d-3f64-4471-adf3-1e13f689cf29}">
-		<property name="parameterValue">
-			<value>0</value>
-		</property>
-		<relationship name="parameter">
-			<destination>{1e0bca11-ac94-44bc-a8d8-546673425780}</destination>
 		</relationship>
 	</object>
 </objects>

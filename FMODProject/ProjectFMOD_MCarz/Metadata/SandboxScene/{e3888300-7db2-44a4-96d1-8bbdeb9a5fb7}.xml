@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="SandboxScene" id="{e3888300-7db2-44a4-96d1-8bbdeb9a5fb7}">
+		<property name="note">
+			<value>1- Jouer l'event "Moteur_Vitesse", RPM à 3.20K et HorsPisteTomber à 0.15
+2- Jouer l'event "Menu_Navigation" pour simuler une navigation dans le menu, choix du véhicule, etc
+3- Lorsque le joueur valide son choix, jouer l'event "Menu_Pret"
+4- Si tout le monde n'est pas pret, le cheef de groupe ne peut pas lancer la partie, jouer "Menu_Erreur"
+5- Si tout le monde est pret, le chef de groupe peut lancer la partie, jouer "Menu_Demarrer""
+6- "Mort_ReapparitionWoosh"</value>
+		</property>
 		<property name="name">
 			<value>5- Antoine (Menu) ok</value>
 		</property>
@@ -128,7 +136,7 @@
 	</object>
 	<object class="SandboxParameter" id="{1bb3cff1-ef7a-48b1-9c69-252e376545af}">
 		<property name="parameterValue">
-			<value>3300</value>
+			<value>3200</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{74335b72-7572-4d44-b9e0-4edd78492008}</destination>
@@ -136,7 +144,7 @@
 	</object>
 	<object class="SandboxParameter" id="{8f6893a1-1cb1-4bc9-9302-de691cb54a66}">
 		<property name="parameterValue">
-			<value>0</value>
+			<value>0.144999996</value>
 		</property>
 		<relationship name="parameter">
 			<destination>{2719814f-781c-45a1-b805-b64e7455863b}</destination>

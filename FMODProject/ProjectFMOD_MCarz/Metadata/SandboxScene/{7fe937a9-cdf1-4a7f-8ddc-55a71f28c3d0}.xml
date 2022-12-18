@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="SandboxScene" id="{7fe937a9-cdf1-4a7f-8ddc-55a71f28c3d0}">
+		<property name="note">
+			<value>1- Jouer l'event "Moteur_Vitesse", augmenter son parameter RPM pour simuler une vitesse du véhicule
+2- Pour simuler pour le fait que le véhicule tombe, mettre le parameter "HorsPisteTomber" a sa valeur maximale instantannément (Simule le fait que le véhicule s'éloigne de la camera et tombe)
+3- Une fois ca fait, jouer une fois l'event "Mort_MortWoosh" (On entre dans un écran noir avec le logo du jeu au plein milieu)
+4- Jouer "Mort_DeathZone" pour simuler la réparration du véhicule
+5- Jouer "Mort_ReapparitionWoosh" (on revient dans la course avec le véhicule qui réapparait)</value>
+		</property>
 		<property name="name">
 			<value>4- Sarah (Tomber dans le vide) ok</value>
 		</property>

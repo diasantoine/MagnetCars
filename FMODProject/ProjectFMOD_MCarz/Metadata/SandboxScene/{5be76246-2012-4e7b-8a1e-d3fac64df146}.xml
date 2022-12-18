@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.02.00">
 	<object class="SandboxScene" id="{5be76246-2012-4e7b-8a1e-d3fac64df146}">
+		<property name="note">
+			<value>1- Allumer tout les events "Piste_DopplerWhoosh" et mettre à tous leur parameter à 10.0k
+2- Allumer les events "Env_Desert", "Decor_Desert_TempeteSable1", "Decor_Desert_TempeteSable2" et "Decor_Desert_Tornade"
+3- Jouer avec le listener comme un véhicule et passer entre ou à travers les events "Piste_DopplerWhoosh"</value>
+		</property>
 		<property name="name">
 			<value>6- FrancoisGuillaume (Env. Desert) ok</value>
 		</property>
