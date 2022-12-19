@@ -59,6 +59,7 @@ void AMyPawnCar::Tick(float DeltaTime)
 void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	if(!CodeInputEnable) return;
 	PlayerInputComponent->BindAxis("Forward",this,&AMyPawnCar::ForwardMovement);
 	PlayerInputComponent->BindAxis("Right",this,&AMyPawnCar::RightMovement);
 
@@ -187,8 +188,17 @@ void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTim
 	
 	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
 	ContainerForwardAxis *= this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed));
-	this->CarCollision->AddForce(this->GetActorForwardVector() * ContainerForwardAxis);
-
+	if(this->LastGroundDetected != nullptr && false)
+	{
+		const FRotator RotationPlayer = this->GetActorRotation();
+		const FRotator RotationForDirection = FRotator(this->LastGroundDetected->GetActorRotation().Pitch,RotationPlayer.Yaw,this->LastGroundDetected->GetActorRotation().Roll);
+		//UE_LOG(LogTemp,Warning,TEXT("WTF DE %s"),*this->LastGroundDetected->GetActorRotation().ToString());
+		this->CarCollision->AddForce(RotationForDirection.Vector() * ContainerForwardAxis);
+	}
+	else
+	{
+		this->CarCollision->AddForce(this->GetActorForwardVector() * ContainerForwardAxis);
+	}
 	
 	//this->CarCollision->GetBodyInstance()->ClearForces();
 	/*UE_LOG(LogTemp,Warning,TEXT("%f"),
@@ -277,7 +287,7 @@ void AMyPawnCar::FlyingCar(FVector ImpactPoint)
 	}
 	if(this->CarCollision->ComponentVelocity.Z < 0)
 	{
-		UE_LOG(LogTemp,Warning,TEXT("test"));
+		//UE_LOG(LogTemp,Warning,TEXT("test"));
 		const FVector Direction = -this->GetActorUpVector();
 		this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForceTowardUp);
 	}
@@ -285,7 +295,7 @@ void AMyPawnCar::FlyingCar(FVector ImpactPoint)
 	{
 		const FVector Direction = this->GetActorUpVector();
 		const float MassCar = this->CarCollision->GetMass();
-		const float HalfSizeBoxGround = CarStruct.HalfSizeBoxGroundDetection.Z * 1.5f;
+		const float HalfSizeBoxGround = this->CarStruct.DistanceWithTheGround;
 		//this->CarCollision->SetEnableGravity(false);
 		FVector LocationCar = this->GetActorLocation();
 		LocationCar.Z = ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);
@@ -372,13 +382,17 @@ void AMyPawnCar::DetectGround()
 	/*const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,TraceChannel,false,ActorIgnored,
 		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);*/
+	FRotator CarRotation = this->GetActorRotation();
+	CarRotation.Roll *= (this->CarStruct.BoxFollowRotationRoll ? 1 : 0);
+	CarRotation.Yaw *= (this->CarStruct.BoxFollowRotationYaw ? 1 : 0);
+	CarRotation.Pitch *= (this->CarStruct.BoxFollowRotationPitch ? 1 : 0);
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
-		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
+		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
 		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5); 
 	if(!ResultHit)
 	{
 		CarStruct.IsGrounded = false;
-		LastActorHit = nullptr;
+		LastGroundDetected = nullptr;
 		return;
 	}
 	if(!this->CarStruct.IsGrounded)
@@ -386,6 +400,7 @@ void AMyPawnCar::DetectGround()
 		this->CarStruct.IsGrounded = true;
 		this->CarGotGrounded();
 	}
+	this->LastGroundDetected = Result.GetActor();
 	if(!BlockSlope)
 	{
 		FRotator NewRotation;
@@ -393,7 +408,7 @@ void AMyPawnCar::DetectGround()
 		FRotator NewRotationCar = this->GetActorRotation();
 		NewRotationCar.Pitch =  NewRotation.Pitch;
 		NewRotationCar.Roll =  NewRotation.Roll;
-		UE_LOG(LogTemp,Warning,TEXT("%s"),*NewRotation.ToString());
+		//UE_LOG(LogTemp,Warning,TEXT("%s"),*NewRotation.ToString());
 
 		FRotator Test2 = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),NewRotationCar,this->GetWorld()->GetDeltaSeconds(),
 			this->CarStruct.SpeedForSlopeAdjustement);

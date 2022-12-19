@@ -24,10 +24,24 @@ void ALoadCircuit::Tick(float DeltaTime)
 
 }
 
+void ALoadCircuit::LoadMapType_Implementation()
+{
+	MapCircuit[0].CircuitPart[0] = OrderPartCircuit[0];
+	for (int i = 0; i < MapCircuit.Num(); i++)
+	{
+		for (int j = 0; j < MapCircuit[i].CircuitPart.Num(); j++)
+		{
+			MapCircuit[i].CircuitPart[j] = OrderPartCircuit[j];
+		}
+	}
+}
+
+
 void ALoadCircuit::LoadCircuit_Implementation()
 {
 	UE_LOG(LogTemp,Warning,TEXT("Prout"));
 	this->UnLoadCircuit();
+	this->LoadMapType();
 	bool First = false;
 	for (auto Circuit : MapCircuit)
 	{
@@ -39,7 +53,7 @@ void ALoadCircuit::LoadCircuit_Implementation()
 			if(!First)
 			{
 				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
-				this->ArrayPartCircuit.Add(Container);
+				this->PartCircuitGenerated.Add(Container);
 				First = true;
 				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
 			}
@@ -83,23 +97,25 @@ void ALoadCircuit::LoadCircuit_Implementation()
 					break;
 				}
 				Container->SetActorLocation(SpawnPosition);
-				this->ArrayPartCircuit.Add(Container);
+				this->PartCircuitGenerated.Add(Container);
 				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
 			}
 		}
+		this->FirstPartCircuitPosition = this->LastEndPosition;
 	}
+	this->FirstPartCircuitPosition = this->GetActorLocation();
 }
 
 
 void ALoadCircuit::UnLoadCircuit_Implementation()
 {
 	UE_LOG(LogTemp,Warning,TEXT("Prout2"));
-	if(this->ArrayPartCircuit.Num() == 0) return;
-	for (AMyPartCircuit* PartCircuit : this->ArrayPartCircuit)
+	if(this->PartCircuitGenerated.Num() == 0) return;
+	for (AMyPartCircuit* PartCircuit : this->PartCircuitGenerated)
 	{
 		PartCircuit->Destroy();
 	}
-	this->ArrayPartCircuit.Empty();
+	this->PartCircuitGenerated.Empty();
 }
 
 
