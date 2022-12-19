@@ -59,6 +59,7 @@ void AMyPawnCar::Tick(float DeltaTime)
 void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	if(!CodeInputEnable) return;
 	PlayerInputComponent->BindAxis("Forward",this,&AMyPawnCar::ForwardMovement);
 	PlayerInputComponent->BindAxis("Right",this,&AMyPawnCar::RightMovement);
 

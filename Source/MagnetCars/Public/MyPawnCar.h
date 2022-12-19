@@ -237,6 +237,8 @@ public:
 	bool ResetGravityInstant = false;
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	bool Keyboard = false;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+    bool CodeInputEnable = true;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
 	FCar CarStruct;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere)
