@@ -124,11 +124,11 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float DistanceWithTheGround = 200.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector HalfSizeBoxGroundDetection = FVector(200,200,200);
+	FVector HalfSizeBoxGroundDetection = FVector(200,200,300);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector StartBoxGroundDetection = FVector(0,0,100);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector EndBoxGroundDetection = FVector(0,0,200);
+	FVector EndBoxGroundDetection = FVector(0,0,300);
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	bool BoxFollowRotationPitch = false;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -169,103 +169,124 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+	//Notify any physical collision, it will be useful later for behaviour between vehicles collision
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 
-	UFUNCTION(BlueprintCallable)
-	void ForwardMovement(float axisValue);
+private: // Private function
+	// This function is the physical update of the car, every force should be used there to have the smoothness physics possible
 	void PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTime);
+public:
+	// Get the axis for the forward movement (physical movement)
 	UFUNCTION(BlueprintCallable)
-	void RightMovement(float axisValue);
+	void ForwardMovement(float AxisValue);
+	// Get the axis for the rotation movement (local rotation)
 	UFUNCTION(BlueprintCallable)
-	void CarDrift(float value);
+	void RightMovement(float AxisValue);
+	// Function which take care of the lean of the vehicles. A force is going to be add to the vehicles depending on the quantity of lean.
+	// If the vehicles have too much lean, it will start to slow down
+	UFUNCTION(BlueprintCallable)
+	void CarDrift(float Value);
+	// Simulate gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();
+	// Simulate invert gravity behaviour
 	UFUNCTION(BlueprintCallable)
-	void InvertGravity();
+	void InvertGravity() const;
+	// Not finish, it's a special ground which add a boost to the vehicle. During this boost the vehicle can break the max speed
 	UFUNCTION(BlueprintCallable)
 	void BoostPlate(float Boost);
+	// Reset the actual scene (level)
 	UFUNCTION(BlueprintCallable)
 	void ResetScene();
+	// Reset the vehicles to it's start position
 	UFUNCTION(BlueprintCallable)
 	void CarRespawn();
+	// Not finish, it will choose the place where the vehicle should respawn after falling out of the circuit
 	UFUNCTION(BlueprintCallable)
-	void LastPosition(FVector lastPositionReturned, AActor* roadExit);
+	void LastPosition(FVector LastPositionReturned, AActor* RoadExit);
+	// This function get the impact normal of the ground detected, it use it to make the car flying at X high
 	UFUNCTION(BlueprintCallable)
-	void FlyingCar(FVector ImpactPoint);
+	void FlyingCar(FHitResult ImpactPoint);
+	// Detection Ground with raycast
 	UFUNCTION(BlueprintCallable)
 	void DetectGround();
+	// Detection slope, value which will be used to adjust the rotation of the car since it's not on the ground
 	UFUNCTION(BlueprintCallable)
-	FRotator DetectSlope(FVector FloorNormal);
+	FRotator DetectSlope(FVector FloorNormal) const;
+	// Rotate the car with the new rotation created with the DetectSlope
 	UFUNCTION(BlueprintCallable)
 	void RotateCarForSlope(FRotator NewRotation);
+	// Event trigger once the car got grounded, executed once each ground
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarGotGrounded();
+	// Event trigger once the car change gravity
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarReverseGravity();
+	// Event trigger once the car fall on another car, but it's not implemented YET
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarFallOnAnotherCar();
+	// Event trigger once the car collide with another car
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarCollisionWithAnotherCar();
+	// Event trigger once the car collide with another the decor
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarCollisionWithDecor();
+	// Event trigger once when the car start to slow because she leaned too much
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void SlowLeanActivate();
+	// Event trigger once when the car take the boost
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarBoost();
 
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FName CarTag;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FName DecorTag;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FName BoostTag;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float TimeBeforeCarFall = 0.5f;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float MagneticForceTowardGround = 500.f;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float MagneticForceTowardUp = 500.f;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	FVector ResetPosition = FVector::Zero();
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TArray<USceneComponent*> ArrayRaycastHorizontalCarAngle;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TArray<USceneComponent*> ArrayRaycastVerticalCarAngle;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool BlockSlope = true;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool ResetGravityInstant = false;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	bool Keyboard = false;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-    bool CodeInputEnable = true;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
 	FCar CarStruct;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FVector LastCarPositionOnRoad = FVector::Zero();
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	FVector MiddleOfTheRoad;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	float LastZValue = 0;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	class UBoxComponent* CarCollision;
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	class USceneComponent* TemporaryScene;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
-	TEnumAsByte<ETraceTypeQuery> TraceChannel;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
 	UCurveFloat* SpeedCurve;
-	UPROPERTY(BlueprintReadWrite,EditAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
 	UCurveFloat* RotationCurve;
-	UPROPERTY(BlueprintReadOnly,VisibleAnywhere)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	FName CarTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	FName DecorTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	FName BoostTag;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	float TimeBeforeCarFall = 0.5f;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Collision")
+	float MagneticForceTowardGround = 500.f;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Collision")
+	float MagneticForceTowardUp = 500.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	TEnumAsByte<ETraceTypeQuery> TraceChannel;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	TEnumAsByte<ECollisionChannel> CollisionTraceChannel;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Reset")
+	FVector ResetPosition = FVector::Zero();
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Reset")
+	FVector LastCarPositionOnRoad = FVector::Zero();
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Reset")
+	FVector MiddleOfTheRoad;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Bool For Test")
+	bool BlockSlope = true;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Bool For Test")
+	bool ResetGravityInstant = false;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Bool For Test")
+	bool Keyboard = false;
+	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Car Bool For Test")
+    bool CodeInputEnable = true;
+	
+	
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Car Component")
+	class UBoxComponent* CarCollision;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car Component")
+	class USceneComponent* TemporaryScene;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
 
 private:
 	float ContainerTimeBeforeCarFall = 0;
-	bool first = false;
-	FVector Velocity;
 	float ContainerAcceleration;
 	float ContainerForwardAxis;
-	FCalculateCustomPhysics OnCalculateCustomPhysics;
-	//float TestZ = 0;
+	FCalculateCustomPhysics OnCalculateCustomPhysics;// Pour le tick physics
 };
