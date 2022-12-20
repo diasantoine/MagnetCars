@@ -366,8 +366,8 @@ void AMyPawnCar::CarRespawn()
 
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 {
-	this->LastCarPositionOnRoad = lastPositionReturned;
-	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
+	/*this->LastCarPositionOnRoad = lastPositionReturned;
+	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();*/
 }
 
 void AMyPawnCar::DetectGround()
