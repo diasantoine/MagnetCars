@@ -369,8 +369,8 @@ void AMyPawnCar::CarRespawn()
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 // Not in use for the moment but it will be useful when the player fall
 {
-	this->LastCarPositionOnRoad = lastPositionReturned;
-	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
+	/*this->LastCarPositionOnRoad = lastPositionReturned;
+	this->MiddleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();*/
 }
 
 void AMyPawnCar::DetectGround()

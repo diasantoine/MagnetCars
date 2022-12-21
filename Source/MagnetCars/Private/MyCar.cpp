@@ -96,8 +96,8 @@ void AMyCar::CarRespawn()
 
 void AMyCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
-	Super::NotifyActorEndOverlap(OtherActor);
-	LastPosition(componentMovement->GetActorLocation(),OtherActor);
+	/*Super::NotifyActorEndOverlap(OtherActor);
+	LastPosition(componentMovement->GetActorLocation(),OtherActor);*/
 }
 
 
