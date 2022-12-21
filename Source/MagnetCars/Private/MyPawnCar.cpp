@@ -276,10 +276,10 @@ void AMyPawnCar::CarDrift(float value)
 void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 {
 	if(CarCollision == nullptr) return;
-	if(this->CarCollision->ComponentVelocity.Z < 0)
+	if(this->CarCollision->ComponentVelocity.Z < 0 && false)
 	{
-		const FVector Direction = -this->GetActorUpVector();
-		this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForceTowardUp);// It was in case of negative Movement but for the moment it's not useful
+		//const FVector Direction = -this->GetActorUpVector();
+		//this->CarCollision->AddForce(Direction * GetWorld()->GetGravityZ() * MagneticForceTowardUp);// It was in case of negative Movement but for the moment it's not useful
 	}
 	else
 	{

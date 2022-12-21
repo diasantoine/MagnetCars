@@ -38,8 +38,8 @@ void ALoadCircuit::LoadMapType_Implementation()
 
 
 void ALoadCircuit::LoadCircuit_Implementation()
+// Function which generate the map in function of the OrderPartCircuit and the MapCircuit
 {
-	UE_LOG(LogTemp,Warning,TEXT("Prout"));
 	this->UnLoadCircuit();
 	this->LoadMapType();
 	bool First = false;
@@ -109,7 +109,6 @@ void ALoadCircuit::LoadCircuit_Implementation()
 
 void ALoadCircuit::UnLoadCircuit_Implementation()
 {
-	UE_LOG(LogTemp,Warning,TEXT("Prout2"));
 	if(this->PartCircuitGenerated.Num() == 0) return;
 	for (AMyPartCircuit* PartCircuit : this->PartCircuitGenerated)
 	{

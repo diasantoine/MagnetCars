@@ -23,12 +23,15 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Scene used to create the root component
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
 	USceneComponent* NewRootComponent = nullptr;
-	
+
+	// Scene used to get the start of the part of the circuit
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
 	USceneComponent* StartPartCircuit = nullptr;
 
+	// Scene used to get the end of the part of the circuit
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
 	USceneComponent* EndPartCircuit = nullptr;
 };

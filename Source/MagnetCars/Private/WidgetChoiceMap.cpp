@@ -40,6 +40,7 @@ void UWidgetChoiceMap::NativeConstruct()
 
 void UWidgetChoiceMap::MapButtonInitialisation_Implementation()
 {
+	// This switch will update all the buttons at the start in case the player hit creation first
 	switch (this->WhichBasePartCircuit)
 	{
 	case Sand:
@@ -219,6 +220,7 @@ void UWidgetChoiceMap::MapButtonInitialisation_Implementation()
 
 void UWidgetChoiceMap::MapButtonEffect_Implementation(UButton* WhichButton)
 {
+	// This switch will update the button clicked with the color of the new part chosen
 	if(WhichButton == this->MapChoice1)
 	{
 		switch (this->WhichPart1)
@@ -409,6 +411,7 @@ void UWidgetChoiceMap::LaunchGenerationMap_Implementation()
 	this->MapChoice3->SetIsEnabled(false);
 	this->MapChoice4->SetIsEnabled(false);
 	this->MapGeneration->SetIsEnabled(false);
+	// Hide and disable the button
 	this->MapChoice1->SetVisibility(ESlateVisibility::Hidden);
 	this->MapChoice2->SetVisibility(ESlateVisibility::Hidden);
 	this->MapChoice3->SetVisibility(ESlateVisibility::Hidden);
