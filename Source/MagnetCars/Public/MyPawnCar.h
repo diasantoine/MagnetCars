@@ -325,6 +325,10 @@ public:
 	// Temporary scene to make the car rotate
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car Component")
 	class USceneComponent* TemporaryScene;
+	UPROPERTY(VisibleAnywhere, Category = "Car Component")
+	USceneComponent* RaycastPosition = nullptr;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
+	float DistanceRaycast = 200.f;
 	// Show which aactor was hit last for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
