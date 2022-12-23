@@ -226,6 +226,12 @@ public:
 	// Not finish, it's a special ground which add a boost to the vehicle. During this boost the vehicle can break the max speed
 	UFUNCTION(BlueprintCallable)
 	void BoostPlate(float Boost);
+	// Not finish, it's the function which reset the max speed to it's normal state after a boost
+	UFUNCTION(BlueprintCallable)
+	void BoostSpeedBehaviour();
+	// This function could be useful or not to back up the vehicle after a collision to a normal rotation
+	UFUNCTION(BlueprintCallable)
+	void ResetRotationAfterCrash();
 	// Reset the actual scene (level)
 	UFUNCTION(BlueprintCallable)
 	void ResetScene();
