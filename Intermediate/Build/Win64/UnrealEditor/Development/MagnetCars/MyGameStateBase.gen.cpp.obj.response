@@ -1,5 +1,6 @@
 D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars\MyGameStateBase.gen.cpp
 /I .
+/I D:\GithubFichier\MagnetCars\Source\MagnetCars\Private
 /I ..\Intermediate\Build\Win64\UnrealEditor\Inc\Engine
 /I Runtime
 /I ..\Shaders\Shared
@@ -253,6 +254,7 @@ D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars
 /I Developer\AnimationDataController\Public
 /I D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Inc\MagnetCars
 /I D:\GithubFichier\MagnetCars\Source
+/I D:\GithubFichier\MagnetCars\Source\MagnetCars\Public
 /I ThirdParty\mimalloc\include
 /I ThirdParty\LibTiff\Source\Win64
 /I ThirdParty\LibTiff\Source
