@@ -359,8 +359,7 @@ void AMyPawnCar::DetectGround()
 	TArray<AActor*> ActorIgnored;
 	ActorIgnored.Add(this);
 	const FVector StartPosition = this->GetActorLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection: this->CarStruct.StartBoxGroundDetection);
-	//const FVector EndPosition = this->GetActorLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
-	const FVector EndPosition = this->GetActorLocation() - this->GetActorUpVector() * this->CarStruct.EndBoxGroundDetection.Z;
+	const FVector EndPosition = this->GetActorLocation()- (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
 	//const FVector StartPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection : this->CarStruct.StartBoxGroundDetection);
 	//const FVector EndPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
 	/*const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
@@ -372,13 +371,13 @@ void AMyPawnCar::DetectGround()
 	CarRotation.Pitch *= (this->CarStruct.BoxFollowRotationPitch ? 1 : 0);
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
-		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
+		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
-	const FName TraceTag("MyTraceTag");
-	this->GetWorld()->DebugDrawTraceTag = TraceTag;
+	//const FName TraceTag("MyTraceTag");
+	//this->GetWorld()->DebugDrawTraceTag = TraceTag;
 	FCollisionQueryParams CollisionParams;
-	CollisionParams.TraceTag = TraceTag;
+	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
 	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->GetActorLocation(),
 		this->GetActorLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,

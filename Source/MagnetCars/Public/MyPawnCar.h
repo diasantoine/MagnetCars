@@ -178,7 +178,7 @@ struct FCar
 	FVector HalfSizeBoxGroundDetection = FVector(200,200,300);
 	// Start position of the box which is used to detect the ground
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
-	FVector StartBoxGroundDetection = FVector(0,0,100);
+	FVector StartBoxGroundDetection = FVector(0,0,200);
 	// End position of the box which is used to detect the ground
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	FVector EndBoxGroundDetection = FVector(0,0,300);
