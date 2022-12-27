@@ -6,6 +6,7 @@
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/BlueprintFunction.Generated.cpp"
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/BlueprintHighlighter.Generated.cpp"
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/BlueprintReference.Generated.cpp"
+#include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/ConnectionInfo.Generated.cpp"
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/EmptyScriptCallStack.Generated.cpp"
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/IScriptCallStack.Generated.cpp"
 #include "F:/ICAN/SecondAnneMastere/MagnetCars/Plugins/Developer/RiderLink/Source/RiderLink/Public/Model/Library/UE4Library/IScriptCallStack_Unknown.Generated.cpp"

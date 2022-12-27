@@ -51,7 +51,6 @@ void AMyCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 void AMyCar::ForwardMovement(float axisValue)
 {
-	UE_LOG(LogTemp,Warning,TEXT("Text, %f"),axisValue);
 	this->AddMovementInput(GetActorForwardVector() * axisValue);
 }
 
@@ -97,8 +96,8 @@ void AMyCar::CarRespawn()
 
 void AMyCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
-	Super::NotifyActorEndOverlap(OtherActor);
-	LastPosition(componentMovement->GetActorLocation(),OtherActor);
+	/*Super::NotifyActorEndOverlap(OtherActor);
+	LastPosition(componentMovement->GetActorLocation(),OtherActor);*/
 }
 
 
