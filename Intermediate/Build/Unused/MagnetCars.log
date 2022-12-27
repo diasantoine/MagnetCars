@@ -5,227 +5,39 @@
   Creating makefile for MagnetCarsEditor (no existing makefile)
   Parsing headers for MagnetCarsEditor
     Running UnrealHeaderTool "D:\GithubFichier\MagnetCars\MagnetCars.uproject" "D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\MagnetCarsEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\peron\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
-  Reflection code generated for MagnetCarsEditor in 54,7916657 seconds
+  Reflection code generated for MagnetCarsEditor in 83,1876712 seconds
   Building MagnetCarsEditor...
   Using Visual Studio 2022 14.34.31933 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.19041.0 SDK (C:\Program Files (x86)\Windows Kits\10).
   Determining max actions to execute in parallel (4 physical cores, 8 logical cores)
     Executing up to 4 processes, one per physical core
-    Requested 1,5 GB free memory per action, 967,96 MB available: limiting max parallel actions to 1
-  Building 193 actions with 1 process...
-  [1/193] Compile PCH.FMODStudio.cpp
-  [2/193] Compile SharedPCH.Engine.ShadowErrors.cpp
-  [3/193] Compile PCH.FMODStudioEditor.cpp
-  [4/193] Resource Default.rc2
-  [5/193] Compile IScheduler.cpp
-  [6/193] Compile RName.cpp
-  [7/193] Compile RdBindableBase.cpp
-  [8/193] Compile RdExtBase.cpp
-  [9/193] Compile ExtWire.cpp
-  [10/193] Compile SerializationCtx.cpp
-  [11/193] Compile RD.cpp
-  [12/193] Compile WireBase.cpp
-  [13/193] Compile RdAny.cpp
-  [14/193] Compile IUnknownInstance.cpp
-  [15/193] Compile IRdWireable.cpp
-  [16/193] Compile thirdparty.cpp
-  [17/193] Compile ISerializersOwner.cpp
-  [18/193] Compile stdout_sinks.cpp
-  [19/193] Compile Polymorphic.cpp
-  [20/193] Compile IProtocol.cpp
-  [21/193] Compile Serializers.cpp
-  [22/193] Compile InternRoot.cpp
-  [23/193] Compile RdReactiveBase.cpp
-  [24/193] Compile SequentialLifetimes.cpp
-  [25/193] Compile async.cpp
-  [26/193] Compile countdownlatch.cpp
-  [27/193] Compile SimpleSocket.cpp
-  [28/193] Compile PassiveSocket.cpp
-  [29/193] Compile ActiveSocket.cpp
-  [30/193] Compile RdTextBuffer.cpp
-  [31/193] Compile WireUtil.cpp
-  [32/193] Compile RdId.cpp
-  [33/193] Compile SocketWire.cpp
-  [34/193] Compile PumpScheduler.cpp
-  [35/193] Compile Identities.cpp
-  [36/193] Compile PkgInputStream.cpp
-  [37/193] Compile Protocol.cpp
-  [38/193] Compile ByteBufferAsyncProcessor.cpp
-  [39/193] Compile Buffer.cpp
-  [40/193] Compile MessageBroker.cpp
-  [41/193] Compile InternScheduler.cpp
-  [42/193] Compile hashing.cpp
-  [43/193] Compile spdlog.cpp
-  [44/193] Compile thread_util.cpp
-  [45/193] Compile SignalCookie.cpp
-  [46/193] Compile DefaultAbstractDeclaration.cpp
-  [47/193] Compile fmt.cpp
-  [48/193] Compile Lifetime.cpp
-  [49/193] Compile file_sinks.cpp
-  [50/193] Compile SingleThreadScheduler.cpp
-  [51/193] Compile SimpleScheduler.cpp
-  [52/193] Compile SynchronousScheduler.cpp
-  [53/193] Compile DateTime.cpp
-  [54/193] Compile SingleThreadSchedulerBase.cpp
-  [55/193] Compile LifetimeDefinition.cpp
-  [56/193] Compile LifetimeImpl.cpp
-  [57/193] Compile cfg.cpp
-  [58/193] Compile ISerializable.cpp
-  [59/193] Compile color_sinks.cpp
-  [60/193] Resource Default.rc2
-  [61/193] Compile Module.RiderLink.cpp
-  [62/193] Compile FMODAudioComponent.cpp
-  [63/193] Compile FMODSnapshot.cpp
-  [64/193] Compile FMODStudio.init.gen.cpp
-  [65/193] Compile FMODEventParameterTrack.cpp
-  [66/193] Compile FMODVCA.gen.cpp
-  [67/193] Compile FMODAudioComponent.gen.cpp
-  [68/193] Resource Default.rc2
-  [69/193] Compile FMODSnapshotReverb.cpp
-  [70/193] Compile FMODAmbientSound.gen.cpp
-  [71/193] Compile FMODAssetLookup.gen.cpp
-  [72/193] Compile FMODAsset.gen.cpp
-  [73/193] Compile Module.AdvancedSessions.cpp
-  [74/193] Compile FMODVCA.cpp
-  [75/193] Compile FMODAnimNotifyPlay.gen.cpp
-  [76/193] Resource Default.rc2
-  [77/193] Compile FMODEventControlTrack.cpp
-  [78/193] Compile FMODEventControlSectionTemplate.cpp
-  [79/193] Compile FMODBankLookup.cpp
-  [80/193] Compile Module.AdvancedSessions.gen.2_of_3.cpp
-  [81/193] Compile FMODStudioModule.cpp
-  [82/193] Compile FMODEventControlSection.cpp
-  [83/193] Compile Module.AdvancedSessions.gen.3_of_3.cpp
-  [84/193] Compile FMODSnapshotReverb.gen.cpp
-  [85/193] Compile FMODBank.cpp
-  [86/193] Compile FMODBank.gen.cpp
-  [87/193] Compile FMODEventControlSection.gen.cpp
-  [88/193] Compile FMODPort.gen.cpp
-  [89/193] Compile FMODListener.cpp
-  [90/193] Compile FMODEventControlTrack.gen.cpp
-  [91/193] Compile FMODBlueprintStatics.cpp
-  [92/193] Compile FMODEventParameterTrack.gen.cpp
-  [93/193] Compile FMODAsset.cpp
-  [94/193] Compile FMODBlueprintStatics.gen.cpp
-  [95/193] Compile FMODEvent.gen.cpp
-  [96/193] Compile FMODAnimNotifyPlay.cpp
-  [97/193] Compile FMODFileCallbacks.cpp
-  [98/193] Compile FMODBus.gen.cpp
-  [99/193] Compile FMODEventControlSectionTemplate.gen.cpp
-  [100/193] Compile FMODSettings.gen.cpp
-  [101/193] Compile FMODBankLookup.gen.cpp
-  [102/193] Compile FMODSettings.cpp
-  [103/193] Compile FMODAmbientSound.cpp
-  [104/193] Resource Default.rc2
-  [105/193] Compile FMODEventParameterSectionTemplate.gen.cpp
-  [106/193] Compile FMODBus.cpp
-  [107/193] Compile FMODAssetLookup.cpp
-  [108/193] Compile FMODEvent.cpp
-  [109/193] Compile FMODPort.cpp
-  [110/193] Compile FMODSnapshot.gen.cpp
-  [111/193] Compile FMODAssetTable.cpp
-  [112/193] Compile Module.RiderBlueprint.cpp
-  [113/193] Compile MyGroundBoostPlate.gen.cpp
-  [114/193] Compile FMODStudioEditorModule.cpp
-  [115/193] Compile MyPartCircuit.gen.cpp
-  [116/193] Compile GMGravityCars.cpp
-  [117/193] Compile MyCar.gen.cpp
-  [118/193] Resource Default.rc2
-  [119/193] Compile MyGameStateBase.gen.cpp
-  [120/193] Compile MapChoicePlayer.gen.cpp
-  [121/193] Compile FMODStudioEditor.init.gen.cpp
-  [122/193] Compile SFMODEventEditorPanel.cpp
-  [123/193] Compile MyCarController.gen.cpp
-  [124/193] Resource Default.rc2
-  [125/193] Compile FMODGenerateAssetsCommandlet.gen.cpp
-  [126/193] Compile LoadCircuit.cpp
-  [127/193] Compile WidgetChoiceMap.gen.cpp
-  [128/193] Compile MyCameraManager.gen.cpp
-  [129/193] Compile FMODAmbientSoundActorFactory.gen.cpp
-  [130/193] Compile FMODStudioStyle.cpp
-  [131/193] Compile MyCameraManager.cpp
-  [132/193] Compile FMODEventEditor.cpp
-  [133/193] Resource Default.rc2
-  [134/193] Compile MagnetCars.init.gen.cpp
-  [135/193] Compile MyPawnCar.cpp
-  [136/193] Resource Default.rc2
-  [137/193] Compile Module.AdvancedSteamSessions.cpp
-  [138/193] Compile FMODAssetBuilder.cpp
-  [139/193] Compile Module.AdvancedSteamSessions.gen.cpp
-  [140/193] Compile MyPartCircuit.cpp
-  [141/193] Compile FMODAmbientSoundActorFactory.cpp
-  [142/193] Compile FMODEventControlTrackEditor.cpp
-  [143/193] Compile MapChoicePlayer.cpp
-  [144/193] Compile MyGroundBoostPlate.cpp
-  [145/193] Resource Default.rc2
-  [146/193] Compile AssetTypeActions_FMODEvent.cpp
-  [147/193] Compile MyCarController.cpp
-  [148/193] Compile FMODEventParameterTrackEditor.cpp
-  [149/193] Compile MyCar.cpp
-  [150/193] Compile FMODParameterSection.cpp
-  [151/193] Compile PlayerControllerMagnetCar.cpp
-  [152/193] Compile MyPawnCar.gen.cpp
-  [153/193] Compile FMODAudioComponentDetails.cpp
-  [154/193] Compile FMODChannelEditors.cpp
-  [155/193] Compile LoadCircuit.gen.cpp
-  [156/193] Compile FMODGenerateAssetsCommandlet.cpp
-  [157/193] Compile GMGravityCars.gen.cpp
-  [158/193] Resource Default.rc2
-  [159/193] Compile MyGameStateBase.cpp
-  [160/193] Compile FMODBankUpdateNotifier.cpp
-  [161/193] Compile MagnetCars.cpp
-  [162/193] Compile FMODAudioComponentVisualizer.cpp
-  [163/193] Compile PlayerControllerMagnetCar.gen.cpp
-  [164/193] Compile WidgetChoiceMap.cpp
-  [165/193] Compile RiderGameControl.cpp
-  [166/193] Compile RiderShaderInfo.cpp
-  [167/193] Compile Module.RiderLogging.cpp
-  [168/193] Link UnrealEditor-RD.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\UnrealEditor-RD.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\UnrealEditor-RD.suppressed.exp
-  [169/193] Link UnrealEditor-MagnetCars.lib
+    Requested 1,5 GB free memory per action, 2,05 GB available: limiting max parallel actions to 1
+  Building 21 actions with 1 process...
+  [1/21] Compile SharedPCH.Engine.ShadowErrors.cpp
+  [2/21] Compile Module.AdvancedSessions.gen.1_of_3.cpp
+  [3/21] Compile Module.AdvancedSessions.gen.3_of_3.cpp
+  [4/21] Compile Module.AdvancedSessions.gen.2_of_3.cpp
+  [5/21] Resource Default.rc2
+  [6/21] Compile Module.AdvancedSteamSessions.cpp
+  [7/21] Compile MagnetCars.init.gen.cpp
+  [8/21] Compile MagnetCars.cpp
+  [9/21] Compile Module.AdvancedSteamSessions.gen.cpp
+  [10/21] Compile MyGameStateBase.gen.cpp
+  [11/21] Compile MyGameStateBase.cpp
+  [12/21] Resource Default.rc2
+  [13/21] Resource Default.rc2
+  [14/21] Link UnrealEditor-MagnetCars.lib
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.exp
-  [170/193] Link UnrealEditor-AdvancedSteamSessions.lib
+  [15/21] Link UnrealEditor-AdvancedSteamSessions.lib
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.exp
-  [171/193] Link UnrealEditor-RiderGameControl.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.exp
-  [172/193] Link UnrealEditor-RiderLogging.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.exp
-  [173/193] Link UnrealEditor-RiderShaderInfo.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.exp
-  [174/193] Compile FMODEventParameterSectionTemplate.cpp
-  [175/193] Link UnrealEditor-FMODStudio.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudio\UnrealEditor-FMODStudio.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudio\UnrealEditor-FMODStudio.suppressed.exp
-  [176/193] Compile Module.AdvancedSessions.gen.1_of_3.cpp
-  [177/193] Link UnrealEditor-AdvancedSessions.dll
+  [16/21] Compile Module.AdvancedSessions.cpp
+  [17/21] Link UnrealEditor-AdvancedSessions.dll
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.exp
-  [178/193] Compile FMODSettingsCustomization.cpp
-  [179/193] Link UnrealEditor-FMODStudioEditor.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudioEditor\UnrealEditor-FMODStudioEditor.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudioEditor\UnrealEditor-FMODStudioEditor.exp
-  [180/193] Link UnrealEditor-RiderLink.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.exp
-  [181/193] Link UnrealEditor-RiderBlueprint.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.exp
-  [182/193] Link UnrealEditor-RiderShaderInfo.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.suppressed.exp
-  [183/193] Link UnrealEditor-AdvancedSessions.lib
+  [18/21] Link UnrealEditor-AdvancedSessions.lib
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.exp
-  [184/193] Link UnrealEditor-AdvancedSteamSessions.dll
+  [19/21] Link UnrealEditor-AdvancedSteamSessions.dll
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.exp
-  [185/193] Link UnrealEditor-MagnetCars.dll
+  [20/21] Link UnrealEditor-MagnetCars.dll
      Création de la bibliothèque D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.exp
-  [186/193] Link UnrealEditor-FMODStudio.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudio\UnrealEditor-FMODStudio.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudio\UnrealEditor-FMODStudio.exp
-  [187/193] Link UnrealEditor-FMODStudioEditor.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudioEditor\UnrealEditor-FMODStudioEditor.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\FMODStudio\Intermediate\Build\Win64\UnrealEditor\Development\FMODStudioEditor\UnrealEditor-FMODStudioEditor.suppressed.exp
-  [188/193] Link UnrealEditor-RD.lib
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\UnrealEditor-RD.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RD\UnrealEditor-RD.exp
-  [189/193] Link UnrealEditor-RiderLink.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.suppressed.exp
-  [190/193] Link UnrealEditor-RiderBlueprint.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.suppressed.exp
-  [191/193] Link UnrealEditor-RiderGameControl.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.suppressed.exp
-  [192/193] Link UnrealEditor-RiderLogging.dll
-     Création de la bibliothèque D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.suppressed.lib et de l'objet D:\GithubFichier\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.suppressed.exp
-  [193/193] WriteMetadata MagnetCarsEditor.target
-  Total time in Parallel executor: 6859,95 seconds
-  Total execution time: 6963,69 seconds
+  [21/21] WriteMetadata MagnetCarsEditor.target
+  Total time in Parallel executor: 223,27 seconds
+  Total execution time: 359,66 seconds
