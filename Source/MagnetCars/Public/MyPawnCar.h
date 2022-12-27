@@ -58,6 +58,9 @@ struct FCar
 	// Bool which show if the car is under a boost
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsBoosted = true;
+	// Bool which show if the car is under a slow
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool IsSlowed = true;
 	// The time before the respawn of the player
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
@@ -71,18 +74,28 @@ struct FCar
 	// The acceleration added to the player when going forward or backward not on ground
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationNotGrounded = 20.f;
+	// Boost After Falling On Another Car
+	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category = "Parameter Boost")
+	float PowerBoost = 5000.f;
 	// The maximum speed on ground
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float MaxSpeed = 1000.f;
 	// The maximum speed with boost
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float MaxSpeedWithBoost = 10000.f;
+	// The maximum speed after another car slowed it
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float MaxSpeedAfterSlowFromAnotherCar = 1000.f;
+	// The speed used by the MaxSpeed to reset to his normal state after a slow
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float SpeedResetMaxSpeedAfterSlow = 1000.f;
 	// The actual maximum speed after a boost going back to the normal MaxSpeed
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
-	float ActualMaxSpeedUnderBoost = 1000.f;
-	// The speed used by the MaxSpeed to reset to his normal state
+	float ActualMaxSpeedUnderEffect = 1000.f;
+	// The actual maximum speed after a slow going back to the normal MaxSpeed
+	// The speed used by the MaxSpeed to reset to his normal state after a boost
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
-	float SpeedResetMaxSpeed = 1000.f;
+	float SpeedResetMaxSpeedAfterBoost = 1000.f;
 	// The acceleration added to the player by the lean grounded
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLean = 20.f;
@@ -202,6 +215,10 @@ public:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	//Notify any physical collision, it will be useful later for behaviour between vehicles collision
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
+	//Notify any Overlap on the Up Collision
+	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	//Notify end Overlap on the Up Collision
+	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
 
 private: // Private function
 	// This function is the physical update of the car, every force should be used there to have the smoothness physics possible
@@ -223,12 +240,18 @@ public:
 	// Simulate invert gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity() const;
-	// Not finish, it's a special ground which add a boost to the vehicle. During this boost the vehicle can break the max speed
+	// Behaviour after a car fall on the player
 	UFUNCTION(BlueprintCallable)
-	void BoostPlate(float Boost);
-	// Not finish, it's the function which reset the max speed to it's normal state after a boost
+	void CarFellOnMe(AMyPawnCar* CarHitting);
+	// it's a special ground which add a boost to the vehicle. During this boost the vehicle can break the max speed
+	UFUNCTION(BlueprintCallable)
+	void BoostPlate(float Boost, bool Forward);
+	// It's the function which reset the max speed to it's normal state after a boost
 	UFUNCTION(BlueprintCallable)
 	void BoostSpeedBehaviour();
+	// It's the function which reset the max speed to it's normal state after a slow
+	UFUNCTION(BlueprintCallable)
+	void SlowSpeedBehaviour();
 	// This function could be useful or not to back up the vehicle after a collision to a normal rotation
 	UFUNCTION(BlueprintCallable)
 	void ResetRotationAfterCrash();
@@ -259,9 +282,12 @@ public:
 	// Event trigger once the car change gravity
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarReverseGravity();
-	// Event trigger once the car fall on another car, but it's not implemented YET
+	// Event trigger once the car fall on another car
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
-	void CarFallOnAnotherCar();
+	void CarFallOnAnotherCar(AMyPawnCar* CarHit);
+	// Event trigger once the car have another car falling on it
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void CarFellOnMeEvent();
 	// Event trigger once the car collide with another car
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarCollisionWithAnotherCar();
@@ -328,6 +354,9 @@ public:
 	// Car collider
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Car Component")
 	class UBoxComponent* CarCollision;
+	// Car collider Up
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Car Component")
+	class UBoxComponent* CarCollisionUp;
 	// Temporary scene to make the car rotate
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Car Component")
 	class USceneComponent* TemporaryScene;

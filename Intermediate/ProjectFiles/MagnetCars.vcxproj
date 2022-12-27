@@ -706,6 +706,11 @@
       <ForcedIncludeFiles>$(SolutionDir)Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Definitions.h</ForcedIncludeFiles>
     </ClCompile>
     <ClInclude Include="..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library\UE4Library\BlueprintReference.Generated.h"/>
+    <ClCompile Include="..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library\UE4Library\ConnectionInfo.Generated.cpp">
+      <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);..\..\Plugins\Developer\RiderLink\Source\RiderLink\Private;..\..\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Inc\RiderLink;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\RdEditorProtocol;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public;D:\EpicGamesGameFolder2\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;</AdditionalIncludeDirectories>
+      <ForcedIncludeFiles>$(SolutionDir)Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Definitions.h</ForcedIncludeFiles>
+    </ClCompile>
+    <ClInclude Include="..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library\UE4Library\ConnectionInfo.Generated.h"/>
     <ClCompile Include="..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library\UE4Library\EmptyScriptCallStack.Generated.cpp">
       <AdditionalIncludeDirectories>$(NMakeIncludeSearchPath);..\..\Plugins\Developer\RiderLink\Source\RiderLink\Private;..\..\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Inc\RiderLink;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\Library;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public\Model\RdEditorProtocol;..\..\Plugins\Developer\RiderLink\Source\RiderLink\Public;D:\EpicGamesGameFolder2\UE_5.0\Engine\Source\ThirdParty\mimalloc\include;</AdditionalIncludeDirectories>
       <ForcedIncludeFiles>$(SolutionDir)Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\Definitions.h</ForcedIncludeFiles>

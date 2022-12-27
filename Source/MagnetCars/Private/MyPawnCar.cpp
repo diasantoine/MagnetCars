@@ -14,9 +14,11 @@ AMyPawnCar::AMyPawnCar()
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 	this->CarCollision = CreateDefaultSubobject<UBoxComponent>(TEXT("carCollision")); // Create the collision of the car, which will be the root component
+	this->CarCollisionUp = CreateDefaultSubobject<UBoxComponent>(TEXT("carCollisionUp"));
 	this->RaycastPosition = this->CreateDefaultSubobject<USceneComponent>("RaycastPosition");
 	this->SetRootComponent(CarCollision);
 	this->RaycastPosition->SetupAttachment(this->CarCollision);
+	this->CarCollisionUp->SetupAttachment(this->CarCollision);
 	this->CarCollision->SetEnableGravity(false);// Use my gravity
 }
 
@@ -48,7 +50,7 @@ void AMyPawnCar::Tick(float DeltaTime)
 		FVector MyVelocity = this->CarCollision->GetPhysicsLinearVelocity();
 		if(this->CarStruct.IsBoosted)
 		{
-			MyVelocity.X = FMath::Clamp(MyVelocity.X,-this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.ActualMaxSpeedUnderBoost);
+			MyVelocity.X = FMath::Clamp(MyVelocity.X,-this->CarStruct.ActualMaxSpeedUnderEffect,this->CarStruct.ActualMaxSpeedUnderEffect);
 		}
 		else
 		{
@@ -98,8 +100,9 @@ void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTim
 // The physical ticks
 {
 	if(this->CarCollision == nullptr)return;
-	DetectGround();
+	this->DetectGround();
 	this->BoostSpeedBehaviour();
+	this->SlowSpeedBehaviour();
 	if(CarStruct.IsGrounded)
 	{
 		this->CarCollision->SetLinearDamping(CarStruct.GroundFriction);
@@ -121,7 +124,8 @@ void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTim
 	}
 	
 	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
-	ContainerForwardAxis *= this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted ? this->CarStruct.ActualMaxSpeedUnderBoost : this->CarStruct.MaxSpeed));
+	ContainerForwardAxis *= this->SpeedCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+		? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
 	// The curve is there to limit the speed of the car, by lowering the acceleration t'ill 0
 	if(this->LastGroundDetected != nullptr && false)// Being Test
 	{
@@ -146,15 +150,32 @@ void AMyPawnCar::BoostSpeedBehaviour()
 {
 	if(this->CarStruct.IsBoosted)
 	{
-		if(this->CarStruct.ActualMaxSpeedUnderBoost <= this->CarStruct.MaxSpeed)
+		if(this->CarStruct.ActualMaxSpeedUnderEffect <= this->CarStruct.MaxSpeed)
 		{
 			this->CarStruct.IsBoosted = false;
-			this->CarStruct.ActualMaxSpeedUnderBoost = this->CarStruct.MaxSpeed;
+			this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeed;
 		}
 		else
 		{
-			this->CarStruct.ActualMaxSpeedUnderBoost = UKismetMathLibrary::FInterpTo_Constant(this->CarStruct.ActualMaxSpeedUnderBoost,this->CarStruct.MaxSpeed,this->GetWorld()->GetDeltaSeconds(),
-				this->CarStruct.SpeedResetMaxSpeed);
+			this->CarStruct.ActualMaxSpeedUnderEffect = UKismetMathLibrary::FInterpTo_Constant(this->CarStruct.ActualMaxSpeedUnderEffect,this->CarStruct.MaxSpeed,this->GetWorld()->GetDeltaSeconds(),
+				this->CarStruct.SpeedResetMaxSpeedAfterBoost);
+		}
+	}
+}
+
+void AMyPawnCar::SlowSpeedBehaviour()
+{
+	if(this->CarStruct.IsSlowed)
+	{
+		if(this->CarStruct.ActualMaxSpeedUnderEffect <= this->CarStruct.MaxSpeed)
+		{
+			this->CarStruct.IsSlowed = false;
+			this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeed;
+		}
+		else
+		{
+			this->CarStruct.ActualMaxSpeedUnderEffect = UKismetMathLibrary::FInterpTo_Constant(this->CarStruct.ActualMaxSpeedUnderEffect,this->CarStruct.MaxSpeed,this->GetWorld()->GetDeltaSeconds(),
+				this->CarStruct.SpeedResetMaxSpeedAfterSlow);
 		}
 	}
 }
@@ -165,16 +186,25 @@ void AMyPawnCar::BoostSpeedBehaviour()
 void AMyPawnCar::RightMovement(const float AxisValue)
 {
 	if(CarCollision == nullptr)return;
+	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
 	/*this->CarCollision->GetBodyInstance()->bLockZRotation = false;
 	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);*/
+	float AmountRotation = 0;
 	if(CarStruct.IsGrounded)
 	{
-		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * AxisValue,0));
+		AmountRotation = CarStruct.AmountRotationCar * AxisValue;
+		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+			? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
+		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * AxisValue,0));
 	}
 	else
 	{
-		this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * AxisValue,0));
+		AmountRotation = CarStruct.AmountRotationCarNotGrounded * AxisValue;
+		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+	? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
+		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * AxisValue,0));
 	}
+	this->AddActorLocalRotation(FRotator(0,AmountRotation,0));
 	/*this->CarCollision->GetBodyInstance()->bLockZRotation = true;
 	this->CarCollision->GetBodyInstance()->SetDOFLock(EDOFMode::Default);*/
 }
@@ -275,18 +305,25 @@ void AMyPawnCar::InvertGravity() const
 		* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));// Invert Gravity
 }
 
-void AMyPawnCar::BoostPlate(const float Boost)
+void AMyPawnCar::BoostPlate(const float Boost, bool Forward)
 // Boost Plate still in progress
 {
 	if(this->CarCollision == nullptr)return;
-	this->CarStruct.ActualMaxSpeedUnderBoost = this->CarStruct.MaxSpeedWithBoost;
+	this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeedWithBoost;
 	this->CarStruct.IsBoosted = true;
 	this->CarBoost();
-	this->CarCollision->AddForce(GetActorForwardVector() * Boost * this->CarCollision->GetMass());
+	if(Forward)
+	{
+		this->CarCollision->AddForce(this->GetActorForwardVector() * Boost * this->CarCollision->GetMass());
+	}
+	else
+	{
+		this->CarCollision->AddForce(-this->GetActorForwardVector() * Boost * this->CarCollision->GetMass());
+	}
 	FVector VelocityCar = this->CarCollision->GetComponentVelocity();
-	VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
-	VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
-	VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.ActualMaxSpeedUnderBoost,CarStruct.ActualMaxSpeedUnderBoost);
+	VelocityCar.X = FMath::Clamp(VelocityCar.X,-CarStruct.ActualMaxSpeedUnderEffect,CarStruct.ActualMaxSpeedUnderEffect);
+	VelocityCar.Y = FMath::Clamp(VelocityCar.Y,-CarStruct.ActualMaxSpeedUnderEffect,CarStruct.ActualMaxSpeedUnderEffect);
+	VelocityCar.Z = FMath::Clamp(VelocityCar.Z,-CarStruct.ActualMaxSpeedUnderEffect,CarStruct.ActualMaxSpeedUnderEffect);
 	this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 }
 
@@ -322,7 +359,8 @@ void AMyPawnCar::DetectGround()
 	TArray<AActor*> ActorIgnored;
 	ActorIgnored.Add(this);
 	const FVector StartPosition = this->GetActorLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection: this->CarStruct.StartBoxGroundDetection);
-	const FVector EndPosition = this->GetActorLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
+	//const FVector EndPosition = this->GetActorLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
+	const FVector EndPosition = this->GetActorLocation() - this->GetActorUpVector() * this->CarStruct.EndBoxGroundDetection.Z;
 	//const FVector StartPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.StartBoxGroundDetection : this->CarStruct.StartBoxGroundDetection);
 	//const FVector EndPosition = this->CarCollision->GetComponentLocation() - (this->CarStruct.IsOnReverseGravity ? -1 * this->CarStruct.EndBoxGroundDetection : this->CarStruct.EndBoxGroundDetection);
 	/*const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
@@ -333,26 +371,19 @@ void AMyPawnCar::DetectGround()
 	CarRotation.Yaw *= (this->CarStruct.BoxFollowRotationYaw ? 1 : 0);
 	CarRotation.Pitch *= (this->CarStruct.BoxFollowRotationPitch ? 1 : 0);
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
-	/*const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
-		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);*/
+	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
+		CarStruct.HalfSizeBoxGroundDetection,FRotator::ZeroRotator,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
+		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
-	FHitResult ResultHit3;
 	const FName TraceTag("MyTraceTag");
 	this->GetWorld()->DebugDrawTraceTag = TraceTag;
-	FCollisionQueryParams CollisionParams2;
-	CollisionParams2.TraceTag = TraceTag;
-	CollisionParams2.AddIgnoredActor(this);
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
 	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->GetActorLocation(),
 		this->GetActorLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
 		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
-	this->GetWorld()->LineTraceSingleByChannel(ResultHit3 ,this->GetActorLocation(),
-	this->GetActorLocation() + this->GetActorForwardVector() * DistanceRaycast * 10,ECC_Visibility,
-	CollisionParams2,FCollisionResponseParams::DefaultResponseParam);
-	if(ResultHit2.GetActor() == nullptr)//!ResultHit)// Doesn't detect ground
+	if(/*ResultHit2.GetActor() == nullptr)*/!ResultHit)// Doesn't detect ground
 	{
 		CarStruct.IsGrounded = false;
 		LastGroundDetected = nullptr;
@@ -363,15 +394,15 @@ void AMyPawnCar::DetectGround()
 		this->CarStruct.IsGrounded = true;
 		this->CarGotGrounded();
 	}
-	this->LastGroundDetected = ResultHit2.GetActor();
+	this->LastGroundDetected = Result.GetActor();
 	if(!BlockSlope)// This is where i adjust the rotation of the car with the slope of the ground
 	{
 		/*FRotator SlopeRotation;
 		SlopeRotation = DetectSlope(Result.ImpactNormal);
 		FRotator NewRotationCar = this->GetActorRotation();
 		NewRotationCar.Pitch =  SlopeRotation.Pitch;
-		NewRotationCar.Roll =  SlopeRotation.Roll;*/
-		//NewRotationCar.Yaw =  SlopeRotation.Yaw;
+		NewRotationCar.Roll =  SlopeRotation.Roll;
+		//NewRotationCar.Yaw =  SlopeRotation.Yaw;*/
 		FRotator NewRotationCar2 = this->GetActorRotation();
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
@@ -380,7 +411,6 @@ void AMyPawnCar::DetectGround()
 			//UE_LOG(LogTemp,Warning,TEXT("Position,%s"),*ResultHit2.GetActor()->GetName());
 			NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
 			NewRotationCar2.Roll =  SlopeRotation2.Roll;
-			UE_LOG(LogTemp,Warning,TEXT("Rotation,%s"),*NewRotationCar2.ToString());
 		}
 		if(true)// Trying a new raycast to adjust better my car rotation, in progress and disable so you can play "normally"
 		{
@@ -397,12 +427,12 @@ void AMyPawnCar::DetectGround()
 	}
 	if(ResultHit2.GetActor() != nullptr)//Result.GetActor() == nullptr) return;// If the ground detect something which isn't an actor, it would be dangerous go further. The code would crash or be garbage since it need an actor
 	FlyingCar(ResultHit2);// Update the flying car position
-	/*if(Result.GetActor()->ActorHasTag(this->BoostTag) && !this->CarStruct.IsBoosted && false)// Boost Zone but still in progress
+	if(Result.GetActor()->ActorHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
 	{
 		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Result.GetActor());
 		if(GroundBoostPlate == nullptr) return;
-		this->BoostPlate(GroundBoostPlate->PowerBoost);
-	}*/
+		this->BoostPlate(GroundBoostPlate->PowerBoost,true);
+	}
 }
 
 FRotator AMyPawnCar::DetectSlope(const FVector FloorNormal) const
@@ -444,10 +474,28 @@ void AMyPawnCar::SlowLeanActivate_Implementation()
 	
 }
 
-void AMyPawnCar::CarFallOnAnotherCar_Implementation()
+void AMyPawnCar::CarFallOnAnotherCar_Implementation(AMyPawnCar* CarHit)
+{
+	if(CarHit == nullptr) return;
+	
+}
+
+void AMyPawnCar::CarFellOnMe(AMyPawnCar* CarHitting)
+{
+	if(this->CarCollision == nullptr)return;
+	if(CarHitting == nullptr) return;
+	this->CarFellOnMeEvent();
+	this->CarStruct.IsSlowed = true;
+	this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeedAfterSlowFromAnotherCar;
+	if(this->CarStruct.IsBoosted) this->CarStruct.IsBoosted = false;
+}
+
+void AMyPawnCar::CarFellOnMeEvent_Implementation()
 {
 	
 }
+
+
 
 void AMyPawnCar::CarCollisionWithDecor_Implementation()
 {
@@ -477,7 +525,6 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 {
 	if(Other == nullptr)return;
 	if(Other == this)return;
-	UE_LOG(LogTemp,Warning,TEXT("%s"),*Other->GetName());
 	if(Other->ActorHasTag(this->DecorTag))// Test the tag of the collider to choose what response it should give
 	{
 		this->CarCollisionWithDecor();
@@ -486,4 +533,31 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 		this->CarCollisionWithAnotherCar();
 	}
 }
+
+void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
+{
+	if(OtherActor == nullptr)return;
+	if(OtherActor->ActorHasTag(this->CarTag))
+	{
+		AMyPawnCar* CarHit = Cast<AMyPawnCar>(OtherActor);
+		if(CarHit == nullptr) return;
+		this->CarFellOnMe(CarHit);
+		//const float Angle = UKismetMathLibrary::DegAcos(FVector::DotProduct(this->GetActorLocation().GetSafeNormal(),OtherActor->GetActorLocation().GetSafeNormal()));
+		const float Angle = FVector::DotProduct(CarHit->GetActorForwardVector(),(this->GetActorLocation() - CarHit->GetActorLocation()).GetSafeNormal());
+		if(Angle < 0.f)
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,true);
+		}
+		else
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,false);
+		}
+	}
+}
+
+void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
+{
+}
+
+
 
