@@ -2,12 +2,12 @@
 	"Targets": [
 		{
 			"Name": "MagnetCars",
-			"Path": "F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars.Target.cs",
+			"Path": "D:\\sarah\\Documents\\Project\\MyProject\\Source\\MagnetCars.Target.cs",
 			"Type": "Game"
 		},
 		{
 			"Name": "MagnetCarsEditor",
-			"Path": "F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs",
+			"Path": "D:\\sarah\\Documents\\Project\\MyProject\\Source\\MagnetCarsEditor.Target.cs",
 			"Type": "Editor"
 		}
 	]

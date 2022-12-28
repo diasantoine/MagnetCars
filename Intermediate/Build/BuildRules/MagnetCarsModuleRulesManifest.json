@@ -1,16 +1,16 @@
 {
 	"SourceFiles": [
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprint\\RiderBlueprint.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControl\\RiderGameControl.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLogging\\RiderLogging.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderShaderInfo\\RiderShaderInfo.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars.Target.cs",
-		"F:\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
+		"D:\\sarah\\Documents\\Project\\MyProject\\Source\\MagnetCars\\MagnetCars.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprint\\RiderBlueprint.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControl\\RiderGameControl.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RiderLogging\\RiderLogging.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\Developer\\RiderLink\\Source\\RiderShaderInfo\\RiderShaderInfo.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Source\\MagnetCars.Target.cs",
+		"D:\\sarah\\Documents\\Project\\MyProject\\Source\\MagnetCarsEditor.Target.cs"
 	],
 	"EngineVersion": "5.0.3"
 }
