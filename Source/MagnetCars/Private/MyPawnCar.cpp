@@ -479,12 +479,24 @@ void AMyPawnCar::ResetScene()
 void AMyPawnCar::CarRespawn()
 // Replace the player at the start
 {
+	this->CarCollision->GetBodyInstance()->ClearForces();
 	this->CarCollision->ComponentVelocity = FVector::Zero();
+	this->CarCollision->SetPhysicsLinearVelocity(FVector::Zero());
 	this->TemporaryScene->SetRelativeRotation(FRotator::ZeroRotator);
-	APawn::SetActorLocation(ResetPosition);
-	APawn::SetActorRotation(FRotator::ZeroRotator);
+	if(this->LastHitPoint != FVector::Zero())
+	{
+		this->SetActorRotation(FRotator::ZeroRotator);
+	}
+	else
+	{
+		this->SetActorRotation(FRotator::ZeroRotator);
+	}
+	this->SetActorLocation(this->ResetPosition);
 	this->CarStruct.IsOnReverseGravity = false;
 	this->CarStruct.IsGrounded = false;
+	this->CarStruct.IsSlowed = false;
+	this->CarStruct.IsBoosted = false;
+	this->LastHitPoint = FVector::Zero();
 }
 
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
@@ -513,7 +525,7 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
 	//const FName TraceTag("MyTraceTag");
 	//this->GetWorld()->DebugDrawTraceTag = TraceTag;
@@ -537,19 +549,18 @@ void AMyPawnCar::DetectGround()
 	this->LastGroundDetected = Result.GetActor();
 	if(!BlockSlope)// This is where i adjust the rotation of the car with the slope of the ground
 	{
-		/*FRotator SlopeRotation;
+		FRotator SlopeRotation;
 		SlopeRotation = DetectSlope(Result.ImpactNormal);
 		FRotator NewRotationCar = this->GetActorRotation();
 		NewRotationCar.Pitch =  SlopeRotation.Pitch;
 		NewRotationCar.Roll =  SlopeRotation.Roll;
-		//NewRotationCar.Yaw =  SlopeRotation.Yaw;*/
+		//NewRotationCar.Yaw =  SlopeRotation.Yaw;
 		FRotator NewRotationCar2 = this->GetActorRotation();
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
 			this->LastHitPoint = ResultHit2.ImpactNormal;
 			FRotator SlopeRotation2;
 			SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
-			//UE_LOG(LogTemp,Warning,TEXT("Position,%s"),*ResultHit2.GetActor()->GetName());
 			NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
 			NewRotationCar2.Roll =  SlopeRotation2.Roll;
 		}
@@ -561,9 +572,10 @@ void AMyPawnCar::DetectGround()
 		}
 		else
 		{
-			/*FRotator NewRotation = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),
+			UE_LOG(LogTemp,Warning,TEXT("%s"),*NewRotationCar.ToString());
+			FRotator NewRotation = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),
 				NewRotationCar,this->GetWorld()->GetDeltaSeconds(),this->CarStruct.SpeedForSlopeAdjustement);// Adjust the rotation smoothly with a speed
-			this->RotateCarForSlope(NewRotation);*/
+			this->RotateCarForSlope(NewRotation);
 		}
 	}
 	if(ResultHit2.GetActor() != nullptr)//Result.GetActor() == nullptr) return;// If the ground detect something which isn't an actor, it would be dangerous go further. The code would crash or be garbage since it need an actor
