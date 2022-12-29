@@ -227,16 +227,29 @@ public:
 	// Get the axis for the forward movement (physical movement)
 	UFUNCTION(BlueprintCallable)
 	void ForwardMovement(float AxisValue);
+	// Get the axis for the forward movement (physical movement)
+	UFUNCTION(Server, Reliable)
+	void Server_ForwardMovement(float AxisValue);
 	// Get the axis for the rotation movement (local rotation)
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float AxisValue);
+	// Get the axis for the rotation movement (local rotation)
+	UFUNCTION(Server, Reliable)
+	void Server_RightMovement(float AxisValue);
 	// Function which take care of the lean of the vehicles. A force is going to be add to the vehicles depending on the quantity of lean.
 	// If the vehicles have too much lean, it will start to slow down
 	UFUNCTION(BlueprintCallable)
 	void CarDrift(float Value);
+	// Function which take care of the lean of the vehicles. A force is going to be add to the vehicles depending on the quantity of lean.
+	// If the vehicles have too much lean, it will start to slow down
+	UFUNCTION(Server,Reliable,NetMulticast)
+	void Server_CarDrift(float Value);
 	// Simulate gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void CarGravity();
+	// Simulate gravity behaviour
+	UFUNCTION(Server,Reliable, NetMulticast)
+	void Server_CarGravity();
 	// Simulate invert gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity() const;
@@ -267,15 +280,24 @@ public:
 	// This function get the impact normal of the ground detected, it use it to make the car flying at X high
 	UFUNCTION(BlueprintCallable)
 	void FlyingCar(FHitResult ImpactPoint);
+	// This function get the impact normal of the ground detected, it use it to make the car flying at X high
+	UFUNCTION(Server,Reliable,NetMulticast)
+	void Server_FlyingCar(FHitResult ImpactPoint);
 	// Detection Ground with raycast
 	UFUNCTION(BlueprintCallable)
 	void DetectGround();
+	// Detection Ground with raycast
+	UFUNCTION(Server,Reliable,NetMulticast)
+	void Server_DetectGround();
 	// Detection slope, value which will be used to adjust the rotation of the car since it's not on the ground
 	UFUNCTION(BlueprintCallable)
 	FRotator DetectSlope(FVector FloorNormal) const;
 	// Rotate the car with the new rotation created with the DetectSlope
 	UFUNCTION(BlueprintCallable)
 	void RotateCarForSlope(FRotator NewRotation);
+	// Rotate the car with the new rotation created with the DetectSlope
+	UFUNCTION(Server,Reliable,NetMulticast)
+	void Server_RotateCarForSlope(FRotator NewRotation);
 	// Event trigger once the car got grounded, executed once each ground
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarGotGrounded();
@@ -367,6 +389,9 @@ public:
 	// Show which aactor was hit last for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
+	// Show last hit point for the ground
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	FVector LastHitPoint;
 
 private:
 	// Not used
@@ -374,7 +399,7 @@ private:
 	// Contain acceleration
 	float ContainerAcceleration;
 	// Forward Axis
-	float ContainerForwardAxis;
+	float ForwardAxis;
 	// Pour le tick physics
 	FCalculateCustomPhysics OnCalculateCustomPhysics;
 };
