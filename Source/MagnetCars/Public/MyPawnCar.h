@@ -250,6 +250,9 @@ public:
 	// Simulate gravity behaviour
 	UFUNCTION(Server,Reliable, NetMulticast)
 	void Server_CarGravity();
+	// Simulate gravity behaviour
+	UFUNCTION(BlueprintCallable)
+	void Gravity() const;
 	// Simulate invert gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity() const;
@@ -402,4 +405,8 @@ private:
 	float ForwardAxis;
 	// Pour le tick physics
 	FCalculateCustomPhysics OnCalculateCustomPhysics;
+	// Check if gravity rotation is finished
+	bool IsRotationChangeGravityFinished = true;
+	// Keep the old Rotation before gravity change
+	FRotator OldRotation = FRotator::ZeroRotator;
 };
