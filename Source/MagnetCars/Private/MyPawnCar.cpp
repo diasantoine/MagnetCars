@@ -128,7 +128,7 @@ void AMyPawnCar::PhysicalCarMovement(FPhysScene_Chaos *_PhysScene,float DeltaTim
 		this->CarCollision->SetLinearDamping(CarStruct.AirFriction);
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
-	if(this->IsRotationChangeGravityFinished && !this->CarStruct.IsGrounded)
+	if(!this->CarStruct.IsGrounded)
 	{
 		if(this->CarStruct.IsOnReverseGravity)
 		{
@@ -213,6 +213,20 @@ void AMyPawnCar::SlowSpeedBehaviour()
 		}
 	}
 }
+
+void AMyPawnCar::RaycastOff()
+{
+	if(this->ContainerTimeBeforeRaycastOn >= this->TimeBeforeRaycastOn)
+	{
+		this->ContainerTimeBeforeRaycastOn = 0;
+		this->IsRaycastActive = true;
+	}
+	else
+	{
+		this->ContainerTimeBeforeRaycastOn += this->GetWorld()->GetDeltaSeconds();
+	}
+}
+
 
 void AMyPawnCar::RightMovement(const float AxisValue)
 {
@@ -402,22 +416,44 @@ void AMyPawnCar::Server_FlyingCar_Implementation(FHitResult ImpactPoint)
 void AMyPawnCar::CarGravity()
 {
 	if(this->CarCollision == nullptr)return;
+	if(this->IsInverseGravityOnCoolDown) return;
+	this->IsInverseGravityOnCoolDown = true;
 	this->CarReverseGravity();
-	this->IsRotationChangeGravityFinished = false;
 	this->CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
 	//this->CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity); If i enable the gravity back i need to know where it was affected before
 	FRotator CarRotation = this->GetActorRotation();
-	this->OldRotation = CarRotation;
 	CarRotation.Roll += this->CarStruct.IsOnReverseGravity ? 180 : -180;// This function invert the gravity of the player and rotate him
 	this->SetActorRotation(CarRotation);
 	this->LastHitPoint = FVector::Zero();
-	this->IsRotationChangeGravityFinished = true;
-	if(!this->ResetGravityInstant) return;
-	FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
-	VelocityCar.Z = 0;
-	//this->CarCollision->GetBodyInstance()->ClearForces();
-	this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
-	//this->Server_CarGravity();
+	this->IsRaycastActive = false;
+	this->CarStruct.IsGrounded = false;
+	if(!this->ResetGravityInstant)
+	{
+		if(this->LastHitPoint != FVector::Zero())
+		{
+			this->CarCollision->AddForce(this->LastHitPoint * this->CarCollision->GetMass() * this->CarStruct.PowerChangeGravity);
+		}
+		else
+		{
+			this->CarCollision->AddForce(this->CarCollision->GetUpVector() * this->CarCollision->GetMass() * this->CarStruct.PowerChangeGravity);
+		}
+	}
+	else
+	{
+		FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+		VelocityCar.Z = 0;
+		//this->CarCollision->GetBodyInstance()->ClearForces();
+		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
+		//this->Server_CarGravity();
+		if(this->LastHitPoint != FVector::Zero())
+		{
+			this->CarCollision->AddForce(this->LastHitPoint * this->CarCollision->GetMass() * this->CarStruct.PowerChangeGravity);
+		}
+		else
+		{
+			this->CarCollision->AddForce(this->CarCollision->GetUpVector() * this->CarCollision->GetMass() * this->CarStruct.PowerChangeGravity);
+		}
+	}
 }
 
 void AMyPawnCar::Server_CarGravity_Implementation()
@@ -470,6 +506,20 @@ void AMyPawnCar::InvertGravity() const
 			* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));// Invert Gravity	
 	}
 }
+
+void AMyPawnCar::InverseGravityCoolDown()
+{
+	if(this->ContainerTimeBeforeInverseGravityBack >= this->CarStruct.CoolDownInverseGravity)
+	{
+		this->IsInverseGravityOnCoolDown = false;
+		this->ContainerTimeBeforeInverseGravityBack = 0;
+	}
+	else
+	{
+		this->ContainerTimeBeforeInverseGravityBack += this->GetWorld()->GetDeltaSeconds();
+	}
+}
+
 
 void AMyPawnCar::BoostPlate(const float Boost, bool Forward)
 // Boost Plate still in progress
@@ -533,9 +583,21 @@ void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 
 void AMyPawnCar::DetectGround()
 {
-	if(!this->IsRotationChangeGravityFinished)
+	if(!this->IsRaycastActive)
 	{
+		this->RaycastOff();
+		if(this->IsInverseGravityOnCoolDown)
+		{
+			this->InverseGravityCoolDown();
+		}
 		return;
+	}
+	else
+	{
+		if(this->IsInverseGravityOnCoolDown)
+		{
+			this->InverseGravityCoolDown();
+		}
 	}
 	FHitResult Result;
 	TArray<AActor*> ActorIgnored;
