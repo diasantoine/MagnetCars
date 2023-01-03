@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{59ac498a-fd85-4246-84d0-ef5c9c813cc0}">
+		<property name="name">
+			<value>SlowMotion</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{62b87c49-044e-4fc7-b93d-5add95a659c4}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{62b87c49-044e-4fc7-b93d-5add95a659c4}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>10</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>

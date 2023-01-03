@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{04cd6b6a-18b7-436f-bc38-311433fae1eb}">
+		<property name="name">
+			<value>HorsPisteTomber</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{2719814f-781c-45a1-b805-b64e7455863b}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{2719814f-781c-45a1-b805-b64e7455863b}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>0.48999997973442078</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>

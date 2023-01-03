@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{d74df27a-7e0f-4365-b4f0-771b3ef73257}">
+		<property name="name">
+			<value>PriseBoost</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{475cbb23-e01a-49df-bf60-227e93b36e58}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{475cbb23-e01a-49df-bf60-227e93b36e58}">
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>1</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>
