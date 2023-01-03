@@ -169,6 +169,12 @@ struct FCar
 	// The mass of the vehicle which augment the gravity aswell on not grounde if the car is on Inversed Gravity
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float CarMassNotGroundedInversedGravity = 100.f;
+	// CoolDown Inverse Gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float CoolDownInverseGravity = 2.f;
+	// Power Jump After Change Gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	float PowerChangeGravity = 2000.f;
 
 	// The distance between the car and the ground
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
@@ -250,6 +256,13 @@ public:
 	// Simulate gravity behaviour
 	UFUNCTION(Server,Reliable, NetMulticast)
 	void Server_CarGravity();
+	// Simulate gravity behaviour
+	UFUNCTION(BlueprintCallable)
+	void Gravity() const;
+	UFUNCTION(BlueprintCallable)
+	void RaycastOff();
+	UFUNCTION(BlueprintCallable)
+	void InverseGravityCoolDown();
 	// Simulate invert gravity behaviour
 	UFUNCTION(BlueprintCallable)
 	void InvertGravity() const;
@@ -392,6 +405,17 @@ public:
 	// Show last hit point for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	FVector LastHitPoint;
+
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	float TimeBeforeRaycastOn = 1;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	float ContainerTimeBeforeRaycastOn = 0;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	float ContainerTimeBeforeInverseGravityBack = 0;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	bool IsRaycastActive = true;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	bool IsInverseGravityOnCoolDown = false;
 
 private:
 	// Not used

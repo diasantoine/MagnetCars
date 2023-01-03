@@ -55,12 +55,15 @@ void ALoadCircuit::LoadCircuit_Implementation()
 				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
 				this->PartCircuitGenerated.Add(Container);
 				First = true;
-				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
+				this->LastEndSceneComponent = Container->EndPartCircuit;//->GetComponentLocation();
 			}
 			else
 			{
+				if(this->LastEndSceneComponent == nullptr)continue;
+				FVector LastEndPosition = this->LastEndSceneComponent->GetComponentLocation();
 				FVector SpawnPosition;
-				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,FVector::Zero(),FRotator::ZeroRotator,ActorSpawnParams);
+				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,FVector::Zero(),
+					this->LastEndSceneComponent->GetComponentRotation(),ActorSpawnParams);
 				FVector StartPartCircuit = Container->StartPartCircuit->GetComponentLocation();
 				switch (WhichAxisAccounted)
 				{
@@ -98,10 +101,11 @@ void ALoadCircuit::LoadCircuit_Implementation()
 				}
 				Container->SetActorLocation(SpawnPosition);
 				this->PartCircuitGenerated.Add(Container);
-				this->LastEndPosition = Container->EndPartCircuit->GetComponentLocation();
+				this->LastEndSceneComponent = Container->EndPartCircuit;
 			}
 		}
-		this->FirstPartCircuitPosition = this->LastEndPosition;
+		if(this->LastEndSceneComponent == nullptr)continue;
+		this->FirstPartCircuitPosition = this->LastEndSceneComponent->GetComponentLocation();
 	}
 	this->FirstPartCircuitPosition = this->GetActorLocation();
 }
@@ -112,6 +116,7 @@ void ALoadCircuit::UnLoadCircuit_Implementation()
 	if(this->PartCircuitGenerated.Num() == 0) return;
 	for (AMyPartCircuit* PartCircuit : this->PartCircuitGenerated)
 	{
+		if(PartCircuit == nullptr)continue;
 		PartCircuit->Destroy();
 	}
 	this->PartCircuitGenerated.Empty();
