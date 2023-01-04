@@ -61,6 +61,15 @@ struct FCar
 	// Bool which show if the car is under a slow
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsSlowed = true;
+	// Bool which show if the raycast for ground detection is active
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	bool IsRaycastActive = true;
+	// Bool which show if InverseGravity mechanic is in cooldown
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	bool IsInverseGravityOnCoolDown = false;
+	// Time Before Raycast Come Back after a modification of gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	float TimeBeforeRaycastOn = 1;
 	// The time before the respawn of the player
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
@@ -405,17 +414,18 @@ public:
 	// Show last hit point for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	FVector LastHitPoint;
-
+	// Show last checkpointHit
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
-	float TimeBeforeRaycastOn = 1;
+	FString CheckPointTag = "CheckPoint";
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	UBoxComponent* LastCheckPointHit;
+	
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	float ContainerTimeBeforeRaycastOn = 0;
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	float ContainerTimeBeforeInverseGravityBack = 0;
-	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
-	bool IsRaycastActive = true;
-	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
-	bool IsInverseGravityOnCoolDown = false;
+
 
 private:
 	// Not used
