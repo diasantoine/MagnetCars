@@ -502,7 +502,8 @@ void AMyPawnCar::InvertGravity() const
 	}
 	else
 	{
-		this->CarCollision->AddForce(-this->CarCollision->GetUpVector() * this->CarCollision->GetMass()
+		UE_LOG(LogTemp,Warning,TEXT("test"));
+		this->CarCollision->AddForce(-this->GetActorUpVector() * this->CarCollision->GetMass()
 			* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));// Invert Gravity	
 	}
 }
