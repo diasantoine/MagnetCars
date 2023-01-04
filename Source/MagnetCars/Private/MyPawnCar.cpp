@@ -216,10 +216,10 @@ void AMyPawnCar::SlowSpeedBehaviour()
 
 void AMyPawnCar::RaycastOff()
 {
-	if(this->ContainerTimeBeforeRaycastOn >= this->TimeBeforeRaycastOn)
+	if(this->ContainerTimeBeforeRaycastOn >= this->CarStruct.TimeBeforeRaycastOn)
 	{
 		this->ContainerTimeBeforeRaycastOn = 0;
-		this->IsRaycastActive = true;
+		this->CarStruct.IsRaycastActive = true;
 	}
 	else
 	{
@@ -416,8 +416,8 @@ void AMyPawnCar::Server_FlyingCar_Implementation(FHitResult ImpactPoint)
 void AMyPawnCar::CarGravity()
 {
 	if(this->CarCollision == nullptr)return;
-	if(this->IsInverseGravityOnCoolDown) return;
-	this->IsInverseGravityOnCoolDown = true;
+	if(this->CarStruct.IsInverseGravityOnCoolDown) return;
+	this->CarStruct.IsInverseGravityOnCoolDown = true;
 	this->CarReverseGravity();
 	this->CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
 	//this->CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity); If i enable the gravity back i need to know where it was affected before
@@ -425,7 +425,7 @@ void AMyPawnCar::CarGravity()
 	CarRotation.Roll += this->CarStruct.IsOnReverseGravity ? 180 : -180;// This function invert the gravity of the player and rotate him
 	this->SetActorRotation(CarRotation);
 	this->LastHitPoint = FVector::Zero();
-	this->IsRaycastActive = false;
+	this->CarStruct.IsRaycastActive = false;
 	this->CarStruct.IsGrounded = false;
 	if(!this->ResetGravityInstant)
 	{
@@ -511,7 +511,7 @@ void AMyPawnCar::InverseGravityCoolDown()
 {
 	if(this->ContainerTimeBeforeInverseGravityBack >= this->CarStruct.CoolDownInverseGravity)
 	{
-		this->IsInverseGravityOnCoolDown = false;
+		this->CarStruct.IsInverseGravityOnCoolDown = false;
 		this->ContainerTimeBeforeInverseGravityBack = 0;
 	}
 	else
@@ -558,15 +558,16 @@ void AMyPawnCar::CarRespawn()
 	this->CarCollision->ComponentVelocity = FVector::Zero();
 	this->CarCollision->SetPhysicsLinearVelocity(FVector::Zero());
 	this->TemporaryScene->SetRelativeRotation(FRotator::ZeroRotator);
-	if(this->LastHitPoint != FVector::Zero())
+	if(this->LastCheckPointHit == nullptr)
 	{
+		this->SetActorLocation(this->ResetPosition);
 		this->SetActorRotation(FRotator::ZeroRotator);
 	}
 	else
 	{
-		this->SetActorRotation(FRotator::ZeroRotator);
+		this->SetActorLocation(this->LastCheckPointHit->GetComponentLocation());
+		this->SetActorRotation(this->LastCheckPointHit->GetComponentRotation());
 	}
-	this->SetActorLocation(this->ResetPosition);
 	this->CarStruct.IsOnReverseGravity = false;
 	this->CarStruct.IsGrounded = false;
 	this->CarStruct.IsSlowed = false;
@@ -583,10 +584,10 @@ void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 
 void AMyPawnCar::DetectGround()
 {
-	if(!this->IsRaycastActive)
+	if(!this->CarStruct.IsRaycastActive)
 	{
 		this->RaycastOff();
-		if(this->IsInverseGravityOnCoolDown)
+		if(this->CarStruct.IsInverseGravityOnCoolDown)
 		{
 			this->InverseGravityCoolDown();
 		}
@@ -594,7 +595,7 @@ void AMyPawnCar::DetectGround()
 	}
 	else
 	{
-		if(this->IsInverseGravityOnCoolDown)
+		if(this->CarStruct.IsInverseGravityOnCoolDown)
 		{
 			this->InverseGravityCoolDown();
 		}
@@ -805,6 +806,18 @@ void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 		else
 		{
 			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,false);
+		}
+	}else
+	{
+		for (UActorComponent* Element : OtherActor->GetComponents())
+		{
+			if(Element == nullptr) continue;
+			if(Element->ComponentHasTag(*this->CheckPointTag))
+			{
+				UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(Element);
+				if(BoxCheckPoint == nullptr) continue;
+				this->LastCheckPointHit = BoxCheckPoint;
+			}
 		}
 	}
 }
