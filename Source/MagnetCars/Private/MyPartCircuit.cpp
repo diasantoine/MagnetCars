@@ -8,7 +8,7 @@ AMyPartCircuit::AMyPartCircuit()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-	this->NewRootComponent = this->CreateDefaultSubobject<USceneComponent>("Root");
+	this->NewRootComponent = this->CreateDefaultSubobject<USceneComponent>("Root");// Creation des components
 	this->StartPartCircuit = this->CreateDefaultSubobject<USceneComponent>("Start");
 	this->EndPartCircuit = this->CreateDefaultSubobject<USceneComponent>("End");
 
