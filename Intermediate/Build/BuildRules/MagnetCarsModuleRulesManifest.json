@@ -1,16 +1,16 @@
 {
 	"SourceFiles": [
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprint\\RiderBlueprint.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControl\\RiderGameControl.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLogging\\RiderLogging.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderShaderInfo\\RiderShaderInfo.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars.Target.cs",
-		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
+		"W:\\GitHub\\Cywer\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprint\\RiderBlueprint.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControl\\RiderGameControl.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLink\\RiderLink.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderLogging\\RiderLogging.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderShaderInfo\\RiderShaderInfo.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudio\\FMODStudio.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Plugins\\FMODStudio\\Source\\FMODStudioEditor\\FMODStudioEditor.Build.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Source\\MagnetCars.Target.cs",
+		"W:\\GitHub\\Cywer\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs"
 	],
 	"EngineVersion": "5.0.3"
 }
