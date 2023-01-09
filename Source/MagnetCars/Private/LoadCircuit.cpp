@@ -53,6 +53,8 @@ void ALoadCircuit::LoadCircuit_Implementation()
 			if(!First)
 			{
 				AMyPartCircuit* Container = this->GetWorld()->SpawnActor<AMyPartCircuit>(CircuitPart,this->FirstPartCircuitPosition,FRotator::ZeroRotator,ActorSpawnParams);
+				FVector SpawnPosition = this->FirstPartCircuitPosition + (this->FirstPartCircuitPosition - Container->StartPartCircuit->GetComponentLocation());
+				Container->SetActorLocation(SpawnPosition);
 				this->PartCircuitGenerated.Add(Container);
 				First = true;
 				this->LastEndSceneComponent = Container->EndPartCircuit;//->GetComponentLocation();
