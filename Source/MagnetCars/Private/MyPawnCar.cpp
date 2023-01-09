@@ -405,9 +405,9 @@ void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 		//this->CarCollision->SetEnableGravity(false); If i enable the gravity back i need to know where it was affected before
 		//const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
 		const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
-		FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
-		VelocityCar.Z = 0;
-		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
+		//FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+		//VelocityCar.Z = 0;
+		//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 		//LocationCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);// Give the height the car should always have for flying 
 		//this->SetActorLocation(LocationCar);
 		this->SetActorLocation(LocationUpCar);
@@ -644,19 +644,28 @@ void AMyPawnCar::DetectGround()
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
 		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
-	/*const FName TraceTag("MyTraceTag");
-	this->GetWorld()->DebugDrawTraceTag = TraceTag;*/
+	const FName TraceTag("MyTraceTag");
+	this->GetWorld()->DebugDrawTraceTag = TraceTag;
 	FCollisionQueryParams CollisionParams;
-	//CollisionParams.TraceTag = TraceTag;
+	CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
-	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->GetActorLocation(),
-		this->GetActorLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
+	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->RaycastPosition->GetComponentLocation(),
+		this->RaycastPosition->GetComponentLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
 		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
 	if(/*ResultHit2.GetActor() == nullptr)*/!ResultHit)// Doesn't detect ground
 	{
 		CarStruct.IsGrounded = false;
 		LastGroundDetected = nullptr;
 		return;
+	}
+	if(Result.GetActor() != nullptr)
+	{
+		if(!Result.Component->ComponentHasTag(*this->GroundTag) && !Result.Component->ComponentHasTag(this->BoostTag))
+		{
+			CarStruct.IsGrounded = false;
+			LastGroundDetected = nullptr;
+			return;
+		}
 	}
 	if(!this->CarStruct.IsGrounded)// Detect ground
 	{
@@ -667,6 +676,7 @@ void AMyPawnCar::DetectGround()
 	if(!BlockSlope)// This is where i adjust the rotation of the car with the slope of the ground
 	{
 		FRotator SlopeRotation;
+		//this->LastHitPoint = Result.ImpactNormal;
 		SlopeRotation = DetectSlope(Result.ImpactNormal);
 		FRotator NewRotationCar = this->GetActorRotation();
 		NewRotationCar.Pitch =  SlopeRotation.Pitch;
@@ -675,11 +685,32 @@ void AMyPawnCar::DetectGround()
 		FRotator NewRotationCar2 = this->GetActorRotation();
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
-			this->LastHitPoint = ResultHit2.ImpactNormal;
-			FRotator SlopeRotation2;
-			SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
-			NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
-			NewRotationCar2.Roll =  SlopeRotation2.Roll;
+			if(!ResultHit2.Component->ComponentHasTag(*this->GroundTag) && !ResultHit2.Component->ComponentHasTag(this->BoostTag)) return;
+			FRotator Cumul;
+			int NumberOfHit = 0 ;
+			if(ArrayRaycastPosition.Num() > 0 && false)
+			{
+				for (USceneComponent* Raycast : ArrayRaycastPosition)
+				{
+					if(this->MultipleRaycast(Raycast->GetComponentLocation()).GetActor() == nullptr) continue;
+					Cumul += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation()).ImpactNormal);
+					NumberOfHit++;
+				}
+				this->LastHitPoint = ResultHit2.ImpactNormal;
+				FRotator SlopeRotation2;
+				SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
+				SlopeRotation2 += Cumul;
+				NewRotationCar2.Pitch =  SlopeRotation2.Pitch /  NumberOfHit + 1;
+				NewRotationCar2.Roll =  SlopeRotation2.Roll /  NumberOfHit + 1;
+			}
+			else
+			{
+				this->LastHitPoint = ResultHit2.ImpactNormal;
+				FRotator SlopeRotation2;
+				SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
+				NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
+				NewRotationCar2.Roll =  SlopeRotation2.Roll;
+			}
 		}
 		if(true)// Trying a new raycast to adjust better my car rotation, in progress and disable so you can play "normally"
 		{
@@ -696,13 +727,28 @@ void AMyPawnCar::DetectGround()
 	}
 	if(ResultHit2.GetActor() != nullptr)//Result.GetActor() == nullptr) return;// If the ground detect something which isn't an actor, it would be dangerous go further. The code would crash or be garbage since it need an actor
 	FlyingCar(ResultHit2);// Update the flying car position
-	if(Result.GetActor()->ActorHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
+	if(Result.GetComponent()->ComponentHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
 	{
 		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Result.GetActor());
 		if(GroundBoostPlate == nullptr) return;
 		this->BoostPlate(GroundBoostPlate->PowerBoost,true);
 	}
 }
+
+FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast)
+{
+	FHitResult ResultHit2;
+	const FName TraceTag("MyTraceTag");
+	this->GetWorld()->DebugDrawTraceTag = TraceTag;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.TraceTag = TraceTag;
+	CollisionParams.AddIgnoredActor(this);
+	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,PositionRaycast,
+		PositionRaycast + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
+		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
+	return ResultHit2;
+}
+
 
 void AMyPawnCar::Server_DetectGround_Implementation()
 {

@@ -381,6 +381,12 @@ public:
 	// Boost Tag for collision
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	FName BoostTag;
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	FString CheckPointTag = "CheckPoint";
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString GroundTag = "Ground";
 	// The time before the system detect the car is falling (not used)
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	float TimeBeforeCarFall = 0.5f;
@@ -426,15 +432,15 @@ public:
 	USceneComponent* RaycastPosition = nullptr;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
 	float DistanceRaycast = 200.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
+	TArray<USceneComponent*> ArrayRaycastPosition;
+	FHitResult MultipleRaycast(FVector PositionRaycast);
 	// Show which aactor was hit last for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
 	// Show last hit point for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	FVector LastHitPoint;
-	// Show last checkpointHit
-	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
-	FString CheckPointTag = "CheckPoint";
 	// Show last checkpointHit
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	UBoxComponent* LastCheckPointHit;
