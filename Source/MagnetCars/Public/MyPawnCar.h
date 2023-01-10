@@ -433,8 +433,10 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
 	float DistanceRaycast = 200.f;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
-	TArray<USceneComponent*> ArrayRaycastPosition;
-	FHitResult MultipleRaycast(FVector PositionRaycast);
+	TArray<USceneComponent*> ArrayVerticalRaycastPosition;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
+	TArray<USceneComponent*> ArrayHoziontalRaycastPosition;
+	FHitResult MultipleRaycast(FVector PositionRaycast, FVector Direction);
 	// Show which aactor was hit last for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
