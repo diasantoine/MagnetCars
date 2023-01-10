@@ -403,8 +403,7 @@ void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 		const float MassCar = this->CarCollision->GetMass();
 		const float HalfSizeBoxGround = this->CarStruct.DistanceWithTheGround;
 		//this->CarCollision->SetEnableGravity(false); If i enable the gravity back i need to know where it was affected before
-		//const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
-		const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
+		const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
 		//FVector LocationUpCar =  this->GetActorLocation();
 		//LocationUpCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);
 		//FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
@@ -412,6 +411,10 @@ void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 		//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 		//LocationCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);// Give the height the car should always have for flying 
 		//this->SetActorLocation(LocationCar);
+		
+		//const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
+
+		//const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
 		this->SetActorLocation(LocationUpCar);
 	}
 	//this->Server_FlyingCar(ImpactPoint);
@@ -644,7 +647,7 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
 	const FName TraceTag("MyTraceTag");
 	this->GetWorld()->DebugDrawTraceTag = TraceTag;
@@ -656,7 +659,6 @@ void AMyPawnCar::DetectGround()
 		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
 	if(/*ResultHit2.GetActor() == nullptr)*/!ResultHit)// Doesn't detect ground
 	{
-		UE_LOG(LogTemp,Warning,TEXT("test"));
 		CarStruct.IsGrounded = false;
 		LastGroundDetected = nullptr;
 		return;
@@ -689,7 +691,7 @@ void AMyPawnCar::DetectGround()
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
 			if(!ResultHit2.Component->ComponentHasTag(*this->GroundTag) && !ResultHit2.Component->ComponentHasTag(this->BoostTag)) return;
-			if(ArrayVerticalRaycastPosition.Num() > 0 &&  ArrayHoziontalRaycastPosition.Num() > 0 && false)
+			if(ArrayVerticalRaycastPosition.Num() > 0 &&  ArrayHoziontalRaycastPosition.Num() > 0 && true)
 			{
 				FRotator CumulVertical = FRotator::ZeroRotator;
 				FRotator CumulHorizontal = FRotator::ZeroRotator;
@@ -705,10 +707,9 @@ void AMyPawnCar::DetectGround()
 					if(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).GetActor() == nullptr) continue;
 					FRotator Slope = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
 					if(FMath::Abs(Slope.Roll) < FMath::Abs(CumulHorizontal.Roll)) continue;
-					CumulHorizontal += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+					CumulHorizontal = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
 				}
 				this->LastHitPoint = ResultHit2.ImpactNormal;
-				UE_LOG(LogTemp,Warning,TEXT("V, %s / H, %s"),*CumulVertical.ToString(), *CumulHorizontal.ToString());
 				NewRotationCar2.Pitch =  CumulVertical.Pitch;// /  NumberOfHit + 1;
 				NewRotationCar2.Roll = CumulHorizontal.Roll;// /  NumberOfHit + 1;
 			}
