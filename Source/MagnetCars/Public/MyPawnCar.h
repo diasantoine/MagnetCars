@@ -43,6 +43,9 @@ struct FCar
 	// Bool which permit the car to create rotation during lean
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsLeanCreateRotation = false;
+	// Bool which permit the car to create rotation Up when grounded (normally it should always be false)
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool IsRotationUpActiveWhenGrounded = false;
 	// Bool which permit the car to be slowed, if the car have too much lean
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsLeanCreateSlow = false;
@@ -61,6 +64,15 @@ struct FCar
 	// Bool which show if the car is under a slow
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool IsSlowed = true;
+	// Bool which show if the raycast for ground detection is active
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Bool")
+	bool IsRaycastActive = true;
+	// Bool which show if InverseGravity mechanic is in cooldown
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Bool")
+	bool IsInverseGravityOnCoolDown = false;
+	// Time Before Raycast Come Back after a modification of gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Physics")
+	float TimeBeforeRaycastOn = 1;
 	// The time before the respawn of the player
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float RespawnTiming = 2.0f;
@@ -103,15 +115,24 @@ struct FCar
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationLeanNotGrounded = 20.f;
 
-	// The amount of rotation the car get with the axis of rotation grounded
+	// The amount of rotation the car get with the horizontal axis of rotation grounded
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
- 	float AmountRotationCar = 20.f;
-	// The amount of rotation the car get with the axis of rotation not grounded
+ 	float AmountRotationCarRight = 20.f;
+	// The amount of rotation the car get with the horizontal axis of rotation not grounded
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
-	float AmountRotationCarNotGrounded = 20.f;
-	// The maximum rotation the car can get (positive or negative)
+	float AmountRotationRightCarNotGrounded = 20.f;
+	// The amount of rotation the car get with the vertical axis of rotation grounded
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float AmountRotationCarUp = 20.f;
+	// The amount of rotation the car get with the vertical axis of rotation not grounded
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float AmountRotationUpCarNotGrounded = 20.f;
+	// The maximum rotation the car can get for horizontal (positive or negative) not used
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
- 	float MaxAmountRotationCar = 90.f;
+ 	float MaxAmountRotationCarRight = 90.f;
+	// The maximum rotation the car can get for vertical axi (positive or negative) not used
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
+	float MaxAmountRotationCarUp = 90.f;
 
 	// The adjustment of the rotation of the car with the slope of the circuit
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Rotation")
@@ -236,12 +257,15 @@ public:
 	// Get the axis for the forward movement (physical movement)
 	UFUNCTION(Server, Reliable)
 	void Server_ForwardMovement(float AxisValue);
-	// Get the axis for the rotation movement (local rotation)
+	// Get the axis for the rotation movement on the X axis (local rotation)
 	UFUNCTION(BlueprintCallable)
 	void RightMovement(float AxisValue);
-	// Get the axis for the rotation movement (local rotation)
+	// Get the axis for the rotation movement on the X axis (local rotation)
 	UFUNCTION(Server, Reliable)
 	void Server_RightMovement(float AxisValue);
+	// get the axis for the rotation movement on the Y axis
+	UFUNCTION(BlueprintCallable)
+	void UpMovement(float AxisValue);
 	// Function which take care of the lean of the vehicles. A force is going to be add to the vehicles depending on the quantity of lean.
 	// If the vehicles have too much lean, it will start to slow down
 	UFUNCTION(BlueprintCallable)
@@ -344,7 +368,10 @@ public:
 	UCurveFloat* SpeedCurve;
 	// Curve for Rotation
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
-	UCurveFloat* RotationCurve;
+	UCurveFloat* RotationRightCurve;
+	// Curve for Rotation
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
+	UCurveFloat* RotationUpCurve;
 	// Car Tag for collision
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	FName CarTag;
@@ -354,6 +381,12 @@ public:
 	// Boost Tag for collision
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	FName BoostTag;
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
+	FString CheckPointTag = "CheckPoint";
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString GroundTag = "Ground";
 	// The time before the system detect the car is falling (not used)
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	float TimeBeforeCarFall = 0.5f;
@@ -399,23 +432,24 @@ public:
 	USceneComponent* RaycastPosition = nullptr;
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
 	float DistanceRaycast = 200.f;
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Component")
+	TArray<USceneComponent*> ArrayRaycastPosition;
+	FHitResult MultipleRaycast(FVector PositionRaycast);
 	// Show which aactor was hit last for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	AActor* LastGroundDetected = nullptr;
 	// Show last hit point for the ground
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	FVector LastHitPoint;
-
-	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
-	float TimeBeforeRaycastOn = 1;
+	// Show last checkpointHit
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	UBoxComponent* LastCheckPointHit;
+	
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	float ContainerTimeBeforeRaycastOn = 0;
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	float ContainerTimeBeforeInverseGravityBack = 0;
-	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
-	bool IsRaycastActive = true;
-	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
-	bool IsInverseGravityOnCoolDown = false;
+
 
 private:
 	// Not used

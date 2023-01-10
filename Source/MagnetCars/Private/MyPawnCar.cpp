@@ -68,6 +68,7 @@ void AMyPawnCar::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent
 	if(!CodeInputEnable) return;// Disable the setup player for the network, the network has his own input
 	PlayerInputComponent->BindAxis("Forward",this,&AMyPawnCar::ForwardMovement);
 	PlayerInputComponent->BindAxis("Right",this,&AMyPawnCar::RightMovement);
+	PlayerInputComponent->BindAxis("LookUp",this,&AMyPawnCar::UpMovement);
 
 	if(Keyboard)
 	{
@@ -216,10 +217,10 @@ void AMyPawnCar::SlowSpeedBehaviour()
 
 void AMyPawnCar::RaycastOff()
 {
-	if(this->ContainerTimeBeforeRaycastOn >= this->TimeBeforeRaycastOn)
+	if(this->ContainerTimeBeforeRaycastOn >= this->CarStruct.TimeBeforeRaycastOn)
 	{
 		this->ContainerTimeBeforeRaycastOn = 0;
-		this->IsRaycastActive = true;
+		this->CarStruct.IsRaycastActive = true;
 	}
 	else
 	{
@@ -235,21 +236,45 @@ void AMyPawnCar::RightMovement(const float AxisValue)
 	float AmountRotation;
 	if(CarStruct.IsGrounded)
 	{
-		AmountRotation = CarStruct.AmountRotationCar * AxisValue;
-		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+		AmountRotation = CarStruct.AmountRotationCarRight * AxisValue;
+		AmountRotation *= this->RotationRightCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
 			? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
 		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * AxisValue,0));
 	}
 	else
 	{
-		AmountRotation = CarStruct.AmountRotationCarNotGrounded * AxisValue;
-		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+		AmountRotation = CarStruct.AmountRotationRightCarNotGrounded * AxisValue;
+		AmountRotation *= this->RotationRightCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
 	? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
 		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * AxisValue,0));
 	}
 	this->AddActorLocalRotation(FRotator(0,AmountRotation,0));
 	//this->Server_RightMovement(AxisValue);
 }
+
+void AMyPawnCar::UpMovement(float AxisValue)
+{
+	if(CarCollision == nullptr)return;
+	if(this->CarStruct.IsGrounded && !this->CarStruct.IsRotationUpActiveWhenGrounded) return;
+	float AmountRotation;
+	const FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+	if(CarStruct.IsGrounded)
+	{
+		AmountRotation = CarStruct.AmountRotationCarUp * AxisValue;
+		AmountRotation *= this->RotationUpCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+			? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
+		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * AxisValue,0));
+	}
+	else
+	{
+		AmountRotation = CarStruct.AmountRotationUpCarNotGrounded * AxisValue;
+		AmountRotation *= this->RotationUpCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+	? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
+		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * AxisValue,0));
+	}
+	this->AddActorLocalRotation(FRotator(AmountRotation,0,0));
+}
+
 
 void AMyPawnCar::Server_RightMovement_Implementation(const float AxisValue)
 {
@@ -258,15 +283,15 @@ void AMyPawnCar::Server_RightMovement_Implementation(const float AxisValue)
 	float AmountRotation;
 	if(CarStruct.IsGrounded)
 	{
-		AmountRotation = CarStruct.AmountRotationCar * AxisValue;
-		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+		AmountRotation = CarStruct.AmountRotationCarRight * AxisValue;
+		AmountRotation *= this->RotationRightCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
 			? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
 		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCar * AxisValue,0));
 	}
 	else
 	{
-		AmountRotation = CarStruct.AmountRotationCarNotGrounded * AxisValue;
-		AmountRotation *= this->RotationCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
+		AmountRotation = CarStruct.AmountRotationRightCarNotGrounded * AxisValue;
+		AmountRotation *= this->RotationRightCurve->GetFloatValue(VelocityCar.Length() /(this->CarStruct.IsBoosted || this->CarStruct.IsSlowed
 	? this->CarStruct.ActualMaxSpeedUnderEffect : this->CarStruct.MaxSpeed));
 		//this->AddActorLocalRotation(FRotator(0,CarStruct.AmountRotationCarNotGrounded * AxisValue,0));
 	}
@@ -380,9 +405,9 @@ void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 		//this->CarCollision->SetEnableGravity(false); If i enable the gravity back i need to know where it was affected before
 		//const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
 		const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
-		FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
-		VelocityCar.Z = 0;
-		this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
+		//FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
+		//VelocityCar.Z = 0;
+		//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 		//LocationCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);// Give the height the car should always have for flying 
 		//this->SetActorLocation(LocationCar);
 		this->SetActorLocation(LocationUpCar);
@@ -416,18 +441,18 @@ void AMyPawnCar::Server_FlyingCar_Implementation(FHitResult ImpactPoint)
 void AMyPawnCar::CarGravity()
 {
 	if(this->CarCollision == nullptr)return;
-	if(this->IsInverseGravityOnCoolDown) return;
-	this->IsInverseGravityOnCoolDown = true;
+	if(this->CarStruct.IsInverseGravityOnCoolDown) return;
+	this->CarStruct.IsInverseGravityOnCoolDown = true;
 	this->CarReverseGravity();
 	this->CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
 	//this->CarCollision->SetEnableGravity(!CarStruct.IsOnReverseGravity); If i enable the gravity back i need to know where it was affected before
 	FRotator CarRotation = this->GetActorRotation();
 	CarRotation.Roll += this->CarStruct.IsOnReverseGravity ? 180 : -180;// This function invert the gravity of the player and rotate him
 	this->SetActorRotation(CarRotation);
-	this->LastHitPoint = FVector::Zero();
-	this->IsRaycastActive = false;
+	this->LastHitPoint = -LastHitPoint;
+	this->CarStruct.IsRaycastActive = false;
 	this->CarStruct.IsGrounded = false;
-	if(!this->ResetGravityInstant)
+	if(!this->CarStruct.InstantReverseGravity)
 	{
 		if(this->LastHitPoint != FVector::Zero())
 		{
@@ -502,7 +527,7 @@ void AMyPawnCar::InvertGravity() const
 	}
 	else
 	{
-		this->CarCollision->AddForce(-this->CarCollision->GetUpVector() * this->CarCollision->GetMass()
+		this->CarCollision->AddForce(-this->GetActorUpVector() * this->CarCollision->GetMass()
 			* (CarStruct.IsGrounded ? CarStruct.CarMassGroundInversedGravity : CarStruct.CarMassNotGroundedInversedGravity));// Invert Gravity	
 	}
 }
@@ -511,7 +536,7 @@ void AMyPawnCar::InverseGravityCoolDown()
 {
 	if(this->ContainerTimeBeforeInverseGravityBack >= this->CarStruct.CoolDownInverseGravity)
 	{
-		this->IsInverseGravityOnCoolDown = false;
+		this->CarStruct.IsInverseGravityOnCoolDown = false;
 		this->ContainerTimeBeforeInverseGravityBack = 0;
 	}
 	else
@@ -558,15 +583,16 @@ void AMyPawnCar::CarRespawn()
 	this->CarCollision->ComponentVelocity = FVector::Zero();
 	this->CarCollision->SetPhysicsLinearVelocity(FVector::Zero());
 	this->TemporaryScene->SetRelativeRotation(FRotator::ZeroRotator);
-	if(this->LastHitPoint != FVector::Zero())
+	if(this->LastCheckPointHit == nullptr)
 	{
+		this->SetActorLocation(this->ResetPosition);
 		this->SetActorRotation(FRotator::ZeroRotator);
 	}
 	else
 	{
-		this->SetActorRotation(FRotator::ZeroRotator);
+		this->SetActorLocation(this->LastCheckPointHit->GetComponentLocation());
+		this->SetActorRotation(this->LastCheckPointHit->GetComponentRotation());
 	}
-	this->SetActorLocation(this->ResetPosition);
 	this->CarStruct.IsOnReverseGravity = false;
 	this->CarStruct.IsGrounded = false;
 	this->CarStruct.IsSlowed = false;
@@ -583,10 +609,10 @@ void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 
 void AMyPawnCar::DetectGround()
 {
-	if(!this->IsRaycastActive)
+	if(!this->CarStruct.IsRaycastActive)
 	{
 		this->RaycastOff();
-		if(this->IsInverseGravityOnCoolDown)
+		if(this->CarStruct.IsInverseGravityOnCoolDown)
 		{
 			this->InverseGravityCoolDown();
 		}
@@ -594,7 +620,7 @@ void AMyPawnCar::DetectGround()
 	}
 	else
 	{
-		if(this->IsInverseGravityOnCoolDown)
+		if(this->CarStruct.IsInverseGravityOnCoolDown)
 		{
 			this->InverseGravityCoolDown();
 		}
@@ -616,21 +642,30 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
 	const FName TraceTag("MyTraceTag");
 	this->GetWorld()->DebugDrawTraceTag = TraceTag;
 	FCollisionQueryParams CollisionParams;
 	CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
-	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->GetActorLocation(),
-		this->GetActorLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
+	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->RaycastPosition->GetComponentLocation(),
+		this->RaycastPosition->GetComponentLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
 		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
 	if(/*ResultHit2.GetActor() == nullptr)*/!ResultHit)// Doesn't detect ground
 	{
 		CarStruct.IsGrounded = false;
 		LastGroundDetected = nullptr;
 		return;
+	}
+	if(Result.GetActor() != nullptr)
+	{
+		if(!Result.Component->ComponentHasTag(*this->GroundTag) && !Result.Component->ComponentHasTag(this->BoostTag))
+		{
+			CarStruct.IsGrounded = false;
+			LastGroundDetected = nullptr;
+			return;
+		}
 	}
 	if(!this->CarStruct.IsGrounded)// Detect ground
 	{
@@ -641,6 +676,7 @@ void AMyPawnCar::DetectGround()
 	if(!BlockSlope)// This is where i adjust the rotation of the car with the slope of the ground
 	{
 		FRotator SlopeRotation;
+		//this->LastHitPoint = Result.ImpactNormal;
 		SlopeRotation = DetectSlope(Result.ImpactNormal);
 		FRotator NewRotationCar = this->GetActorRotation();
 		NewRotationCar.Pitch =  SlopeRotation.Pitch;
@@ -649,11 +685,32 @@ void AMyPawnCar::DetectGround()
 		FRotator NewRotationCar2 = this->GetActorRotation();
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
-			this->LastHitPoint = ResultHit2.ImpactNormal;
-			FRotator SlopeRotation2;
-			SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
-			NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
-			NewRotationCar2.Roll =  SlopeRotation2.Roll;
+			if(!ResultHit2.Component->ComponentHasTag(*this->GroundTag) && !ResultHit2.Component->ComponentHasTag(this->BoostTag)) return;
+			FRotator Cumul;
+			int NumberOfHit = 0 ;
+			if(ArrayRaycastPosition.Num() > 0 && false)
+			{
+				for (USceneComponent* Raycast : ArrayRaycastPosition)
+				{
+					if(this->MultipleRaycast(Raycast->GetComponentLocation()).GetActor() == nullptr) continue;
+					Cumul += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation()).ImpactNormal);
+					NumberOfHit++;
+				}
+				this->LastHitPoint = ResultHit2.ImpactNormal;
+				FRotator SlopeRotation2;
+				SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
+				SlopeRotation2 += Cumul;
+				NewRotationCar2.Pitch =  SlopeRotation2.Pitch /  NumberOfHit + 1;
+				NewRotationCar2.Roll =  SlopeRotation2.Roll /  NumberOfHit + 1;
+			}
+			else
+			{
+				this->LastHitPoint = ResultHit2.ImpactNormal;
+				FRotator SlopeRotation2;
+				SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
+				NewRotationCar2.Pitch =  SlopeRotation2.Pitch;
+				NewRotationCar2.Roll =  SlopeRotation2.Roll;
+			}
 		}
 		if(true)// Trying a new raycast to adjust better my car rotation, in progress and disable so you can play "normally"
 		{
@@ -663,7 +720,6 @@ void AMyPawnCar::DetectGround()
 		}
 		else
 		{
-			UE_LOG(LogTemp,Warning,TEXT("%s"),*NewRotationCar.ToString());
 			FRotator NewRotation = UKismetMathLibrary::RInterpTo_Constant(this->GetActorRotation(),
 				NewRotationCar,this->GetWorld()->GetDeltaSeconds(),this->CarStruct.SpeedForSlopeAdjustement);// Adjust the rotation smoothly with a speed
 			this->RotateCarForSlope(NewRotation);
@@ -671,13 +727,28 @@ void AMyPawnCar::DetectGround()
 	}
 	if(ResultHit2.GetActor() != nullptr)//Result.GetActor() == nullptr) return;// If the ground detect something which isn't an actor, it would be dangerous go further. The code would crash or be garbage since it need an actor
 	FlyingCar(ResultHit2);// Update the flying car position
-	if(Result.GetActor()->ActorHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
+	if(Result.GetComponent()->ComponentHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
 	{
 		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Result.GetActor());
 		if(GroundBoostPlate == nullptr) return;
 		this->BoostPlate(GroundBoostPlate->PowerBoost,true);
 	}
 }
+
+FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast)
+{
+	FHitResult ResultHit2;
+	const FName TraceTag("MyTraceTag");
+	this->GetWorld()->DebugDrawTraceTag = TraceTag;
+	FCollisionQueryParams CollisionParams;
+	CollisionParams.TraceTag = TraceTag;
+	CollisionParams.AddIgnoredActor(this);
+	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,PositionRaycast,
+		PositionRaycast + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
+		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
+	return ResultHit2;
+}
+
 
 void AMyPawnCar::Server_DetectGround_Implementation()
 {
@@ -805,6 +876,18 @@ void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 		else
 		{
 			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,false);
+		}
+	}else
+	{
+		for (UActorComponent* Element : OtherActor->GetComponents())
+		{
+			if(Element == nullptr) continue;
+			if(Element->ComponentHasTag(*this->CheckPointTag))
+			{
+				UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(Element);
+				if(BoxCheckPoint == nullptr) continue;
+				this->LastCheckPointHit = BoxCheckPoint;
+			}
 		}
 	}
 }
