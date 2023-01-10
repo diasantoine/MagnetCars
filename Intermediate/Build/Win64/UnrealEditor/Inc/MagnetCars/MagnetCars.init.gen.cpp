@@ -17,13 +17,13 @@ void EmptyLinkFunctionForGeneratedCodeMagnetCars_init() {}
 				nullptr,
 				0,
 				PKG_CompiledIn | 0x00000000,
-				0x08334415,
-				0x56A9F828,
+				0x426CA0B6,
+				0x5571BA9B,
 				METADATA_PARAMS(nullptr, 0)
 			};
 			UECodeGen_Private::ConstructUPackage(Z_Registration_Info_UPackage__Script_MagnetCars.OuterSingleton, PackageParams);
 		}
 		return Z_Registration_Info_UPackage__Script_MagnetCars.OuterSingleton;
 	}
-	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MagnetCars(Z_Construct_UPackage__Script_MagnetCars, TEXT("/Script/MagnetCars"), Z_Registration_Info_UPackage__Script_MagnetCars, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x08334415, 0x56A9F828));
+	static FRegisterCompiledInInfo Z_CompiledInDeferPackage_UPackage__Script_MagnetCars(Z_Construct_UPackage__Script_MagnetCars, TEXT("/Script/MagnetCars"), Z_Registration_Info_UPackage__Script_MagnetCars, CONSTRUCT_RELOAD_VERSION_INFO(FPackageReloadVersionInfo, 0x426CA0B6, 0x5571BA9B));
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

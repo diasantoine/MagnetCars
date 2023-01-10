@@ -1,11 +1,11 @@
 {
     "Version": "1.2",
     "Data": {
-        "Source": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\magnetcars.init.gen.cpp",
+        "Source": "e:\\ecole\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\inc\\magnetcars\\magnetcars.init.gen.cpp",
         "ProvidedModule": "",
-        "PCH": "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "PCH": "e:\\ecole\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\magnetcarseditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
         "Includes": [
-            "f:\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h"
+            "e:\\ecole\\ican\\secondannemastere\\magnetcars\\intermediate\\build\\win64\\unrealeditor\\development\\magnetcars\\definitions.magnetcars.h"
         ],
         "ImportedModules": [],
         "ImportedHeaderUnits": []

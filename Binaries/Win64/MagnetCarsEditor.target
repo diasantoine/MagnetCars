@@ -33,6 +33,30 @@
 			"Type": "SymbolFile"
 		},
 		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSessions/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSessions/Binaries/Win64/UnrealEditor-AdvancedSessions.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSessions/Binaries/Win64/UnrealEditor-AdvancedSessions.pdb",
+			"Type": "SymbolFile"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSteamSessions/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSteamSessions/Binaries/Win64/UnrealEditor-AdvancedSteamSessions.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSteamSessions/Binaries/Win64/UnrealEditor-AdvancedSteamSessions.pdb",
+			"Type": "SymbolFile"
+		},
+		{
 			"Path": "$(ProjectDir)/Plugins/Developer/RiderLink/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
@@ -2713,6 +2737,14 @@
 			"Type": "DynamicLibrary"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemSteam/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemSteam/Binaries/Win64/UnrealEditor-OnlineSubsystemSteam.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemUtils/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
@@ -3025,6 +3057,14 @@
 			"Type": "DynamicLibrary"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Runtime/Steam/SteamShared/Binaries/Win64/UnrealEditor.modules",
+			"Type": "RequiredResource"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Runtime/Steam/SteamShared/Binaries/Win64/UnrealEditor-SteamShared.dll",
+			"Type": "DynamicLibrary"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Runtime/Synthesis/Binaries/Win64/UnrealEditor.modules",
 			"Type": "RequiredResource"
 		},
@@ -3072,6 +3112,14 @@
 	"RuntimeDependencies": [
 		{
 			"Path": "$(ProjectDir)/MagnetCars.uproject",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSessions/AdvancedSessions.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(ProjectDir)/Plugins/AdvancedSessions/AdvancedSteamSessions/AdvancedSteamSessions.uplugin",
 			"Type": "UFS"
 		},
 		{
@@ -19883,6 +19931,10 @@
 			"Type": "NonUFS"
 		},
 		{
+			"Path": "$(EngineDir)/Binaries/ThirdParty/Steamworks/Steamv151/Win64/steam_api64.dll",
+			"Type": "NonUFS"
+		},
+		{
 			"Path": "$(EngineDir)/Binaries/ThirdParty/svn/Win64/apr_crypto_openssl-1.dll",
 			"Type": "NonUFS"
 		},
@@ -23475,6 +23527,10 @@
 			"Type": "UFS"
 		},
 		{
+			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemSteam/OnlineSubsystemSteam.uplugin",
+			"Type": "UFS"
+		},
+		{
 			"Path": "$(EngineDir)/Plugins/Online/OnlineSubsystemUtils/OnlineSubsystemUtils.uplugin",
 			"Type": "UFS"
 		},
@@ -23584,6 +23640,10 @@
 		},
 		{
 			"Path": "$(EngineDir)/Plugins/Runtime/SoundFields/SoundFields.uplugin",
+			"Type": "UFS"
+		},
+		{
+			"Path": "$(EngineDir)/Plugins/Runtime/Steam/SteamShared/SteamShared.uplugin",
 			"Type": "UFS"
 		},
 		{
