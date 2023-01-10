@@ -647,7 +647,7 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
 	const FName TraceTag("MyTraceTag");
 	this->GetWorld()->DebugDrawTraceTag = TraceTag;
@@ -695,23 +695,27 @@ void AMyPawnCar::DetectGround()
 			{
 				FRotator CumulVertical = FRotator::ZeroRotator;
 				FRotator CumulHorizontal = FRotator::ZeroRotator;
+				int NumberOfHit1 = 0;
+				int NumberOfHit2 = 0;
 				for (USceneComponent* Raycast : ArrayVerticalRaycastPosition)
 				{
 					if(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).GetActor() == nullptr) continue;
 					FRotator Slope = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
-					if(FMath::Abs(Slope.Pitch) < FMath::Abs(CumulVertical.Pitch)) continue;
-					CumulVertical = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+					//if(FMath::Abs(Slope.Pitch) < FMath::Abs(CumulVertical.Pitch)) continue;
+					NumberOfHit1++;
+					CumulVertical += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
 				}
 				for (USceneComponent* Raycast : ArrayHoziontalRaycastPosition)
 				{
 					if(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).GetActor() == nullptr) continue;
 					FRotator Slope = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
-					if(FMath::Abs(Slope.Roll) < FMath::Abs(CumulHorizontal.Roll)) continue;
-					CumulHorizontal = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+					//if(FMath::Abs(Slope.Roll) < FMath::Abs(CumulHorizontal.Roll)) continue;
+					NumberOfHit2++;
+					CumulHorizontal += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
 				}
 				this->LastHitPoint = ResultHit2.ImpactNormal;
-				NewRotationCar2.Pitch =  CumulVertical.Pitch;// /  NumberOfHit + 1;
-				NewRotationCar2.Roll = CumulHorizontal.Roll;// /  NumberOfHit + 1;
+				NewRotationCar2.Pitch =  CumulVertical.Pitch / (NumberOfHit1 == 0 ? 1 : NumberOfHit1);
+				NewRotationCar2.Roll = CumulHorizontal.Roll / (NumberOfHit2 == 0 ? 1 : NumberOfHit2);
 			}
 			else
 			{
