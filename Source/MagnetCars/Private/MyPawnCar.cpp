@@ -39,6 +39,9 @@ void AMyPawnCar::BeginPlay()
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
 	this->GetWorld()->GetPhysicsScene()->OnPhysSceneStep.AddUObject(this,&AMyPawnCar::PhysicalCarMovement);// Call the physical Tick to get a better physical response
+
+	this->CarCollision->OnComponentBeginOverlap.AddDynamic(this,&AMyPawnCar::OverlapBegin);
+	this->CarCollision->OnComponentEndOverlap.AddDynamic(this,&AMyPawnCar::AMyPawnCar::OverlapEnd);
 }
 
 // Called every frame
@@ -403,13 +406,18 @@ void AMyPawnCar::FlyingCar(const FHitResult ImpactPoint)
 		const float MassCar = this->CarCollision->GetMass();
 		const float HalfSizeBoxGround = this->CarStruct.DistanceWithTheGround;
 		//this->CarCollision->SetEnableGravity(false); If i enable the gravity back i need to know where it was affected before
-		//const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
-		const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
+		const FVector LocationUpCar = this->GetActorUpVector() * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
+		//FVector LocationUpCar =  this->GetActorLocation();
+		//LocationUpCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);
 		//FVector VelocityCar = this->CarCollision->GetPhysicsLinearVelocity();
 		//VelocityCar.Z = 0;
 		//this->CarCollision->SetPhysicsLinearVelocity(VelocityCar);
 		//LocationCar.Z = ImpactPoint.ImpactPoint.Z + (this->CarStruct.IsOnReverseGravity ? -HalfSizeBoxGround: HalfSizeBoxGround);// Give the height the car should always have for flying 
 		//this->SetActorLocation(LocationCar);
+		
+		//const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
+
+		//const FVector LocationUpCar = ImpactPoint.ImpactNormal * this->CarStruct.DistanceWithTheGround + ImpactPoint.ImpactPoint;
 		this->SetActorLocation(LocationUpCar);
 	}
 	//this->Server_FlyingCar(ImpactPoint);
@@ -595,9 +603,14 @@ void AMyPawnCar::CarRespawn()
 	}
 	this->CarStruct.IsOnReverseGravity = false;
 	this->CarStruct.IsGrounded = false;
+	this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeed;
+	this->ContainerTimeBeforeRaycastOn = this->CarStruct.TimeBeforeRaycastOn;
+	this->ContainerTimeBeforeInverseGravityBack = this->CarStruct.CoolDownInverseGravity;
+	this->LastHitPoint = FVector::Zero();
 	this->CarStruct.IsSlowed = false;
 	this->CarStruct.IsBoosted = false;
-	this->LastHitPoint = FVector::Zero();
+	this->CarStruct.IsInverseGravityOnCoolDown = false;
+	this->CarStruct.IsRaycastActive = true;
 }
 
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
@@ -642,7 +655,7 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
 	const FName TraceTag("MyTraceTag");
 	this->GetWorld()->DebugDrawTraceTag = TraceTag;
@@ -686,22 +699,31 @@ void AMyPawnCar::DetectGround()
 		if(ResultHit2.GetActor() != nullptr)// This is the new raycast, same function but the raycast change
 		{
 			if(!ResultHit2.Component->ComponentHasTag(*this->GroundTag) && !ResultHit2.Component->ComponentHasTag(this->BoostTag)) return;
-			FRotator Cumul;
-			int NumberOfHit = 0 ;
-			if(ArrayRaycastPosition.Num() > 0 && false)
+			if(ArrayVerticalRaycastPosition.Num() > 0 &&  ArrayHoziontalRaycastPosition.Num() > 0 && true)
 			{
-				for (USceneComponent* Raycast : ArrayRaycastPosition)
+				FRotator CumulVertical = FRotator::ZeroRotator;
+				FRotator CumulHorizontal = FRotator::ZeroRotator;
+				int NumberOfHit1 = 0;
+				int NumberOfHit2 = 0;
+				for (USceneComponent* Raycast : ArrayVerticalRaycastPosition)
 				{
-					if(this->MultipleRaycast(Raycast->GetComponentLocation()).GetActor() == nullptr) continue;
-					Cumul += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation()).ImpactNormal);
-					NumberOfHit++;
+					if(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).GetActor() == nullptr) continue;
+					FRotator Slope = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+					//if(FMath::Abs(Slope.Pitch) < FMath::Abs(CumulVertical.Pitch)) continue;
+					NumberOfHit1++;
+					CumulVertical += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+				}
+				for (USceneComponent* Raycast : ArrayHoziontalRaycastPosition)
+				{
+					if(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).GetActor() == nullptr) continue;
+					FRotator Slope = DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
+					//if(FMath::Abs(Slope.Roll) < FMath::Abs(CumulHorizontal.Roll)) continue;
+					NumberOfHit2++;
+					CumulHorizontal += DetectSlope(this->MultipleRaycast(Raycast->GetComponentLocation(),Raycast->GetForwardVector()).ImpactNormal);
 				}
 				this->LastHitPoint = ResultHit2.ImpactNormal;
-				FRotator SlopeRotation2;
-				SlopeRotation2 = DetectSlope(ResultHit2.ImpactNormal);
-				SlopeRotation2 += Cumul;
-				NewRotationCar2.Pitch =  SlopeRotation2.Pitch /  NumberOfHit + 1;
-				NewRotationCar2.Roll =  SlopeRotation2.Roll /  NumberOfHit + 1;
+				NewRotationCar2.Pitch =  CumulVertical.Pitch / (NumberOfHit1 == 0 ? 1 : NumberOfHit1);
+				NewRotationCar2.Roll = CumulHorizontal.Roll / (NumberOfHit2 == 0 ? 1 : NumberOfHit2);
 			}
 			else
 			{
@@ -735,7 +757,7 @@ void AMyPawnCar::DetectGround()
 	}
 }
 
-FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast)
+FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast, FVector Direction)
 {
 	FHitResult ResultHit2;
 	const FName TraceTag("MyTraceTag");
@@ -744,8 +766,8 @@ FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast)
 	CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
 	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,PositionRaycast,
-		PositionRaycast + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
-		CollisionParams,FCollisionResponseParams::DefaultResponseParam);
+		PositionRaycast + Direction * DistanceRaycast,
+		ECC_Visibility,CollisionParams,FCollisionResponseParams::DefaultResponseParam);
 	return ResultHit2;
 }
 
@@ -844,6 +866,18 @@ void AMyPawnCar::ResetRotationAfterCrash()
 	this->SetActorRotation(CarRotation);
 }
 
+void AMyPawnCar::FinishLine()
+{
+	//Something
+}
+
+void AMyPawnCar::FinishLineCrossed_Implementation()
+{
+	
+}
+
+
+
 
 void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 // Notify when a collision happen
@@ -859,6 +893,48 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 	}
 }
 
+void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherActor->GetName());
+	if(OtherActor == nullptr)return;
+	if(OtherActor->ActorHasTag(this->CarTag))
+	{
+		AMyPawnCar* CarHit = Cast<AMyPawnCar>(OtherActor);
+		if(CarHit == nullptr) return;
+		this->CarFellOnMe(CarHit);
+		const float Angle = FVector::DotProduct(CarHit->GetActorForwardVector(),(this->GetActorLocation() - CarHit->GetActorLocation()).GetSafeNormal());
+		if(Angle < 0.f)
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,true);
+		}
+		else
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,false);
+		}
+	}else
+	{
+		if(OtherComp == nullptr) return;
+		UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherComp->GetName());
+		if(OtherComp->ComponentHasTag(*this->CheckPointTag))
+		{
+			UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(OtherComp);
+			if(BoxCheckPoint == nullptr) return;;
+			this->LastCheckPointHit = BoxCheckPoint;
+		}else if(OtherComp->ComponentHasTag(*this->RespawnTag))
+		{
+			this->CarRespawn();
+		}
+	}
+}
+
+void AMyPawnCar::OverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	
+}
+
+
+
+/*
 void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if(OtherActor == nullptr)return;
@@ -894,7 +970,18 @@ void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 
 void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
-}
+	if(OtherActor == nullptr)return;
+	for (UActorComponent* Element : OtherActor->GetComponents())
+	{
+		if(Element == nullptr) continue;
+		if(Element->ComponentHasTag(*this->RespawnTag))
+		{
+			const UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(Element);
+			if(BoxCheckPoint == nullptr) continue;
+			this->CarRespawn();
+		}
+	}
+}*/
 
 
 

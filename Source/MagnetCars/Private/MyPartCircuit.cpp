@@ -3,6 +3,8 @@
 
 #include "MyPartCircuit.h"
 
+#include "Components/SlateWrapperTypes.h"
+
 // Sets default values
 AMyPartCircuit::AMyPartCircuit()
 {
@@ -11,17 +13,23 @@ AMyPartCircuit::AMyPartCircuit()
 	this->NewRootComponent = this->CreateDefaultSubobject<USceneComponent>("Root");// Creation des components
 	this->StartPartCircuit = this->CreateDefaultSubobject<USceneComponent>("Start");
 	this->EndPartCircuit = this->CreateDefaultSubobject<USceneComponent>("End");
+	this->TriggerEndPartCircuit = this->CreateDefaultSubobject<UBoxComponent>("FinishLine");
 
 	this->SetRootComponent(this->NewRootComponent);
 	this->StartPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->EndPartCircuit->SetupAttachment(this->NewRootComponent);
+	this->TriggerEndPartCircuit->SetupAttachment(this->NewRootComponent);
+	if(!this->IsLastPartCircuit)
+	{
+		this->TriggerEndPartCircuit->SetActive(false);
+		this->TriggerEndPartCircuit->SetHiddenInGame(true);
+	}
 }
 
 // Called when the game starts or when spawned
 void AMyPartCircuit::BeginPlay()
 {
 	Super::BeginPlay();
-	
 }
 
 // Called every frame
@@ -29,5 +37,15 @@ void AMyPartCircuit::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 }
+
+void AMyPartCircuit::SetUpLastPart() const
+{
+	if(this->IsLastPartCircuit)
+	{
+		this->TriggerEndPartCircuit->SetActive(true);
+		this->TriggerEndPartCircuit->SetHiddenInGame(false);
+	}
+}
+
 
 
