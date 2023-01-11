@@ -243,9 +243,15 @@ public:
 	//Notify any physical collision, it will be useful later for behaviour between vehicles collision
 	virtual void NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit) override;
 	//Notify any Overlap on the Up Collision
-	virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
+	//virtual void NotifyActorBeginOverlap(AActor* OtherActor) override;
 	//Notify end Overlap on the Up Collision
-	virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+	//virtual void NotifyActorEndOverlap(AActor* OtherActor) override;
+
+	UFUNCTION()
+	void OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult & SweepResult);
+
+	UFUNCTION()
+	void OverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 private: // Private function
 	// This function is the physical update of the car, every force should be used there to have the smoothness physics possible
@@ -335,6 +341,9 @@ public:
 	// Rotate the car with the new rotation created with the DetectSlope
 	UFUNCTION(Server,Reliable,NetMulticast)
 	void Server_RotateCarForSlope(FRotator NewRotation);
+	// What Happend When Finish Line Crossed
+	UFUNCTION(BlueprintCallable)
+	void FinishLine();
 	// Event trigger once the car got grounded, executed once each ground
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarGotGrounded();
@@ -359,6 +368,9 @@ public:
 	// Event trigger once when the car take the boost
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void CarBoost();
+	// Event trigger once we pass the finish line
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void FinishLineCrossed();
 
 	// Structure for the preset of parameter for the car
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
@@ -384,9 +396,12 @@ public:
 	// Show last checkpointHit
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	FString CheckPointTag = "CheckPoint";
-	// Show last checkpointHit
+	// Ground Tag
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
 	FString GroundTag = "Ground";
+	// Ground Tag
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString RespawnTag = "Respawn";
 	// The time before the system detect the car is falling (not used)
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	float TimeBeforeCarFall = 0.5f;

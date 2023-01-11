@@ -39,6 +39,9 @@ void AMyPawnCar::BeginPlay()
 		this->CarCollision->SetAngularDamping(CarStruct.AngularAirFriction);
 	}
 	this->GetWorld()->GetPhysicsScene()->OnPhysSceneStep.AddUObject(this,&AMyPawnCar::PhysicalCarMovement);// Call the physical Tick to get a better physical response
+
+	this->CarCollision->OnComponentBeginOverlap.AddDynamic(this,&AMyPawnCar::OverlapBegin);
+	this->CarCollision->OnComponentEndOverlap.AddDynamic(this,&AMyPawnCar::AMyPawnCar::OverlapEnd);
 }
 
 // Called every frame
@@ -600,9 +603,14 @@ void AMyPawnCar::CarRespawn()
 	}
 	this->CarStruct.IsOnReverseGravity = false;
 	this->CarStruct.IsGrounded = false;
+	this->CarStruct.ActualMaxSpeedUnderEffect = this->CarStruct.MaxSpeed;
+	this->ContainerTimeBeforeRaycastOn = this->CarStruct.TimeBeforeRaycastOn;
+	this->ContainerTimeBeforeInverseGravityBack = this->CarStruct.CoolDownInverseGravity;
+	this->LastHitPoint = FVector::Zero();
 	this->CarStruct.IsSlowed = false;
 	this->CarStruct.IsBoosted = false;
-	this->LastHitPoint = FVector::Zero();
+	this->CarStruct.IsInverseGravityOnCoolDown = false;
+	this->CarStruct.IsRaycastActive = true;
 }
 
 void AMyPawnCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
@@ -858,6 +866,18 @@ void AMyPawnCar::ResetRotationAfterCrash()
 	this->SetActorRotation(CarRotation);
 }
 
+void AMyPawnCar::FinishLine()
+{
+	//Something
+}
+
+void AMyPawnCar::FinishLineCrossed_Implementation()
+{
+	
+}
+
+
+
 
 void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiveComponent* OtherComp, bool bSelfMoved, FVector HitLocation, FVector HitNormal, FVector NormalImpulse, const FHitResult& Hit)
 // Notify when a collision happen
@@ -873,6 +893,48 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 	}
 }
 
+void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherActor->GetName());
+	if(OtherActor == nullptr)return;
+	if(OtherActor->ActorHasTag(this->CarTag))
+	{
+		AMyPawnCar* CarHit = Cast<AMyPawnCar>(OtherActor);
+		if(CarHit == nullptr) return;
+		this->CarFellOnMe(CarHit);
+		const float Angle = FVector::DotProduct(CarHit->GetActorForwardVector(),(this->GetActorLocation() - CarHit->GetActorLocation()).GetSafeNormal());
+		if(Angle < 0.f)
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,true);
+		}
+		else
+		{
+			CarHit->BoostPlate(CarHit->CarStruct.PowerBoost,false);
+		}
+	}else
+	{
+		if(OtherComp == nullptr) return;
+		UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherComp->GetName());
+		if(OtherComp->ComponentHasTag(*this->CheckPointTag))
+		{
+			UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(OtherComp);
+			if(BoxCheckPoint == nullptr) return;;
+			this->LastCheckPointHit = BoxCheckPoint;
+		}else if(OtherComp->ComponentHasTag(*this->RespawnTag))
+		{
+			this->CarRespawn();
+		}
+	}
+}
+
+void AMyPawnCar::OverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	
+}
+
+
+
+/*
 void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 {
 	if(OtherActor == nullptr)return;
@@ -908,7 +970,18 @@ void AMyPawnCar::NotifyActorBeginOverlap(AActor* OtherActor)
 
 void AMyPawnCar::NotifyActorEndOverlap(AActor* OtherActor)
 {
-}
+	if(OtherActor == nullptr)return;
+	for (UActorComponent* Element : OtherActor->GetComponents())
+	{
+		if(Element == nullptr) continue;
+		if(Element->ComponentHasTag(*this->RespawnTag))
+		{
+			const UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(Element);
+			if(BoxCheckPoint == nullptr) continue;
+			this->CarRespawn();
+		}
+	}
+}*/
 
 
 
