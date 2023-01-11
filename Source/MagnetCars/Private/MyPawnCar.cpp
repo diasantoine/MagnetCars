@@ -655,12 +655,12 @@ void AMyPawnCar::DetectGround()
 	// Raycast with a box to detect the ground, i prefer to do that to not have the system breaking because of some mistake in the LD
 	const bool ResultHit = UKismetSystemLibrary::BoxTraceSingle(this, StartPosition,EndPosition,
 		CarStruct.HalfSizeBoxGroundDetection,CarRotation,UEngineTypes::ConvertToTraceType(ECC_Visibility),false,ActorIgnored,
-		EDrawDebugTrace::ForOneFrame,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
+		EDrawDebugTrace::None,Result,true,FLinearColor::Blue,FLinearColor::Red,5);
 	FHitResult ResultHit2;
-	const FName TraceTag("MyTraceTag");
-	this->GetWorld()->DebugDrawTraceTag = TraceTag;
+	/*const FName TraceTag("MyTraceTag");
+	this->GetWorld()->DebugDrawTraceTag = TraceTag;*/
 	FCollisionQueryParams CollisionParams;
-	CollisionParams.TraceTag = TraceTag;
+	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
 	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,this->RaycastPosition->GetComponentLocation(),
 		this->RaycastPosition->GetComponentLocation() + -this->GetActorUpVector() * DistanceRaycast,ECC_Visibility,
@@ -760,10 +760,10 @@ void AMyPawnCar::DetectGround()
 FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast, FVector Direction)
 {
 	FHitResult ResultHit2;
-	const FName TraceTag("MyTraceTag");
-	this->GetWorld()->DebugDrawTraceTag = TraceTag;
+	/*const FName TraceTag("MyTraceTag");
+	this->GetWorld()->DebugDrawTraceTag = TraceTag;*/
 	FCollisionQueryParams CollisionParams;
-	CollisionParams.TraceTag = TraceTag;
+	//CollisionParams.TraceTag = TraceTag;
 	CollisionParams.AddIgnoredActor(this);
 	this->GetWorld()->LineTraceSingleByChannel(ResultHit2 ,PositionRaycast,
 		PositionRaycast + Direction * DistanceRaycast,
