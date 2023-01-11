@@ -6,6 +6,6 @@
 /NAME:"UnrealEditor-RiderBlueprint.dll"
 /IGNORE:4221
 /NODEFAULTLIB
-"F:\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Module.RiderBlueprint.cpp.obj"
-"F:\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Default.rc2.res"
-/OUT:"F:\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.lib"
+"W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Module.RiderBlueprint.cpp.obj"
+"W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\Default.rc2.res"
+/OUT:"W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.lib"

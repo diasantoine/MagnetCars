@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.02.00">
 	<object class="Event" id="{0bcfe947-2af3-45a5-bd1b-679900b75456}">
 		<property name="color">
-			<value>Blue</value>
+			<value>Green</value>
 		</property>
 		<property name="name">
 			<value>Moteur_Vitesse</value>
@@ -472,10 +472,10 @@
 	</object>
 	<object class="SingleSound" id="{6cff9117-3504-4108-9ed5-4ea7d5ca8cb9}">
 		<property name="start">
-			<value>8100</value>
+			<value>7700</value>
 		</property>
 		<property name="length">
-			<value>900</value>
+			<value>1300</value>
 		</property>
 		<property name="looping">
 			<value>true</value>
@@ -1566,7 +1566,7 @@
 	</object>
 	<object class="AutomationPoint" id="{81a27abf-9b65-4822-a507-dda56a675cae}">
 		<property name="position">
-			<value>8100</value>
+			<value>7700</value>
 		</property>
 		<property name="value">
 			<value>0</value>
@@ -1577,7 +1577,7 @@
 	</object>
 	<object class="AutomationPoint" id="{7f89deaf-0cc5-4004-96d3-9e1fce276c98}">
 		<property name="position">
-			<value>8300</value>
+			<value>7900</value>
 		</property>
 		<property name="value">
 			<value>1</value>
