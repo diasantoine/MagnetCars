@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="ParameterPreset" id="{4bc69ffc-859d-4dab-9968-f83134c726ec}">
+		<property name="name">
+			<value>VolPourcent</value>
+		</property>
+		<relationship name="folder">
+			<destination>{ac2d6cd1-1a9a-4053-a583-ee03d158e0ea}</destination>
+		</relationship>
+		<relationship name="parameter">
+			<destination>{1fdfcf8e-b337-4083-889e-d4a8d6df63fa}</destination>
+		</relationship>
+	</object>
+	<object class="GameParameter" id="{1fdfcf8e-b337-4083-889e-d4a8d6df63fa}">
+		<property name="maximum">
+			<value>100</value>
+		</property>
+		<property name="initialValue">
+			<value>0</value>
+		</property>
+		<property name="seekSpeed">
+			<value>26</value>
+		</property>
+		<property name="seekSpeedDescending">
+			<value>26</value>
+		</property>
+		<property name="seekSpeedAsymmetric">
+			<value>true</value>
+		</property>
+	</object>
+</objects>
