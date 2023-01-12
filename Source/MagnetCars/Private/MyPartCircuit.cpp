@@ -14,13 +14,19 @@ AMyPartCircuit::AMyPartCircuit()
 	this->StartPartCircuit = this->CreateDefaultSubobject<USceneComponent>("Start");
 	this->EndPartCircuit = this->CreateDefaultSubobject<USceneComponent>("End");
 	this->TriggerEndPartCircuit = this->CreateDefaultSubobject<UBoxComponent>("FinishLine");
+	this->StopFallFirstPartCircuit = this->CreateDefaultSubobject<UBoxComponent>("BlockFallFirstPart");
 
 	this->SetRootComponent(this->NewRootComponent);
 	this->StartPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->EndPartCircuit->SetupAttachment(this->NewRootComponent);
+	
 	this->TriggerEndPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->TriggerEndPartCircuit->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	this->TriggerEndPartCircuit->SetHiddenInGame(true);
+
+	this->StopFallFirstPartCircuit->SetupAttachment(this->NewRootComponent);
+	this->StopFallFirstPartCircuit->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	this->StopFallFirstPartCircuit->SetHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
@@ -40,6 +46,13 @@ void AMyPartCircuit::SetUpLastPart()
 	this->IsLastPartCircuit = true;
 	this->TriggerEndPartCircuit->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
+
+void AMyPartCircuit::SetUpFirstPart()
+{
+	this->IsFirstPartCircuit = true;
+	this->StopFallFirstPartCircuit->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+}
+
 
 
 
