@@ -24,11 +24,22 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	// Set Up Finish Line
 	UFUNCTION(BlueprintCallable)
-	void SetUpLastPart() const;
+	void SetUpLastPart();
+
+	// Set Up a respawn wall at the start of the circuit
+	UFUNCTION(BlueprintCallable)
+	void SetUpFirstPart();
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Parameter PartCircuit")
 	bool IsLastPartCircuit = false;
+
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Parameter PartCircuit")
+	bool IsFirstPartCircuit = false;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Parameter PartCircuit")
+	float BoostPower = 2000.f;
 
 	// Scene used to create the root component
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
@@ -45,4 +56,8 @@ public:
 	// Scene used to get the end of the part of the circuit
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
 	UBoxComponent* TriggerEndPartCircuit = nullptr;
+
+	// Scene used to stop the player from falling at the first part
+	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")
+	UBoxComponent* StopFallFirstPartCircuit = nullptr;
 };

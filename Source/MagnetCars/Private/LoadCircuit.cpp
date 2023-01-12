@@ -111,8 +111,10 @@ void ALoadCircuit::LoadCircuit_Implementation()
 	}
 	this->FirstPartCircuitPosition = this->GetActorLocation();
 	if(PartCircuitGenerated.Num() == 0)return;
-	if(PartCircuitGenerated[PartCircuitGenerated.Num()-1] == nullptr)return;
-	PartCircuitGenerated[PartCircuitGenerated.Num()-1]->SetUpLastPart();
+	if(this->PartCircuitGenerated[0] == nullptr)return;
+	this->PartCircuitGenerated[0]->SetUpFirstPart();
+	if(this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1] == nullptr)return;
+	this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1]->SetUpLastPart();
 }
 
 
