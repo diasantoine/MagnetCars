@@ -25,10 +25,13 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintCallable)
-	void SetUpLastPart() const;
+	void SetUpLastPart();
 
 	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Parameter PartCircuit")
 	bool IsLastPartCircuit = false;
+	
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category = "Parameter PartCircuit")
+	float BoostPower = 2000.f;
 
 	// Scene used to create the root component
 	UPROPERTY(VisibleAnywhere, Category = "Parameter PartCircuit")

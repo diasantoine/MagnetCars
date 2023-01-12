@@ -19,11 +19,8 @@ AMyPartCircuit::AMyPartCircuit()
 	this->StartPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->EndPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->TriggerEndPartCircuit->SetupAttachment(this->NewRootComponent);
-	if(!this->IsLastPartCircuit)
-	{
-		this->TriggerEndPartCircuit->SetActive(false);
-		this->TriggerEndPartCircuit->SetHiddenInGame(true);
-	}
+	this->TriggerEndPartCircuit->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	this->TriggerEndPartCircuit->SetHiddenInGame(true);
 }
 
 // Called when the game starts or when spawned
@@ -38,13 +35,10 @@ void AMyPartCircuit::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 }
 
-void AMyPartCircuit::SetUpLastPart() const
+void AMyPartCircuit::SetUpLastPart()
 {
-	if(this->IsLastPartCircuit)
-	{
-		this->TriggerEndPartCircuit->SetActive(true);
-		this->TriggerEndPartCircuit->SetHiddenInGame(false);
-	}
+	this->IsLastPartCircuit = true;
+	this->TriggerEndPartCircuit->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
 
 
