@@ -3,6 +3,7 @@
 
 #include "MyCarUi.h"
 #include "Components/CanvasPanelSlot.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Logging/LogMacros.h"
 #include "Logging/LogMacros.h"
 
@@ -308,14 +309,14 @@ void UMyCarUi::UpdateArrow()
 			switch (i)
 			{
 			case 0:
-				default:
-				this->BehindPlayer2->SetVisibility(ESlateVisibility::Visible);
+			default:
+			this->BehindPlayer2->SetVisibility(ESlateVisibility::Visible);
 				if(FVector::DotProduct(Element->GetActorUpVector(),MyPlayerCar->GetActorUpVector()) >= 0)
 				{
 					this->BehindPlayer2->SetBrushTintColor(this->ColorSameGravity);
 				}
-				UE_LOG(LogTemp,Warning,TEXT("%f"),FVector::DotProduct(Element->GetActorUpVector(),MyPlayerCar->GetActorUpVector()));
-				this->BehindPlayer2->SetRenderTransformAngle(FVector::DotProduct(Element->GetActorUpVector(),MyPlayerCar->GetActorUpVector()));
+				UE_LOG(LogTemp,Warning,TEXT("test ,%f"),FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
+				this->BehindPlayer2->SetRenderTransformAngle(FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
 				break;
 			case 1:
 				this->BehindPlayer3->SetVisibility(ESlateVisibility::Visible);
@@ -323,7 +324,7 @@ void UMyCarUi::UpdateArrow()
 				{
 					this->BehindPlayer3->SetBrushTintColor(this->ColorSameGravity);
 				}
-				this->BehindPlayer3->SetRenderTransformAngle(FVector::DotProduct(Element->GetActorUpVector(),MyPlayerCar->GetActorUpVector()));
+				this->BehindPlayer3->SetRenderTransformAngle(FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
 				break;
 			case 2:
 				this->BehindPlayer4->SetVisibility(ESlateVisibility::Visible);
@@ -331,7 +332,7 @@ void UMyCarUi::UpdateArrow()
 				{
 					this->BehindPlayer4->SetBrushTintColor(this->ColorSameGravity);
 				}
-				this->BehindPlayer4->SetRenderTransformAngle(FVector::DotProduct(Element->GetActorUpVector(),MyPlayerCar->GetActorUpVector()));
+				this->BehindPlayer4->SetRenderTransformAngle(FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
 				break;
 			}
 		}
@@ -352,15 +353,4 @@ void UMyCarUi::UpdateArrow()
 			}
 		}
 	}
-	
-	/*if(Element->CarStruct.IsOnReverseGravity != MyPlayerCar->CarStruct.IsOnReverseGravity)//calcul angle?
-		{
-		this->BehindPlayer2->SetBrushTintColor(this->ColorOpositeGravity);
-		}*/
 }
-
-
-
-
-
-
