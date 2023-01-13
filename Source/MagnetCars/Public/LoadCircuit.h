@@ -96,4 +96,5 @@ public:
 	// Last position of the last circuit, used for the generation
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Var")
 	USceneComponent* LastEndSceneComponent = nullptr;
+
 };

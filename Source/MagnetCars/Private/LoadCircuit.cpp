@@ -43,6 +43,7 @@ void ALoadCircuit::LoadCircuit_Implementation()
 	this->UnLoadCircuit();
 	this->LoadMapType();
 	bool First = false;
+	bool HalfMade = false;
 	for (auto Circuit : MapCircuit)
 	{
 		for (const TSubclassOf<AMyPartCircuit> CircuitPart : Circuit.Value.CircuitPart)
@@ -104,6 +105,14 @@ void ALoadCircuit::LoadCircuit_Implementation()
 				Container->SetActorLocation(SpawnPosition);
 				this->PartCircuitGenerated.Add(Container);
 				this->LastEndSceneComponent = Container->EndPartCircuit;
+			}
+		}
+		if(!HalfMade)
+		{
+			HalfMade = true;
+			if(this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1] != __nullptr)
+			{
+				this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1]->SetUpHalfCircuit();
 			}
 		}
 		if(this->LastEndSceneComponent == nullptr)continue;

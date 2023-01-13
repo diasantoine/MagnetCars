@@ -891,6 +891,12 @@ void AMyPawnCar::FinishLineCrossed_Implementation()
 	
 }
 
+void AMyPawnCar::HalfLineCrossed_Implementation()
+{
+	
+}
+
+
 
 
 
@@ -948,6 +954,11 @@ void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* 
 		else if(OtherComp->ComponentHasTag(*this->FinishLineTag))
 		{
 			this->FinishLine();
+		}
+		else if(OtherComp->ComponentHasTag(*this->LeapPassedTag))
+		{
+			this->NumberOfLeap = 2;
+			this->HalfLineCrossed();
 		}
 	}
 }

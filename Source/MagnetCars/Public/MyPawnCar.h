@@ -383,6 +383,9 @@ public:
 	// Event trigger once we pass the finish line
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void FinishLineCrossed();
+	// Event trigger once we pass the Half Line
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void HalfLineCrossed();
 
 	// Structure for the preset of parameter for the car
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
@@ -417,6 +420,10 @@ public:
 	// Finish Line Tag
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
 	FString FinishLineTag = "Finish";
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString LeapPassedTag = "Leap";
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	int NumberOfLeap = 1;
 	// The time before the system detect the car is falling (not used)
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	float TimeBeforeCarFall = 0.5f;

@@ -15,6 +15,7 @@ AMyPartCircuit::AMyPartCircuit()
 	this->EndPartCircuit = this->CreateDefaultSubobject<USceneComponent>("End");
 	this->TriggerEndPartCircuit = this->CreateDefaultSubobject<UBoxComponent>("FinishLine");
 	this->StopFallFirstPartCircuit = this->CreateDefaultSubobject<UBoxComponent>("BlockFallFirstPart");
+	this->TriggerOneLap = this->CreateDefaultSubobject<UBoxComponent>("HalfPartCircuit");
 
 	this->SetRootComponent(this->NewRootComponent);
 	this->StartPartCircuit->SetupAttachment(this->NewRootComponent);
@@ -27,6 +28,11 @@ AMyPartCircuit::AMyPartCircuit()
 	this->StopFallFirstPartCircuit->SetupAttachment(this->NewRootComponent);
 	this->StopFallFirstPartCircuit->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 	this->StopFallFirstPartCircuit->SetHiddenInGame(true);
+
+	this->TriggerOneLap->SetupAttachment(this->NewRootComponent);
+	this->TriggerOneLap->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	this->TriggerOneLap->SetHiddenInGame(true);
+	this->TriggerOneLap->ComponentTags.Add("Leap");
 }
 
 // Called when the game starts or when spawned
@@ -52,6 +58,13 @@ void AMyPartCircuit::SetUpFirstPart()
 	this->IsFirstPartCircuit = true;
 	this->StopFallFirstPartCircuit->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
 }
+
+void AMyPartCircuit::SetUpHalfCircuit()
+{
+	this->IsHalfCircuit = true;
+	this->TriggerOneLap->SetCollisionEnabled(ECollisionEnabled::QueryOnly);
+}
+
 
 
 
