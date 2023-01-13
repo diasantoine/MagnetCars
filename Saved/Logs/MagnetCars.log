@@ -1136,3 +1136,81 @@ LogConfig: CVar [[QualityLevelMapping:high]] deferred - dummy variable created
 [2023.01.13-23.50.18:939][973]LogSavePackage: Moving '../../../../../../../../sarah/Documents/Project/MyProject/Saved/Car_Texture4EB95CE054F95AD4D7AD0519E152051E6.tmp' to '../../../../../../../../sarah/Documents/Project/MyProject/Content/2D/Textures/Car_Texture4.uasset'
 [2023.01.13-23.50.20:060][973]LogSavePackage: Moving output files for package: /Game/2D/Textures/Car_Texture_with_outlines_2
 [2023.01.13-23.50.20:060][973]LogSavePackage: Moving '../../../../../../../../sarah/Documents/Project/MyProject/Saved/Car_Texture_with_outlines_25A81F04142414B548B49F0BB2612E804.tmp' to '../../../../../../../../sarah/Documents/Project/MyProject/Content/2D/Textures/Car_Texture_with_outlines_2.uasset'
+[2023.01.13-23.51.11:186][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' exceeded budget of 2.000000s, reporting...
+[2023.01.13-23.51.11:186][973]LogFMOD: Warning: c:\jk\workspace\Build__2.2__Unreal_Win\core_api\platforms\win\src\fmod_output_wasapi.cpp(587) - Starvation detected in WASAPI output buffer!
+
+[2023.01.13-23.51.11:186][973]LogFMOD: Warning: c:\jk\workspace\Build__2.2__Unreal_Win\core_api\platforms\win\src\fmod_output_wasapi.cpp(587) - Starvation detected in WASAPI output buffer!
+
+[2023.01.13-23.51.11:186][973]LogAudioMixer: Warning: AudioMixerPlatformInterface Timeout [48195ms] waiting for h/w. InstanceID=1
+[2023.01.13-23.51.11:186][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' report submitted, and took 0.049942s
+[2023.01.13-23.51.18:736][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' complete in 0.001287s (7.599293s overbudget)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: ================================================
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: === FShaderJobCache stats ===
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Total job queries 181, among them cache hits 83 (45.86%)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Tracking 56 distinct input hashes that result in 21 distinct outputs (37.50%)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: RAM used: 0.06 MB (0.00 GB) of 409.60 MB (0.40 GB) budget. Usage: 0.01%
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: === Shader Compilation stats ===
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Shaders Compiled: 58
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Jobs assigned 56, completed 56 (100.00%)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Average time worker was idle: 35.19 s
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Time job spent in pending queue: average 6.22 s, longest 55.66 s
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Job execution time: average 18.22 s, max 55.21 s
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Job life time (pending + execution): average 24.44 s, max 58.54
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Time at least one job was in flight (either pending or executed): 155.98 s
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Jobs were issued in 47 batches (only local compilation was used), average 1.19 jobs/batch
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Average processing rate: 0.36 jobs/sec
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Effective parallelization: 1.27 (times faster than compiling all shaders on one thread). Compare with number of workers: 4
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Top 5 most expensive shader types by average time:
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                 TBasePassVSFNoLightMapPolicy (compiled    9 times, average 4.80 sec, max 6.14 sec, min 3.52 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                                 FLumenCardVS (compiled    7 times, average 4.39 sec, max 5.22 sec, min 1.91 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy (compiled    9 times, average 4.20 sec, max 5.40 sec, min 1.99 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:        TBasePassPSFCachedPointIndirectLightingPolicySkylight (compiled    2 times, average 4.08 sec, max 5.76 sec, min 2.39 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: TBasePassPSFPrecomputedVolumetricLightmapLightingPolicySkylight (compiled    2 times, average 4.00 sec, max 5.57 sec, min 2.42 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: Top 5 shader types by total compile time:
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                 TBasePassVSFNoLightMapPolicy - 21.77% of total time (compiled    9 times, average 4.80 sec, max 6.14 sec, min 3.52 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                 TBasePassPSFNoLightMapPolicy - 19.06% of total time (compiled    9 times, average 4.20 sec, max 5.40 sec, min 1.99 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                                 FLumenCardVS - 15.49% of total time (compiled    7 times, average 4.39 sec, max 5.22 sec, min 1.91 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:                                          FLumenCardPS<false> - 7.12% of total time (compiled    7 times, average 2.02 sec, max 2.49 sec, min 0.63 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display:        TBasePassPSFCachedPointIndirectLightingPolicySkylight - 4.11% of total time (compiled    2 times, average 4.08 sec, max 5.76 sec, min 2.39 sec)
+[2023.01.13-23.51.18:793][973]LogShaderCompilers: Display: ================================================
+[2023.01.13-23.51.18:916][973]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/3D/Materials/Mt_Car2" FILE="../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car2.uasset" SILENT=true
+[2023.01.13-23.51.19:125][973]LogSavePackage: Moving output files for package: /Game/3D/Materials/Mt_Car2
+[2023.01.13-23.51.19:126][973]LogSavePackage: Moving '../../../../../../../../sarah/Documents/Project/MyProject/Saved/Mt_Car2BB6D4DF5434FD48CB8AE90AFEFDF03F8.tmp' to '../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car2.uasset'
+[2023.01.13-23.51.21:165][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' exceeded budget of 2.000000s
+[2023.01.13-23.51.33:450][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' complete in 0.000046s (12.148963s overbudget)
+[2023.01.13-23.51.33:508][973]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/3D/Materials/Mt_Car3" FILE="../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car3.uasset" SILENT=true
+[2023.01.13-23.51.33:511][973]LogSavePackage: Moving output files for package: /Game/3D/Materials/Mt_Car3
+[2023.01.13-23.51.33:511][973]LogSavePackage: Moving '../../../../../../../../sarah/Documents/Project/MyProject/Saved/Mt_Car3B022A5C9474E6769BD589FA85F15A067.tmp' to '../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car3.uasset'
+[2023.01.13-23.51.35:676][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' exceeded budget of 2.000000s
+[2023.01.13-23.51.45:622][973]LogStall: Stall detector 'FShaderCompilingManager::BlockOnShaderMapCompletion' complete in 0.003091s (10.082725s overbudget)
+[2023.01.13-23.51.45:673][973]Cmd: OBJ SAVEPACKAGE PACKAGE="/Game/3D/Materials/Mt_Car4" FILE="../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car4.uasset" SILENT=true
+[2023.01.13-23.51.45:714][973]LogSavePackage: Moving output files for package: /Game/3D/Materials/Mt_Car4
+[2023.01.13-23.51.45:714][973]LogSavePackage: Moving '../../../../../../../../sarah/Documents/Project/MyProject/Saved/Mt_Car4B2B056F2479597CCC6D883AC3CE0D2AD.tmp' to '../../../../../../../../sarah/Documents/Project/MyProject/Content/3D/Materials/Mt_Car4.uasset'
+[2023.01.13-23.51.45:880][973]LogStall: Shutdown...
+[2023.01.13-23.51.46:136][973]LogStall: Shutdown complete.
+[2023.01.13-23.51.47:019][973]LogSlate: Window 'MagnetCars - Unreal Editor' being destroyed
+[2023.01.13-23.51.48:953][973]AssetCheck: New page: Asset Save: multiple assets
+[2023.01.13-23.51.49:012][973]LogContentValidation: Display: Validating Texture2D /Game/2D/Textures/Car_Texture4.Car_Texture4
+[2023.01.13-23.51.49:133][973]LogContentValidation: Display: Validating Texture2D /Game/2D/Textures/Car_Texture_with_outlines_2.Car_Texture_with_outlines_2
+[2023.01.13-23.51.49:133][973]LogContentValidation: Display: Validating Texture2D /Game/2D/Textures/Car_Texture3.Car_Texture3
+[2023.01.13-23.51.49:133][973]LogContentValidation: Display: Validating Material /Game/3D/Materials/Mt_Car2.Mt_Car2
+[2023.01.13-23.51.49:133][973]LogContentValidation: Display: Validating Material /Game/3D/Materials/Mt_Car3.Mt_Car3
+[2023.01.13-23.51.49:134][973]LogContentValidation: Display: Validating Material /Game/3D/Materials/Mt_Car4.Mt_Car4
+[2023.01.13-23.51.49:536][974]LogAudioMixer: Display: FMixerNullCallback: Simulating a h/w device callback at [21ms], ThreadID=25860
+[2023.01.13-23.51.49:539][974]Cmd: QUIT_EDITOR
+[2023.01.13-23.51.49:591][974]LogCore: Engine exit requested (reason: UUnrealEdEngine::CloseEditor())
+[2023.01.13-23.51.50:100][974]LogCore: Engine exit requested (reason: EngineExit() was called; note: exit was already requested)
+[2023.01.13-23.51.50:206][974]LogStaticMesh: Abandoning remaining async distance field tasks for shutdown
+[2023.01.13-23.51.50:289][974]LogStaticMesh: Abandoning remaining async card representation tasks for shutdown
+[2023.01.13-23.51.51:615][974]LogAudio: Display: Beginning Audio Device Manager Shutdown (Module: AudioMixerXAudio2)...
+[2023.01.13-23.51.51:615][974]LogAudio: Display: Destroying 1 Remaining Audio Device(s)...
+[2023.01.13-23.51.51:615][974]LogAudio: Display: Audio Device unregistered from world 'AntoineMap'.
+[2023.01.13-23.51.53:840][974]LogAudioMixer: Warning: FadeOutEvent timed out
+[2023.01.13-23.51.53:896][974]LogAudioMixer: Display: Successful Swap new Device is (NumChannels=2, SampleRate=48000, DeviceID={0.0.0.00000000}.{44f3f5d4-2869-4d34-bf69-62ec70579c41}, Name=Speaker/Headphone (Realtek High Definition Audio)), Reason=AudioMixerPlatformInterface. Timeout waiting for h/w., InstanceID=1, DurationMS=145.71
+[2023.01.13-23.51.53:896][974]LogAudioMixer: Display: Output buffers initialized: Frames=1024, Channels=2, Samples=2048, InstanceID=1
+[2023.01.13-23.51.54:096][974]LogAudioMixer: Display: Starting AudioMixerPlatformInterface::RunInternal(), InstanceID=1
+[2023.01.13-23.51.54:097][974]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1
+[2023.01.13-23.51.54:098][974]LogAudioMixer: FMixerPlatformXAudio2::StopAudioStream() called. InstanceID=1
+[2023.01.13-23.51.54:481][974]LogAudio: Display: Audio Device Manager Shutdown
+[2023.01.13-23.51.54:777][974]LogExit: Preparing to exit.
+[2023.01.13-23.51.56:028][974]LogUObjectHash: Compacting FUObjectHashTables data took   0.72ms
