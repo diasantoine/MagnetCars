@@ -115,6 +115,7 @@ void ALoadCircuit::LoadCircuit_Implementation()
 	this->PartCircuitGenerated[0]->SetUpFirstPart();
 	if(this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1] == nullptr)return;
 	this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1]->SetUpLastPart();
+	this->LastPartCircuitPosition = this->PartCircuitGenerated[this->PartCircuitGenerated.Num()-1]->TriggerEndPartCircuit->GetComponentLocation();
 }
 
 

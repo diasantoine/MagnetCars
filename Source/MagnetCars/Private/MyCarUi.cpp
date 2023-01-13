@@ -72,65 +72,97 @@ void UMyCarUi::NativeConstruct()
 void UMyCarUi::SetUpClassementSetUpMap()
 {
 	if(ArrayPlayer.Num() == 0)return;
+	if(this->StartMap)
+	{
+		this->StartMap->SetVisibility(ESlateVisibility::Visible);
+	}
+	if(this->EndMap)
+	{
+		this->EndMap->SetVisibility(ESlateVisibility::Visible);
+	}
+	if(this->Map)
+	{
+		this->Map->SetVisibility(ESlateVisibility::Visible);
+	}
 	switch (ArrayPlayer.Num())
 	{
 	case 1:
 		default:
-		if(MapPositionPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
+			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
+			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
 		}
 		break;
 	case 2:
-		if(MapPositionPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
+			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
+			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
+			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
+			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
 		}
 		break;
 	case 3:
-		if(MapPositionPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
+			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
+			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
+			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
+			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer3)
+		if(MapPositionPlayer3 && this->ClassementPlayer3)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[2],this->MapPositionPlayer3);
+			this->MapPositionPlayer3->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[2],this->ClassementPlayer3);
+			this->ClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
 		}
 		break;
 	case 4:
-		if(MapPositionPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
+			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
+			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
+			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
+			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer3)
+		if(MapPositionPlayer3 && this->ClassementPlayer3)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[2],this->MapPositionPlayer3);
+			this->MapPositionPlayer3->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[2],this->ClassementPlayer3);
+			this->ClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
 		}
-		if(MapPositionPlayer4)
+		if(MapPositionPlayer4 && this->ClassementPlayer4)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[3],this->MapPositionPlayer4);
+			this->MapPositionPlayer4->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[3],this->ClassementPlayer4);
+			this->ClassementPlayer4->SetVisibility(ESlateVisibility::Visible);
 		}
 		break;
 	}
