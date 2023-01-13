@@ -55,6 +55,9 @@ struct FCar
 	// Bool which show if the car can instant reverse his gravity
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool InstantReverseGravity = false;
+	// Bool which show if the gravity change to UpVector after a changement of gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool DoesHitPointReset = true;
 	// Bool which show if the car will gain force toward the direction of the lean
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool DragWholeBodyWhenLean = true;

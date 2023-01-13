@@ -1828,6 +1828,9 @@
     <ClCompile Include="..\..\Source\MagnetCars\Private\MyCarController.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\MagnetCars\Private\MyCarUi.cpp">
+      <Filter>Source\MagnetCars\Private</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\MagnetCars\Private\MyGroundBoostPlate.cpp">
       <Filter>Source\MagnetCars\Private</Filter>
     </ClCompile>
@@ -1859,6 +1862,9 @@
       <Filter>Source\MagnetCars\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MagnetCars\Public\MyCarController.h">
+      <Filter>Source\MagnetCars\Public</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\MagnetCars\Public\MyCarUi.h">
       <Filter>Source\MagnetCars\Public</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Source\MagnetCars\Public\MyGroundBoostPlate.h">

@@ -461,7 +461,14 @@ void AMyPawnCar::CarGravity()
 	FRotator CarRotation = this->GetActorRotation();
 	CarRotation.Roll += this->CarStruct.IsOnReverseGravity ? 180 : -180;// This function invert the gravity of the player and rotate him
 	this->SetActorRotation(CarRotation);
-	this->LastHitPoint = -LastHitPoint;
+	if(this->CarStruct.DoesHitPointReset)
+	{
+		this->LastHitPoint = FVector::Zero();
+	}
+	else
+	{
+		this->LastHitPoint = -LastHitPoint;
+	}
 	this->CarStruct.IsRaycastActive = false;
 	this->CarStruct.IsGrounded = false;
 	if(!this->CarStruct.InstantReverseGravity)
