@@ -1,6 +1,8 @@
 {
 	"SourceFiles": [
 		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Source\\MagnetCars\\MagnetCars.Build.cs",
+		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\AdvancedSessions\\AdvancedSessions\\Source\\AdvancedSessions\\AdvancedSessions.Build.cs",
+		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\AdvancedSessions\\AdvancedSteamSessions\\Source\\AdvancedSteamSessions\\AdvancedSteamSessions.Build.cs",
 		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RD\\RD.Build.cs",
 		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderBlueprint\\RiderBlueprint.Build.cs",
 		"E:\\Ecole\\ICAN\\SecondAnneMastere\\MagnetCars\\Plugins\\Developer\\RiderLink\\Source\\RiderGameControl\\RiderGameControl.Build.cs",

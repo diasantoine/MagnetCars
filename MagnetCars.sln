@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Games", "Games", "{DE1F8B53
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MagnetCars", "Intermediate\ProjectFiles\MagnetCars.vcxproj", "{873991DB-5F8C-3D42-BF2C-39369E7C11D5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE5", "Intermediate\ProjectFiles\UE5.vcxproj", "{A6734242-8DB6-3EF8-B751-177DB011BE05}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "UE5", "Intermediate\ProjectFiles\UE5.vcxproj", "{9FF4307B-0272-32FD-AFA3-49E0FCA47607}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Visualizers", "Visualizers", "{1CCEC849-CC72-4C59-8C36-2F7C38706D4C}"
 	ProjectSection(SolutionItems) = preProject
@@ -39,17 +39,17 @@ Global
 		{873991DB-5F8C-3D42-BF2C-39369E7C11D5}.Development|Win64.Build.0 = Development|x64
 		{873991DB-5F8C-3D42-BF2C-39369E7C11D5}.Shipping|Win64.ActiveCfg = Shipping|x64
 		{873991DB-5F8C-3D42-BF2C-39369E7C11D5}.Shipping|Win64.Build.0 = Shipping|x64
-		{A6734242-8DB6-3EF8-B751-177DB011BE05}.DebugGame Editor|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
-		{A6734242-8DB6-3EF8-B751-177DB011BE05}.DebugGame|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
-		{A6734242-8DB6-3EF8-B751-177DB011BE05}.Development Editor|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
-		{A6734242-8DB6-3EF8-B751-177DB011BE05}.Development|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
-		{A6734242-8DB6-3EF8-B751-177DB011BE05}.Shipping|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607}.DebugGame Editor|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607}.DebugGame|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607}.Development Editor|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607}.Development|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607}.Shipping|Win64.ActiveCfg = BuiltWithUnrealBuildTool|Win64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A6734242-8DB6-3EF8-B751-177DB011BE05} = {233774A8-CC9D-3FA9-86D1-90573E92B704}
+		{9FF4307B-0272-32FD-AFA3-49E0FCA47607} = {233774A8-CC9D-3FA9-86D1-90573E92B704}
 		{873991DB-5F8C-3D42-BF2C-39369E7C11D5} = {DE1F8B53-6C02-3C13-9101-A7C8D96F3FF6}
 	EndGlobalSection
 EndGlobal

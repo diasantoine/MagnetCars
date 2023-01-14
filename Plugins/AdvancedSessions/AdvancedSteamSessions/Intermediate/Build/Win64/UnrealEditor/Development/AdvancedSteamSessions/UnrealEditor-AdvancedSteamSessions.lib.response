@@ -1,0 +1,13 @@
+/NOLOGO
+/errorReport:prompt
+/MACHINE:x64
+/SUBSYSTEM:WINDOWS
+/DEF
+/NAME:"UnrealEditor-AdvancedSteamSessions.dll"
+/IGNORE:4221
+/NODEFAULTLIB
+"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\Engine\SharedPCH.Engine.ShadowErrors.h.obj"
+"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.cpp.obj"
+"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Module.AdvancedSteamSessions.gen.cpp.obj"
+"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\Default.rc2.res"
+/OUT:"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib"
