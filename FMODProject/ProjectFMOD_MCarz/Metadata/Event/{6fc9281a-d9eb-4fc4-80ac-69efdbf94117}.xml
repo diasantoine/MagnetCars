@@ -103,6 +103,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerGroup" id="{4849b27e-09c7-4054-b0dd-93297fb4a580}">
+		<property name="volume">
+			<value>-10</value>
+		</property>
 		<property name="name">
 			<value>Audio 1</value>
 		</property>
@@ -141,17 +144,23 @@
 	<object class="MixerBusEffectChain" id="{cb7f294c-ba48-47d1-9e4e-b83c9d015b79}">
 		<relationship name="effects">
 			<destination>{2a2e4f85-9e04-43ec-b18a-fd9e2db3d1a8}</destination>
+			<destination>{6309eea7-e01a-438c-a2fe-635cf28782c1}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{fb6a4443-316c-4174-830e-e90c8aedf0a5}" />
 	<object class="MixerBusFader" id="{4d5e5556-cf72-4a12-bd5b-e60530ec1f08}" />
 	<object class="SpatialiserEffect" id="{3bcd1268-d553-43a8-8dcd-57fca0e344a3}">
 		<property name="maximumDistance">
-			<value>500</value>
+			<value>1000</value>
 		</property>
 		<property name="overrideRange">
 			<value>true</value>
 		</property>
 	</object>
 	<object class="MixerBusFader" id="{2a2e4f85-9e04-43ec-b18a-fd9e2db3d1a8}" />
+	<object class="ThreeEQEffect" id="{6309eea7-e01a-438c-a2fe-635cf28782c1}">
+		<property name="lowGain">
+			<value>-13.5</value>
+		</property>
+	</object>
 </objects>
