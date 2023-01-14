@@ -4,7 +4,7 @@
 #include "MyCarUi.h"
 #include "Components/CanvasPanelSlot.h"
 #include "Kismet/KismetMathLibrary.h"
-#include "Logging/LogMacros.h"
+#include "Fonts/SlateFontInfo.h"
 #include "Logging/LogMacros.h"
 
 void UMyCarUi::NativeConstruct()
@@ -43,18 +43,34 @@ void UMyCarUi::NativeConstruct()
 	if(this->ClassementPlayer1)
 	{
 		this->ClassementPlayer1->SetVisibility(ESlateVisibility::Hidden);
+		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
+		PlayerClassementMapUpdate = this->ClassementPlayer1->Slot;
+		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement1.X,this->PositionClassement1.Y));
 	}
 	if(this->ClassementPlayer2)
 	{
 		this->ClassementPlayer2->SetVisibility(ESlateVisibility::Hidden);
+		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
+		PlayerClassementMapUpdate = this->ClassementPlayer2->Slot;
+		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement2.X,this->PositionClassement2.Y));
 	}
 	if(this->ClassementPlayer3)
 	{
 		this->ClassementPlayer3->SetVisibility(ESlateVisibility::Hidden);
+		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
+		PlayerClassementMapUpdate = this->ClassementPlayer3->Slot;
+		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement3.X,this->PositionClassement3.Y));
 	}
 	if(this->ClassementPlayer4)
 	{
 		this->ClassementPlayer4->SetVisibility(ESlateVisibility::Hidden);
+		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
+		PlayerClassementMapUpdate = this->ClassementPlayer4->Slot;
+		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement4.X,this->PositionClassement4.Y));
 	}
 
 	if(this->TextClassementPlayer1)
@@ -267,9 +283,15 @@ void UMyCarUi::UpdateMap(TArray<AMyPawnCar*> PlayerArray)
 			PlayerImageMapUpdate = MapImagePlayer[PlayerArray[i]]->Slot;
 			UCanvasPanelSlot* PlayerImageMapUpdatePanel = Cast<UCanvasPanelSlot>(PlayerImageMapUpdate);
 			if(PlayerImageMapUpdatePanel == __nullptr)continue;
-			float DistanceCircuit = FVector::Distance(this->StartLine,this->EndLine);
-			float DistancePlayer = FVector::Distance(PlayerArray[i]->GetActorLocation(),this->EndLine);
-			float PositionOnMap = FMath::Lerp(EndMapPannel->GetPosition().Y,StartMapPanel->GetPosition().Y, DistanceCircuit / DistancePlayer	);
+			FVector StartCircuit = this->StartLine;
+			StartCircuit.Z = 0;
+			FVector EndCircuit = this->EndLine;
+			EndCircuit.Z = 0;
+			float DistanceCircuit = FVector::Distance(StartCircuit,EndCircuit);
+			//float DistanceCircuit = FVector::Distance(this->StartLine,this->EndLine);
+			float DistancePlayer = FVector::Distance(PlayerArray[i]->GetActorLocation(),EndCircuit);
+			float PositionOnMap = FMath::Lerp(EndMapPannel->GetPosition().Y,StartMapPanel->GetPosition().Y, DistancePlayer / DistanceCircuit);
+			UE_LOG(LogTemp,Warning,TEXT("%f , %f , %f"),PositionOnMap, DistancePlayer,DistanceCircuit);
 			PlayerImageMapUpdatePanel->SetPosition(FVector2D(StartMapPanel->GetPosition().X,PositionOnMap));
 		}
 		else
@@ -294,29 +316,29 @@ void UMyCarUi::UpdateClassement(TArray<AMyPawnCar*> PlayerArray)
 {
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
-		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
+	/*	TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
 		PlayerClassementMapUpdate = this->MapClassementPlayer[PlayerArray[i]]->Slot;
-		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);*/
 		TObjectPtr<UPanelSlot> PlayerTextClassementMapUpdate;
 		PlayerTextClassementMapUpdate = this->MapTextClassementPlayer[PlayerArray[i]]->Slot;
 		UCanvasPanelSlot* PlayerTextClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerTextClassementMapUpdate);
-		if(PlayerClassementUpdatePanel == __nullptr)continue;
+		//if(PlayerClassementUpdatePanel == __nullptr)continue;
 		if(PlayerTextClassementUpdatePanel == __nullptr)continue;
 		if(i == 0)
 		{
-			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement1.X,this->PositionClassement1.Y));
+			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement1.X,this->PositionClassement1.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement1.X,this->TextClassement1.Y));
 		}else if( i == 1)
 		{
-			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement2.X,this->PositionClassement2.Y));
+			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement2.X,this->PositionClassement2.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement2.X,this->TextClassement2.Y));
 		}else if( i == 2)
 		{
-			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement3.X,this->PositionClassement3.Y));
+			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement3.X,this->PositionClassement3.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement3.X,this->TextClassement3.Y));
 		}else if( i == 3)
 		{
-			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement4.X,this->PositionClassement4.Y));
+			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement4.X,this->PositionClassement4.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement4.X,this->TextClassement4.Y));
 		}
 	}
@@ -338,10 +360,6 @@ void UMyCarUi::UpdateSpeed()
 	if(this->SpeedMeterText)
 	{
 		this->SpeedMeterText->SetText(FText::AsNumber( FMath::CeilToInt(ActualSpeed / this->DivsionSpeedForUI)));
-	}
-	if(this->SpeedMeterImage)
-	{
-		
 	}
 }
 

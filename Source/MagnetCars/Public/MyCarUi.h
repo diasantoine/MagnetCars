@@ -83,6 +83,15 @@ public:
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  FVector2D TextClassement4 = FVector2D::Zero();
 
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ int SizeTextClassement1 = 30;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ int SizeTextClassement2 = 25;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ int SizeTextClassement3 = 20;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ int SizeTextClassement4 = 15;
+
  UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
  UImage* BehindPlayer2 = __nullptr;
  UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
@@ -130,10 +139,11 @@ public:
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  int NumberOfLap = 0;
 
-private:
-
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
  TMap<AMyPawnCar*,UImage*> MapImagePlayer;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
  TMap<AMyPawnCar*,UImage*> MapClassementPlayer;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
  TMap<AMyPawnCar*,UTextBlock*> MapTextClassementPlayer;
 
 
