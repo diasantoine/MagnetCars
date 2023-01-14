@@ -3,9 +3,7 @@
 
 #include "MyCarUi.h"
 #include "Components/CanvasPanelSlot.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "Fonts/SlateFontInfo.h"
-#include "Logging/LogMacros.h"
 
 void UMyCarUi::NativeConstruct()
 {
@@ -107,14 +105,6 @@ void UMyCarUi::NativeConstruct()
 void UMyCarUi::SetUpClassementSetUpMap()
 {
 	if(ArrayPlayer.Num() == 0)return;
-	/*if(this->StartMap)
-	{
-		this->StartMap->SetVisibility(ESlateVisibility::Visible);
-	}
-	if(this->EndMap)
-	{
-		this->EndMap->SetVisibility(ESlateVisibility::Visible);
-	}*/
 	if(this->Map)
 	{
 		this->Map->SetVisibility(ESlateVisibility::Visible);
@@ -277,38 +267,19 @@ void UMyCarUi::UpdateMap(TArray<AMyPawnCar*> PlayerArray)
 	UCanvasPanelSlot* EndMapPannel = Cast<UCanvasPanelSlot>(EndMapSlot);
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
-		if(true)
-		{
-			TObjectPtr<UPanelSlot> PlayerImageMapUpdate;
-			PlayerImageMapUpdate = MapImagePlayer[PlayerArray[i]]->Slot;
-			UCanvasPanelSlot* PlayerImageMapUpdatePanel = Cast<UCanvasPanelSlot>(PlayerImageMapUpdate);
-			if(PlayerImageMapUpdatePanel == __nullptr)continue;
-			FVector StartCircuit = this->StartLine;
-			StartCircuit.Z = 0;
-			FVector EndCircuit = this->EndLine;
-			EndCircuit.Z = 0;
-			float DistanceCircuit = FVector::Distance(StartCircuit,EndCircuit);
-			//float DistanceCircuit = FVector::Distance(this->StartLine,this->EndLine);
-			float DistancePlayer = FVector::Distance(PlayerArray[i]->GetActorLocation(),EndCircuit);
-			float PositionOnMap = FMath::Lerp(EndMapPannel->GetPosition().Y,StartMapPanel->GetPosition().Y, DistancePlayer / DistanceCircuit);
-			UE_LOG(LogTemp,Warning,TEXT("%f , %f , %f"),PositionOnMap, DistancePlayer,DistanceCircuit);
-			PlayerImageMapUpdatePanel->SetPosition(FVector2D(StartMapPanel->GetPosition().X,PositionOnMap));
-		}
-		else
-		{
-			if(StartMapPanel == __nullptr || EndMapPannel == __nullptr)
-			{
-				UE_LOG(LogTemp,Warning,TEXT("Connard"));
-				continue;
-			}
-			float DistancePlayer = FVector::Distance(PlayerArray[i]->GetActorLocation(),PlayerArray[0]->GetActorLocation());
-			float PositionOnMap = FMath::Lerp(StartMapPanel->GetPosition().Y,EndMapPannel->GetPosition().Y,DistancePlayer/this->DistanceMap);
-			TObjectPtr<UPanelSlot> PlayerImageMapUpdate;
-			PlayerImageMapUpdate = MapImagePlayer[PlayerArray[i]]->Slot;
-			UCanvasPanelSlot* PlayerImageMapUpdatePanel = Cast<UCanvasPanelSlot>(PlayerImageMapUpdate);
-			if(PlayerImageMapUpdatePanel == __nullptr)continue;
-			PlayerImageMapUpdatePanel->SetPosition(FVector2D(StartMapPanel->GetPosition().X,PositionOnMap));
-		}
+		TObjectPtr<UPanelSlot> PlayerImageMapUpdate;
+		PlayerImageMapUpdate = MapImagePlayer[PlayerArray[i]]->Slot;
+		UCanvasPanelSlot* PlayerImageMapUpdatePanel = Cast<UCanvasPanelSlot>(PlayerImageMapUpdate);
+		if(PlayerImageMapUpdatePanel == __nullptr)continue;
+		FVector StartCircuit = this->StartLine;
+		StartCircuit.Z = 0;
+		FVector EndCircuit = this->EndLine;
+		EndCircuit.Z = 0;
+		float DistanceCircuit = FVector::Distance(StartCircuit,EndCircuit);
+		//float DistanceCircuit = FVector::Distance(this->StartLine,this->EndLine);
+		float DistancePlayer = FVector::Distance(PlayerArray[i]->GetActorLocation(),EndCircuit);
+		float PositionOnMap = FMath::Lerp(EndMapPannel->GetPosition().Y,StartMapPanel->GetPosition().Y, DistancePlayer / DistanceCircuit);
+		PlayerImageMapUpdatePanel->SetPosition(FVector2D(StartMapPanel->GetPosition().X,PositionOnMap));
 	}
 }
 
@@ -316,29 +287,21 @@ void UMyCarUi::UpdateClassement(TArray<AMyPawnCar*> PlayerArray)
 {
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
-	/*	TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
-		PlayerClassementMapUpdate = this->MapClassementPlayer[PlayerArray[i]]->Slot;
-		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);*/
 		TObjectPtr<UPanelSlot> PlayerTextClassementMapUpdate;
 		PlayerTextClassementMapUpdate = this->MapTextClassementPlayer[PlayerArray[i]]->Slot;
 		UCanvasPanelSlot* PlayerTextClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerTextClassementMapUpdate);
-		//if(PlayerClassementUpdatePanel == __nullptr)continue;
 		if(PlayerTextClassementUpdatePanel == __nullptr)continue;
 		if(i == 0)
 		{
-			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement1.X,this->PositionClassement1.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement1.X,this->TextClassement1.Y));
 		}else if( i == 1)
 		{
-			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement2.X,this->PositionClassement2.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement2.X,this->TextClassement2.Y));
 		}else if( i == 2)
 		{
-			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement3.X,this->PositionClassement3.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement3.X,this->TextClassement3.Y));
 		}else if( i == 3)
 		{
-			//PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement4.X,this->PositionClassement4.Y));
 			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement4.X,this->TextClassement4.Y));
 		}
 	}
@@ -388,7 +351,6 @@ void UMyCarUi::UpdateArrow()
 				{
 					this->BehindPlayer2->SetBrushTintColor(this->ColorSameGravity);
 				}
-				UE_LOG(LogTemp,Warning,TEXT("test ,%f"),FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
 				this->BehindPlayer2->SetRenderTransformAngle(FMath::Acos(FVector::DotProduct(Element->GetActorForwardVector(),MyPlayerCar->GetActorForwardVector())));
 				break;
 			case 1:

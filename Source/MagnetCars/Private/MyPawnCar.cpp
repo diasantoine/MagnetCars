@@ -881,7 +881,6 @@ void AMyPawnCar::ResetRotationAfterCrash()
 void AMyPawnCar::FinishLine()
 {
 	if(this->OnceEnd)return;
-	UE_LOG(LogTemp,Warning,TEXT("pUTE"));
 	this->OnceEnd = true;
 	this->FinishLineCrossed();
 }
@@ -948,7 +947,6 @@ void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* 
 		{
 			const AMyPartCircuit* PartCircuit = Cast<AMyPartCircuit>(OtherActor);
 			if(PartCircuit == nullptr) return;
-			UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherComp->GetName());
 			this->BoostPlate(PartCircuit->BoostPower,true);
 		}
 		else if(OtherComp->ComponentHasTag(*this->FinishLineTag))

@@ -78,7 +78,6 @@ void UWidgetChoiceMap::MapButtonInitialisation_Implementation()
 		if(LoadCircuit == nullptr) return;
 		if(LoadCircuit->OrderPartCircuit.Num() < this->WhichPartYouCanModif0) return;
 		if(this->LoadCircuit->PartCircuitTypeSand == nullptr) return;
-		UE_LOG(LogTemp,Warning,TEXT("test"));
 		this->LoadCircuit->OrderPartCircuit[this->WhichPartYouCanModif0] = this->LoadCircuit->PartCircuitTypeSand;
 		break;
 	case 1:
@@ -232,7 +231,6 @@ void UWidgetChoiceMap::MapButtonEffect_Implementation(UButton* WhichButton)
 			if(LoadCircuit == nullptr) return;
 			if(LoadCircuit->OrderPartCircuit.Num() < this->WhichPartYouCanModif0) return;
 			if(this->LoadCircuit->PartCircuitTypeSand == nullptr) return;
-			UE_LOG(LogTemp,Warning,TEXT("test"));
 			this->LoadCircuit->OrderPartCircuit[this->WhichPartYouCanModif0] = this->LoadCircuit->PartCircuitTypeSand;
 			break;
 		case 1:
@@ -411,7 +409,6 @@ void UWidgetChoiceMap::LaunchGenerationMap_Implementation()
 	this->MapChoice3->SetIsEnabled(false);
 	this->MapChoice4->SetIsEnabled(false);
 	this->MapGeneration->SetIsEnabled(false);
-	// Hide and disable the button
 	this->MapChoice1->SetVisibility(ESlateVisibility::Hidden);
 	this->MapChoice2->SetVisibility(ESlateVisibility::Hidden);
 	this->MapChoice3->SetVisibility(ESlateVisibility::Hidden);

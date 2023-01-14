@@ -103,6 +103,4 @@ void AMyCar::NotifyActorEndOverlap(AActor* OtherActor)
 
 void AMyCar::LastPosition(FVector lastPositionReturned, AActor* roadExit)
 {
-	lastCarPositionOnRoad = lastPositionReturned;
-	middleOfTheRoad = roadExit->GetStreamingBounds().GetCenter();
 }
