@@ -57,6 +57,23 @@ void UMyCarUi::NativeConstruct()
 		this->ClassementPlayer4->SetVisibility(ESlateVisibility::Hidden);
 	}
 
+	if(this->TextClassementPlayer1)
+	{
+		this->TextClassementPlayer1->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if(this->TextClassementPlayer2)
+	{
+		this->TextClassementPlayer2->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if(this->TextClassementPlayer3)
+	{
+		this->TextClassementPlayer3->SetVisibility(ESlateVisibility::Hidden);
+	}
+	if(this->TextClassementPlayer4)
+	{
+		this->TextClassementPlayer4->SetVisibility(ESlateVisibility::Hidden);
+	}
+
 	if(this->BehindPlayer2)
 	{
 		this->BehindPlayer2->SetVisibility(ESlateVisibility::Hidden);
@@ -74,14 +91,14 @@ void UMyCarUi::NativeConstruct()
 void UMyCarUi::SetUpClassementSetUpMap()
 {
 	if(ArrayPlayer.Num() == 0)return;
-	if(this->StartMap)
+	/*if(this->StartMap)
 	{
 		this->StartMap->SetVisibility(ESlateVisibility::Visible);
 	}
 	if(this->EndMap)
 	{
 		this->EndMap->SetVisibility(ESlateVisibility::Visible);
-	}
+	}*/
 	if(this->Map)
 	{
 		this->Map->SetVisibility(ESlateVisibility::Visible);
@@ -90,81 +107,111 @@ void UMyCarUi::SetUpClassementSetUpMap()
 	{
 	case 1:
 		default:
-		if(MapPositionPlayer1 && this->ClassementPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1 && this->TextClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
 			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
 			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer1->SetText(this->NamePlayer1);
+			this->TextClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[0],this->TextClassementPlayer1);
 		}
 		break;
 	case 2:
-		if(MapPositionPlayer1 && this->ClassementPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1 && this->TextClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
 			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
 			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer1->SetText(this->NamePlayer1);
+			this->TextClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[0],this->TextClassementPlayer1);
 		}
-		if(MapPositionPlayer2 && this->ClassementPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2 && this->TextClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
 			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
 			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer2->SetText(this->NamePlayer2);
+			this->TextClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[1],this->TextClassementPlayer2);
 		}
 		break;
 	case 3:
-		if(MapPositionPlayer1 && this->ClassementPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1 && this->TextClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
 			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
 			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer1->SetText(this->NamePlayer1);
+			this->TextClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[0],this->TextClassementPlayer1);
 		}
-		if(MapPositionPlayer2 && this->ClassementPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2 && this->TextClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
 			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
 			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer2->SetText(this->NamePlayer2);
+			this->TextClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[1],this->TextClassementPlayer2);
 		}
-		if(MapPositionPlayer3 && this->ClassementPlayer3)
+		if(MapPositionPlayer3 && this->ClassementPlayer3 && this->TextClassementPlayer3)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[2],this->MapPositionPlayer3);
 			this->MapPositionPlayer3->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[2],this->ClassementPlayer3);
 			this->ClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer3->SetText(this->NamePlayer3);
+			this->TextClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[2],this->TextClassementPlayer3);
 		}
 		break;
 	case 4:
-		if(MapPositionPlayer1 && this->ClassementPlayer1)
+		if(MapPositionPlayer1 && this->ClassementPlayer1 && this->TextClassementPlayer1)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[0],this->MapPositionPlayer1);
 			this->MapPositionPlayer1->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[0],this->ClassementPlayer1);
 			this->ClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer1->SetText(this->NamePlayer1);
+			this->TextClassementPlayer1->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[0],this->TextClassementPlayer1);
 		}
-		if(MapPositionPlayer2 && this->ClassementPlayer2)
+		if(MapPositionPlayer2 && this->ClassementPlayer2 && this->TextClassementPlayer2)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[1],this->MapPositionPlayer2);
 			this->MapPositionPlayer2->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[1],this->ClassementPlayer2);
 			this->ClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer2->SetText(this->NamePlayer2);
+			this->TextClassementPlayer2->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[1],this->TextClassementPlayer2);
 		}
-		if(MapPositionPlayer3 && this->ClassementPlayer3)
+		if(MapPositionPlayer3 && this->ClassementPlayer3 && this->TextClassementPlayer3)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[2],this->MapPositionPlayer3);
 			this->MapPositionPlayer3->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[2],this->ClassementPlayer3);
 			this->ClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer3->SetText(this->NamePlayer3);
+			this->TextClassementPlayer3->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[2],this->TextClassementPlayer3);
 		}
-		if(MapPositionPlayer4 && this->ClassementPlayer4)
+		if(MapPositionPlayer4 && this->ClassementPlayer4 && this->TextClassementPlayer4)
 		{
 			this->MapImagePlayer.Add(this->ArrayPlayer[3],this->MapPositionPlayer4);
 			this->MapPositionPlayer4->SetVisibility(ESlateVisibility::Visible);
 			this->MapClassementPlayer.Add(this->ArrayPlayer[3],this->ClassementPlayer4);
 			this->ClassementPlayer4->SetVisibility(ESlateVisibility::Visible);
+			this->TextClassementPlayer4->SetText(this->NamePlayer4);
+			this->TextClassementPlayer4->SetVisibility(ESlateVisibility::Visible);
+			this->MapTextClassementPlayer.Add(this->ArrayPlayer[3],this->TextClassementPlayer4);
 		}
 		break;
 	}
@@ -248,21 +295,29 @@ void UMyCarUi::UpdateClassement(TArray<AMyPawnCar*> PlayerArray)
 	for(int i = 0; i < PlayerArray.Num(); i++)
 	{
 		TObjectPtr<UPanelSlot> PlayerClassementMapUpdate;
-		PlayerClassementMapUpdate = MapClassementPlayer[PlayerArray[i]]->Slot;
+		PlayerClassementMapUpdate = this->MapClassementPlayer[PlayerArray[i]]->Slot;
 		UCanvasPanelSlot* PlayerClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerClassementMapUpdate);
+		TObjectPtr<UPanelSlot> PlayerTextClassementMapUpdate;
+		PlayerTextClassementMapUpdate = this->MapTextClassementPlayer[PlayerArray[i]]->Slot;
+		UCanvasPanelSlot* PlayerTextClassementUpdatePanel = Cast<UCanvasPanelSlot>(PlayerTextClassementMapUpdate);
 		if(PlayerClassementUpdatePanel == __nullptr)continue;
+		if(PlayerTextClassementUpdatePanel == __nullptr)continue;
 		if(i == 0)
 		{
 			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement1.X,this->PositionClassement1.Y));
+			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement1.X,this->TextClassement1.Y));
 		}else if( i == 1)
 		{
 			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement2.X,this->PositionClassement2.Y));
+			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement2.X,this->TextClassement2.Y));
 		}else if( i == 2)
 		{
 			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement3.X,this->PositionClassement3.Y));
+			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement3.X,this->TextClassement3.Y));
 		}else if( i == 3)
 		{
 			PlayerClassementUpdatePanel->SetPosition(FVector2D(this->PositionClassement4.X,this->PositionClassement4.Y));
+			PlayerTextClassementUpdatePanel->SetPosition(FVector2D(this->TextClassement4.X,this->TextClassement4.Y));
 		}
 	}
 }
@@ -279,10 +334,10 @@ void UMyCarUi::UpdateSpeed()
 {
 	AMyPawnCar* MyPlayerCar = Cast<AMyPawnCar>(this->GetOwningPlayerPawn());
 	if(MyPlayerCar == __nullptr) return;
-	float ActualSpeed = MyPlayerCar->CarCollision->GetPhysicsLinearVelocity().Length();
+	const float ActualSpeed = MyPlayerCar->CarCollision->GetPhysicsLinearVelocity().Length();
 	if(this->SpeedMeterText)
 	{
-		this->SpeedMeterText->SetText(FText::AsNumber( ActualSpeed / this->DivsionSpeedForUI));
+		this->SpeedMeterText->SetText(FText::AsNumber( FMath::CeilToInt(ActualSpeed / this->DivsionSpeedForUI)));
 	}
 	if(this->SpeedMeterImage)
 	{

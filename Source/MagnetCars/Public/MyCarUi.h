@@ -47,6 +47,24 @@ public:
  UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
  UImage* ClassementPlayer4 = __nullptr;
 
+ UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
+ UTextBlock* TextClassementPlayer1 = __nullptr;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
+ UTextBlock* TextClassementPlayer2 = __nullptr;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
+ UTextBlock* TextClassementPlayer3 = __nullptr;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
+ UTextBlock* TextClassementPlayer4 = __nullptr;
+
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FText NamePlayer1;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FText NamePlayer2;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FText NamePlayer3;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FText NamePlayer4;
+
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  FVector2D PositionClassement1 = FVector2D::Zero();
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
@@ -55,6 +73,15 @@ public:
  FVector2D  PositionClassement3 = FVector2D::Zero();
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  FVector2D  PositionClassement4 = FVector2D::Zero();
+
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FVector2D TextClassement1 = FVector2D::Zero();
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FVector2D TextClassement2 = FVector2D::Zero();
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FVector2D TextClassement3 = FVector2D::Zero();
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ FVector2D TextClassement4 = FVector2D::Zero();
 
  UPROPERTY(BlueprintReadWrite,EditAnywhere,meta =(BindWidget))
  UImage* BehindPlayer2 = __nullptr;
@@ -82,6 +109,8 @@ public:
  UTextBlock* SpeedMeterText = __nullptr;
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  float DivsionSpeedForUI = 10.f;
+ UPROPERTY(BlueprintReadWrite,EditAnywhere)
+ UMaterial* MaterialSpeedometer = __nullptr;
 
  UPROPERTY(BlueprintReadWrite,EditAnywhere)
  TArray<AMyPawnCar*> ArrayPlayer;
@@ -105,6 +134,8 @@ private:
 
  TMap<AMyPawnCar*,UImage*> MapImagePlayer;
  TMap<AMyPawnCar*,UImage*> MapClassementPlayer;
+ TMap<AMyPawnCar*,UTextBlock*> MapTextClassementPlayer;
+
 
  
 public:
