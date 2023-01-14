@@ -4,55 +4,47 @@
   Creating makefile for MagnetCarsEditor (no existing makefile)
   Parsing headers for MagnetCarsEditor
     Running UnrealHeaderTool "E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\MagnetCars.uproject" "E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\MagnetCarsEditor\Development\MagnetCarsEditor.uhtmanifest" -LogCmds="loginit warning, logexit warning, logdatabase error" -Unattended -WarningsAsErrors -abslog="C:\Users\diasa\AppData\Local\UnrealBuildTool\Log_UHT.txt" -installed
-  Reflection code generated for MagnetCarsEditor in 0,9065808 seconds
+  Reflection code generated for MagnetCarsEditor in 5,2777014 seconds
   Building MagnetCarsEditor...
   Using Visual Studio 2022 14.34.31937 toolchain (C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933) and Windows 10.0.22000.0 SDK (C:\Program Files (x86)\Windows Kits\10).
   Determining max actions to execute in parallel (16 physical cores, 24 logical cores)
     Executing up to 16 processes, one per physical core
-    Requested 1,5 GB free memory per action, 13,97 GB available: limiting max parallel actions to 9
-  Building 32 actions with 9 processes...
-  [1/32] Compile MyGameStateBase.cpp
-  [2/32] Compile MyGameStateBase.gen.cpp
-  [3/32] Compile MyPartCircuit.cpp
-  [4/32] Compile MyPawnCar.gen.cpp
-  [5/32] Compile MyPartCircuit.gen.cpp
-  [6/32] Compile LoadCircuit.gen.cpp
-  [7/32] Compile MyCarUi.cpp
-  [8/32] Compile MyCar.cpp
-  [9/32] Compile LoadCircuit.cpp
-  [10/32] Compile MyPawnCar.cpp
-  [11/32] Compile MyCarUi.gen.cpp
-  [12/32] Compile MagnetCars.init.gen.cpp
-  [13/32] Compile WidgetChoiceMap.gen.cpp
-  [14/32] Link UnrealEditor-RiderBlueprint.dll
+    Requested 1,5 GB free memory per action, 14,92 GB available: limiting max parallel actions to 9
+  Building 24 actions with 9 processes...
+  [1/24] Resource Default.rc2
+  [2/24] Resource Default.rc2
+  [3/24] Compile MyCar.cpp
+  [4/24] Compile MagnetCars.init.gen.cpp
+  [5/24] Link UnrealEditor-RiderBlueprint.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderBlueprint\UnrealEditor-RiderBlueprint.suppressed.exp
-  [15/32] Link UnrealEditor-RiderGameControl.dll
+  [6/24] Link UnrealEditor-RiderGameControl.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderGameControl\UnrealEditor-RiderGameControl.suppressed.exp
-  [16/32] Compile WidgetChoiceMap.cpp
-  [17/32] Link UnrealEditor-RiderLogging.dll
+  [7/24] Link UnrealEditor-RiderLogging.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLogging\UnrealEditor-RiderLogging.suppressed.exp
-  [18/32] Link UnrealEditor-MagnetCars.lib
-     Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.exp
-  [19/32] Link UnrealEditor-RiderShaderInfo.dll
+  [8/24] Link UnrealEditor-RiderShaderInfo.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\UnrealEditor-RiderShaderInfo.suppressed.exp
-  [20/32] Link UnrealEditor-RiderLink.dll
+  [9/24] Link UnrealEditor-RiderLink.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderLink\UnrealEditor-RiderLink.suppressed.exp
-  [21/32] Link UnrealEditor-MagnetCars.dll
+  [10/24] Compile MyGameStateBase.cpp
+  [11/24] Compile MyGameStateBase.gen.cpp
+  [12/24] Link UnrealEditor-MagnetCars.lib
+     Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.exp
+  [13/24] Link UnrealEditor-MagnetCars.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Intermediate\Build\Win64\UnrealEditor\Development\MagnetCars\UnrealEditor-MagnetCars.suppressed.exp
-  [22/32] Compile Module.AdvancedSessions.gen.3_of_3.cpp
-  [23/32] Compile Module.AdvancedSteamSessions.gen.cpp
-  [24/32] Compile Module.AdvancedSessions.gen.2_of_3.cpp
-  [25/32] Compile Module.AdvancedSteamSessions.cpp
-  [26/32] Link UnrealEditor-AdvancedSteamSessions.lib
+  [14/24] Compile Module.AdvancedSteamSessions.gen.cpp
+  [15/24] Compile Module.AdvancedSessions.gen.2_of_3.cpp
+  [16/24] Compile Module.AdvancedSessions.gen.3_of_3.cpp
+  [17/24] Compile Module.AdvancedSessions.gen.1_of_3.cpp
+  [18/24] Compile Module.AdvancedSteamSessions.cpp
+  [19/24] Link UnrealEditor-AdvancedSteamSessions.lib
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.exp
-  [27/32] Compile Module.AdvancedSessions.gen.1_of_3.cpp
-  [28/32] Compile Module.AdvancedSessions.cpp
-  [29/32] Link UnrealEditor-AdvancedSessions.lib
+  [20/24] Compile Module.AdvancedSessions.cpp
+  [21/24] Link UnrealEditor-AdvancedSessions.lib
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.exp
-  [30/32] Link UnrealEditor-AdvancedSessions.dll
-     Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.exp
-  [31/32] Link UnrealEditor-AdvancedSteamSessions.dll
+  [22/24] Link UnrealEditor-AdvancedSteamSessions.dll
      Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSteamSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSteamSessions\UnrealEditor-AdvancedSteamSessions.suppressed.exp
-  [32/32] WriteMetadata MagnetCarsEditor.target
-  Total time in Parallel executor: 79,65 seconds
-  Total execution time: 84,94 seconds
+  [23/24] Link UnrealEditor-AdvancedSessions.dll
+     Création de la bibliothèque E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.lib et de l'objet E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\AdvancedSessions\AdvancedSessions\Intermediate\Build\Win64\UnrealEditor\Development\AdvancedSessions\UnrealEditor-AdvancedSessions.suppressed.exp
+  [24/24] WriteMetadata MagnetCarsEditor.target
+  Total time in Parallel executor: 103,17 seconds
+  Total execution time: 113,41 seconds
