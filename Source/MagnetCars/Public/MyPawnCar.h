@@ -55,6 +55,9 @@ struct FCar
 	// Bool which show if the car can instant reverse his gravity
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool InstantReverseGravity = false;
+	// Bool which show if the gravity change to UpVector after a changement of gravity
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
+	bool DoesHitPointReset = true;
 	// Bool which show if the car will gain force toward the direction of the lean
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Bool")
 	bool DragWholeBodyWhenLean = true;
@@ -80,12 +83,18 @@ struct FCar
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Respawn")
  	float ContainerRespawnTiming = 2.0f;
 
-	// The acceleration added to the player when going forward or backward on ground
+	// The acceleration added to the player when going forward on ground
  	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
  	float Acceleration = 20.f;
-	// The acceleration added to the player when going forward or backward not on ground
+	// The acceleration added to the player when going forward not on ground
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
 	float AccelerationNotGrounded = 20.f;
+	// The acceleration added to the player when going backward on ground
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float AccelerationBackWard = 20.f;
+	// The acceleration added to the player when going backward not on ground
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Speed")
+	float AccelerationBackWardNotGrounded = 20.f;
 	// Boost After Falling On Another Car
 	UPROPERTY(BlueprintReadWrite, EditAnywhere,Category = "Parameter Boost")
 	float PowerBoost = 5000.f;
@@ -193,6 +202,9 @@ struct FCar
 	// CoolDown Inverse Gravity
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float CoolDownInverseGravity = 2.f;
+	// Number of change of gravity before touching ground
+	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
+	int NumberOfGravityChange = 2;
 	// Power Jump After Change Gravity
 	UPROPERTY(BlueprintReadWrite,EditAnywhere,Category = "Car Physics")
 	float PowerChangeGravity = 2000.f;
@@ -371,6 +383,9 @@ public:
 	// Event trigger once we pass the finish line
 	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
 	void FinishLineCrossed();
+	// Event trigger once we pass the Half Line
+	UFUNCTION(BlueprintNativeEvent, Category = "Car Event")
+	void HalfLineCrossed();
 
 	// Structure for the preset of parameter for the car
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Parameter")
@@ -402,6 +417,13 @@ public:
 	// Ground Tag
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
 	FString RespawnTag = "Respawn";
+	// Finish Line Tag
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString FinishLineTag = "Finish";
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	FString LeapPassedTag = "Leap";
+	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Debug")
+	int NumberOfLeap = 1;
 	// The time before the system detect the car is falling (not used)
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Car Collision")
 	float TimeBeforeCarFall = 0.5f;
@@ -466,6 +488,8 @@ public:
 	float ContainerTimeBeforeRaycastOn = 0;
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
 	float ContainerTimeBeforeInverseGravityBack = 0;
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Car Debug")
+	int ContainerNumberOfGravityChanged = 0;
 
 
 private:
@@ -477,4 +501,6 @@ private:
 	float ForwardAxis;
 	// Pour le tick physics
 	FCalculateCustomPhysics OnCalculateCustomPhysics;
+	//Do Once End
+	bool OnceEnd = false;
 };

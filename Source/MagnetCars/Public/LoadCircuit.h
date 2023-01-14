@@ -85,6 +85,10 @@ public:
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
 	FVector FirstPartCircuitPosition = FVector::Zero();
 
+	// The end of the generation
+	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Parameter")
+	FVector LastPartCircuitPosition = FVector::Zero();
+
 	// The map used for the generation
 	UPROPERTY(BlueprintReadWrite,EditAnywhere, Category = "Load Circuit Parameter")
 	TMap<int,FCircuit> MapCircuit;
@@ -92,4 +96,5 @@ public:
 	// Last position of the last circuit, used for the generation
 	UPROPERTY(BlueprintReadOnly,VisibleAnywhere, Category = "Load Circuit Var")
 	USceneComponent* LastEndSceneComponent = nullptr;
+
 };

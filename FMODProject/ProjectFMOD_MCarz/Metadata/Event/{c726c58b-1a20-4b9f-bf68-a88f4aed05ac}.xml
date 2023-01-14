@@ -8,7 +8,7 @@
 			<value>Env_BatimentAbandon</value>
 		</property>
 		<property name="outputFormat">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<relationship name="folder">
 			<destination>{4f46312d-706d-4bb3-8f74-ebc9c6947dd3}</destination>
@@ -88,6 +88,9 @@
 		</relationship>
 	</object>
 	<object class="EventMixerMaster" id="{6273323d-5d0c-4fd7-ba9a-1cf79f0c6f4a}">
+		<property name="volume">
+			<value>10</value>
+		</property>
 		<relationship name="effectChain">
 			<destination>{5e59c30b-f4d4-429a-9465-4b78eb32b540}</destination>
 		</relationship>
@@ -177,6 +180,7 @@
 	<object class="MixerBusEffectChain" id="{5e59c30b-f4d4-429a-9465-4b78eb32b540}">
 		<relationship name="effects">
 			<destination>{bef5f3b9-559c-4568-803c-980a97b15605}</destination>
+			<destination>{75084cd8-be40-4861-be4a-f3d5a38ba8a2}</destination>
 		</relationship>
 	</object>
 	<object class="MixerBusPanner" id="{270cf147-214e-49ec-8bcf-f7f775ec3b9f}" />
@@ -194,6 +198,17 @@
 	</object>
 	<object class="MixerBusPanner" id="{6bb05974-5441-41a0-b0b5-10f88f63bdb6}" />
 	<object class="MixerBusFader" id="{bef5f3b9-559c-4568-803c-980a97b15605}" />
+	<object class="SpatialiserEffect" id="{75084cd8-be40-4861-be4a-f3d5a38ba8a2}">
+		<property name="minimumDistance">
+			<value>500</value>
+		</property>
+		<property name="maximumDistance">
+			<value>500</value>
+		</property>
+		<property name="overrideRange">
+			<value>true</value>
+		</property>
+	</object>
 	<object class="MixerBusFader" id="{f92c78f8-3bc2-4d5b-975e-e63312be044d}" />
 	<object class="MixerBusFader" id="{43b17df3-0a5c-4f73-a9f8-21a75a4e66f7}" />
 </objects>

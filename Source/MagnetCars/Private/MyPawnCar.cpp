@@ -92,11 +92,13 @@ void AMyPawnCar::ForwardMovement(const float AxisValue)
 	if(CarCollision == nullptr)return;
 	if(this->CarStruct.IsGrounded)
 	{
-		ForwardAxis = AxisValue * CarStruct.Acceleration * this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();// Get Axis Input
+		ForwardAxis = AxisValue * (AxisValue >=0 ? this->CarStruct.Acceleration : this->CarStruct.AccelerationBackWard) *
+			this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();// Get Axis Input
 	}
 	else
 	{
-		ForwardAxis = AxisValue * CarStruct.AccelerationNotGrounded * this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();
+		ForwardAxis = AxisValue * (AxisValue >=0 ? this->CarStruct.AccelerationNotGrounded : this->CarStruct.AccelerationBackWardNotGrounded) *
+			this->CarCollision->GetMass() * this->CarCollision->GetLinearDamping();
 	}
 	//this->Server_ForwardMovement(AxisValue);
 }
@@ -450,6 +452,8 @@ void AMyPawnCar::CarGravity()
 {
 	if(this->CarCollision == nullptr)return;
 	if(this->CarStruct.IsInverseGravityOnCoolDown) return;
+	if(this->ContainerNumberOfGravityChanged >= this->CarStruct.NumberOfGravityChange) return;
+	this->ContainerNumberOfGravityChanged++;
 	this->CarStruct.IsInverseGravityOnCoolDown = true;
 	this->CarReverseGravity();
 	this->CarStruct.IsOnReverseGravity = !CarStruct.IsOnReverseGravity;
@@ -457,7 +461,14 @@ void AMyPawnCar::CarGravity()
 	FRotator CarRotation = this->GetActorRotation();
 	CarRotation.Roll += this->CarStruct.IsOnReverseGravity ? 180 : -180;// This function invert the gravity of the player and rotate him
 	this->SetActorRotation(CarRotation);
-	this->LastHitPoint = -LastHitPoint;
+	if(this->CarStruct.DoesHitPointReset)
+	{
+		this->LastHitPoint = FVector::Zero();
+	}
+	else
+	{
+		this->LastHitPoint = -LastHitPoint;
+	}
 	this->CarStruct.IsRaycastActive = false;
 	this->CarStruct.IsGrounded = false;
 	if(!this->CarStruct.InstantReverseGravity)
@@ -685,6 +696,7 @@ void AMyPawnCar::DetectGround()
 		this->CarStruct.IsGrounded = true;
 		this->CarGotGrounded();
 	}
+	this->ContainerNumberOfGravityChanged = 0;
 	this->LastGroundDetected = Result.GetActor();
 	if(!BlockSlope)// This is where i adjust the rotation of the car with the slope of the ground
 	{
@@ -749,12 +761,12 @@ void AMyPawnCar::DetectGround()
 	}
 	if(ResultHit2.GetActor() != nullptr)//Result.GetActor() == nullptr) return;// If the ground detect something which isn't an actor, it would be dangerous go further. The code would crash or be garbage since it need an actor
 	FlyingCar(ResultHit2);// Update the flying car position
-	if(Result.GetComponent()->ComponentHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
+	/*if(Result.GetComponent()->ComponentHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)// Boost Zone but still in progress
 	{
 		const AMyGroundBoostPlate* GroundBoostPlate = Cast<AMyGroundBoostPlate>(Result.GetActor());
 		if(GroundBoostPlate == nullptr) return;
 		this->BoostPlate(GroundBoostPlate->PowerBoost,true);
-	}
+	}*/
 }
 
 FHitResult AMyPawnCar::MultipleRaycast(FVector PositionRaycast, FVector Direction)
@@ -868,13 +880,22 @@ void AMyPawnCar::ResetRotationAfterCrash()
 
 void AMyPawnCar::FinishLine()
 {
-	//Something
+	if(this->OnceEnd)return;
+	UE_LOG(LogTemp,Warning,TEXT("pUTE"));
+	this->OnceEnd = true;
+	this->FinishLineCrossed();
 }
 
 void AMyPawnCar::FinishLineCrossed_Implementation()
 {
 	
 }
+
+void AMyPawnCar::HalfLineCrossed_Implementation()
+{
+	
+}
+
 
 
 
@@ -895,7 +916,6 @@ void AMyPawnCar::NotifyHit(UPrimitiveComponent* MyComp, AActor* Other, UPrimitiv
 
 void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
 {
-	UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherActor->GetName());
 	if(OtherActor == nullptr)return;
 	if(OtherActor->ActorHasTag(this->CarTag))
 	{
@@ -914,15 +934,31 @@ void AMyPawnCar::OverlapBegin(UPrimitiveComponent* OverlappedComponent, AActor* 
 	}else
 	{
 		if(OtherComp == nullptr) return;
-		UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherComp->GetName());
 		if(OtherComp->ComponentHasTag(*this->CheckPointTag))
 		{
 			UBoxComponent* BoxCheckPoint = Cast<UBoxComponent>(OtherComp);
 			if(BoxCheckPoint == nullptr) return;;
 			this->LastCheckPointHit = BoxCheckPoint;
-		}else if(OtherComp->ComponentHasTag(*this->RespawnTag))
+		}
+		else if(OtherComp->ComponentHasTag(*this->RespawnTag))
 		{
 			this->CarRespawn();
+		}
+		else if(OtherComp->ComponentHasTag(this->BoostTag) && !this->CarStruct.IsBoosted)
+		{
+			const AMyPartCircuit* PartCircuit = Cast<AMyPartCircuit>(OtherActor);
+			if(PartCircuit == nullptr) return;
+			UE_LOG(LogTemp,Warning,TEXT("%s"),*OtherComp->GetName());
+			this->BoostPlate(PartCircuit->BoostPower,true);
+		}
+		else if(OtherComp->ComponentHasTag(*this->FinishLineTag))
+		{
+			this->FinishLine();
+		}
+		else if(OtherComp->ComponentHasTag(*this->LeapPassedTag))
+		{
+			this->NumberOfLeap = 2;
+			this->HalfLineCrossed();
 		}
 	}
 }
