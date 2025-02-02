@@ -1,4 +1,4 @@
-W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Source\RiderShaderInfo\RiderShaderInfo.cpp
+E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Source\RiderShaderInfo\RiderShaderInfo.cpp
 /I .
 /I Runtime
 /I Runtime\TraceLog\Public
@@ -7,17 +7,17 @@ W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Source\RiderShaderInfo\Ri
 /I Runtime\Json\Public
 /I Runtime\RenderCore\Public
 /I Runtime\RHI\Public
-/I W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Source
+/I E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Source
 /I ThirdParty\mimalloc\include
 /I "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.34.31933\INCLUDE"
 /I "C:\Program Files (x86)\Windows Kits\NETFXSDK\4.8\include\um"
-/I W:\WindowsSDK\include\10.0.22000.0\ucrt
-/I W:\WindowsSDK\include\10.0.22000.0\shared
-/I W:\WindowsSDK\include\10.0.22000.0\um
-/I W:\WindowsSDK\include\10.0.22000.0\winrt
-/FI"W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\Definitions.h"
-/Fo"W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\RiderShaderInfo.cpp.obj"
-/sourceDependencies W:\GitHub\Cywer\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\RiderShaderInfo.cpp.json
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\ucrt"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\shared"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\um"
+/I "C:\Program Files (x86)\Windows Kits\10\include\10.0.22000.0\winrt"
+/FI"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\Definitions.h"
+/Fo"E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\RiderShaderInfo.cpp.obj"
+/sourceDependencies E:\Ecole\ICAN\SecondAnneMastere\MagnetCars\Plugins\Developer\RiderLink\Intermediate\Build\Win64\UnrealEditor\Development\RiderShaderInfo\RiderShaderInfo.cpp.json
 /Zc:inline
 /nologo
 /Oi
