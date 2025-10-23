@@ -1,0 +1,14 @@
+{
+	"Targets": [
+		{
+			"Name": "MagnetCars",
+			"Path": "F:\\UnrealProject\\MagnetCars\\Source\\MagnetCars.Target.cs",
+			"Type": "Game"
+		},
+		{
+			"Name": "MagnetCarsEditor",
+			"Path": "F:\\UnrealProject\\MagnetCars\\Source\\MagnetCarsEditor.Target.cs",
+			"Type": "Editor"
+		}
+	]
+}
